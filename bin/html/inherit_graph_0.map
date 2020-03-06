@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$structa_interface.html" title=" " alt="" coords="5,56,84,83"/>
+<area shape="rect" id="node2" href="$classa_class.html" title="aClass to do something" alt="" coords="148,5,211,32"/>
+<area shape="rect" id="node3" href="$classa_other_class.html" title=" " alt="" coords="132,56,227,83"/>
+<area shape="rect" id="node4" href="$structa_value.html" title=" " alt="" coords="148,107,211,133"/>
+<area shape="rect" id="node5" href="$structa_value_impl.html" title="A simple value class to enable uniform serialization." alt="" coords="287,56,405,83"/>
+<area shape="rect" id="node6" href="$structa_value_impl.html" title=" " alt="" coords="284,107,408,133"/>
+<area shape="rect" id="node7" href="$structa_value_impl.html" title=" " alt="" coords="275,157,417,184"/>
+</map>
