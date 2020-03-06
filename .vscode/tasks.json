@@ -1,0 +1,56 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build with Clang",
+            "type": "shell",
+            "command": "clang++",
+            "args": [
+                "-std=c++2a",
+                "*.cpp",
+                "--debug",
+                // "-v",
+                "-o.\\bin\\TheSimplest.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build with Batch",
+            "type": "shell",
+            "command": "build_and_run.cmd",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            }
+            // ,
+            // "group": {
+            //     "kind": "build",
+            //     "isDefault": true
+            // }
+            
+        },
+        {
+            "label": "Build Doxygen Documentation",
+            "type": "shell",
+            "command": "doxygen",
+            "args": [
+                "doxyfile",
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            }
+        },
+        {
+            "label": "echo",
+            "type": "shell",
+            "command": "echo ${workspaceRoot}    ${workspaceFolderBasename}"
+        }
+    ]
+}
