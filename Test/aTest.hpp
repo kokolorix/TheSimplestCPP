@@ -2,6 +2,8 @@
 #define aTestHPP
 
 #include "aInterface.hpp"
+#include "Helpers.hpp"
+#include "OutputStream.hpp"
 
 enum struct TestResult
 {
@@ -11,7 +13,7 @@ enum struct TestResult
     Unexpected
 };
 
-struct aTestCase
+struct aTestCase  : public aInterface
 {
     virtual ~aTestCase() = default;
     virtual void setUp() {}
@@ -20,5 +22,6 @@ struct aTestCase
 };
 using aTestCasePtr = shared_ptr<aTestCase>;
 bool addTestCase(aTestCasePtr pTest, const string &name);
+TestResult runTests(const string &testPattern = "*");
 
 #endif

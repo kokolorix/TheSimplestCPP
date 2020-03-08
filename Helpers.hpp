@@ -1,6 +1,19 @@
 #ifndef HelpersHPP
 #define HelpersHPP
 
+#include <string>
+using std::string;
+
+#include <sstream>
+using std::istringstream;
+using std::ostringstream;
+using std::boolalpha;
+
+#include <map>
+
+using AppArguments = std::multimap<string, string>;
+namespace impl { extern AppArguments appArguments; }
+
 template <typename T>
 bool is_one_of(T value, T first) // End of recursive call
 {
@@ -32,7 +45,7 @@ struct cast_helper<string, In>
 {
     inline string operator()(In in)
     {
-        std::ostringstream os;
+        ostringstream os;
         os << in;
         return string(os.str());
     }
@@ -44,7 +57,7 @@ struct cast_helper<R, string>
     inline R operator()(string in)
     {
         R r;
-        std::istringstream is(in);
+        istringstream is(in);
         is >> r;
         return r;
     }
@@ -65,5 +78,4 @@ R cast(In in)
     impl::cast_helper<R, In> helper;
     return helper(in);
 }
-
 #endif

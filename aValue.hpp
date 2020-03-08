@@ -72,6 +72,12 @@ private:
     T value_; ///> The value
 };
 
+template <typename iosT, typename T>
+inline iosT &operator<<(iosT &ios, const aValueImpl<T> &val)
+{
+    return ios <<  val.get_value();
+}
+
 using aInt32 = aValueImpl<int>;
 template<> inline aValueType aValueImpl< int >::get_valueType() const { return aValueType::vtInt32; }
 template<> inline aValueType aValueImpl< double >::get_valueType() const { return aValueType::vtFloat64; }

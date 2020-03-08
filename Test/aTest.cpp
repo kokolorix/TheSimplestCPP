@@ -1,6 +1,5 @@
 #include "aTest.hpp"
 #include "aInterface.hpp"
-#include "OutputStream.hpp"
 
 #include <map>
 using std::map;
@@ -14,8 +13,6 @@ using std::regex_match;
 
 #include <chrono>
 using namespace std::chrono;
-
-OutputStream out;
 
 namespace
 {
@@ -53,9 +50,8 @@ void writeOutput(const vector<vector<string>> & outputs);
 
 TestResult runTests(const string& testPattern /*= "*"*/)
 {
-	vector<string> labels = { "Test name","Buildup (ms)","Test result","Test (ms)","Breakdown (ms)", "Total (ms)" };
+	vector<string> labels = { "Test name","Set up (ms)","Test result","Test (ms)","Tear down (ms)", "Total (ms)" };
 	vector<vector<string>> outputs = { labels };
-	//writeOutput(labels);
 
 	NameChecker check(testPattern);
 	for (CaseMap::value_type& entry : getCaseMap())
@@ -72,47 +68,47 @@ TestResult runTests(const string& testPattern /*= "*"*/)
 			{
 				auto start = std::chrono::high_resolution_clock::now();
 				{
-//					out << "Buildup Test: " << name << std::endl;
+					out << "Set up Test: " << name << std::endl;
 					auto start = std::chrono::high_resolution_clock::now();
 					pTest->setUp();
 					auto end = std::chrono::high_resolution_clock::now();
 					std::chrono::duration<double, std::milli> elapsed = end - start;
-					// values.push_back(cast<string>(elapsed.count()));
+					values.push_back(cast<string>(elapsed.count()));
 				}
 				{
-					//				out << "Run Test: " << name << std::endl;
+					out << "Run Test: " << name << std::endl;
 					auto start = std::chrono::high_resolution_clock::now();
 					switch (pTest->runTest())
 					{
 					case TestResult::Successful:
 						values.push_back("Succeed");
-						//out << "Test " << name << " successfully completed" << std::endl;
+						out << "Test " << name << " successfully completed" << std::endl;
 						break;
 					case TestResult::Failed:
 						values.push_back("Failed");
-						//out << "Test " << name << " failed" << std::endl;
+						out << "Test " << name << " failed" << std::endl;
 						break;
 					default:
 						values.push_back("Error");
-						//out << "Test " << name << " failed with unexpected result" << std::endl;
+						out << "Test " << name << " failed with unexpected result" << std::endl;
 						break;
 					}
 					auto end = std::chrono::high_resolution_clock::now();
 					std::chrono::duration<double, std::milli> elapsed = end - start;
-					// values.push_back(cast<string>(elapsed.count()));
+					values.push_back(cast<string>(elapsed.count()));
 				}
 
 				{
-					//out << "Breakdown Test: " << name << std::endl;
+					out << "Tear down Test: " << name << std::endl;
 					auto start = std::chrono::high_resolution_clock::now();
 					pTest->tearDown();
 					auto end = std::chrono::high_resolution_clock::now();
 					std::chrono::duration<double, std::milli> elapsed = end - start;
-					// values.push_back(cast<string>(elapsed.count()));
+					values.push_back(cast<string>(elapsed.count()));
 				}
 				auto end = std::chrono::high_resolution_clock::now();
 				std::chrono::duration<double, std::milli> elapsed = end - start;
-				// values.push_back(cast<string>(elapsed.count()));
+				values.push_back(cast<string>(elapsed.count()));
 				outputs.push_back(values);
 			}
 			catch (std::exception &e)

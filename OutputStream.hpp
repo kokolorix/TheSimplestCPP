@@ -1,7 +1,7 @@
 #ifndef OutputStreamHPP
 #define OutputStreamHPP
 
-#include <windows.h>
+// #include <windows.h>
 #include <sstream>
 using std::basic_ostream;
 using std::basic_ostringstream;
@@ -9,39 +9,17 @@ using std::ostringstream;
 
 #include <iostream>
 using std::cout;
-using std::wcout;
 using std::endl;
+using std::wcout;
 
-template <typename Elem>
-inline void flush(std::basic_string<Elem> &msg)
-{
-    if (msg.empty())
-        return;
+bool isDebuggerPresent();
 
-    basic_ostringstream<Elem> os;
-    os << msg << endl;
-    cout << os.str();
-    if (::IsDebuggerPresent())
-        debug_out(os.str());
-}
-
-template <typename Elem>
-inline void debug_out(std::basic_string<Elem> &&msg)
-{
-    OutputDebugStringA(msg.c_str());
-}
-template <>
-inline void debug_out(std::basic_string<wchar_t> &&msg)
-{
-    OutputDebugStringW(msg.c_str());
-}
-
-template <typename Elem>
-class outputbuf : public std::basic_streambuf<Elem>
+template <typename CharT>
+class outputbuf : public std::basic_streambuf<CharT>
 {
 private:
-    typedef typename std::basic_streambuf<Elem>::int_type int_type;
-    std::basic_string<Elem> msg; ///< buffer for current log message
+    typedef typename std::basic_streambuf<CharT>::int_type int_type;
+    std::basic_string<CharT> msg; ///< buffer for current log message
 
     void flushMsg()
     {
@@ -51,6 +29,19 @@ private:
             msg.erase(); // erase message buffer
         }
     }
+    inline void flush(std::basic_string<CharT> &msg)
+    {
+        if (msg.empty())
+            return;
+
+        basic_ostringstream<CharT> os;
+        os << msg << endl;
+        cout << os.str();
+        if (isDebuggerPresent())
+            debug_out(os.str());
+    }
+
+    void debug_out(std::basic_string<CharT> &&msg);
 
 public:
     outputbuf(){};
@@ -59,7 +50,7 @@ public:
 protected:
     virtual int_type overflow(int_type c)
     {
-        std::basic_ostream<Elem> tmp(this);
+        std::basic_ostream<CharT> tmp(this);
         if (c == tmp.widen('\n'))
         {
             flushMsg();
@@ -76,13 +67,13 @@ private:
     void operator=(outputbuf const &); // disallow copy assignment
 };
 
-template <typename Elem>
+template <typename CharT>
 class output_stream
-    : private outputbuf<Elem>,
-      public std::basic_ostream<Elem>
+    : private outputbuf<CharT>,
+      public std::basic_ostream<CharT>
 {
 public:
-    explicit output_stream() : basic_ostream<Elem>(this) {}
+    explicit output_stream() : basic_ostream<CharT>(this) {}
 };
 
 using OutputStream = output_stream<char>;

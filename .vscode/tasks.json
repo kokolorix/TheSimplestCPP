@@ -10,9 +10,12 @@
             "args": [
                 "-std=c++2a",
                 "*.cpp",
+                "Test\\*.cpp",
                 "--debug",
                 // "-v",
-                "-o.\\bin\\TheSimplest.exe"
+                "-I${workspaceRoot}",
+                "-I${workspaceRoot}\\Test",
+                "-o.\\bin\\${workspaceFolderBasename}.exe"
             ],
             "options": {
                 "cwd": "${workspaceRoot}"
