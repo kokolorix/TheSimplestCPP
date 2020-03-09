@@ -2,10 +2,11 @@
 #define aInterfaceHPP
 
 #include <typeinfo>
-#include <string>
-#include <memory>
 
+#include <string>
 using std::string;
+
+#include <memory>
 using std::make_shared;
 using std::shared_ptr;
 
