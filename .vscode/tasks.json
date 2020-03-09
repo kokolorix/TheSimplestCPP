@@ -23,7 +23,8 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
+            },
+            "problemMatcher": "$msCompile"
         },
         {
             "label": "Build with Batch",
@@ -31,13 +32,13 @@
             "command": "build_and_run.cmd",
             "options": {
                 "cwd": "${workspaceRoot}"
-            }
+            },
+            "problemMatcher": "$msCompile"
             // ,
             // "group": {
             //     "kind": "build",
             //     "isDefault": true
             // }
-            
         },
         {
             "label": "Build Doxygen Documentation",
@@ -48,7 +49,9 @@
             ],
             "options": {
                 "cwd": "${workspaceRoot}"
-            }
+            },
+            "problemMatcher":"$gcc"
+
         },
         {
             "label": "echo",
