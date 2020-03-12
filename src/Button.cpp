@@ -4,6 +4,7 @@
 #include <map>
 using std::map;
 
+extern HINSTANCE hInstance;
 
 Button::ButtonManager Button::Manager;
 
@@ -33,7 +34,7 @@ HWND Button::create(HWND hParent, int x, int y, int cx, int cy)
     if (!::RegisterClass(&wc))
         return  NULL;
 
-    HWND hWnd = ::CreateWindow(L" BUTTON",
+    HWND hWnd = ::CreateWindow(L"BUTTON",
                                L"Start ...",
                                WS_CHILD | WS_VISIBLE,
                                x,
@@ -42,7 +43,7 @@ HWND Button::create(HWND hParent, int x, int y, int cx, int cy)
                                cy,
                                hParent,
                                0,
-                               0,
+                               hInstance,
                                NULL);
     return hWnd;
 }

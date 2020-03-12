@@ -15,9 +15,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 ThreadPtr mainThread;
 #define WM_THREAD WM_USER + 1
+HINSTANCE hInstance;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+    :: hInstance = hInstance;
+
     MSG msg = {0};
     WNDCLASS wc = {0};
     wc.lpfnWndProc = WndProc;
@@ -64,7 +67,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:
     {
         ButtonPtr start = Button::Manager["Start:Button"];
-        HWND hStart = start->create(hWnd, 20, 20, 30, 100);
+        HWND hStart = start->create(hWnd, 20, 20, 100, 30);
     }
     break;
 
