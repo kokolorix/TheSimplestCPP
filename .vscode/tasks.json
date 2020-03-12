@@ -11,14 +11,11 @@
                 "-std=c++2a",
                 ".\\src\\*.cpp",
                 "--debug",
-                "-DWIN32",
-                "-D_WINDOWS",
-                "-D_DEBUG",
-                "-D_UNICODE",
+                "-DWINDOWS",
+                "-DDEBUG",
                 "-DUNICODE",
                 "-luser32.lib",
-                "-libcpmtd.lib",
-                // "-NODEFAULTLIB",
+                // "-v",
                 "-o.\\bin\\${workspaceFolderBasename}.exe"
             ],
             "options": {
