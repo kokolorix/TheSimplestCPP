@@ -45,17 +45,17 @@ class Thread : public enable_shared_from_this<Thread>
 
 public:
 	virtual ~Thread();
-	static struct ThreadPool
+	static struct ThreadManager
 	{
-		ThreadPool();
-		virtual ~ThreadPool() = default;
+		ThreadManager();
+		virtual ~ThreadManager() = default;
 		ThreadPtr operator[](const string &name);
 		ThreadPtr operator[](const ThreadId &id) const;
 
 	private:
 		struct Impl;
 		unique_ptr<Impl> pImpl_;
-	} Pool;
+	} Manager;
 
 public:
 	template <class _Fn, class... _Args>
@@ -74,6 +74,7 @@ public:
 	void start();
 	void stop();
 	static void standardLoop(ThreadPtr pThread);
+	void processQueue(size_t maxElements = 100);
 
 	bool joinable() { return thread_.joinable(); }
 	void join() { thread_.join(); }
@@ -84,6 +85,8 @@ private:
 	// ThreadId m_id;
 	thread thread_;
 
+	function<void()> notify_;
+
 	mutex mutex_;
 	condition_variable condition_;
 	atomic_bool enqueued_ = false, stopped_ = false;
@@ -93,4 +96,5 @@ private:
 public:
 	PropertyR<string> Name;
 	PropertyR<ThreadId> const Id;
+	PropertyRW<function<void()>> Notify;
 };

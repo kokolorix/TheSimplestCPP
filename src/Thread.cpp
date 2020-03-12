@@ -3,11 +3,11 @@ using std::map;
 
 #include "Thread.h"
 
-Thread::Thread(const string& name)
-	:   name_(name)
-	, Name(name_)
-	// , m_id(GenerateId())
-	, Id([this](){return thread_.get_id() ;})
+Thread::Thread(const string &name)
+	: name_(name), Name(name_)
+	  // , m_id(GenerateId())
+	  , Notify(notify_)
+	  , Id([this]() { return thread_.get_id(); })
 {
 }
 
@@ -19,7 +19,7 @@ Thread::~Thread()
 }
 
 
-Thread::ThreadPool Thread::Pool;
+Thread::ThreadManager Thread::Manager;
 
 
 void Thread::enqueue(function<void()> f)
@@ -29,7 +29,10 @@ void Thread::enqueue(function<void()> f)
 		queue_.push(f);
 		enqueued_ = true;
 	}
-	condition_.notify_one();
+	if(notify_)
+		notify_();
+	else
+		condition_.notify_one();
 }
 
 
@@ -55,7 +58,22 @@ void Thread::standardLoop(ThreadPtr pThread)
 		}
 
 	} while (pThread->stopped_ == false);
+}
 
+void Thread::processQueue(size_t maxElements /*= 100*/)
+{
+	unique_lock<mutex> lock(mutex_);
+	
+	for (size_t i = 0; i < maxElements || queue_.empty() == false; ++i)
+	{
+		function<void()> f = queue_.back();
+		queue_.pop();
+		lock.unlock();
+
+		f();
+
+		lock.lock();
+	}
 }
 
 void Thread::start()
@@ -70,17 +88,17 @@ void Thread::stop()
 	this_thread::yield();
 }
 
-struct Thread::ThreadPool::Impl
+struct Thread::ThreadManager::Impl
 {
 	mutex mutex_;
 	map<ThreadId, ThreadPtr> threadMap_;
 	map<string, ThreadId> threadIdMap_;
 };
 
-Thread::ThreadPool::ThreadPool() : pImpl_(make_unique<Thread::ThreadPool::ThreadPool::Impl>()){}
+Thread::ThreadManager::ThreadManager() : pImpl_(make_unique<Thread::ThreadManager::ThreadManager::Impl>()){}
 
 
-ThreadPtr Thread::ThreadPool::operator[](const string& name)
+ThreadPtr Thread::ThreadManager::operator[](const string& name)
 {
 	lock_guard<mutex> lock(pImpl_->mutex_);
 	ThreadId& id = pImpl_->threadIdMap_[name];
@@ -93,7 +111,7 @@ ThreadPtr Thread::ThreadPool::operator[](const string& name)
 	return it->second;
 }
 
-ThreadPtr Thread::ThreadPool::operator[](const ThreadId &id) const
+ThreadPtr Thread::ThreadManager::operator[](const ThreadId &id) const
 {
 	lock_guard<mutex> lock(pImpl_->mutex_);
 	auto it = pImpl_->threadMap_.find(id);
