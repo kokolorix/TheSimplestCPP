@@ -11,6 +11,8 @@ using std::make_unique;
 using std::shared_ptr;
 using std::unique_ptr;
 
+#include "Property.hpp"
+
 class Button;
 using ButtonPtr = shared_ptr<Button>;
 
@@ -31,7 +33,9 @@ public:
         unique_ptr<Impl> pImpl_;
     } Manager;
 
-    HWND create(HWND hParent, int x, int y, int cx, int cy);
+    HWND create(HWND hParent, int x, int y, int cx, int cy, string caption);
+
+    PropertyRW<string> Caption;
 
 private:
     struct Impl;

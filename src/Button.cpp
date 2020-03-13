@@ -10,11 +10,18 @@ Button::ButtonManager Button::Manager;
 
 struct  Button::Impl
 {
+    HWND hWnd_;
+    string caption_;
+    void set_caption(const string& caption)
+    {
+
+    }
 };
 
-Button::Button() : pImpl_(make_unique<Button::Impl>())
+Button::Button() 
+: pImpl_(make_unique<Button::Impl>())
+, Caption(pImpl_->caption_, Impl::set_caption)
 {
-
 }
 
 Button::~Button()
@@ -22,21 +29,11 @@ Button::~Button()
 
 }
 
-HWND Button::create(HWND hParent, int x, int y, int cx, int cy)
+HWND Button::create(HWND hParent, int x, int y, int cx, int cy, string caption)
 {
-    MSG msg = {0};
-    WNDCLASS wc = {0};
-    // wc.lpfnWndProc = WndProc;
-    // wc.Instance = hInstance;
-    wc.hbrBackground = (HBRUSH)(COLOR_BACKGROUND);
-    wc.lpszClassName = L" BUTTON";
-
-    if (!::RegisterClass(&wc))
-        return  NULL;
-
-    HWND hWnd = ::CreateWindow(L"BUTTON",
+    pImpl_->hWnd = ::CreateWindow(L"BUTTON",
                                L"Start ...",
-                               WS_CHILD | WS_VISIBLE,
+                               WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
                                x,
                                y,
                                cx,
@@ -45,7 +42,7 @@ HWND Button::create(HWND hParent, int x, int y, int cx, int cy)
                                0,
                                hInstance,
                                NULL);
-    return hWnd;
+    return pImpl_->hWnd;
 }
 
 struct  Button::ButtonManager::Impl
