@@ -6,10 +6,19 @@
  * correct
  */
 
-class aTestCase;
-struct aTestCasePtr {
-    aTestCase* ptr_ = nullptr;
-    aTestCase* operator->()const{return ptr_;}
-    aTestCase* operator&(){return ptr_;}
-    aTestCase& operator*(){return *ptr_;}
+class Thread;
+struct ThreadPtr
+{
+    Thread* ptr_;
+    Thread *operator->() const { return ptr_; }
+    Thread *operator&() { return ptr_; }
+    Thread &operator*() { return *ptr_; }
+};
+class Button;
+struct ButtonPtr
+{
+    Button* ptr_;
+    Button *operator->() const { return ptr_; }
+    Button *operator&() { return ptr_; }
+    Button &operator*() { return *ptr_; }
 };
