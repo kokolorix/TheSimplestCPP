@@ -41,7 +41,7 @@ using ThreadId = thread::id;
 class Thread : public enable_shared_from_this<Thread>
 {
 	explicit Thread(const string &name);
-	friend inline shared_ptr<Thread> make_shared();
+	// friend inline shared_ptr<Thread> make_shared<Thread>(const string &);
 
 public:
 	virtual ~Thread();
