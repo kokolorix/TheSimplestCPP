@@ -27,17 +27,23 @@ public:
         ButtonManager();
         virtual ~ButtonManager() = default;
         ButtonPtr operator[](const string &name);
+        ButtonPtr operator[](HWND hWnd);
 
     private:
         struct Impl;
         unique_ptr<Impl> pImpl_;
+        friend class Button;
     } Manager;
 
     HWND create(HWND hParent, int x, int y, int cx, int cy, string caption);
-
-    PropertyRW<string> Caption;
+    void execute(int command);
 
 private:
     struct Impl;
     unique_ptr<Impl> pImpl_;
+
+public:
+    PropertyRW<HWND> hWnd;
+    PropertyRW<string> Caption;
+    PropertyRW<function<void(Button*)>> OnClicked;
 };
