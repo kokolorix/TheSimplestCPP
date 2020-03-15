@@ -27,6 +27,17 @@
             }
         },
         {
+            "label": "Build Doxygen Documentation",
+            "type": "shell",
+            "command": "doxygen",
+            "args": [
+                "doxyfile",
+            ],
+            "options": {
+                "cwd": "${workspaceRoot}"
+            }
+        },
+        {
             "label": "echo",
             "type": "shell",
             "command": "echo ${workspaceRoot}    ${workspaceFolderBasename}"
