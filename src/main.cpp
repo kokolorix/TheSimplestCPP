@@ -10,10 +10,15 @@
  * @copyright Copyright (c) 2020
  * 
  */
+#include <sstream>
+using std::ostringstream;
+using std::endl;
+
 #include <windows.h>
 #include <CommCtrl.h>
 #include "Thread.h"
 #include "Button.h"
+
 
 /**
  * @brief The declaration of the main message processing function
@@ -66,7 +71,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return 2;
 
     mainThread = Thread::Manager["MainThread"];
-    mainThread->Notify = [hWnd]() { ::PostMessage(hWnd, WM_THREAD, (WPARAM)0, (LPARAM)0); };
+    mainThread->initRunningThread(this_thread::get_id(), [hWnd]() {
+         ::PostMessage(hWnd, WM_THREAD, (WPARAM)0, (LPARAM)0); 
+         });
 
     while (::GetMessage(&msg, NULL, 0, 0) > 0)
     {
@@ -74,9 +81,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
 
     return 0;
+
 }
 
-HWND hwndPB = NULL;
+HWND hWndPB = NULL;
 void OnStartClicked(Button* button);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -94,7 +102,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
         int cyVScroll = GetSystemMetrics(SM_CYVSCROLL);
 
-        ::hwndPB = CreateWindowEx(0, PROGRESS_CLASS, (LPTSTR)NULL,
+        ::hWndPB = CreateWindowEx(0, PROGRESS_CLASS, (LPTSTR)NULL,
                                  WS_CHILD | WS_VISIBLE, rcClient.left,
                                  rcClient.bottom - cyVScroll * 2,
                                  rcClient.right, cyVScroll * 2,
@@ -114,7 +122,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             ButtonPtr button = Button::Manager[hCtrl];
             button->execute(BN_CLICKED);
         }
-    }
+   }
     break;
 
     case WM_KEYUP:
@@ -123,6 +131,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             ::PostMessage(hWnd, WM_CLOSE, 0, 0);
     }
     break;
+
+    case WM_LBUTTONDOWN:
+        ::SetFocus(hWnd);
+        break;
 
     case WM_CLOSE:
         ::PostQuitMessage(0);
@@ -141,15 +153,41 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 void OnStartClicked(Button *button)
 {
     ThreadPtr thread1 = Thread::Manager["Thread1"];
-    thread1->start();
-    thread1->call([thread1]() {
+    if(!thread1->IsRunning)
+        thread1->start();
+
+    ThreadPtr thread2 = Thread::Manager["Thread2"];
+    if(!thread2->IsRunning)
+        thread2->start();
+
+    thread2->call([thread2]() {
+        while(!thread2->IsStopped)
+        {
+            ::Sleep(500);
+            mainThread->call([thread2]() {
+                static int count = 0;
+                string progress[] = {"/", "-", "\\", "|"};
+                int size = sizeof(progress) / sizeof(string);
+                ButtonPtr button = Button::Manager["Start:Button"];
+                button->Caption = "Running " + progress[count % size];
+                count++;
+            });
+        }
+        mainThread->call([](){
+             ButtonPtr button = Button::Manager["Start:Button"];
+             button->Caption = "Start ...";            
+        });
+    });
+
+    thread1->call([thread1,thread2]() {       
         for(int i = 0; i < 10; ++i)
         {
             ::Sleep(800);
-            ::PostMessage(hwndPB, PBM_STEPIT, 0, 0);
+            ::PostMessage(hWndPB, PBM_STEPIT, 0, 0);
         }
 
-        mainThread->call([thread1](){
+        mainThread->call([thread1,thread2](){
+            thread2->stop();
             thread1->stop();
         });
     });
