@@ -3,17 +3,10 @@
 #include <string>
 using std::string;
 
-#include <queue>
-using std::queue;
-
 #include <memory>
-using std::const_pointer_cast;
-using std::dynamic_pointer_cast;
 using std::enable_shared_from_this;
-using std::make_shared;
 using std::make_unique;
 using std::shared_ptr;
-using std::static_pointer_cast;
 using std::unique_ptr;
 
 #include <thread>
@@ -32,8 +25,6 @@ using ThreadId = thread::id;
 class Thread : public enable_shared_from_this<Thread>
 {
 	explicit Thread(const string &name);
-	// friend inline shared_ptr<Thread> make_shared<Thread>(const string &);
-
 public:
 	virtual ~Thread();
 	static struct ThreadManager
@@ -46,6 +37,7 @@ public:
 	private:
 		struct Impl;
 		unique_ptr<Impl> pImpl_;
+		friend class Thread;
 	} Manager;
 
 public:
