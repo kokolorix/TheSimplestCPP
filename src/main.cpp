@@ -150,6 +150,50 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
+/**
+ * @brief All the magic is here :-)
+ * 
+ * @msc
+ * gui,t1,t2
+ * gui->t1
+ * t1->gui
+ * @endmsc
+ * 
+ * @msc
+ * gui[label="GUI-Thread"], t1[label="Worker1"], t2=[label="Worker2"];
+ * gui=>t1 [label="start()"];
+ * gui=>t2 [label="start()"];
+ * 
+ * gui=>t2 [label="call(...)"]
+ * t2=>t2 [label="sleep(500)"]
+ * 
+ * gui=>t1 [label="call(...)"]
+ * t1=>t1 [label="sleep(800)"]
+ * 
+ * t2=>gui [label="button->caption(Running...)"]
+ * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
+ * t2=>gui [label="button->caption(Running...)"]
+ * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
+ * t2=>gui [label="button->caption(Running...)"]
+ * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
+ * t2=>gui [label="button->caption(Running...)"]
+ * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
+ * t2=>gui [label="button->caption(Running...)"]
+ * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
+ * t2=>gui [label="button->caption(Running...)"]
+ * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
+ * t2=>gui [label="button->caption(Running...)"]
+ * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
+ * t2=>gui [label="button->caption(Running...)"]
+ * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
+ * 
+ * t2=>gui [label="button->caption(Start...)"]
+ * gui=>t1 [label="stop()"]
+ * gui=>t2 [label="stop()"]
+ * @endmsc
+ * 
+ * @param button 
+ */
 void OnStartClicked(Button *button)
 {
     ThreadPtr thread1 = Thread::Manager["Thread1"];
