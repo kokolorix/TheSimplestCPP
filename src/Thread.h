@@ -20,15 +20,6 @@ using std::unique_ptr;
 using std::thread;
 namespace this_thread = std::this_thread;
 
-#include <mutex>
-using std::lock_guard;
-using std::mutex;
-using std::condition_variable;
-using std::unique_lock;
-
-#include <atomic>
-using std::atomic_bool;
-
 #include <functional>
 using std::function;
 
@@ -61,7 +52,7 @@ public:
 	template <class _Fn, class... _Args>
 	void start(_Fn &&_Fx, _Args &&... _Ax)
 	{
-		thread_ = thread(_Fx, forward<_Args>(_Ax)...);
+		start(thread(_Fx, forward<_Args>(_Ax)...));
 	}
 
 	template <class _Fn, class... _Args>
@@ -73,28 +64,22 @@ public:
 
 	void start();
 	void stop();
-	static void standardLoop(ThreadPtr pThread);
+
+	void initRunningThread(ThreadId id, function<void()> notify);
 	void processQueue(size_t maxElements = 100);
 
-	bool joinable() { return thread_.joinable(); }
-	void join() { thread_.join(); }
-	thread::id get_id() { return thread_.get_id(); }
+	bool joinable();
+	void join();
 
 private:
-	string name_;
-	// ThreadId m_id;
-	thread thread_;
-
-	function<void()> notify_;
-
-	mutex mutex_;
-	condition_variable condition_;
-	atomic_bool enqueued_ = false, stopped_ = false;
-	queue<function<void()>> queue_;
+	struct Impl;
+	unique_ptr<Impl> pImpl_;
 	void enqueue(function<void()> f);
-
+	void start(thread&& t);
+	
 public:
-	PropertyR<string> Name;
+	PropertyR<bool> const IsRunning;
+	PropertyR<bool> const IsStopped;
 	PropertyR<ThreadId> const Id;
-	PropertyRW<function<void()>> Notify;
+	PropertyR<string> Name;
 };

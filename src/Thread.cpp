@@ -1,30 +1,81 @@
-#include <map>
-using std::map;
 
+#include<cassert>
+
+#include <map>
+#include <mutex>
+#include <atomic>
 #include "Thread.h"
 
+using namespace std;
+
+struct Thread::Impl
+{
+	Impl(const string &name) 
+	: name_(name)
+	{}
+	string name_;
+	ThreadId id_;
+	thread thread_;
+
+	function<void()> notify_;
+
+	mutex mutex_;
+	condition_variable condition_;
+	atomic_bool enqueued_ = false, stopped_ = false;
+	queue<function<void()>> queue_;
+	void enqueue(function<void()> f);
+	static void standardLoop(ThreadPtr pThread);
+};
+
+struct Thread::ThreadManager::Impl
+{
+	mutex mutex_;
+	map<ThreadId, ThreadPtr> idMap_;
+	map<string, ThreadPtr> nameMap_;
+};
+
 Thread::Thread(const string &name)
-	: name_(name), Name(name_)
-	  // , m_id(GenerateId())
-	  , Notify(notify_)
-	  , Id([this]() {
-		   return thread_.get_id() == thread::id() ? this_thread::get_id() : thread_.get_id();
-		    })
+	: pImpl_(make_unique<Thread::Impl>(name))
+	, Name(pImpl_->name_)
+	, IsRunning([this]() {
+		  return pImpl_->thread_.get_id() != thread::id() || pImpl_->id_ != thread::id();
+	  })
+	, IsStopped([this]() {
+		  return pImpl_->stopped_.load();
+	  })
+	, Id([this]() {
+		  return pImpl_->id_ != thread::id() ? pImpl_->id_ : pImpl_->thread_.get_id();
+	  })
 {
 }
-
 
 Thread::~Thread()
 {
-	if(thread_.joinable())
-		thread_.join();
+	if (pImpl_->thread_.joinable())
+		pImpl_->thread_.join();
 }
 
+void Thread::initRunningThread(ThreadId id, function<void()> notify)
+{
+	pImpl_->id_ = id;
+	pImpl_->notify_ = notify;
+}
+
+void Thread::enqueue(function<void()> f)
+{
+	pImpl_->enqueue(f);
+}
+
+void Thread::start(thread &&t)
+{
+	assert(!IsRunning);
+	swap(pImpl_->thread_, t);
+	pImpl_->stopped_ = false;
+}
 
 Thread::ThreadManager Thread::Manager;
 
-
-void Thread::enqueue(function<void()> f)
+void Thread::Impl::enqueue(function<void()> f)
 {
 	{
 		lock_guard<mutex> lock(mutex_);
@@ -38,19 +89,32 @@ void Thread::enqueue(function<void()> f)
 }
 
 
-void Thread::standardLoop(ThreadPtr pThread)
+void Thread::start()
+{
+	start(thread(Impl::standardLoop, shared_from_this()));
+}
+
+void Thread::stop()
+{
+	pImpl_->stopped_ = true;
+	pImpl_->condition_.notify_one();
+	this_thread::yield();
+}
+
+void Thread::Impl::standardLoop(ThreadPtr pThread)
 {
 	string threadName = pThread->Name;
+	Thread::Impl* pImpl = pThread->pImpl_.get();
 	do
 	{
-		unique_lock<mutex> lock(pThread->mutex_);
-		pThread->condition_.wait(lock, [pThread] { return pThread->enqueued_.load() || pThread->stopped_.load(); });
-		pThread->enqueued_ = false;
+		unique_lock<mutex> lock(pThread->pImpl_->mutex_);
+		pImpl->condition_.wait(lock, [pImpl] { return pImpl->enqueued_.load() || pImpl->stopped_.load(); });
+		pImpl->enqueued_ = false;
 
-		while (!pThread->queue_.empty())
+		while (!pImpl->queue_.empty())
 		{
-			function<void()> f = pThread->queue_.back();
-			pThread->queue_.pop();
+			function<void()> f = pImpl->queue_.back();
+			pImpl->queue_.pop();
 			lock.unlock();
 
 			f();
@@ -59,19 +123,19 @@ void Thread::standardLoop(ThreadPtr pThread)
 			lock.lock();
 		}
 
-	} while (pThread->stopped_ == false);
+	} while (pImpl->stopped_ == false);
 
-	pThread->thread_.detach();
+	pImpl->thread_.detach();
 }
 
 void Thread::processQueue(size_t maxElements /*= 100*/)
 {
-	unique_lock<mutex> lock(mutex_);
+	unique_lock<mutex> lock(pImpl_->mutex_);
 	
-	for (size_t i = 0; i < maxElements && !queue_.empty(); ++i)
+	for (size_t i = 0; i < maxElements && !pImpl_->queue_.empty(); ++i)
 	{
-		function<void()> f = queue_.back();
-		queue_.pop();
+		function<void()> f = pImpl_->queue_.back();
+		pImpl_->queue_.pop();
 		lock.unlock();
 
 		f();
@@ -80,29 +144,22 @@ void Thread::processQueue(size_t maxElements /*= 100*/)
 	}
 }
 
-void Thread::start()
+bool Thread::joinable()
 {
-	thread_ = thread(standardLoop, shared_from_this());
+	return pImpl_->thread_.joinable();
+}
+void Thread::join()
+{
+
+	pImpl_->thread_.join();
 }
 
-void Thread::stop()
+Thread::ThreadManager::ThreadManager()
+	: pImpl_(make_unique<Thread::ThreadManager::ThreadManager::Impl>())
 {
-	stopped_ = true;
-	condition_.notify_one();
-	this_thread::yield();
 }
 
-struct Thread::ThreadManager::Impl
-{
-	mutex mutex_;
-	map<ThreadId, ThreadPtr> idMap_;
-	map<string, ThreadPtr> nameMap_;
-};
-
-Thread::ThreadManager::ThreadManager() : pImpl_(make_unique<Thread::ThreadManager::ThreadManager::Impl>()){}
-
-
-ThreadPtr Thread::ThreadManager::operator[](const string& name)
+ThreadPtr Thread::ThreadManager::operator[](const string &name)
 {
 	lock_guard<mutex> lock(pImpl_->mutex_);
     ThreadPtr &thread = pImpl_->nameMap_[name];
