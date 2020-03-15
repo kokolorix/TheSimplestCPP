@@ -62,4 +62,8 @@
         "xloctime": "cpp",
         "xtree": "cpp"
     }
-}
+    // ,
+    // "code-runner.executorMap": {
+    //     // "cpp": "cd $dir && \"$workspaceRoot\\.vscode\\cpp-code-runner.cmd\" $fileName"
+    //     // "cpp": "cd $dir && clang++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    // }}
