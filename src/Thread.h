@@ -44,7 +44,10 @@ public:
 	template <class _Fn, class... _Args>
 	void start(_Fn &&_Fx, _Args &&... _Ax)
 	{
-		start(thread(_Fx, forward<_Args>(_Ax)...));
+		ThreadPtr thisThread = shared_from_this();
+		start(thread([thisThread, _Fn](forward<_Args>(_Ax)...){
+			_Fn(forward<_Args>(_Ax)...);
+		}));
 	}
 
 	template <class _Fn, class... _Args>
@@ -58,7 +61,7 @@ public:
 	void stop();
 
 	void initRunningThread(ThreadId id, function<void()> notify);
-	void processQueue(size_t maxElements = 100);
+	void processQueue(size_t maxElements = 10);
 
 	bool joinable();
 	void join();

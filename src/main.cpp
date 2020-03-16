@@ -154,82 +154,99 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
  * @brief All the magic is here :-)
  * 
  * @msc
- * gui,t1,t2
- * gui->t1
- * t1->gui
- * @endmsc
+ * hscale="2.5", arcgradient="10";
+ * gui[linecolor="violet"], tr1[linecolor="olive"], tr2[linecolor="orange"];
  * 
- * @msc
- * gui[label="GUI-Thread"], t1[label="Worker1"], t2=[label="Worker2"];
- * gui=>t1 [label="start()"];
- * gui=>t2 [label="start()"];
+ * |||;
  * 
- * gui=>t2 [label="call(...)"]
- * t2=>t2 [label="sleep(500)"]
+ * gui box gui[label="GUI-Thread", textbgcolour="violet"];
+ * tr1 box tr1[label="Worker1", textbgcolour="olive"];
+ * tr2 box tr2[label="Worker2", textbgcolour="orange"];
  * 
- * gui=>t1 [label="call(...)"]
- * t1=>t1 [label="sleep(800)"]
+ * gui => tr1 [label="start()",linecolor="violet"];
+ * gui => tr2 [label="start()",linecolor="violet"];
  * 
- * t2=>gui [label="button->caption(Running...)"]
- * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
- * t2=>gui [label="button->caption(Running...)"]
- * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
- * t2=>gui [label="button->caption(Running...)"]
- * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
- * t2=>gui [label="button->caption(Running...)"]
- * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
- * t2=>gui [label="button->caption(Running...)"]
- * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
- * t2=>gui [label="button->caption(Running...)"]
- * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
- * t2=>gui [label="button->caption(Running...)"]
- * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
- * t2=>gui [label="button->caption(Running...)"]
- * t1=>gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)"]
+ * gui => tr2 [label="call(...)",linecolor="violet"];
  * 
- * t2=>gui [label="button->caption(Start...)"]
- * gui=>t1 [label="stop()"]
- * gui=>t2 [label="stop()"]
+ * gui => tr1 [label="call(...)",linecolor="violet"];
+ * 
+ * tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+ * tr2 => gui [label="button->caption='Running |'",linecolor="orange"];
+ * tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+ * tr2 => gui [label="button->caption='Running /'",linecolor="orange"];
+ * tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+ * tr2 => gui [label="button->caption='Running -'",linecolor="orange"];
+ * 
+ * tr1 => tr1 [label="sleep(900)",linecolor="olive", arcskip="1"];
+ * tr1 => gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)",linecolor="olive"];
+ * 
+ * tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+ * tr2 => gui [label="button->caption='Running \'",linecolor="orange"];
+ * tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+ * tr2 => gui [label="button->caption='Running |'",linecolor="orange"];
+ * tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+ * tr2 => gui [label="button->caption='Running /'",linecolor="orange"];
+ * 
+ * 
+ * tr1 => tr1 [label="sleep(900)",linecolor="olive", arcskip="1"];
+ * tr1 => gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)",linecolor="olive"];
+ * 
+ * ---;
+ * 
+ * tr2 => gui [label="button->caption='Start...'",linecolor="orange"];
+ * gui => tr1 [label="stop()",linecolor="violet"];
+ * gui => tr2 [label="stop()",linecolor="violet"];
  * @endmsc
  * 
  * @param button 
  */
 void OnStartClicked(Button *button)
 {
+    // First, we fetch the first worker thread and start it when needed
     ThreadPtr thread1 = Thread::Manager["Thread1"];
     if(!thread1->IsRunning)
         thread1->start();
 
+    
+    // Then we get the second worker thread and start it if necessary
     ThreadPtr thread2 = Thread::Manager["Thread2"];
     if(!thread2->IsRunning)
         thread2->start();
 
+    // Then we send the job to the second worker thread every 3 tenths of a second
+    // update the text of the start button
     thread2->call([thread2]() {
         while(!thread2->IsStopped)
         {
-            ::Sleep(500);
+            ::Sleep(300);
             mainThread->call([thread2]() {
                 static int count = 0;
-                string progress[] = {"/", "-", "\\", "|"};
+                string progress[] = {"|","/", "-", "\\" };
                 int size = sizeof(progress) / sizeof(string);
                 ButtonPtr button = Button::Manager["Start:Button"];
                 button->Caption = "Running " + progress[count % size];
                 count++;
             });
         }
+        // If the thread was stopped, we reset the text
         mainThread->call([](){
              ButtonPtr button = Button::Manager["Start:Button"];
              button->Caption = "Start ...";            
         });
     });
 
-    thread1->call([thread1,thread2]() {       
+    // The first worker thread gets the job, ten times, every 900 milliseconds, 
+    // move the progress bar one step forward
+    thread1->call([thread1,thread2]() {
+               
+        // This is the real job: Move the bar one to the right ten times :-)
         for(int i = 0; i < 10; ++i)
         {
-            ::Sleep(800);
+            ::Sleep(900);
             ::PostMessage(hWndPB, PBM_STEPIT, 0, 0);
         }
 
+        // Wenn der Job erledigt ist, stoppen wir vom Haupt-Thread aus beide Worker-Threads
         mainThread->call([thread1,thread2](){
             thread2->stop();
             thread1->stop();
