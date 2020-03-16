@@ -120,19 +120,37 @@ struct PropertyRW : public PropertyR<T>
      * @param value 
      * @return PropertyRW& 
      */
-
-    /**@{*/
-    /**
-     * @brief Arithmetic operators so that the proeprties are more intuitive to use
-     * 
-     * @param value 
-     * @return PropertyRW& 
-     */
-    PropertyRW &operator=(T &&value)
-    {
-        setter_(value);
-        return *this;
+    PropertyRW &operator=(T &&value) {
+      setter_(value);
+      return *this;
     }
+    
+    /**
+     * @name Arithmetic operators
+     * 
+     * Arithmetic operators, so that the properties are more intuitive to use.
+     *
+     * Sample:
+     * @code {.cpp}
+     * class SomeObject {
+     *      int someInt;
+     * public:
+     *      SomeObject() : SomeProeprty(someInt)
+     *      {}
+     *
+     *      PropertyRW<int> SomeProeprty;
+     * };
+     *
+     * @endcode
+     * Usage:
+     * @code {.cpp}
+     * someObject->SomeProperty += 15;
+     * @endcode
+     *
+     *
+     */
+    /**@{*/
+    /** To use as operators of the underlying type*/
     PropertyRW &operator+=(T &&value)
     {
         setter_(PropertyR<T>::getter_() + value);
