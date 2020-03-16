@@ -21,6 +21,7 @@
             "options": {
                 "cwd": "${workspaceRoot}"
             },
+            "problemMatcher" :"$msCompile",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -35,7 +36,8 @@
             ],
             "options": {
                 "cwd": "${workspaceRoot}"
-            }
+            },
+            "problemMatcher":"$gcc"
         },
         {
             "label": "echo",
