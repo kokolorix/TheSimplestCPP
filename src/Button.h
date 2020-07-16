@@ -1,28 +1,17 @@
 #pragma once
 
-#include "windows.h"
-
-#include <string>
-using std::string;
-
-#include <memory>
-using std::make_shared;
-using std::make_unique;
-using std::shared_ptr;
-using std::unique_ptr;
-
-#include "Property.hpp"
+#include "Control.h"
 
 class Button;
 using ButtonPtr = shared_ptr<Button>;
 
-class Button
-{
+class Button : public  Control
+{ 
 public:
     Button();
     virtual ~Button();
 
-    static struct ButtonManager
+    static struct ButtonManager : public ControlManager
     {
         ButtonManager();
         virtual ~ButtonManager() = default;
@@ -30,8 +19,6 @@ public:
         ButtonPtr operator[](HWND hWnd);
 
     private:
-        struct Impl;
-        unique_ptr<Impl> pImpl_;
         friend class Button;
     } Manager;
 
@@ -43,7 +30,5 @@ private:
     unique_ptr<Impl> pImpl_;
 
 public:
-    PropertyRW<HWND> hWnd;
-    PropertyRW<string> Caption;
     PropertyRW<function<void(Button*)>> OnClicked;
 };
