@@ -45,7 +45,7 @@ public:
 	void start(_Fn &&_Fx, _Args &&... _Ax)
 	{
 		ThreadPtr thisThread = shared_from_this();
-		start(thread([thisThread, _Fn](forward<_Args>(_Ax)...){
+		start(thread([thisThread, _Fn](typename std::forward<_Args>(_Ax)...){
 			_Fn(forward<_Args>(_Ax)...);
 		}));
 	}
