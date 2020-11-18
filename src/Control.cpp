@@ -27,7 +27,8 @@ struct  Control::Impl
 
 struct Control::ControlManager::Impl
 {
-    map<HWND,ControlPtr> hMap_;  
+	bool deleted_ = false;
+	map<HWND, ControlPtr> hMap_;
 	map<string, ControlPtr> nameMap_;
 };
 
@@ -40,7 +41,15 @@ Control::Control()
 
 Control::~Control()
 {
-
+	hWnd = NULL;
+   if(!Control::Manager.pImpl_->deleted_)
+	{
+		auto begin = Control::Manager.pImpl_->nameMap_.begin();
+		auto end = Control::Manager.pImpl_->nameMap_.end();
+		auto it = find_if(begin, end, [this](pair<const string, ControlPtr>& p) {return p.second.get() == this; });
+		if (it != end)
+			Control::Manager.pImpl_->nameMap_.erase(it);
+	}
 }
 
 HWND Control::create(HWND hParent, int x, int y, int cx, int cy,  string windowClass, string caption, int windowStyle)
@@ -75,7 +84,7 @@ void Control::execute(int command)
 
 Control::ControlManager::ControlManager() : pImpl_(make_unique<Control::ControlManager::Impl>()){}
 
-Control::ControlManager::~ControlManager() = default;
+Control::ControlManager::~ControlManager() { pImpl_->deleted_ = true; }
 
 ControlPtr Control::ControlManager::operator[](const string &name)
 {

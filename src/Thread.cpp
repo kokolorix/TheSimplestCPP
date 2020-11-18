@@ -140,7 +140,12 @@ Thread::Thread(const string &name)
 Thread::~Thread()
 {
 	if (pImpl_->thread_.joinable())
-		pImpl_->thread_.join();
+	{
+		if(this_thread::get_id() == pImpl_->thread_.get_id())
+			pImpl_->thread_.detach();
+		else
+			pImpl_->thread_.join();
+	}
 
 	// It is possible that global variables are deleted,  
 	// after the manager has already been cleared. 
@@ -166,7 +171,9 @@ void Thread::enqueue(function<void()> f)
 
 void Thread::start(thread &&t)
 {
-	assert(!IsRunning);
+	if (pImpl_->thread_.joinable())
+		pImpl_->thread_.detach();
+
 	swap(pImpl_->thread_, t);
 	pImpl_->stopped_ = false;
 	pImpl_->id_ = pImpl_->thread_.get_id();
@@ -196,7 +203,12 @@ void Thread::Impl::enqueue(function<void()> f)
  */
 void Thread::start()
 {
-	start(thread(Impl::standardLoop, shared_from_this()));
+	ThreadPtr thisThread = shared_from_this();
+
+	if (pImpl_->thread_.joinable())
+		pImpl_->thread_.detach();
+
+	start(thread(Impl::standardLoop, thisThread));
 }
 
 /**
@@ -265,7 +277,6 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 
 	Thread::Manager.pImpl_->idMap_.erase(pImpl->id_);
 	pImpl->id_ = ThreadId();
-	pImpl->thread_.detach();
 }
 
 /**

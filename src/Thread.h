@@ -46,14 +46,14 @@ public:
 	{
 		ThreadPtr thisThread = shared_from_this();
 		start(thread([thisThread, _Fn](typename std::forward<_Args>(_Ax)...){
-			_Fn(forward<_Args>(_Ax)...);
+			_Fn(std::forward<_Args>(_Ax)...);
 		}));
 	}
 
 	template <class _Fn, class... _Args>
 	void call(_Fn &&_Fx, _Args &&... _Ax)
 	{
-		auto f = bind(_Fx, forward<_Args>(_Ax)...);
+		auto f = bind(_Fx, std::forward<_Args>(_Ax)...);
 		enqueue(f);
 	}
 
