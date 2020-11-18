@@ -8,6 +8,37 @@
 #include <atomic>
 
 #include "Thread.h"
+#include <windows.h>
+#include <processthreadsapi.h>
+#include <assert.h>
+#include <codecvt>
+#include <locale>
+
+const DWORD MS_VC_EXCEPTION = 0x406D1388;
+#pragma pack(push,8)
+typedef struct tagTHREADNAME_INFO
+{
+	DWORD dwType; // Must be 0x1000.
+	LPCSTR szName; // Pointer to name (in user addr space).
+	DWORD dwThreadID; // Thread ID (-1=caller thread).
+	DWORD dwFlags; // Reserved for future use, must be zero.
+} THREADNAME_INFO;
+#pragma pack(pop)
+void SetThreadName(DWORD dwThreadID, const char* threadName) {
+	THREADNAME_INFO info;
+	info.dwType = 0x1000;
+	info.szName = threadName;
+	info.dwThreadID = dwThreadID;
+	info.dwFlags = 0;
+#pragma warning(push)
+#pragma warning(disable: 6320 6322)
+	__try {
+		RaiseException(MS_VC_EXCEPTION, 0, sizeof(info) / sizeof(ULONG_PTR), (ULONG_PTR*)&info);
+	}
+	__except (EXCEPTION_EXECUTE_HANDLER) {
+	}
+#pragma warning(pop)
+}
 
 using namespace std;
 /**
@@ -142,9 +173,14 @@ Thread::~Thread()
 	if (pImpl_->thread_.joinable())
 	{
 		if(this_thread::get_id() == pImpl_->thread_.get_id())
+		{
 			pImpl_->thread_.detach();
+		}
 		else
+		{
+			pImpl_->stopped_ = true;
 			pImpl_->thread_.join();
+		}
 	}
 
 	// It is possible that global variables are deleted,  
@@ -172,7 +208,12 @@ void Thread::enqueue(function<void()> f)
 void Thread::start(thread &&t)
 {
 	if (pImpl_->thread_.joinable())
-		pImpl_->thread_.detach();
+	{
+		pImpl_->stopped_ = true;
+		pImpl_->thread_.join();
+
+		//pImpl_->thread_.detach();
+	}
 
 	swap(pImpl_->thread_, t);
 	pImpl_->stopped_ = false;
@@ -204,17 +245,13 @@ void Thread::Impl::enqueue(function<void()> f)
 void Thread::start()
 {
 	ThreadPtr thisThread = shared_from_this();
-
-	if (pImpl_->thread_.joinable())
-		pImpl_->thread_.detach();
-
 	start(thread(Impl::standardLoop, thisThread));
 }
 
 /**
  * @brief Stops a running thread as fast as intended.
- * In länger dauernden Verarbeitungen muss es vorgesehen werden, an geeigneten Stellen
- * abzubrechen:
+ * In longer lasting processing it must be provided, at suitable places
+ * to cancel
  * @code {.cpp}
     thread2->call([thread2]() {
         while(!thread2->IsStopped) // <--- here we checks every loop the IsStopped Property
@@ -254,6 +291,13 @@ void Thread::stop()
 void Thread::Impl::standardLoop(ThreadPtr pThread)
 {
 	string threadName = pThread->Name;
+	//std::wstring threadName = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(tn.c_str());
+	//std::wstring threadName(tn.length(), L' ');// = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(tn.c_str());
+	//std::copy(tn.begin(), tn.end(), threadName.begin());
+
+	//HRESULT hr = SetThreadDescription(GetCurrentThread(), threadName.c_str());
+	//assert(SUCCEEDED(hr));
+	SetThreadName(::GetCurrentThreadId(), threadName.c_str());
 	Thread::Impl* pImpl = pThread->pImpl_.get();
 	do
 	{
