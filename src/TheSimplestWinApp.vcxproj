@@ -97,6 +97,13 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>cd /d $(SolutionDir) 
+call doxygen doxyfile</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Create the Documentation</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -113,6 +120,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>cd /d $(SolutionDir) 
+call doxygen doxyfile</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Create the Documentation</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -126,6 +140,13 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>cd /d $(SolutionDir) 
+call doxygen doxyfile</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Create the Documentation</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -142,6 +163,13 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>cd /d $(SolutionDir) 
+call doxygen doxyfile</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Create the Documentation</Message>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
@@ -152,6 +180,7 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Control.h" />
+    <ClInclude Include="dbg_new.h" />
     <ClInclude Include="Property.hpp" />
     <ClInclude Include="Thread.h" />
   </ItemGroup>

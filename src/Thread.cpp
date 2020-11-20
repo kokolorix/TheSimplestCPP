@@ -1,4 +1,5 @@
 
+#include "dbg_new.h"
 #include<cassert>
 
 #include <map>
@@ -135,8 +136,13 @@ struct Thread::Impl
 
 	void enqueue(function<void()> f);
 	static void standardLoop(ThreadPtr pThread);
+	void initRunningThread(ThreadId id, function<void()> notify, ThreadPtr pThread);
 };
 
+/**
+ * @brief The implementation of the thread manager
+ * 
+ */
 struct Thread::ThreadManager::Impl
 {
 	static bool isDeleted; ///>An helper construct to prevent the application from crashing on exit.
@@ -148,11 +154,57 @@ struct Thread::ThreadManager::Impl
 	recursive_mutex mutex_;
 	map<ThreadId, weak_ptr<Thread>> idMap_;
 	map<string, weak_ptr<Thread>> nameMap_;
+
+	ThreadPtr getOrCreateThread(const string& name);
+	ThreadPtr getThread(const ThreadId &id);
 };
+
+/**
+ * @copydoc ThreadPtr Thread::ThreadManager::operator[](const string &name)
+ */
+ThreadPtr Thread::ThreadManager::Impl::getOrCreateThread(const string& name)
+{
+	lock_guard<recursive_mutex> lock(mutex_);
+	ThreadPtr threadPtr;
+	auto res = nameMap_.insert(make_pair(name, threadPtr));
+	if (res.second)
+	{
+		weak_ptr<Thread>& weakPtr = res.first->second;
+		threadPtr = ThreadPtr(new Thread(name));
+		weakPtr = threadPtr;
+	}
+	else
+	{
+		weak_ptr<Thread>& weakPtr = res.first->second;
+		threadPtr = weakPtr.lock();
+	}
+
+	return threadPtr;
+}
+
+/**
+ * @copydoc Thread::ThreadManager::operator[](const ThreadId& id)
+ */
+ThreadPtr Thread::ThreadManager::Impl::getThread(const ThreadId &id)
+{
+	lock_guard<recursive_mutex> lock(mutex_);
+	auto it = idMap_.find(id);
+	if (it != idMap_.end())
+	{
+		weak_ptr<Thread>& thread = it->second;
+		return thread.lock();
+	}
+	return ThreadPtr();
+}
 
 bool Thread::ThreadManager::Impl::isDeleted = false;
 Thread::ThreadManager Thread::Manager;
 
+/**
+ * @brief Construct a new Thread:: Thread object
+ * 
+ * @param name 
+ */
 Thread::Thread(const string &name)
 	: pImpl_(make_unique<Thread::Impl>(name))
 	, Name(pImpl_->name_)
@@ -167,7 +219,10 @@ Thread::Thread(const string &name)
 	  })
 {
 }
-
+/**
+ * @brief Destroy the Thread:: Thread object
+ * 
+ */
 Thread::~Thread()
 {
 	if (pImpl_->thread_.joinable())
@@ -188,23 +243,28 @@ Thread::~Thread()
 	// Hence this check here 
 	if (!Thread::ThreadManager::Impl::isDeleted)
 	{
+		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
 		Thread::Manager.pImpl_->nameMap_.erase(pImpl_->name_);
 		Thread::Manager.pImpl_->idMap_.erase(pImpl_->id_);
 	}
 }
 
+/**
+ * @brief 
+ * 
+ * @param id 
+ * @param notify 
+ */
 void Thread::initRunningThread(ThreadId id, function<void()> notify)
 {
-	pImpl_->id_ = id;
-	Thread::Manager.pImpl_->idMap_.insert(make_pair(pImpl_->id_, shared_from_this()));	
-	pImpl_->notify_ = notify;
+	pImpl_->initRunningThread(id, notify, shared_from_this());
 }
 
-void Thread::enqueue(function<void()> f)
-{
-	pImpl_->enqueue(f);
-}
-
+/**
+ * @brief 
+ * 
+ * @param t 
+ */
 void Thread::start(thread &&t)
 {
 	if (pImpl_->thread_.joinable())
@@ -218,25 +278,8 @@ void Thread::start(thread &&t)
 	swap(pImpl_->thread_, t);
 	pImpl_->stopped_ = false;
 	pImpl_->id_ = pImpl_->thread_.get_id();
-	Thread::Manager.pImpl_->idMap_.insert(make_pair(pImpl_->id_, shared_from_this()));	
-}
-
-/**
- * @brief A new function object is added to the waiting queue
- * 
- * @param f 
- */
-void Thread::Impl::enqueue(function<void()> f)
-{
-	{
-		lock_guard<recursive_mutex> lock(mutex_);
-		queue_.push(f);
-		enqueued_ = true;
-	}
-	if(notify_)
-		notify_();
-	else
-		condition_.notify_one();
+	lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+	Thread::Manager.pImpl_->idMap_.insert(make_pair(pImpl_->id_, shared_from_this()));
 }
 
 /**
@@ -279,48 +322,21 @@ void Thread::stop()
 	pImpl_->stopped_ = true;
 	pImpl_->condition_.notify_one();
 	this_thread::yield();
-	Thread::Manager.pImpl_->idMap_.erase(pImpl_->id_);
+	{
+		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+		Thread::Manager.pImpl_->idMap_.erase(pImpl_->id_);
+	}
 	pImpl_->id_ = ThreadId();
 }
 
 /**
- * @brief The normally used processing loop of a background thread.
+ * @brief 
  * 
- * @param pThread 
+ * @param f 
  */
-void Thread::Impl::standardLoop(ThreadPtr pThread)
+void Thread::enqueue(function<void()> f)
 {
-	string threadName = pThread->Name;
-	//std::wstring threadName = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(tn.c_str());
-	//std::wstring threadName(tn.length(), L' ');// = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(tn.c_str());
-	//std::copy(tn.begin(), tn.end(), threadName.begin());
-
-	//HRESULT hr = SetThreadDescription(GetCurrentThread(), threadName.c_str());
-	//assert(SUCCEEDED(hr));
-	SetThreadName(::GetCurrentThreadId(), threadName.c_str());
-	Thread::Impl* pImpl = pThread->pImpl_.get();
-	do
-	{
-		unique_lock<recursive_mutex> lock(pThread->pImpl_->mutex_);
-		pImpl->condition_.wait(lock, [pImpl] { return pImpl->enqueued_.load() || pImpl->stopped_.load(); });
-		pImpl->enqueued_ = false;
-
-		while (!pImpl->queue_.empty())
-		{
-			function<void()> f = pImpl->queue_.back();
-			pImpl->queue_.pop();
-			lock.unlock();
-
-			f();
-			this_thread::yield();
-
-			lock.lock();
-		}
-
-	} while (pImpl->stopped_ == false);
-
-	Thread::Manager.pImpl_->idMap_.erase(pImpl->id_);
-	pImpl->id_ = ThreadId();
+	pImpl_->enqueue(f);
 }
 
 /**
@@ -355,6 +371,7 @@ bool Thread::joinable()
 {
 	return pImpl_->thread_.joinable();
 }
+
 /**
  * @brief Waits for the end of the thread
  * 
@@ -364,6 +381,91 @@ void Thread::join()
 	pImpl_->thread_.join();
 }
 
+/**
+ * @brief A new function object is added to the waiting queue
+ * 
+ * @param f 
+ */
+void Thread::Impl::enqueue(function<void()> f)
+{
+	{
+		lock_guard<recursive_mutex> lock(mutex_);
+		queue_.push(f);
+		enqueued_ = true;
+	}
+	if(notify_)
+		notify_();
+	else
+		condition_.notify_one();
+}
+
+/**
+ * @brief The normally used processing loop of a background thread.
+ * 
+ * @param pThread 
+ */
+void Thread::Impl::standardLoop(ThreadPtr pThread)
+{
+	string threadName = pThread->Name;
+	//std::wstring threadName = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(tn.c_str());
+	//std::wstring threadName(tn.length(), L' ');// = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(tn.c_str());
+	//std::copy(tn.begin(), tn.end(), threadName.begin());
+
+	//HRESULT hr = SetThreadDescription(GetCurrentThread(), threadName.c_str());
+	//assert(SUCCEEDED(hr));
+	SetThreadName(::GetCurrentThreadId(), threadName.c_str());
+	
+	Thread::Impl* pImpl = pThread->pImpl_.get();
+	do
+	{
+		unique_lock<recursive_mutex> lock(pThread->pImpl_->mutex_);
+		pImpl->condition_.wait(lock, [pImpl] { return pImpl->enqueued_.load() || pImpl->stopped_.load(); });
+		pImpl->enqueued_ = false;
+
+		while (!pImpl->queue_.empty())
+		{
+			function<void()> f = pImpl->queue_.back();
+			pImpl->queue_.pop();
+			lock.unlock();
+
+			f();
+			this_thread::yield();
+
+			lock.lock();
+		}
+
+	} while (pImpl->stopped_ == false);
+
+	{
+		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+		Thread::Manager.pImpl_->idMap_.erase(pImpl->id_);
+	}
+	pImpl->id_ = ThreadId();
+}
+/**
+ * @brief initialize a running thread.
+ * 
+ * @details 
+ * 
+ * 
+ * @param id 
+ * @param notify 
+ * @param pThread 
+ */
+void Thread::Impl::initRunningThread(ThreadId id, function<void()> notify, ThreadPtr pThread)
+{
+	id_ = id;
+	{
+		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+		Thread::Manager.pImpl_->nameMap_.insert(make_pair(name_, pThread));
+	}
+	notify_ = notify;
+}
+
+/**
+ * @brief Construct a new Thread:: Thread Manager:: Thread Manager object
+ * 
+ */
 Thread::ThreadManager::ThreadManager()
 	: pImpl_(make_unique<Thread::ThreadManager::ThreadManager::Impl>())
 {
@@ -377,22 +479,7 @@ Thread::ThreadManager::ThreadManager()
  */
 ThreadPtr Thread::ThreadManager::operator[](const string &name)
 {
-	lock_guard<recursive_mutex> lock(pImpl_->mutex_);
-	ThreadPtr threadPtr;
-	auto res = pImpl_->nameMap_.insert(make_pair(name , threadPtr));
-	if(res.second)
-	{
-		weak_ptr<Thread>& weakPtr = res.first->second;
-		threadPtr = ThreadPtr(new Thread(name));
-		weakPtr = threadPtr;
-	}
-	else
-	{
-		weak_ptr<Thread>& weakPtr = res.first->second;
-		threadPtr = weakPtr.lock(); 
-	}
-
-	return threadPtr;
+	return pImpl_->getOrCreateThread(name);
 }
 /**
  * @brief Returns the Thread object with the resulting ThreadId. If no such thread exists, an empty ThreadPtr is returned. 
@@ -402,13 +489,6 @@ ThreadPtr Thread::ThreadManager::operator[](const string &name)
  */
 ThreadPtr Thread::ThreadManager::operator[](const ThreadId &id) const
 {
-	lock_guard<recursive_mutex> lock(pImpl_->mutex_);
-	auto it = pImpl_->idMap_.find(id);
-	if (it != pImpl_->idMap_.end())
-	{
-		weak_ptr<Thread> &thread = it->second;
-		return thread.lock();
-	}
-	return ThreadPtr();
+	return pImpl_->getThread(id);
 }
 

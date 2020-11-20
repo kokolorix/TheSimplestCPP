@@ -10,11 +10,14 @@
  * @copyright Copyright (c) 2020
  * 
  */
+#include "dbg_new.h"
 #include <sstream>
 using std::ostringstream;
 using std::endl;
 
 #include <windows.h>
+
+
 #include <CommCtrl.h>
 #include "Thread.h"
 #include "Button.h"
@@ -40,7 +43,8 @@ HINSTANCE hInstance;            //>The main instance handle, used for the create
  */
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-    ::hInstance = hInstance; // store the instance handle in the global variable
+   _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+   ::hInstance = hInstance; // store the instance handle in the global variable
 
     MSG msg = {0};
     WNDCLASS wc = {0};    
@@ -204,14 +208,21 @@ void OnStartClicked(Button *button)
 {
     // First, we fetch the first worker thread and start it when needed
     ThreadPtr thread1 = Thread::Manager["Thread1"];
-    if(!thread1->IsRunning)
-        thread1->start();
-
     
     // Then we get the second worker thread and start it if necessary
     ThreadPtr thread2 = Thread::Manager["Thread2"];
-    if(!thread2->IsRunning)
-        thread2->start();
+
+    if (thread1->IsRunning)
+    {
+		   thread2->stop();
+		   thread1->stop();
+    }
+    else
+	 {
+		 thread1->start();
+		 if (!thread2->IsRunning)
+			 thread2->start();
+	 }
 
     // Then we send the job to the second worker thread every 3 tenths of a second
     // update the text of the start button
@@ -240,13 +251,15 @@ void OnStartClicked(Button *button)
     thread1->call([thread1,thread2]() {
                
         // This is the real job: Move the bar one to the right ten times :-)
-        for(int i = 0; i < 10; ++i)
+        for(int i = 0; i < 10 && !thread1->IsStopped; ++i)
         {
             ::Sleep(900);
             ::PostMessage(hWndPB, PBM_STEPIT, 0, 0);
         }
+        if(thread1->IsStopped)
+            ::PostMessage(hWndPB, PBM_SETPOS, 0, 0);
 
-        // Wenn der Job erledigt ist, stoppen wir vom Haupt-Thread aus beide Worker-Threads
+        // if the job is done, we stop the threads from the main-thread
         mainThread->call([thread1,thread2](){
             thread2->stop();
             thread1->stop();

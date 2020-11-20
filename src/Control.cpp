@@ -1,4 +1,5 @@
 
+#include "dbg_new.h"
 #include "Control.h"
 
 #include <map>
