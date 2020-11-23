@@ -98,8 +98,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>cd /d $(SolutionDir) 
-call doxygen doxyfile</Command>
+      <Command>call $(solutionDir)\generate-doc
+</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Create the Documentation</Message>
@@ -121,8 +121,8 @@ call doxygen doxyfile</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>cd /d $(SolutionDir) 
-call doxygen doxyfile</Command>
+      <Command>call $(solutionDir)\generate-doc
+</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Create the Documentation</Message>
@@ -141,8 +141,8 @@ call doxygen doxyfile</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>cd /d $(SolutionDir) 
-call doxygen doxyfile</Command>
+      <Command>call $(solutionDir)\generate-doc
+</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Create the Documentation</Message>
@@ -164,8 +164,8 @@ call doxygen doxyfile</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>cd /d $(SolutionDir) 
-call doxygen doxyfile</Command>
+      <Command>call $(solutionDir)\generate-doc
+</Command>
     </PostBuildEvent>
     <PostBuildEvent>
       <Message>Create the Documentation</Message>
