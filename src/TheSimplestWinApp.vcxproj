@@ -98,12 +98,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call copy  /y  "$(TargetPath)"  bin
-call $(solutionDir)\generate-doc
+      <Command>"$(SolutionDir)bin\post-build" "$(SolutionPath)" "$(ProjectPath)" "$(TargetPath)"
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Create the Documentation</Message>
+      <Message>Post build</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -122,12 +121,11 @@ call $(solutionDir)\generate-doc
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call copy  /y  "$(TargetPath)"  bin
-call $(solutionDir)\generate-doc
+      <Command>"$(SolutionDir)bin\post-build" "$(SolutionPath)" "$(ProjectPath)" "$(TargetPath)"
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Create the Documentation</Message>
+      <Message>Post build</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -143,12 +141,11 @@ call $(solutionDir)\generate-doc
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call copy  /y  "$(TargetPath)"  bin
-call $(solutionDir)\generate-doc
+      <Command>"$(SolutionDir)bin\post-build" "$(SolutionPath)" "$(ProjectPath)" "$(TargetPath)"
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Create the Documentation</Message>
+      <Message>Post build</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -167,12 +164,11 @@ call $(solutionDir)\generate-doc
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call copy  /y  "$(TargetPath)"  bin
-call $(solutionDir)\generate-doc
+      <Command>"$(SolutionDir)bin\post-build" "$(SolutionPath)" "$(ProjectPath)" "$(TargetPath)"
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Create the Documentation</Message>
+      <Message>Post build</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
