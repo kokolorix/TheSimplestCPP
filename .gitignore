@@ -1,7 +1,3 @@
-open-doc.url
-bin/TheSimplestCPP.exe
-bin/TheSimplestCPP.ilk
-bin/TheSimplestCPP.pdb
 bin/html
 bin/TheSimplestWinApp.exe
 bin/TheSimplestWinApp.ilk
@@ -12,3 +8,5 @@ bin/TheSimplestWinApp.pdb
 /src/Win32
 /Win32
 /src/.vs
+open-doc.url
+start-app.url
