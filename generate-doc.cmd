@@ -8,5 +8,4 @@ goto:eof
 
 :doIt
 call doxygen Doxyfile
-call bin\open-doc
 goto:eof
