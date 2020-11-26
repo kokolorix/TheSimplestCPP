@@ -98,11 +98,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call $(solutionDir)\generate-doc
+      <Command>"$(SolutionDir)bin\post-build" "$(SolutionPath)" "$(ProjectPath)" "$(TargetPath)"
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Create the Documentation</Message>
+      <Message>Post build</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -121,11 +121,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call $(solutionDir)\generate-doc
+      <Command>"$(SolutionDir)bin\post-build" "$(SolutionPath)" "$(ProjectPath)" "$(TargetPath)"
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Create the Documentation</Message>
+      <Message>Post build</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -141,11 +141,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call $(solutionDir)\generate-doc
+      <Command>"$(SolutionDir)bin\post-build" "$(SolutionPath)" "$(ProjectPath)" "$(TargetPath)"
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Create the Documentation</Message>
+      <Message>Post build</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -164,11 +164,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>call $(solutionDir)\generate-doc
+      <Command>"$(SolutionDir)bin\post-build" "$(SolutionPath)" "$(ProjectPath)" "$(TargetPath)"
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
-      <Message>Create the Documentation</Message>
+      <Message>Post build</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

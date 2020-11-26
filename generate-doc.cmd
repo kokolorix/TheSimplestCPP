@@ -1,6 +1,6 @@
 @echo off
 cd /d "%~dp0"
-echo %~dp0
+@REM echo %~dp0
 
 call:doIt
 
