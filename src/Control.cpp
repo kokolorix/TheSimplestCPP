@@ -19,7 +19,7 @@ struct  Control::Impl
     }
     string get_caption()
     {
-        int len = ::GetWindowTextLengthA(hWnd_);
+        size_t len = ::GetWindowTextLengthA(hWnd_);
         auto buf = unique_ptr<char[]>(new char[len + 1]);
         ::GetWindowTextA(hWnd_, buf.get(), len);
         return string(buf.get());
@@ -55,7 +55,7 @@ Control::~Control()
 
 HWND Control::create(HWND hParent, int x, int y, int cx, int cy,  string windowClass, string caption, int windowStyle)
 {
-    pImpl_->hWnd_ = ::CreateWindowA(windowClass.c_str(),
+    HWND hWnd = ::CreateWindowA(windowClass.c_str(),
                                    caption.c_str(),
                                    windowStyle,
                                    x,
@@ -67,13 +67,19 @@ HWND Control::create(HWND hParent, int x, int y, int cx, int cy,  string windowC
                                    hInstance,
                                    NULL);
 
-    auto begin = Control::Manager.pImpl_->nameMap_.begin();
-    auto end = Control::Manager.pImpl_->nameMap_.end();
-    auto it = find_if(begin, end, [this](pair<const string, ControlPtr>& p ){return p.second.get() == this;});
-    if(it != end)
-        Control::Manager.pImpl_->hMap_[pImpl_->hWnd_] = it->second;
+    insert(hWnd);
+    return hWnd;
+}
 
-    return pImpl_->hWnd_;
+void Control::insert(HWND hWnd)
+{
+   pImpl_->hWnd_ = hWnd;
+
+	auto begin = Control::Manager.pImpl_->nameMap_.begin();
+	auto end = Control::Manager.pImpl_->nameMap_.end();
+	auto it = find_if(begin, end, [this](pair<const string, ControlPtr>& p) {return p.second.get() == this; });
+	if (it != end)
+		Control::Manager.pImpl_->hMap_[pImpl_->hWnd_] = it->second;
 }
 
 void Control::execute(int command)

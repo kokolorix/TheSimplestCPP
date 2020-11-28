@@ -13,7 +13,7 @@ set path=%solutionDir%bin;%path%
 
 call generate-doc
 
-call:generate-url "%solutionDir%open-doc.url" "%solutionDir%bin\html\index" "%solutionDir%bin\window_information.ico" 
+call:generate-url "%solutionDir%open-doc.url" "%solutionDir%bin\html\index.html" "%solutionDir%bin\window_information.ico" 
 call:generate-url "%solutionDir%start-app.url" "%target%" "%solutionDir%bin\window_gear.ico" 
 @REM call copy /y  "%target%" "%solutionDir%bin"
 

@@ -21,6 +21,7 @@ using std::endl;
 #include <CommCtrl.h>
 #include "Thread.h"
 #include "Button.h"
+#include "Progress.h"
 
 
 /**
@@ -88,7 +89,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 }
 
-HWND hWndPB = NULL;
 void OnStartClicked(Button* button);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -106,15 +106,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
         int cyVScroll = GetSystemMetrics(SM_CYVSCROLL);
 
-        ::hWndPB = CreateWindowEx(0, PROGRESS_CLASS, (LPTSTR)NULL,
-                                 WS_CHILD | WS_VISIBLE, rcClient.left,
-                                 rcClient.bottom - cyVScroll * 2,
-                                 rcClient.right, cyVScroll * 2,
-                                 hWnd, (HMENU)0, ::hInstance, NULL);
-
-        // SendMessage(hwndPB, PBM_SETRANGE, 0, MAKELPARAM(0, 100));
-
-        // SendMessage(hwndPB, PBM_SETSTEP, (WPARAM)1, 0);
+        ProgressPtr progress1 = Progress::Manager["Progress1"];
+        LONG height = rcClient.bottom - rcClient.top;
+        progress1->create(hWnd, 0, height - cyVScroll * 2, rcClient.right, cyVScroll * 2);
   }
     break;
 
@@ -254,10 +248,14 @@ void OnStartClicked(Button *button)
         for(int i = 0; i < 10 && !thread1->IsStopped; ++i)
         {
             ::Sleep(900);
-            ::PostMessage(hWndPB, PBM_STEPIT, 0, 0);
+				ProgressPtr progress1 = Progress::Manager["Progress1"];
+            progress1->stepIt();
         }
         if(thread1->IsStopped)
-            ::PostMessage(hWndPB, PBM_SETPOS, 0, 0);
+		  {
+				ProgressPtr progress1 = Progress::Manager["Progress1"];
+            progress1->Pos = 0;
+		  }
 
         // if the job is done, we stop the threads from the main-thread
         mainThread->call([thread1,thread2](){
