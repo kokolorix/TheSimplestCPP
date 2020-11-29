@@ -175,12 +175,14 @@
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Control.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Progress.cpp" />
     <ClCompile Include="Thread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="dbg_new.h" />
+    <ClInclude Include="Progress.h" />
     <ClInclude Include="Property.hpp" />
     <ClInclude Include="Thread.h" />
   </ItemGroup>

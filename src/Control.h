@@ -39,6 +39,7 @@ public:
     } Manager;
 
     virtual HWND create(HWND hParent, int x, int y, int cx, int cy, string windowClass, string caption , int windowStyle);
+    virtual void insert(HWND hWnd);
     virtual void execute(int command);
 
 private:
