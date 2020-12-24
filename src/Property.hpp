@@ -57,7 +57,8 @@ struct PropertyR
     template <class... _Args>
 	void operator()(_Args &&... _Ax)
 	{
-		getter_()(std::forward<_Args>(_Ax)...);
+		if (getter_())
+			getter_()(std::forward<_Args>(_Ax)...);
 	}
 
 

@@ -15,39 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Control.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Thread.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Progress.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="Control.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Progress.cpp" />
+    <ClCompile Include="Thread.cpp" />
+    <ClCompile Include="Edit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Control.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Property.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Thread.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="dbg_new.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Progress.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
