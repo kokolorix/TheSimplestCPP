@@ -42,6 +42,33 @@ public:
     virtual void insert(HWND hWnd);
     virtual void execute(int command);
 
+    protected:
+    template<typename CT>
+    struct ControlManagerImpl : public ControlManager
+    {
+        std::shared_ptr<CT> operator[](const string &name)
+        {
+            ControlPtr &ctrl = get(name);
+            if (ctrl)
+            {
+                std::shared_ptr<CT> impl = dynamic_pointer_cast<CT>(ctrl);
+                assert(impl);
+                return impl;
+            }
+            else
+            {
+                std::shared_ptr<CT> impl = make_shared<CT>();
+                ctrl = impl;
+                return impl;
+            }
+        }
+        std::shared_ptr<CT> operator[](HWND hWnd)
+        {
+            std::shared_ptr<CT> impl = dynamic_pointer_cast<CT>(Control::Manager[hWnd]);
+            return impl;
+        }
+    };
+
 private:
     struct Impl;
     unique_ptr<Impl> pImpl_;
