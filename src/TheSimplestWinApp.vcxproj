@@ -92,6 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -113,6 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -156,6 +158,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -174,17 +177,29 @@
   <ItemGroup>
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Control.cpp" />
+    <ClCompile Include="Edit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Progress.cpp" />
     <ClCompile Include="Thread.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="Control.h" />
+    <ClInclude Include="Button.h">
+      <DependentUpon>Button.cpp</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Control.h">
+      <DependentUpon>Control.cpp</DependentUpon>
+    </ClInclude>
     <ClInclude Include="dbg_new.h" />
-    <ClInclude Include="Progress.h" />
+    <ClInclude Include="Edit.h">
+      <DependentUpon>Edit.cpp</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Progress.h">
+      <DependentUpon>Progress.cpp</DependentUpon>
+    </ClInclude>
     <ClInclude Include="Property.hpp" />
-    <ClInclude Include="Thread.h" />
+    <ClInclude Include="Thread.h">
+      <DependentUpon>Thread.cpp</DependentUpon>
+    </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

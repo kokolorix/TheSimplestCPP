@@ -21,7 +21,7 @@ struct  Control::Impl
     {
         size_t len = ::GetWindowTextLengthA(hWnd_);
         auto buf = unique_ptr<char[]>(new char[len + 1]);
-        ::GetWindowTextA(hWnd_, buf.get(), len);
+        ::GetWindowTextA(hWnd_, buf.get(), (int)len);
         return string(buf.get());
     }
 };

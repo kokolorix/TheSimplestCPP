@@ -21,6 +21,7 @@ using std::endl;
 #include <CommCtrl.h>
 #include "Thread.h"
 #include "Button.h"
+#include "Edit.h"
 #include "Progress.h"
 
 
@@ -39,11 +40,11 @@ HINSTANCE hInstance;            //>The main instance handle, used for the create
  * @param hInstance         //> The instance handle, to be contacted, for example, by other processes 
  * @param hPrevInstance     //> The handle from the parent process
  * @param lpCmdLine         //> The command line with all arguments passed
- * @param nCmdShow          //> The display code , it determines how the application window is initially displayed  
+ * @param nShowCmd          //> The display code , it determines how the application window is initially displayed  
  * @return int WinMain      //> The return value of the application. Traditionally zero if everything was ok
  */
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
-{
+//int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+int WINAPI CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd) {
    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
    ::hInstance = hInstance; // store the instance handle in the global variable
 
@@ -90,6 +91,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 }
 
 void OnStartClicked(Button* button);
+void OnThreadTestClicked(Button* button);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -105,9 +107,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         ::GetClientRect(hWnd, &rcClient);
 
         int cyVScroll = GetSystemMetrics(SM_CYVSCROLL);
+		  LONG height = rcClient.bottom - rcClient.top;
+
+        ButtonPtr threadTest = Button::Manager["ThreadTest:Button"];
+        threadTest->OnClicked = OnThreadTestClicked;
+        threadTest->create(hWnd, 140, 20, 100, 30, "Thread-Test");
+
+        EditPtr output = Edit::Manager["Output:Edit"];
+        output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
 
         ProgressPtr progress1 = Progress::Manager["Progress1"];
-        LONG height = rcClient.bottom - rcClient.top;
         progress1->create(hWnd, 0, height - cyVScroll * 2, rcClient.right, cyVScroll * 2);
   }
     break;
@@ -264,3 +273,52 @@ void OnStartClicked(Button *button)
         });
     });
 }
+/**
+ * @brief 
+ * 
+ * @param button 
+ */
+void OnThreadTestClicked(Button* button)
+{
+	EditPtr output = Edit::Manager["Output:Edit"];
+	ThreadPtr thread1 = Thread::Manager["ThreadTest1"];
+	ThreadPtr thread2 = Thread::Manager["ThreadTest2"];
+   if (thread1->IsRunning)
+   {
+	   thread1->stop();
+	   thread2->stop();
+      thread1->join();
+      thread2->join();
+      return;
+   }
+   output->Caption = "";
+	thread1->start();
+	thread2->start();
+
+	thread1->call([thread1, output]() {
+		for (size_t i = 0; !thread1->IsStopped; i++)
+		{
+			ostringstream os;
+			os << "Output from Thread1 " << i << endl;
+			string line = os.str();
+			::Sleep(500);
+			mainThread->call([output, line]() {
+				output->addLine(line);
+				});
+		}
+		});
+
+   thread2->call([thread2, output]() {
+		for (size_t i = 0; !thread2->IsStopped; i++)
+      {
+         std::ostringstream os;
+         os << "Output from Thread2 " << i << std::endl;
+			string line = os.str();
+			::Sleep(300);
+			mainThread->call([output, line]() {
+				output->addLine(line);
+				});
+      }
+   });
+}
+

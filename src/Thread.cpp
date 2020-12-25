@@ -160,7 +160,7 @@ struct Thread::ThreadManager::Impl
 };
 
 /**
- * @copydoc ThreadPtr Thread::ThreadManager::operator[](const string &name)
+ * @copydoc Thread::ThreadManager::operator[](const string &name)
  */
 ThreadPtr Thread::ThreadManager::Impl::getOrCreateThread(const string& name)
 {
@@ -183,7 +183,7 @@ ThreadPtr Thread::ThreadManager::Impl::getOrCreateThread(const string& name)
 }
 
 /**
- * @copydoc Thread::ThreadManager::operator[](const ThreadId& id)
+ * @copydoc Thread::ThreadManager::operator[](const ThreadId &id) const
  */
 ThreadPtr Thread::ThreadManager::Impl::getThread(const ThreadId &id)
 {

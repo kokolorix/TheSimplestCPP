@@ -6,7 +6,7 @@
         {
             "label": "Build with Clang",
             "type": "shell",
-            "command": "clang++",
+            "command": "c:\\llvm\\bin\\clang++",
             "args": [
                 "-std=c++2a",
                 ".\\src\\*.cpp",
