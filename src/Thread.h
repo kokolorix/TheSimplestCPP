@@ -3,31 +3,15 @@
 #include <string>
 using std::string;
 
-#include <queue>
-using std::queue;
-
 #include <memory>
-using std::const_pointer_cast;
-using std::dynamic_pointer_cast;
 using std::enable_shared_from_this;
-using std::make_shared;
 using std::make_unique;
 using std::shared_ptr;
-using std::static_pointer_cast;
 using std::unique_ptr;
 
 #include <thread>
 using std::thread;
 namespace this_thread = std::this_thread;
-
-#include <mutex>
-using std::lock_guard;
-using std::mutex;
-using std::condition_variable;
-using std::unique_lock;
-
-#include <atomic>
-using std::atomic_bool;
 
 #include <functional>
 using std::function;
@@ -41,56 +25,56 @@ using ThreadId = thread::id;
 class Thread : public enable_shared_from_this<Thread>
 {
 	explicit Thread(const string &name);
-	friend inline shared_ptr<Thread> make_shared();
-
 public:
 	virtual ~Thread();
-	static struct ThreadPool
+	static struct ThreadManager
 	{
-		ThreadPool();
-		virtual ~ThreadPool() = default;
+		ThreadManager();
+		virtual ~ThreadManager() = default;
 		ThreadPtr operator[](const string &name);
 		ThreadPtr operator[](const ThreadId &id) const;
 
 	private:
 		struct Impl;
 		unique_ptr<Impl> pImpl_;
-	} Pool;
+		friend class Thread;
+	} Manager;
 
 public:
 	template <class _Fn, class... _Args>
 	void start(_Fn &&_Fx, _Args &&... _Ax)
 	{
-		thread_ = thread(_Fx, forward<_Args>(_Ax)...);
+		ThreadPtr thisThread = shared_from_this();
+		start(thread([thisThread, _Fn](typename std::forward<_Args>(_Ax)...){
+			_Fn(std::forward<_Args>(_Ax)...);
+		}));
 	}
 
 	template <class _Fn, class... _Args>
 	void call(_Fn &&_Fx, _Args &&... _Ax)
 	{
-		auto f = bind(_Fx, forward<_Args>(_Ax)...);
+		auto f = bind(_Fx, std::forward<_Args>(_Ax)...);
 		enqueue(f);
 	}
 
 	void start();
 	void stop();
-	static void standardLoop(ThreadPtr pThread);
 
-	bool joinable() { return thread_.joinable(); }
-	void join() { thread_.join(); }
-	thread::id get_id() { return thread_.get_id(); }
+	void initRunningThread(ThreadId id, function<void()> notify);
+	void processQueue(size_t maxElements = 10);
+
+	bool joinable();
+	void join();
 
 private:
-	string name_;
-	// ThreadId m_id;
-	thread thread_;
-
-	mutex mutex_;
-	condition_variable condition_;
-	atomic_bool enqueued_ = false, stopped_ = false;
-	queue<function<void()>> queue_;
+	struct Impl;
+	unique_ptr<Impl> pImpl_;
 	void enqueue(function<void()> f);
-
+	void start(thread&& t);
+	
 public:
-	PropertyR<string> Name;
+	PropertyR<bool> const IsRunning;
+	PropertyR<bool> const IsStopped;
 	PropertyR<ThreadId> const Id;
+	PropertyR<string> Name;
 };

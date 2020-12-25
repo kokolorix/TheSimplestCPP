@@ -43,8 +43,27 @@
         "xstddef": "cpp",
         "xtr1common": "cpp",
         "xutility": "cpp",
-        "chrono": "cpp",
         "mutex": "cpp",
-        "map": "cpp"
+        "*.rh": "cpp",
+        "algorithm": "cpp",
+        "atomic": "cpp",
+        "chrono": "cpp",
+        "codecvt": "cpp",
+        "ctime": "cpp",
+        "deque": "cpp",
+        "locale": "cpp",
+        "map": "cpp",
+        "queue": "cpp",
+        "ratio": "cpp",
+        "thread": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xloctime": "cpp",
+        "xtree": "cpp"
     }
-}
+    // ,
+    // "code-runner.executorMap": {
+    //     // "cpp": "cd $dir && \"$workspaceRoot\\.vscode\\cpp-code-runner.cmd\" $fileName"
+    //     // "cpp": "cd $dir && clang++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    // }}

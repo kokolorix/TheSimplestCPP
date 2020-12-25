@@ -9,36 +9,23 @@
             "command": "clang++",
             "args": [
                 "-std=c++2a",
-                "*.cpp",
-                "Test\\*.cpp",
+                ".\\src\\*.cpp",
                 "--debug",
+                "-DWINDOWS",
+                "-DDEBUG",
+                "-DUNICODE",
+                "-luser32.lib",
                 // "-v",
-                "-I${workspaceRoot}",
-                "-I${workspaceRoot}\\Test",
                 "-o.\\bin\\${workspaceFolderBasename}.exe"
             ],
             "options": {
                 "cwd": "${workspaceRoot}"
             },
+            "problemMatcher" :"$msCompile",
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "Build with Batch",
-            "type": "shell",
-            "command": "build_and_run.cmd",
-            "options": {
-                "cwd": "${workspaceRoot}"
-            },
-            "problemMatcher": "$msCompile"
-            // ,
-            // "group": {
-            //     "kind": "build",
-            //     "isDefault": true
-            // }
+            }
         },
         {
             "label": "Build Doxygen Documentation",
@@ -51,7 +38,6 @@
                 "cwd": "${workspaceRoot}"
             },
             "problemMatcher":"$gcc"
-
         },
         {
             "label": "echo",

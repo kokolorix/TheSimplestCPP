@@ -1,14 +1,18 @@
-@mainpage A simple c++ project
+@mainpage A simple c++ Windows-App
 
 # Documentation
 
 ## Short description
-to test and play with tricky constructions in doxygen and c++
+A  very simple application, which demonstrates 
+how a gui framework can be built and operated
+asynchronously and to test and play with tricky 
+constructions in doxygen, c++ and the Win32-Api  
 
 ## Entrance points
 
-- main()
-- aInterface
+- main.cpp
+- Property.hpp
+- Thread
 
 ## Overviews
 
@@ -18,6 +22,7 @@ to test and play with tricky constructions in doxygen and c++
 
 ## External documentations
 
+- [Win32 Api](https://docs.microsoft.com/en-us/windows/win32/api/_winmsg/)
 - [doxygen special commands](http://doxygen.nl/manual/commands.html)
 - [c++ reference](https://en.cppreference.com/w/)
 - [boost documentation](https://www.boost.org/doc/libs/1_72_0/?view=categorized)
