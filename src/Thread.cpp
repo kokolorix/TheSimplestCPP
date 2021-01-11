@@ -14,6 +14,9 @@
 #include <assert.h>
 #include <codecvt>
 #include <locale>
+#include "Edit.h"
+#include <sstream>
+//#include <boost\format.hpp>
 
 const DWORD MS_VC_EXCEPTION = 0x406D1388;
 #pragma pack(push,8)
@@ -209,7 +212,7 @@ Thread::Thread(const string &name)
 	: pImpl_(make_unique<Thread::Impl>(name))
 	, Name(pImpl_->name_)
 	, IsRunning([this]() {
-		  return pImpl_->id_ != ThreadId();
+		  return pImpl_->id_ != ThreadId() && !IsStopped;
 	  })
 	, IsStopped([this]() {
 		  return pImpl_->stopped_.load();
@@ -415,6 +418,8 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 	//assert(SUCCEEDED(hr));
 	SetThreadName(::GetCurrentThreadId(), threadName.c_str());
 	
+	EditPtr output = Edit::Manager["Output:Edit"];
+	output->addLine((ostringstream() << "start of thread " << threadName).str());
 	Thread::Impl* pImpl = pThread->pImpl_.get();
 	do
 	{
@@ -441,6 +446,7 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 		Thread::Manager.pImpl_->idMap_.erase(pImpl->id_);
 	}
 	pImpl->id_ = ThreadId();
+	output->addLine((ostringstream() << "end of thread " << threadName).str());
 }
 /**
  * @brief initialize a running thread.

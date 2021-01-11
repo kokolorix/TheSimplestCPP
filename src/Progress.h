@@ -11,16 +11,7 @@ public:
 	Progress();
 	virtual ~Progress();
 
-	static struct ProgressManager : public ControlManager
-	{
-		ProgressManager();
-		virtual ~ProgressManager() = default;
-		ProgressPtr operator[](const string& name);
-		ProgressPtr operator[](HWND hWnd);
-
-	private:
-		friend class Progress;
-	} Manager;
+	static Control::ControlManagerImpl<Progress> Manager;
 
 	HWND create(HWND hParent, int x, int y, int cx, int cy);
 	void stepIt();

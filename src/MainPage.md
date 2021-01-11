@@ -13,6 +13,7 @@ constructions in doxygen, c++ and the Win32-Api
 - main.cpp
 - Property.hpp
 - Thread
+- Control
 
 ## Overviews
 

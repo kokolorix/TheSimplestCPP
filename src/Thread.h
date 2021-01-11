@@ -22,6 +22,8 @@ class Thread;
 using ThreadPtr = shared_ptr<Thread> ;
 using ThreadId = thread::id;
 
+extern ThreadPtr mainThread;
+
 class Thread : public enable_shared_from_this<Thread>
 {
 	explicit Thread(const string &name);
@@ -73,8 +75,8 @@ private:
 	void start(thread&& t);
 	
 public:
-	PropertyR<bool> const IsRunning;
-	PropertyR<bool> const IsStopped;
-	PropertyR<ThreadId> const Id;
+	PropertyR<bool> IsRunning;
+	PropertyR<bool> IsStopped;
+	PropertyR<ThreadId> Id;
 	PropertyR<string> Name;
 };
