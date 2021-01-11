@@ -41,12 +41,13 @@ struct PropertyR
      * 
      * @return T const 
      */
-    operator T const() { return getter_(); }
+    operator T () { return getter_(); }
+    operator  T const() const { return static_cast<T>(getter_()); }
 
     /**
      * @brief Explicit bool operator, used by control structures
      */
-    operator bool() const { return static_cast<bool>(getter_()); }
+    operator bool () const { return static_cast<bool>(getter_()); }
 
     /**
      * @brief Universal call operator, which also allows properties with std::function
@@ -65,6 +66,7 @@ struct PropertyR
 protected:
     Getter getter_;
 };
+
 /**
  * @brief utility class to emulate the Property functionality of .NET
  * @tparam T The type of the Property
