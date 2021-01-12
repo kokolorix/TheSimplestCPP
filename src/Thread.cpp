@@ -132,7 +132,7 @@ struct Thread::Impl
 
 	function<void()> notify_;
 
-	recursive_mutex mutex_;
+	std::mutex mutex_;
 	condition_variable_any condition_;
 	atomic_bool enqueued_ = false, stopped_ = false;
 	queue<function<void()>> queue_;
@@ -349,18 +349,17 @@ void Thread::enqueue(function<void()> f)
  */
 void Thread::processQueue(size_t maxElements /*= 10*/)
 {
-	unique_lock<recursive_mutex> lock(pImpl_->mutex_);
+	unique_lock<std::mutex> lock(pImpl_->mutex_);
 	
 	for (size_t i = 0; i < maxElements && !pImpl_->queue_.empty(); ++i)
 	{
 		function<void()> f = pImpl_->queue_.back();
 		pImpl_->queue_.pop();
 		lock.unlock();
-
 		f();
-		this_thread::yield();
-
 		lock.lock();
+
+		this_thread::yield();
 	}
 }
 
@@ -392,7 +391,7 @@ void Thread::join()
 void Thread::Impl::enqueue(function<void()> f)
 {
 	{
-		lock_guard<recursive_mutex> lock(mutex_);
+		lock_guard<std::mutex> lock(mutex_);
 		queue_.push(f);
 		enqueued_ = true;
 	}
@@ -419,11 +418,11 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 	SetThreadName(::GetCurrentThreadId(), threadName.c_str());
 	
 	EditPtr output = Edit::Manager["Output:Edit"];
-	output->addLine((ostringstream() << "start of thread " << threadName).str());
+	output->addLine((ostringstream() << "start of thread " << threadName << "\r\n").str());
 	Thread::Impl* pImpl = pThread->pImpl_.get();
 	do
 	{
-		unique_lock<recursive_mutex> lock(pThread->pImpl_->mutex_);
+		unique_lock<std::mutex> lock(pThread->pImpl_->mutex_);
 		pImpl->condition_.wait(lock, [pImpl] { return pImpl->enqueued_.load() || pImpl->stopped_.load(); });
 		pImpl->enqueued_ = false;
 
@@ -432,11 +431,9 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 			function<void()> f = pImpl->queue_.back();
 			pImpl->queue_.pop();
 			lock.unlock();
-
 			f();
-			this_thread::yield();
-
 			lock.lock();
+			this_thread::yield();
 		}
 
 	} while (pImpl->stopped_ == false);
@@ -446,7 +443,7 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 		Thread::Manager.pImpl_->idMap_.erase(pImpl->id_);
 	}
 	pImpl->id_ = ThreadId();
-	output->addLine((ostringstream() << "end of thread " << threadName).str());
+	output->addLine((ostringstream() << "end of thread " << threadName << "\r\n").str());
 }
 /**
  * @brief initialize a running thread.

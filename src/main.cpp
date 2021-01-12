@@ -64,14 +64,14 @@ int WINAPI CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevIn
 
     int sx = ::GetSystemMetrics(SM_CXSCREEN);
     int sy = ::GetSystemMetrics(SM_CYSCREEN);
-
+    int width = 800, height = 600;
     HWND hWnd = ::CreateWindow(wc.lpszClassName,
                                L"WinApp",
                                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-                               (sx - 640) / 2,  // center the window on screen
-                               (sy - 480) / 2,
-                               640,
-                               480,
+                               (sx - width) / 2,  // center the window on screen
+                               (sy - height) / 2,
+                               width,
+                               height,
                                0,
                                0,
                                hInstance,
@@ -308,35 +308,81 @@ void OnThreadTestClicked(Button* button)
    }
    output->Caption = "";
 
-   static std::atomic_size_t i = 0;
-   for(ThreadPtr thread : threads)
+   //static std::atomic_size_t i = 0;
+   //for(ThreadPtr thread : threads)
+   for(size_t i = 0; i < threads.size(); ++i)
 	{
+      ThreadPtr thread = threads.at(i);
 		thread->start();
 		LOG(__FUNCTION__);
-		thread->call([thread, output]() {
-			for (; thread->IsRunning;)
-			{
-            i.fetch_add(1, std::memory_order_relaxed);	
-            // Generate a normal distribution around that mean
-				std::random_device r;
-				// Choose a random mean between 1 and 6
-				std::default_random_engine e1(r());
-				std::uniform_int_distribution<int> uniform_dist(200, 800);
-				int mean = uniform_dist(e1);
-				std::seed_seq seed2{ r(), r(), r(), r(), r(), r(), r(), r() };
-				std::mt19937 e2(seed2);
-				std::normal_distribution<> normal_dist(mean, 2);
-            uint32_t wait = static_cast<uint32_t>(std::round(normal_dist(e2)));
-            ostringstream os;
-				os << "Output from " <<  thread->Name << ": " << i << " waiting " << wait << " ms" << endl;
-				string line = os.str();
-				::Sleep(wait);
-            LOG(__FUNCTION__);
-				mainThread->call([output, line]() {
-					output->addLine(line);
-					});
-			}
-			});
+      struct  
+      {
+         ThreadPtr thread;
+			EditPtr output;
+         size_t tn;
+         void operator()() {
+				for (size_t i = 0; thread->IsRunning; ++i)
+				{
+					//i.fetch_add(1, std::memory_order_relaxed);
+					// Generate a normal distribution around that mean
+					std::random_device r;
+					// Choose a random mean between 1 and 6
+					std::default_random_engine e1(r());
+					std::uniform_int_distribution<int> uniform_dist(200, 800);
+					int mean = uniform_dist(e1);
+					std::seed_seq seed2{ r(), r(), r(), r(), r(), r(), r(), r() };
+					std::mt19937 e2(seed2);
+					std::normal_distribution<> normal_dist(mean, 2);
+					uint32_t wait = static_cast<uint32_t>(std::round(normal_dist(e2)));
+					ostringstream os;
+					os << "Output from " << thread->Name << ": " << (tn + i) << " waiting " << wait << " ms, This1:" << this;
+					string line = os.str();
+					::Sleep(wait);
+					LOG(__FUNCTION__);
+               struct
+               {
+                  ThreadPtr thread;
+                  EditPtr output;
+                  string line;
+                  void operator()() {
+					      ostringstream os;
+					      os << line << ", This2:" << this << endl;
+							output->addLine(os.str());
+                  }
+               } doIt = { thread, output, line };
+					mainThread->call(doIt);
+
+					//mainThread->call([output, line]() {
+					//	output->addLine(line);
+					//	});
+				}
+         }
+		} doIt = { thread, output, i };
+      thread->call(doIt);
+		//thread->call([thread, output]() {
+		//	for (; thread->IsRunning;)
+		//	{
+  //          i.fetch_add(1, std::memory_order_relaxed);	
+  //          // Generate a normal distribution around that mean
+		//		std::random_device r;
+		//		// Choose a random mean between 1 and 6
+		//		std::default_random_engine e1(r());
+		//		std::uniform_int_distribution<int> uniform_dist(200, 800);
+		//		int mean = uniform_dist(e1);
+		//		std::seed_seq seed2{ r(), r(), r(), r(), r(), r(), r(), r() };
+		//		std::mt19937 e2(seed2);
+		//		std::normal_distribution<> normal_dist(mean, 2);
+  //          uint32_t wait = static_cast<uint32_t>(std::round(normal_dist(e2)));
+  //          ostringstream os;
+		//		os << "Output from " <<  thread->Name << ": " << i << " waiting " << wait << " ms, " << this << endl;
+		//		string line = os.str();
+		//		::Sleep(wait);
+  //          LOG(__FUNCTION__);
+		//		mainThread->call([output, line]() {
+		//			output->addLine(line);
+		//			});
+		//	}
+		//	});
 	}
 }
 
