@@ -47,8 +47,13 @@ void Edit::addLine(const string& line)
 		SendMessageA(hWnd, EM_REPLACESEL, FALSE, (LPARAM)line.c_str());
 	}
    else
-   { 
-		PostMessageA(hWnd, EM_SETSEL, -1, -1);
-		PostMessageA(hWnd, EM_REPLACESEL, FALSE, (LPARAM)line.c_str());
+   {
+      HWND h = hWnd;
+      mainThread->call([h, line]() {
+		      SendMessageA(h, EM_SETSEL, -1, -1);
+		      SendMessageA(h, EM_REPLACESEL, FALSE, (LPARAM)line.c_str());
+         });
+		//PostMessageA(hWnd, EM_SETSEL, -1, -1);
+		//PostMessageA(hWnd, EM_REPLACESEL, FALSE, (LPARAM)line.c_str());
    }
 }
