@@ -138,6 +138,9 @@ struct Thread::Impl
 	queue<function<void()>> queue_;
 
 	void enqueue(function<void()> f);
+
+	void notify();
+
 	static void standardLoop(ThreadPtr pThread);
 	void initRunningThread(ThreadId id, function<void()> notify, ThreadPtr pThread);
 };
@@ -356,12 +359,14 @@ void Thread::processQueue(size_t maxElements /*= 10*/)
 		function<void()> f = pImpl_->queue_.front();
 		pImpl_->queue_.pop();
 		lock.unlock();
-
 		f();
-		this_thread::yield();
-
 		lock.lock();
+
+		this_thread::yield();
 	}
+
+	if(!pImpl_->queue_.empty())
+		pImpl_->notify();
 }
 
 /**
@@ -396,10 +401,7 @@ void Thread::Impl::enqueue(function<void()> f)
 		queue_.push(f);
 		enqueued_ = true;
 	}
-	if(notify_)
-		notify_();
-	else
-		condition_.notify_one();
+	notify();
 }
 
 /**
@@ -419,7 +421,7 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 	SetThreadName(::GetCurrentThreadId(), threadName.c_str());
 	
 	EditPtr output = Edit::Manager["Output:Edit"];
-	output->addLine((ostringstream() << "start of thread " << threadName).str());
+	output->addLine((ostringstream() << "start of thread " << threadName << "\r\n").str());
 	Thread::Impl* pImpl = pThread->pImpl_.get();
 	do
 	{
@@ -432,11 +434,10 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 			function<void()> f = pImpl->queue_.front();
 			pImpl->queue_.pop();
 			lock.unlock();
-
 			f();
-			this_thread::yield();
-
 			lock.lock();
+
+			this_thread::yield();
 		}
 
 	} while (pImpl->stopped_ == false);
@@ -446,7 +447,7 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 		Thread::Manager.pImpl_->idMap_.erase(pImpl->id_);
 	}
 	pImpl->id_ = ThreadId();
-	output->addLine((ostringstream() << "end of thread " << threadName).str());
+	output->addLine((ostringstream() << "end of thread " << threadName << "\r\n").str());
 }
 /**
  * @brief initialize a running thread.
@@ -466,6 +467,14 @@ void Thread::Impl::initRunningThread(ThreadId id, function<void()> notify, Threa
 		Thread::Manager.pImpl_->nameMap_.insert(make_pair(name_, pThread));
 	}
 	notify_ = notify;
+}
+
+void Thread::Impl::notify()
+{
+	if (notify_)
+		notify_();
+	else
+		condition_.notify_one();
 }
 
 /**
