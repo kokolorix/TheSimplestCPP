@@ -10,19 +10,23 @@
  * @copyright Copyright (c) 2020
  * 
  */
-#include "dbg_new.h"
 #include <sstream>
 using std::ostringstream;
 using std::endl;
+#define WIN32_LEAN_AND_MEAN      // Exclude rarely-used stuff from Windows headers
 
 #include <windows.h>
 
+#include "dbg_new.h"
 
 #include <CommCtrl.h>
 #include "Thread.h"
 #include "Button.h"
 #include "Edit.h"
 #include "Progress.h"
+#include <fstream>
+#include <ctime>
+#include <random>
 
 
 /**
@@ -60,14 +64,14 @@ int WINAPI CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevIn
 
     int sx = ::GetSystemMetrics(SM_CXSCREEN);
     int sy = ::GetSystemMetrics(SM_CYSCREEN);
-
+    int width = 800, height = 600;
     HWND hWnd = ::CreateWindow(wc.lpszClassName,
                                L"WinApp",
                                WS_OVERLAPPEDWINDOW | WS_VISIBLE,
-                               (sx - 640) / 2,  // center the window on screen
-                               (sy - 480) / 2,
-                               640,
-                               480,
+                               (sx - width) / 2,  // center the window on screen
+                               (sy - height) / 2,
+                               width,
+                               height,
                                0,
                                0,
                                hInstance,
@@ -280,45 +284,59 @@ void OnStartClicked(Button *button)
  */
 void OnThreadTestClicked(Button* button)
 {
+   size_t threadNumber = 9;
 	EditPtr output = Edit::Manager["Output:Edit"];
-	ThreadPtr thread1 = Thread::Manager["ThreadTest1"];
-	ThreadPtr thread2 = Thread::Manager["ThreadTest2"];
-   if (thread1->IsRunning)
+	std::vector<ThreadPtr> threads;
+   threads.reserve(threadNumber);
+   for (size_t i = 0; i < threadNumber; ++i)
    {
-	   thread1->stop();
-	   thread2->stop();
-      thread1->join();
-      thread2->join();
-      return;
+		ostringstream os;
+		os << "ThreadTest" << (i + 1);
+	   ThreadPtr thread = Thread::Manager[os.str()];
+      threads.push_back(thread);
+   }
+
+   if(threads.front()->IsRunning)
+	{
+      for(ThreadPtr thread : threads)
+			thread->stop();
+      for(ThreadPtr thread : threads)
+			thread->join();
+
+		LOG(__FUNCTION__);
+		return;
    }
    output->Caption = "";
-	thread1->start();
-	thread2->start();
 
-	thread1->call([thread1, output]() {
-		for (size_t i = 0; !thread1->IsStopped; i++)
-		{
-			ostringstream os;
-			os << "Output from Thread1 " << i << endl;
-			string line = os.str();
-			::Sleep(500);
-			mainThread->call([output, line]() {
-				output->addLine(line);
-				});
-		}
-		});
-
-   thread2->call([thread2, output]() {
-		for (size_t i = 0; !thread2->IsStopped; i++)
-      {
-         std::ostringstream os;
-         os << "Output from Thread2 " << i << std::endl;
-			string line = os.str();
-			::Sleep(300);
-			mainThread->call([output, line]() {
-				output->addLine(line);
-				});
-      }
-   });
+   for(ThreadPtr thread : threads)
+	{
+		thread->start();
+		LOG(__FUNCTION__);
+		thread->call([thread, output]() {
+			;
+			for (; thread->IsRunning;)
+         {
+				// Generate a normal distribution around that mean
+				std::random_device r;
+				// Choose a random mean between 1 and 6
+				std::default_random_engine e1(r());
+				std::uniform_int_distribution<int> uniform_dist(200, 800);
+				int mean = uniform_dist(e1);
+				std::seed_seq seed2{ r(), r(), r(), r(), r(), r(), r(), r() };
+				std::mt19937 e2(seed2);
+				std::normal_distribution<> normal_dist(mean, 2);
+				uint32_t wait = static_cast<uint32_t>(std::round(normal_dist(e2)));
+				ostringstream os;
+            static std::atomic_size_t i = 0;
+				os << "Output from " << thread->Name << ": " << ++i << " waiting " << wait << " ms" << endl;
+				string line = os.str();
+				::Sleep(wait);
+				LOG(__FUNCTION__);
+				mainThread->call([output, line]() {
+					output->addLine(line);
+					});
+			}
+			});
+	}
 }
 

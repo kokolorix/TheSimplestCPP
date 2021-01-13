@@ -5,8 +5,7 @@
 using namespace std;
 
 extern HINSTANCE hInstance;
-
-Progress::ProgressManager Progress::Manager;
+Control::ControlManagerImpl<Progress> Progress::Manager;
 
 struct  Progress::Impl
 {
@@ -77,28 +76,4 @@ HWND Progress::create(HWND hParent, int x, int y, int cx, int cy)
 void Progress::stepIt()
 {
 	pImpl_->stepIt();
-}
-
-Progress::ProgressManager::ProgressManager() { }  // : pImpl_(make_unique<Progress::ProgressManager::Impl>()){}
-
-ProgressPtr Progress::ProgressManager::operator[](const string& name)
-{
-	ControlPtr& control = get(name);
-	if (control)
-	{
-		ProgressPtr progress = dynamic_pointer_cast<Progress>(control);
-		assert(progress);
-		return progress;
-	}
-	else
-	{
-		ProgressPtr progress = make_shared<Progress>();
-		control = progress;
-		return progress;
-	}
-}
-ProgressPtr Progress::ProgressManager::operator[](HWND hWnd)
-{
-	ProgressPtr progress = dynamic_pointer_cast<Progress>(Control::Manager[hWnd]);
-	return progress;
 }
