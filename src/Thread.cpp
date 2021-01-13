@@ -353,7 +353,7 @@ void Thread::processQueue(size_t maxElements /*= 10*/)
 	
 	for (size_t i = 0; i < maxElements && !pImpl_->queue_.empty(); ++i)
 	{
-		function<void()> f = pImpl_->queue_.back();
+		function<void()> f = pImpl_->queue_.front();
 		pImpl_->queue_.pop();
 		lock.unlock();
 
@@ -429,7 +429,7 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 
 		while (!pImpl->queue_.empty())
 		{
-			function<void()> f = pImpl->queue_.back();
+			function<void()> f = pImpl->queue_.front();
 			pImpl->queue_.pop();
 			lock.unlock();
 

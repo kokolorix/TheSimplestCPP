@@ -10,3 +10,4 @@ bin/TheSimplestWinApp.pdb
 /src/.vs
 open-doc.url
 start-app.url
+/src/obj/Debug
