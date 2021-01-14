@@ -143,6 +143,7 @@ struct Thread::Impl
 
 	static void standardLoop(ThreadPtr pThread);
 	void initRunningThread(ThreadId id, function<void()> notify, ThreadPtr pThread);
+	void processQueue(unique_lock<recursive_mutex>& lock, size_t maxElements);
 };
 
 /**
@@ -156,6 +157,23 @@ struct Thread::ThreadManager::Impl
 	{
 		// If the globally stored main thread is released on termination, the manager may already be cleared
 		isDeleted = true;
+		std::vector<weak_ptr<Thread>> threads;
+		for (map<ThreadId, weak_ptr<Thread>>::value_type vt : idMap_)
+			threads.push_back(vt.second);
+
+		for ( weak_ptr<Thread> twp : threads)
+		{
+			ThreadPtr thread = twp.lock(); 
+			if (thread)
+				thread->stop();
+		}
+		this_thread::yield();
+		for ( weak_ptr<Thread> twp : threads)
+		{
+			ThreadPtr thread = twp.lock(); 
+			if (thread && thread->joinable())
+				thread->join();
+		}
 	}
 	recursive_mutex mutex_;
 	map<ThreadId, weak_ptr<Thread>> idMap_;
@@ -294,7 +312,9 @@ void Thread::start(thread &&t)
 void Thread::start()
 {
 	ThreadPtr thisThread = shared_from_this();
+	unique_lock<recursive_mutex> lock(pImpl_->mutex_);
 	start(thread(Impl::standardLoop, thisThread));
+	pImpl_->condition_.wait(lock);
 }
 
 /**
@@ -353,20 +373,7 @@ void Thread::enqueue(function<void()> f)
 void Thread::processQueue(size_t maxElements /*= 10*/)
 {
 	unique_lock<recursive_mutex> lock(pImpl_->mutex_);
-	
-	for (size_t i = 0; i < maxElements && !pImpl_->queue_.empty(); ++i)
-	{
-		function<void()> f = pImpl_->queue_.front();
-		pImpl_->queue_.pop();
-		lock.unlock();
-		f();
-		lock.lock();
-
-		this_thread::yield();
-	}
-
-	if(!pImpl_->queue_.empty())
-		pImpl_->notify();
+	pImpl_->processQueue(lock, maxElements);
 }
 
 /**
@@ -387,6 +394,26 @@ bool Thread::joinable()
 void Thread::join()
 {
 	pImpl_->thread_.join();
+}
+
+/**
+ * @brief initialize a running thread.
+ * 
+ * @details 
+ * 
+ * 
+ * @param id 
+ * @param notify 
+ * @param pThread 
+ */
+void Thread::Impl::initRunningThread(ThreadId id, function<void()> notify, ThreadPtr pThread)
+{
+	id_ = id;
+	{
+		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+		Thread::Manager.pImpl_->nameMap_.insert(make_pair(name_, pThread));
+	}
+	notify_ = notify;
 }
 
 /**
@@ -423,22 +450,15 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 	EditPtr output = Edit::Manager["Output:Edit"];
 	output->addLine((ostringstream() << "start of thread " << threadName << "\r\n").str());
 	Thread::Impl* pImpl = pThread->pImpl_.get();
+	pImpl->condition_.notify_all();
+
 	do
 	{
 		unique_lock<recursive_mutex> lock(pThread->pImpl_->mutex_);
 		pImpl->condition_.wait(lock, [pImpl] { return pImpl->enqueued_.load() || pImpl->stopped_.load(); });
 		pImpl->enqueued_ = false;
 
-		while (!pImpl->queue_.empty())
-		{
-			function<void()> f = pImpl->queue_.front();
-			pImpl->queue_.pop();
-			lock.unlock();
-			f();
-			lock.lock();
-
-			this_thread::yield();
-		}
+		pImpl->processQueue(lock, 10);
 
 	} while (pImpl->stopped_ == false);
 
@@ -450,25 +470,30 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 	output->addLine((ostringstream() << "end of thread " << threadName << "\r\n").str());
 }
 /**
- * @brief initialize a running thread.
+ * @brief process the queue of functors, usually called form notify-functor
  * 
- * @details 
- * 
- * 
- * @param id 
- * @param notify 
- * @param pThread 
+ * @param maxElements ///> if more elements in queue, notify is called
  */
-void Thread::Impl::initRunningThread(ThreadId id, function<void()> notify, ThreadPtr pThread)
+void Thread::Impl::processQueue(unique_lock<recursive_mutex>& lock, size_t maxElements)
 {
-	id_ = id;
+	for (size_t i = 0; i < maxElements && !queue_.empty(); ++i)
 	{
-		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
-		Thread::Manager.pImpl_->nameMap_.insert(make_pair(name_, pThread));
-	}
-	notify_ = notify;
-}
+		function<void()> f = queue_.front();
+		queue_.pop();
+		lock.unlock();
+		f();
+		lock.lock();
 
+		this_thread::yield();
+	}
+
+	if (!queue_.empty())
+		notify();
+}
+/**
+ * @brief notify condition or notify-functor
+ * 
+ */
 void Thread::Impl::notify()
 {
 	if (notify_)

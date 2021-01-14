@@ -96,7 +96,15 @@ int WINAPI CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevIn
 
 void OnStartClicked(Button* button);
 void OnThreadTestClicked(Button* button);
-
+/**
+ * @brief 
+ * 
+ * @param hWnd 
+ * @param message 
+ * @param wParam 
+ * @param lParam 
+ * @return LRESULT 
+ */
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -278,7 +286,7 @@ void OnStartClicked(Button *button)
     });
 }
 /**
- * @brief 
+ * @brief Thread-Test-Button event handler
  * 
  * @param button 
  */
@@ -315,7 +323,7 @@ void OnThreadTestClicked(Button* button)
 		thread->call([thread, output]() {
 			;
 			for (; thread->IsRunning;)
-         {
+			{
 				// Generate a normal distribution around that mean
 				std::random_device r;
 				// Choose a random mean between 1 and 6
@@ -327,7 +335,7 @@ void OnThreadTestClicked(Button* button)
 				std::normal_distribution<> normal_dist(mean, 2);
 				uint32_t wait = static_cast<uint32_t>(std::round(normal_dist(e2)));
 				ostringstream os;
-            static std::atomic_size_t i = 0;
+				static std::atomic_size_t i = 0;
 				os << "Output from " << thread->Name << ": " << ++i << " waiting " << wait << " ms" << endl;
 				string line = os.str();
 				::Sleep(wait);

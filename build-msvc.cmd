@@ -4,7 +4,9 @@ title %~n0 - %cd%
 
 set path=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\Common7\Tools;%path%
 call VsDevCmd
-@REM call MSBuild TheSimplestWinApp.sln -t:Rebuild -p:Configuration=Release -p:Platform=x64
+call MSBuild TheSimplestWinApp.sln -t:Rebuild -p:Configuration=Release -p:Platform=x64
+goto:wait
+
 
 echo warte max 10s
 for /l %%i in (1, 1, 10) do (
@@ -22,6 +24,7 @@ if errorlevel 1 goto:exit
 
 :exit
 pause
+goto:eof
 
 :title
 set /a s= 10 - %~1
