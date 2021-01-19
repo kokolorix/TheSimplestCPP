@@ -1,4 +1,3 @@
-@mainpage A simple c++ Windows-App
 
 # Documentation
 
