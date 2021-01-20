@@ -480,7 +480,10 @@ void Thread::Impl::processQueue(unique_lock<recursive_mutex>& lock, size_t maxEl
 	{
 		function<void()> f = queue_.front();
 		queue_.pop();
+#pragma warning(push)
+#pragma warning(disable : 26110)
 		lock.unlock();
+#pragma warning(pop)
 		f();
 		lock.lock();
 
