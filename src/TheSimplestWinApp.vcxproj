@@ -192,6 +192,7 @@
     <ClCompile Include="Base\Thread.cpp" />
     <ClCompile Include="Base\Property.cpp" />
     <ClCompile Include="Base\Object.cpp" />
+    <ClCompile Include="Test\TestRunner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Description.h">
@@ -225,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Base\Object.h">
       <DependentUpon>Base\Object.cpp</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Test\TestRunner.h">
+      <DependentUpon>Test\TestRunner.cpp</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

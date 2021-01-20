@@ -7,6 +7,9 @@
     <Filter Include="Controls">
       <UniqueIdentifier>{6910e091-690a-4888-8916-786180c6577c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test">
+      <UniqueIdentifier>{5fc12620-e30e-43b9-989e-f0f1900de157}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controls\Button.cpp">
@@ -39,6 +42,9 @@
     </ClCompile>
     <ClCompile Include="Base\Object.cpp">
       <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Test\TestRunner.cpp">
+      <Filter>Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

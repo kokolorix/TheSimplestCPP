@@ -125,6 +125,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         threadTest->OnClicked = OnThreadTestClicked;
         threadTest->create(hWnd, 140, 20, 100, 30, "Thread-Test");
 
+		  ButtonPtr startTest = Button::Manager["StartTest:Button"];
+		  //threadTest->OnClicked = OnThreadTestClicked;
+		  startTest->create(hWnd, 260, 20, 100, 30, "Test");
+
+		  EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
+  		  filterTest->create(hWnd, 380, 20, rcClient.right - 400, 30);
+
         EditPtr output = Edit::Manager["Output:Edit"];
         output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
 
@@ -133,21 +140,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
   }
     break;
 
-    case WM_COMMAND:
-    {
-        HWND hCtrl = reinterpret_cast<HWND>(lParam);
-        if (HIWORD(wParam) == BN_CLICKED)
-        {
-            ButtonPtr button = Button::Manager[hCtrl];
-            button->execute(BN_CLICKED);
-        }
-   }
-    break;
+	 case WM_COMMAND:
+	 {
+		 HWND hCtrl = reinterpret_cast<HWND>(lParam);
+		 if (HIWORD(wParam) == BN_CLICKED)
+		 {
+			 ButtonPtr button = Button::Manager[hCtrl];
+			 button->execute(BN_CLICKED);
+		 }
+		 break;
+	 }
 
-    case WM_KEYUP:
+	 case WM_KEYUP:
     {
         if(wParam  == VK_ESCAPE)
             ::PostMessage(hWnd, WM_CLOSE, 0, 0);
+        else
+		    return ::DefWindowProc(hWnd, message, wParam, lParam);
     }
     break;
 
