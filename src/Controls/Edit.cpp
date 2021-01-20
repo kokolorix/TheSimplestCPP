@@ -27,16 +27,34 @@ Edit::~Edit()
 
 HWND Edit::create(HWND hParent, int x, int y, int cx, int cy)
 {
-    return Control::create(hParent,
-                           x,
-                           y,
-                           cx,
-                           cy,
-                           "Edit",
-                           "",
-		                     WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL
-                           );
-}
+	DWORD wsStyle = WS_CHILD | WS_VISIBLE | WS_VSCROLL | ES_MULTILINE | ES_LEFT | ES_AUTOVSCROLL;
+	DWORD wsExStyle = WS_EX_CLIENTEDGE;
+
+	HWND hWnd = ::CreateWindowExA(
+		wsExStyle,
+		"Edit",
+		"",
+		wsStyle ,
+		x,
+		y,
+		cx,
+		cy,
+		hParent,
+		0,
+		hInstance,
+		NULL);
+
+	RECT rc;
+	SendMessage(hWnd, EM_GETRECT, 0, (LPARAM)&rc);
+	rc.left += 2;
+	rc.top += 2;
+	rc.right -= 2;
+	rc.bottom -= 2;
+	SendMessage(hWnd, EM_SETRECT, 0, (LPARAM)&rc);
+
+	insert(hWnd);
+	return hWnd;
+}																									  
 
 void Edit::addLine(const string& line)
 {

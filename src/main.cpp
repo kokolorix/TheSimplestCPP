@@ -85,9 +85,9 @@ int WINAPI CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevIn
          ::PostMessage(hWnd, WM_THREAD, (WPARAM)0, (LPARAM)0); 
          });
 
-    while (::GetMessage(&msg, NULL, 0, 0) > 0)
-    {
-        ::DispatchMessage(&msg);
+	 while (GetMessage(&msg, NULL, 0, 0) > 0) {
+		 ::TranslateMessage(&msg);
+		 ::DispatchMessage(&msg);
     }
 
     return 0;
@@ -107,75 +107,76 @@ void OnThreadTestClicked(Button* button);
  */
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message)
-    {
-    case WM_CREATE:
-    {
-        ButtonPtr start = Button::Manager["Start:Button"];
-        start->OnClicked = OnStartClicked;
-        start->create(hWnd, 20, 20, 100, 30, "Start ...");
+	switch (message)
+	{
+	case WM_CREATE:
+	{
+		ButtonPtr start = Button::Manager["Start:Button"];
+		start->OnClicked = OnStartClicked;
+		start->create(hWnd, 20, 20, 100, 30, "Start ...");
 
-        RECT rcClient;
-        ::GetClientRect(hWnd, &rcClient);
+		RECT rcClient;
+		::GetClientRect(hWnd, &rcClient);
 
-        int cyVScroll = GetSystemMetrics(SM_CYVSCROLL);
-		  LONG height = rcClient.bottom - rcClient.top;
+		int cyVScroll = GetSystemMetrics(SM_CYVSCROLL);
+		LONG height = rcClient.bottom - rcClient.top;
 
-        ButtonPtr threadTest = Button::Manager["ThreadTest:Button"];
-        threadTest->OnClicked = OnThreadTestClicked;
-        threadTest->create(hWnd, 140, 20, 100, 30, "Thread-Test");
+		ButtonPtr threadTest = Button::Manager["ThreadTest:Button"];
+		threadTest->OnClicked = OnThreadTestClicked;
+		threadTest->create(hWnd, 140, 20, 100, 30, "Thread-Test");
 
-		  ButtonPtr startTest = Button::Manager["StartTest:Button"];
-		  //threadTest->OnClicked = OnThreadTestClicked;
-		  startTest->create(hWnd, 260, 20, 100, 30, "Test");
+		ButtonPtr startTest = Button::Manager["StartTest:Button"];
+		//threadTest->OnClicked = OnThreadTestClicked;
+		startTest->create(hWnd, 260, 20, 100, 30, "Test");
 
-		  EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
-  		  filterTest->create(hWnd, 380, 20, rcClient.right - 400, 30);
+		EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
+		filterTest->create(hWnd, 380, 20, rcClient.right - 400, 30);
 
-        EditPtr output = Edit::Manager["Output:Edit"];
-        output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
+		EditPtr output = Edit::Manager["Output:Edit"];
+		output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
 
-        ProgressPtr progress1 = Progress::Manager["Progress1"];
-        progress1->create(hWnd, 0, height - cyVScroll * 2, rcClient.right, cyVScroll * 2);
-  }
-    break;
+		ProgressPtr progress1 = Progress::Manager["Progress1"];
+		progress1->create(hWnd, 0, height - cyVScroll * 2, rcClient.right, cyVScroll * 2);
+		return 0;
+	}
+	break;
 
-	 case WM_COMMAND:
-	 {
-		 HWND hCtrl = reinterpret_cast<HWND>(lParam);
-		 if (HIWORD(wParam) == BN_CLICKED)
-		 {
-			 ButtonPtr button = Button::Manager[hCtrl];
-			 button->execute(BN_CLICKED);
-		 }
-		 break;
-	 }
+	case WM_COMMAND:
+	{
+		HWND hCtrl = reinterpret_cast<HWND>(lParam);
+		if (HIWORD(wParam) == BN_CLICKED)
+		{
+			ButtonPtr button = Button::Manager[hCtrl];
+			button->execute(BN_CLICKED);
+			return 0;
+		}
+		break;
+	}
 
-	 case WM_KEYUP:
-    {
-        if(wParam  == VK_ESCAPE)
-            ::PostMessage(hWnd, WM_CLOSE, 0, 0);
-        else
-		    return ::DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    break;
+	case WM_KEYUP:
+	{
+		if (wParam == VK_ESCAPE)
+		{
+			::PostMessage(hWnd, WM_CLOSE, 0, 0);
+			return 0;
+		}
+	}
+	break;
 
-    case WM_LBUTTONDOWN:
-        ::SetFocus(hWnd);
-        break;
+	case WM_LBUTTONDOWN:
+		::SetFocus(hWnd);
+		return 0;
 
-    case WM_CLOSE:
-        ::PostQuitMessage(0);
-        break;
+	case WM_CLOSE:
+		::PostQuitMessage(0);
+		return 0;
 
-    case WM_THREAD:
-        mainThread->processQueue();
-        break;
+	case WM_THREAD:
+		mainThread->processQueue();
+		return 0;
 
-    default:
-        return ::DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
+	}
+	return ::DefWindowProc(hWnd, message, wParam, lParam);
 }
 
 /**
