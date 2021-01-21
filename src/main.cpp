@@ -27,6 +27,7 @@ using std::endl;
 #include <fstream>
 #include <ctime>
 #include <random>
+#include "TestRunner.h"
 
 
 /**
@@ -96,6 +97,7 @@ int WINAPI CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevIn
 
 void OnStartClicked(Button* button);
 void OnThreadTestClicked(Button* button);
+void OnStartTestClicked(Button* button);
 /**
  * @brief 
  * 
@@ -126,13 +128,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		threadTest->create(hWnd, 140, 20, 100, 30, "Thread-Test");
 
 		ButtonPtr startTest = Button::Manager["StartTest:Button"];
-		//threadTest->OnClicked = OnThreadTestClicked;
+		startTest->OnClicked = OnStartTestClicked;
 		startTest->create(hWnd, 260, 20, 100, 30, "Test");
 
 		EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
-		filterTest->create(hWnd, 380, 20, rcClient.right - 400, 30);
+		filterTest->LeftMargin = 6;
+		filterTest->TopMargin = 2;
+		filterTest->ClientEdge = true;
+		filterTest->create(hWnd, 380, 20, rcClient.right - 400, 30, "*");
 
 		EditPtr output = Edit::Manager["Output:Edit"];
+		output->Margins = 6;
+		output->ReadOnly = true;
 		output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
 
 		ProgressPtr progress1 = Progress::Manager["Progress1"];
@@ -356,5 +363,11 @@ void OnThreadTestClicked(Button* button)
 			}
 			});
 	}
+}
+
+void OnStartTestClicked(Button* button)
+{
+	EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
+	TestRunner::StartTests(filterTest->Caption);
 }
 

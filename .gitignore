@@ -11,3 +11,4 @@ bin/TheSimplestWinApp.pdb
 open-doc.url
 start-app.url
 /src/obj/Debug
+*.lnk

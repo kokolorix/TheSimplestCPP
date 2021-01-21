@@ -19,9 +19,10 @@ struct  Control::Impl
     }
     string get_caption()
     {
-        size_t len = ::GetWindowTextLengthA(hWnd_);
-        auto buf = unique_ptr<char[]>(new char[len + 1]);
-        ::GetWindowTextA(hWnd_, buf.get(), (int)len);
+        size_t len = ::GetWindowTextLengthA(hWnd_) + 1;
+        auto buf = unique_ptr<char[]>(new char[len]);
+        buf[len - 1] = '\0';
+        ::GetWindowTextA(hWnd_, buf.get(), (int)len) ;
         return string(buf.get());
     }
 };

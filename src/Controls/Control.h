@@ -12,6 +12,7 @@ using std::shared_ptr;
 using std::unique_ptr;
 
 #include "Property.hpp"
+#include <assert.h>
 
 class Control;
 using ControlPtr = shared_ptr<Control>;
