@@ -10,6 +10,10 @@
     <Filter Include="Test">
       <UniqueIdentifier>{5fc12620-e30e-43b9-989e-f0f1900de157}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Test\Base">
+      <UniqueIdentifier>{fa88b4f3-7244-4e4a-ab99-70d61df60878}</UniqueIdentifier>
+      <Extensions>*BaseTest*.h</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Controls\Button.cpp">
@@ -23,9 +27,6 @@
     </ClCompile>
     <ClCompile Include="Controls\Progress.cpp">
       <Filter>Controls</Filter>
-    </ClCompile>
-    <ClCompile Include="Base\Serialize.cpp">
-      <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="Base\Thread.cpp">
       <Filter>Base</Filter>
@@ -46,10 +47,21 @@
     <ClCompile Include="Test\TestRunner.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="Test\ValueTests.cpp">
+      <Filter>Test\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dbg_new.h" />
     <ClInclude Include="Base\Property.hpp" />
+    <ClInclude Include="Test\TestCase.h">
+      <Filter>Test\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\Serialize.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="cast.hpp" />
+    <ClInclude Include="output.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MainPage.md" />

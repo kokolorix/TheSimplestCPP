@@ -92,7 +92,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_X86_ ;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_X86_;_DEBUG;WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);.\Base;.\Controls;.\Test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -182,28 +182,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Base\Description.cpp" />
+    <ClCompile Include="Base\Serialize.cpp">
+      <DependentUpon>Base\Serialize.h</DependentUpon>
+    </ClCompile>
     <ClCompile Include="Base\Value.cpp" />
     <ClCompile Include="Controls\Button.cpp" />
     <ClCompile Include="Controls\Control.cpp" />
     <ClCompile Include="Controls\Edit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Controls\Progress.cpp" />
-    <ClCompile Include="Base\Serialize.cpp" />
     <ClCompile Include="Base\Thread.cpp" />
     <ClCompile Include="Base\Property.cpp" />
     <ClCompile Include="Base\Object.cpp" />
+    <ClCompile Include="Test\TestCase.cpp">
+      <DependentUpon>Test\TestCase.h</DependentUpon>
+    </ClCompile>
     <ClCompile Include="Test\TestRunner.cpp" />
+    <ClCompile Include="Test\ValueTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Base\Description.h">
       <DependentUpon>Base\Description.cpp</DependentUpon>
     </ClInclude>
-    <ClInclude Include="Base\Serialize.h">
-      <DependentUpon>Base\Serialize.cpp</DependentUpon>
-    </ClInclude>
+    <ClInclude Include="Base\Serialize.h" />
     <ClInclude Include="Base\Value.h">
       <DependentUpon>Base\Value.cpp</DependentUpon>
     </ClInclude>
+    <ClInclude Include="cast.hpp" />
     <ClInclude Include="Controls\Button.h">
       <DependentUpon>Controls\Button.cpp</DependentUpon>
     </ClInclude>
@@ -227,8 +232,13 @@
     <ClInclude Include="Base\Object.h">
       <DependentUpon>Base\Object.cpp</DependentUpon>
     </ClInclude>
+    <ClInclude Include="output.hpp" />
+    <ClInclude Include="Test\TestCase.h" />
     <ClInclude Include="Test\TestRunner.h">
       <DependentUpon>Test\TestRunner.cpp</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Test\ValueTests.h">
+      <DependentUpon>Test\ValueTests.cpp</DependentUpon>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

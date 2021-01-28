@@ -358,7 +358,7 @@ void OnThreadTestClicked(Button* button)
 				::Sleep(wait);
 				LOG(__FUNCTION__);
 				mainThread->call([output, line]() {
-					output->addLine(line);
+					output->add(line);
 					});
 			}
 			});

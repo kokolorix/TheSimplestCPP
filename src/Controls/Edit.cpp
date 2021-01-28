@@ -86,7 +86,7 @@ HWND Edit::create(HWND hParent, int x, int y, int cx, int cy, string caption /*=
 	return hWnd;
 }																									  
 
-void Edit::addLine(const string& line)
+void Edit::add(const string& line)
 {
    ThreadId mainId = mainThread->Id;
    if(this_thread::get_id() == mainId )

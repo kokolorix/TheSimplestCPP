@@ -15,7 +15,7 @@ public:
 
     HWND create(HWND hParent, int x, int y, int cx, int cy, string caption = string());
 
-	 void addLine(const string& line);
+	 void add(const string& line);
 
 
 private:

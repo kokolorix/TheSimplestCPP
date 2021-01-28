@@ -448,7 +448,7 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 	SetThreadName(::GetCurrentThreadId(), threadName.c_str());
 	
 	EditPtr output = Edit::Manager["Output:Edit"];
-	output->addLine((ostringstream() << "start of thread " << threadName << "\r\n").str());
+	output->add((ostringstream() << "start of thread " << threadName << "\r\n").str());
 	Thread::Impl* pImpl = pThread->pImpl_.get();
 	pImpl->condition_.notify_all();
 
@@ -467,7 +467,7 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 		Thread::Manager.pImpl_->idMap_.erase(pImpl->id_);
 	}
 	pImpl->id_ = ThreadId();
-	output->addLine((ostringstream() << "end of thread " << threadName << "\r\n").str());
+	output->add((ostringstream() << "end of thread " << threadName << "\r\n").str());
 }
 /**
  * @brief process the queue of functors, usually called form notify-functor
