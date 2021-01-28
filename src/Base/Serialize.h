@@ -11,6 +11,9 @@ class Serialize
 public:
 	virtual ~Serialize() {}
 
+	virtual string writeString() const = 0;
+	virtual void readString(const string& str) = 0;
+
 	virtual string toJson() const = 0;
 	virtual void fromJson(const string& json) = 0;
 

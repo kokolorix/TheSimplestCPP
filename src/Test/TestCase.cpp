@@ -147,7 +147,7 @@ void TestCase::writeOutput(const VectorOfstringVectors& outputs)
 					if (value.length() > label.length())
 						value.erase(label.size());
 					else if (value.length() < label.length())
-						value += string(label.length() - value.length(), ' ');
+						value += string((label.length() - value.length()), ' ');
 					out << value << "\t";
 				}
 				else
