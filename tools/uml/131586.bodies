@@ -1,0 +1,44 @@
+class Control
+!!!135554.cpp!!!	Control()
+
+!!!135682.cpp!!!	~Control()
+
+	hWnd = NULL;
+   if(!Control::Manager.pImpl_->deleted_)
+	{
+		auto begin = Control::Manager.pImpl_->nameMap_.begin();
+		auto end = Control::Manager.pImpl_->nameMap_.end();
+		auto it = find_if(begin, end, [this](pair<const string, ControlPtr>& p) {return p.second.get() == this; });
+		if (it != end)
+			Control::Manager.pImpl_->nameMap_.erase(it);
+	}
+!!!136450.cpp!!!	create(in hParent : HWND, in x : int, in y : int, in cx : int, in cy : int, in windowClass : string, in caption : string, in windowStyle : int) : HWND
+
+    HWND hWnd = ::CreateWindowA(windowClass.c_str(),
+                                   caption.c_str(),
+                                   windowStyle,
+                                   x,
+                                   y,
+                                   cx,
+                                   cy,
+                                   hParent,
+                                   0,
+                                   hInstance,
+                                   NULL);
+
+    insert(hWnd);
+    return hWnd;
+!!!136578.cpp!!!	insert(in hWnd : HWND) : void
+
+   pImpl_->hWnd_ = hWnd;
+
+	auto begin = Control::Manager.pImpl_->nameMap_.begin();
+	auto end = Control::Manager.pImpl_->nameMap_.end();
+	auto it = find_if(begin, end, [this](pair<const string, ControlPtr>& p) {return p.second.get() == this; });
+	if (it != end)
+		Control::Manager.pImpl_->hMap_[pImpl_->hWnd_] = it->second;
+!!!136706.cpp!!!	execute(in command : int) : void
+
+    //switch(command)
+    //{
+    //}

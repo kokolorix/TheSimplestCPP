@@ -1,0 +1,300 @@
+format 222
+"src" // src
+  revision 1
+  modified_by 2 "srdev"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "D:\\Projects\\TheSimplestCPP\\src/"
+  cpp_src_dir "D:\\Projects\\TheSimplestCPP\\src/"
+  classview 128002 "src"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 128002 "LogHelper"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 128002 "LogHelper"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "logSrc" explicit_type "string"
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract} {
+		msg_ << logSrc << \" ThreadId: \" << ::GetCurrentThreadId();
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 128130 "~LogHelper"
+	cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {
+		msg_ << endl;
+		::OutputDebugStringA(msg_.str().c_str());
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 128258 "operator ()"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "format" explicit_type "char"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} * ${p0}${v0}, ...${)}${const}${volatile}${throw}${abstract} {
+		va_list args;
+		va_start(args, format);
+		size_t len = _vscprintf(format, args) + (size_t)1; // _vscprintf doesn't count terminating '\\0'
+		char* buf = new char[len * sizeof(char)];
+		_vsnprintf_s(buf, len, len, format, args);
+		msg_ << \", Msg: \" << buf;
+		delete[] buf;
+		va_end(args);
+	};
+"
+	
+	
+	
+	
+      end
+
+      attribute 128002 "msg_"
+	public explicit_type "ostringstream"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 128130 "ThreadPtr"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128002 // ptr_ (<unidirectional association>)
+	relation 128002 --->
+	  a role_name "ptr_" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 128002 // ptr_ (<unidirectional association>)
+	  b parent class_ref 128258 // Thread
+      end
+
+      operation 128386 "operator ->"
+	const cpp_inline public return_type class_ref 128258 // Thread
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract} { return ptr_; };
+"
+	
+	
+	
+	
+      end
+
+      operation 128514 "operator &"
+	cpp_inline public return_type class_ref 128258 // Thread
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract} { return ptr_; };
+"
+	
+	
+	
+	
+      end
+
+      operation 128642 "operator *"
+	cpp_inline public return_type class_ref 128258 // Thread
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}${)}${const}${volatile}${throw}${abstract} { return *ptr_; };
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128386 "ButtonPtr"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128130 // ptr_ (<unidirectional association>)
+	relation 128130 --->
+	  a role_name "ptr_" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 128130 // ptr_ (<unidirectional association>)
+	  b parent class_ref 128514 // Button
+      end
+
+      operation 128770 "operator ->"
+	const cpp_inline public return_type class_ref 128514 // Button
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract} { return ptr_; };
+"
+	
+	
+	
+	
+      end
+
+      operation 128898 "operator &"
+	cpp_inline public return_type class_ref 128514 // Button
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract} { return ptr_; };
+"
+	
+	
+	
+	
+      end
+
+      operation 129026 "operator *"
+	cpp_inline public return_type class_ref 128514 // Button
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}${)}${const}${volatile}${throw}${abstract} { return *ptr_; };
+"
+	
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 128002 "src"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128002 "dbg_new"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128002 // LogHelper
+      end
+    end
+
+    artifact 128130 "doxyHelper"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128130 // ThreadPtr
+	class_ref 128386 // ButtonPtr
+      end
+    end
+  end
+
+  package_ref 128130 // Base
+
+  package_ref 128258 // Controls
+
+  package_ref 128386 // Test
+end

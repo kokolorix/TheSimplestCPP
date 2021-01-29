@@ -1,0 +1,8 @@
+class Edit::Impl
+!!!140674.cpp!!!	getMargins() : uint32_t
+
+	std::array<uint32_t,4> m = { lm_, tm_, rm_ , bm_};
+	return *std::max_element(m.begin(), m.end());
+!!!140802.cpp!!!	setMargins(in m : uint32_t) : void
+
+	tm_ = lm_ = bm_ = rm_ = m;

@@ -1,0 +1,7 @@
+class TestRunner
+!!!139010.cpp!!!	StartTests(in pattern : string) : void
+
+	EditPtr output = Edit::Manager["Output:Edit"];
+	output->Caption = "";
+	output->add(format("Start tests with filter '%s'\r\n", pattern.c_str()));
+	TestCase::runTests(pattern);

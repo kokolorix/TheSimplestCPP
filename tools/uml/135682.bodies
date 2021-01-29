@@ -1,0 +1,14 @@
+class NameChecker
+!!!141826.cpp!!!	operator ()(in name : string) : bool
+
+		if (_pattern == "*")
+			return true;
+
+		if (_pattern == name)
+			return true;
+
+		regex rx(_pattern);
+		if (regex_match(name, rx))
+			return true;
+		else
+			return false;

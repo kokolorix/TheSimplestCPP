@@ -1,0 +1,19 @@
+class Object
+!!!129538.cpp!!!	Object()
+
+
+!!!129666.cpp!!!	Object(in name : string, in properties : PropertyList)
+
+
+!!!129794.cpp!!!	toJson() : string
+
+	throw std::exception("The method or operation is not implemented.");
+!!!129922.cpp!!!	fromJson(in json : string) : void
+
+	throw std::exception("The method or operation is not implemented.");
+!!!130050.cpp!!!	toXml() : string
+
+	throw std::exception("The method or operation is not implemented.");
+!!!130178.cpp!!!	fromXml(in xml : string) : void
+
+	throw std::exception("The method or operation is not implemented.");

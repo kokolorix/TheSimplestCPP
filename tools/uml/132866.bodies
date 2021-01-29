@@ -1,0 +1,20 @@
+class Progress
+!!!137602.cpp!!!	Progress()
+
+
+!!!137730.cpp!!!	~Progress()
+
+
+!!!137858.cpp!!!	create(in hParent : HWND, in x : int, in y : int, in cx : int, in cy : int) : HWND
+
+	HWND hWnd = CreateWindowEx(0, PROGRESS_CLASS, (LPTSTR)NULL,
+		WS_CHILD | WS_VISIBLE,
+		x,  y, cx, cy,
+		hParent, (HMENU)0, ::hInstance, NULL);
+
+	insert(hWnd);
+
+	return hWnd;
+!!!137986.cpp!!!	stepIt() : void
+
+	pImpl_->stepIt();

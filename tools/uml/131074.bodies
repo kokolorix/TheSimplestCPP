@@ -1,0 +1,22 @@
+class ValueImpl
+!!!134274.cpp!!!	writeString() : string
+
+	ostringstream os;
+	os << boolalpha << value_;
+	return os.str();
+!!!134402.cpp!!!	readString(in str : string) : void
+
+	istringstream is(str);
+	is >> boolalpha >> value_;
+!!!134530.cpp!!!	toJson() : string
+
+	return writeString();
+!!!134658.cpp!!!	fromJson(in json : string) : void
+
+	readString(json);
+!!!134786.cpp!!!	toXml() : string
+
+	return writeString();
+!!!134914.cpp!!!	fromXml(in xml : string) : void
+
+	readString(xml);

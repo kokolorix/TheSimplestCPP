@@ -1,0 +1,74 @@
+class Thread
+!!!132098.cpp!!!	Thread(in name : string)
+
+!!!132226.cpp!!!	~Thread()
+
+	if (pImpl_->thread_.joinable())
+	{
+		if(this_thread::get_id() == pImpl_->thread_.get_id())
+		{
+			pImpl_->thread_.detach();
+		}
+		else
+		{
+			pImpl_->stopped_ = true;
+			pImpl_->thread_.join();
+		}
+	}
+
+	// It is possible that global variables are deleted,  
+	// after the manager has already been cleared. 
+	// Hence this check here 
+	if (!Thread::ThreadManager::Impl::isDeleted)
+	{
+		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+		Thread::Manager.pImpl_->nameMap_.erase(pImpl_->name_);
+		Thread::Manager.pImpl_->idMap_.erase(pImpl_->id_);
+	}
+!!!132866.cpp!!!	start() : void
+
+	ThreadPtr thisThread = shared_from_this();
+	unique_lock<recursive_mutex> lock(pImpl_->mutex_);
+	start(thread(Impl::standardLoop, thisThread));
+	pImpl_->condition_.wait(lock);
+!!!132994.cpp!!!	stop() : void
+
+	pImpl_->stopped_ = true;
+	pImpl_->condition_.notify_one();
+	this_thread::yield();
+	{
+		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+		Thread::Manager.pImpl_->idMap_.erase(pImpl_->id_);
+	}
+	pImpl_->id_ = ThreadId();
+!!!133122.cpp!!!	initRunningThread(in id : ThreadId, in notify : function<void()>) : void
+
+	pImpl_->initRunningThread(id, notify, shared_from_this());
+!!!133250.cpp!!!	processQueue(in maxElements : size_t = 10) : void
+
+	unique_lock<recursive_mutex> lock(pImpl_->mutex_);
+	pImpl_->processQueue(lock, maxElements);
+!!!133378.cpp!!!	joinable() : bool
+
+	return pImpl_->thread_.joinable();
+!!!133506.cpp!!!	join() : void
+
+	pImpl_->thread_.join();
+!!!133634.cpp!!!	enqueue(in f : function<void()>) : void
+
+	pImpl_->enqueue(f);
+!!!133762.cpp!!!	start(inout t : thread) : void
+
+	if (pImpl_->thread_.joinable())
+	{
+		pImpl_->stopped_ = true;
+		pImpl_->thread_.join();
+
+		//pImpl_->thread_.detach();
+	}
+
+	swap(pImpl_->thread_, t);
+	pImpl_->stopped_ = false;
+	pImpl_->id_ = pImpl_->thread_.get_id();
+	lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+	Thread::Manager.pImpl_->idMap_.insert(make_pair(pImpl_->id_, shared_from_this()));

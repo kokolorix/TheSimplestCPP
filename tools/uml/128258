@@ -1,0 +1,1707 @@
+format 222
+"Controls" // src::Controls
+  revision 1
+  modified_by 2 "srdev"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "D:/Projects/TheSimplestCPP/src/Controls/"
+  cpp_src_dir "D:/Projects/TheSimplestCPP/src/Controls/"
+  classview 128258 "Controls"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 128514 "Button"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 130818 // <generalisation>
+	relation 130818 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 130818 // <generalisation>
+	  b parent class_ref 131586 // Control
+      end
+
+      operation 135042 "Button"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)} 
+: pImpl_(make_unique<Button::Impl>())
+, OnClicked(pImpl_->onClicked_)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135170 "~Button"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 130946 // Manager (<directional composition>)
+	relation 130946 *-->
+	  stereotype "Control::ControlManagerImpl"
+	  a role_name "Manager" class_relation public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 130946 // Manager (<directional composition>)
+	  b parent class_ref 128514 // Button
+      end
+
+      operation 135298 "create"
+	preserve_cpp_body_indent public explicit_return_type "HWND"
+	nparams 6
+	  param in name "hParent" explicit_type "HWND"
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	  param in name "cx" explicit_type "int"
+	  param in name "cy" explicit_type "int"
+	  param in name "caption" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}, ${t5} ${p5}${v5}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135426 "execute"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "command" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 128258 "Impl"
+	
+	stereotype "struct"
+	cpp "    struct Impl;
+" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      attribute 129410 "pImpl_"
+	private explicit_type "Impl"
+	stereotype "unique_ptr"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129538 "OnClicked"
+	public explicit_type "function<void(Button*)>"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 131586 "Control"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 135554 "Control"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)} 
+: pImpl_(make_unique<Control::Impl>())
+, Caption(bind(&Impl::get_caption, pImpl_.get()), bind(&Impl::set_caption, pImpl_.get(), _1))
+, hWnd(pImpl_->hWnd_)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135682 "~Control"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      class 131970 "ControlManager"
+	visibility package stereotype "struct"
+	cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	operation 135810 "ControlManager"
+	  preserve_cpp_body_indent public explicit_return_type ""
+	  nparams 0
+	  cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	  cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)} : pImpl_(make_unique<Control::ControlManager::Impl>())${throw}{
+${body}}
+"
+	  
+	  
+	  
+	  
+	end
+
+	operation 135938 "~ControlManager"
+	  preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	  nparams 0
+	  cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	  cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	  
+	  
+	  
+	  
+	end
+
+	operation 136066 "operator []"
+	  preserve_cpp_body_indent public return_type class_ref 131714 // ControlPtr
+	  nparams 1
+	    param in name "name" explicit_type "string"
+	  cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	  cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  
+	end
+
+	operation 136194 "operator []"
+	  preserve_cpp_body_indent public return_type class_ref 131714 // ControlPtr
+	  nparams 1
+	    param in name "hWnd" explicit_type "HWND"
+	  cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	  cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  
+	end
+
+	operation 136322 "get"
+	  preserve_cpp_body_indent protected return_type class_ref 131714 // ControlPtr
+	  nparams 1
+	    param in name "name" explicit_type "string"
+	  cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} & ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	  cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	  
+	end
+
+	extra_member 128386 "Impl"
+	  
+	  stereotype "struct"
+	  cpp "    struct Impl;
+" ""
+	  java ""
+	  php ""
+	  python ""
+	  idl ""
+	  mysql ""
+	end
+
+	attribute 129666 "pImpl_"
+	  private explicit_type "Impl"
+	  stereotype "unique_ptr"
+	  cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	classrelation 131202 // <dependency>
+	  relation 131202 -_->
+	    stereotype "friend"
+	    a public
+	      cpp default "Generated"
+	      classrelation_ref 131202 // <dependency>
+	    b parent class_ref 131586 // Control
+	end
+      end
+
+      operation 136450 "create"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "HWND"
+	nparams 8
+	  param in name "hParent" explicit_type "HWND"
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	  param in name "cx" explicit_type "int"
+	  param in name "cy" explicit_type "int"
+	  param in name "windowClass" explicit_type "string"
+	  param in name "caption" explicit_type "string"
+	  param in name "windowStyle" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}, ${t5} ${p5}${v5}, ${t6} ${p6}${v6}, ${t7} ${p7}${v7}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 136578 "insert"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "hWnd" explicit_type "HWND"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 136706 "execute"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "command" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      class 132098 "ControlManagerImpl"
+	visibility package stereotype "struct"
+	nformals 1
+	formal name "CT" type "typename" explicit_default_value ""
+	  explicit_extends ""
+	cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 131330 // <generalisation>
+	  relation 131330 ---|>
+	    a public
+	      cpp default "${type}"
+	      classrelation_ref 131330 // <generalisation>
+	    b parent class_ref 131970 // ControlManager
+	end
+
+	operation 136834 "operator []"
+	  cpp_inline public explicit_return_type "std::shared_ptr<CT>"
+	  nparams 1
+	    param in name "name" explicit_type "string"
+	  cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+            ControlPtr &ctrl = get(name);
+            if (ctrl)
+            {
+                std::shared_ptr<CT> impl = dynamic_pointer_cast<CT>(ctrl);
+                assert(impl);
+                return impl;
+            }
+            else
+            {
+                std::shared_ptr<CT> impl = make_shared<CT>();
+                ctrl = impl;
+                return impl;
+            }
+        };
+"
+	  
+	  
+	  
+	  
+	end
+
+	operation 136962 "operator []"
+	  cpp_inline public explicit_return_type "std::shared_ptr<CT>"
+	  nparams 1
+	    param in name "hWnd" explicit_type "HWND"
+	  cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+            std::shared_ptr<CT> impl = dynamic_pointer_cast<CT>(Control::Manager[hWnd]);
+            return impl;
+        };
+"
+	  
+	  
+	  
+	  
+	end
+      end
+
+      extra_member 128514 "Impl"
+	
+	stereotype "struct"
+	cpp "    struct Impl;
+" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      attribute 129794 "pImpl_"
+	private explicit_type "Impl"
+	stereotype "unique_ptr"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129922 "hWnd"
+	public explicit_type "HWND"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130050 "Caption"
+	public explicit_type "string"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 131714 "ControlPtr"
+      visibility package stereotype "template_typedef"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 131074 // <generalisation>
+	relation 131074 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 131074 // <generalisation>
+	  b parent class_ref 131842 // typedef8
+      end
+    end
+
+    class 131842 "typedef8"
+      visibility package stereotype "typedef" explicit_base_type "shared_ptr<Control>"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 132226 "EditPtr"
+      visibility package stereotype "template_typedef"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 131458 // <generalisation>
+	relation 131458 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 131458 // <generalisation>
+	  b parent class_ref 132354 // typedef9
+      end
+    end
+
+    class 132354 "typedef9"
+      visibility package stereotype "typedef" explicit_base_type "shared_ptr<Edit>"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 132482 "Edit"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 131586 // <generalisation>
+	relation 131586 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 131586 // <generalisation>
+	  b parent class_ref 131586 // Control
+      end
+
+      operation 137090 "Edit"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)} 
+: pImpl_(make_unique<Edit::Impl>())
+, ReadOnly(pImpl_->readOnly_)
+, ClientEdge(pImpl_->clientedge_)
+, HScroll(pImpl_->hscroll_)
+, VSCroll(pImpl_->vscroll_)
+, LeftMargin(pImpl_->lm_)
+, TopMargin(pImpl_->tm_)
+, RightMargin(pImpl_->rm_)
+, BottomMargin(pImpl_->bm_)
+, Margins([this]() {return pImpl_->getMargins(); }, [this](uint32_t m) {pImpl_->setMargins(m); })
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 137218 "~Edit"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 131714 // Manager (<directional composition>)
+	relation 131714 *-->
+	  stereotype "Control::ControlManagerImpl"
+	  a role_name "Manager" class_relation public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 131714 // Manager (<directional composition>)
+	  b parent class_ref 132482 // Edit
+      end
+
+      operation 137346 "create"
+	preserve_cpp_body_indent public explicit_return_type "HWND"
+	nparams 6
+	  param in name "hParent" explicit_type "HWND"
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	  param in name "cx" explicit_type "int"
+	  param in name "cy" explicit_type "int"
+	  param in name "caption" explicit_type "string"
+	    defaultvalue "string()"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}, ${t5} ${p5}${v5}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 137474 "add"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "line" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 128642 "Impl"
+	
+	stereotype "struct"
+	cpp "    struct Impl;
+" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      attribute 130178 "pImpl_"
+	private explicit_type "Impl"
+	stereotype "unique_ptr"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130306 "ReadOnly"
+	public explicit_type "bool"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130434 "ClientEdge"
+	public explicit_type "bool"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130562 "HScroll"
+	public explicit_type "bool"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130690 "VSCroll"
+	public explicit_type "bool"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130818 "Margins"
+	public explicit_type "uint32_t"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 130946 "LeftMargin"
+	public explicit_type "uint32_t"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 131074 "TopMargin"
+	public explicit_type "uint32_t"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 131202 "RightMargin"
+	public explicit_type "uint32_t"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 131330 "BottomMargin"
+	public explicit_type "uint32_t"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 132610 "ProgressPtr"
+      visibility package stereotype "template_typedef"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 131842 // <generalisation>
+	relation 131842 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 131842 // <generalisation>
+	  b parent class_ref 132738 // typedef10
+      end
+    end
+
+    class 132738 "typedef10"
+      visibility package stereotype "typedef" explicit_base_type "shared_ptr<Progress>"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 132866 "Progress"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 131970 // <generalisation>
+	relation 131970 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 131970 // <generalisation>
+	  b parent class_ref 131586 // Control
+      end
+
+      operation 137602 "Progress"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}
+	: pImpl_(make_unique<Progress::Impl>(this))
+	, MinRange(pImpl_->minRange_, bind(&Impl::set_minRange, pImpl_.get(), _1))
+	, MaxRange(pImpl_->maxRange_, bind(&Impl::set_maxRange, pImpl_.get(), _1))
+	, Step(pImpl_->step_, bind(&Impl::set_step, pImpl_.get(), _1))
+	, Pos(pImpl_->pos_, bind(&Impl::set_pos, pImpl_.get(), _1))
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 137730 "~Progress"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 132098 // Manager (<directional composition>)
+	relation 132098 *-->
+	  stereotype "Control::ControlManagerImpl"
+	  a role_name "Manager" class_relation public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 132098 // Manager (<directional composition>)
+	  b parent class_ref 132866 // Progress
+      end
+
+      operation 137858 "create"
+	preserve_cpp_body_indent public explicit_return_type "HWND"
+	nparams 5
+	  param in name "hParent" explicit_type "HWND"
+	  param in name "x" explicit_type "int"
+	  param in name "y" explicit_type "int"
+	  param in name "cx" explicit_type "int"
+	  param in name "cy" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 137986 "stepIt"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 128770 "Impl"
+	
+	stereotype "struct"
+	cpp "    struct Impl;
+" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      attribute 131458 "pImpl_"
+	private explicit_type "Impl"
+	stereotype "unique_ptr"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 131586 "MinRange"
+	public explicit_type "int16_t"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 131714 "MaxRange"
+	public explicit_type "int16_t"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 131842 "Step"
+	public explicit_type "int16_t"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 131970 "Pos"
+	public explicit_type "int16_t"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 134274 "Button::Impl"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 134530 "onClicked_"
+	public explicit_type "void(Button*)"
+	stereotype "function"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 134402 "Control::Impl"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 134658 "hWnd_"
+	public explicit_type "HWND"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 140418 "set_caption"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "caption" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+        ::SetWindowTextA(hWnd_, caption.c_str());
+    };
+"
+	
+	
+	
+	
+      end
+
+      operation 140546 "get_caption"
+	cpp_inline public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+        size_t len = ::GetWindowTextLengthA(hWnd_) + 1;
+        auto buf = unique_ptr<char[]>(new char[len]);
+        buf[len - 1] = '\\0';
+        ::GetWindowTextA(hWnd_, buf.get(), (int)len) ;
+        return string(buf.get());
+    };
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 134530 "Control::ControlManager::Impl"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 134786 "deleted_"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 132738 // hMap_ (<directional composition>)
+	relation 132738 *-->
+	  stereotype "map"
+	  a role_name "hMap_" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<HWND,${type}> ${name}${value};
+"
+	    classrelation_ref 132738 // hMap_ (<directional composition>)
+	  b parent class_ref 131714 // ControlPtr
+      end
+
+      classrelation 132866 // nameMap_ (<directional composition>)
+	relation 132866 *-->
+	  stereotype "map"
+	  a role_name "nameMap_" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<string,${type}> ${name}${value};
+"
+	    classrelation_ref 132866 // nameMap_ (<directional composition>)
+	  b parent class_ref 131714 // ControlPtr
+      end
+    end
+
+    class 134658 "Edit::Impl"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 134914 "readOnly_"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135042 "clientedge_"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135170 "hscroll_"
+	public explicit_type "bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135298 "vscroll_"
+	public explicit_type "bool"
+	init_value "=  true"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135426 "lm_"
+	public explicit_type "uint32_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135554 "tm_"
+	public explicit_type "uint32_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135682 "rm_"
+	public explicit_type "uint32_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135810 "bm_"
+	public explicit_type "uint32_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 140674 "getMargins"
+	preserve_cpp_body_indent const cpp_inline public explicit_return_type "uint32_t"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 140802 "setMargins"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "m" explicit_type "uint32_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 134786 "Progress::Impl"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 140930 "Impl"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param inout name "control" type class_ref 132866 // Progress
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract} : control_(control) {};
+"
+	
+	
+	
+	
+      end
+
+      classrelation 132994 // control_ (<unidirectional association>)
+	relation 132994 --->
+	  a role_name "control_" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 132994 // control_ (<unidirectional association>)
+	  b parent class_ref 132866 // Progress
+      end
+
+      attribute 135938 "minRange_"
+	public explicit_type "int16_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 141058 "set_minRange"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "minRange" explicit_type "int16_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		minRange_ = minRange;
+		::PostMessage(control_->hWnd, PBM_SETRANGE, 0, MAKELPARAM(minRange_, maxRange_));
+	};
+"
+	
+	
+	
+	
+      end
+
+      attribute 136066 "maxRange_"
+	public explicit_type "int16_t"
+	init_value "=  100"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 141186 "set_maxRange"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "maxRange" explicit_type "int16_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		maxRange_ = maxRange;
+		::PostMessage(control_->hWnd, PBM_SETRANGE, 0, MAKELPARAM(minRange_, maxRange_));
+	};
+"
+	
+	
+	
+	
+      end
+
+      attribute 136194 "step_"
+	public explicit_type "int16_t"
+	init_value "=  10"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 141314 "set_step"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "step" explicit_type "int16_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		step_ = step;
+	 ::PostMessage(control_->hWnd, PBM_SETSTEP, (WPARAM)step_, 0);
+	};
+"
+	
+	
+	
+	
+      end
+
+      attribute 136322 "pos_"
+	public explicit_type "int16_t"
+	init_value "=  0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 141442 "set_pos"
+	cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "pos" explicit_type "int16_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract} {
+		pos_ = pos;
+		::PostMessage(control_->hWnd, PBM_SETPOS, (WPARAM)pos_, 0);
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 141570 "stepIt"
+	cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract} {
+		::PostMessage(control_->hWnd, PBM_STEPIT, 0, 0);
+	};
+"
+	
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 128258 "Controls"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 129026 "Button"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128514 // Button
+      end
+    end
+
+    artifact 129154 "Control"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 131842 // typedef8
+	class_ref 131714 // ControlPtr
+	class_ref 131586 // Control
+      end
+    end
+
+    artifact 129282 "Edit"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 132354 // typedef9
+	class_ref 132226 // EditPtr
+	class_ref 132482 // Edit
+      end
+    end
+
+    artifact 129410 "Progress"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 132738 // typedef10
+	class_ref 132610 // ProgressPtr
+	class_ref 132866 // Progress
+      end
+    end
+
+    artifact 130434 "Button::Impl"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 134274 // Button::Impl
+      end
+    end
+
+    artifact 130562 "Control::Impl"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 134402 // Control::Impl
+      end
+    end
+
+    artifact 130690 "Control::ControlManager::Impl"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 134530 // Control::ControlManager::Impl
+      end
+    end
+
+    artifact 130818 "Edit::Impl"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 134658 // Edit::Impl
+      end
+    end
+
+    artifact 130946 "Progress::Impl"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 134786 // Progress::Impl
+      end
+    end
+  end
+end

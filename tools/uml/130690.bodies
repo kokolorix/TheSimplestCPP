@@ -1,0 +1,9 @@
+class ThreadManager
+!!!132354.cpp!!!	ThreadManager()
+
+!!!132610.cpp!!!	operator [](in name : string) : ThreadPtr
+
+	return pImpl_->getOrCreateThread(name);
+!!!132738.cpp!!!	operator [](in id : ThreadId) : ThreadPtr
+
+	return pImpl_->getThread(id);
