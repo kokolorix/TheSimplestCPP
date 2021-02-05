@@ -1,4 +1,5 @@
 #pragma once
+#include <utils.hpp>
 /**
  * @brief Enables the debug heap to detect memory leaks
  * 
@@ -22,10 +23,7 @@ using std::string;
 using std::ostringstream;
 using std::endl;
 
-#define _s(x)			#x
-#define _str(x)			_s(x)
-
-#define LOG_SOURCE		__FILE__ "(" _str(__LINE__) ",1): "	
+#define LOG_SOURCE		__FILE__ "(" S(__LINE__) ",1): "	
 
 struct LogHelper
 {

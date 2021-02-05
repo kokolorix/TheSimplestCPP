@@ -50,6 +50,9 @@
     <ClCompile Include="Test\ValueTests.cpp">
       <Filter>Test\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Test\BaseTests.cpp">
+      <Filter>Test\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dbg_new.h" />
@@ -62,6 +65,7 @@
     </ClInclude>
     <ClInclude Include="cast.hpp" />
     <ClInclude Include="output.hpp" />
+    <ClInclude Include="utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="MainPage.md" />

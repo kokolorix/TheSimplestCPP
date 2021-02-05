@@ -3,7 +3,7 @@
 
 namespace
 {
-	bool test = TestCase::addTestCase("ValueTests", make_shared<ValueTests>());
+	bool test = TestCase::addTestCase(S(ValueTests), make_shared<ValueTests>());
 }
 
 TestResult ValueTests::runTest()
