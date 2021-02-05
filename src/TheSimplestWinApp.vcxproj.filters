@@ -53,6 +53,9 @@
     <ClCompile Include="Test\BaseTests.cpp">
       <Filter>Test\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Test\PropertyTests.cpp">
+      <Filter>Test\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dbg_new.h" />

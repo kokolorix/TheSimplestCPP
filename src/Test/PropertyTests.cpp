@@ -1,11 +1,17 @@
-#include "ProeprtyTests.h"
+#include "PropertyTests.h"
+#include "Property.h"
 
 namespace
 {
-	bool test = TestCase::addTestCase(S(ProeprtyTests), make_shared<ProeprtyTests>());
+	bool test = TestCase::addTestCase(S(PropertyTests), make_shared<PropertyTests>());
 }
 
-TestResult ProeprtyTests::runTest()
+TestResult PropertyTests::runTest()
 {
+	PropertyList properties = {
+		PropertyPtr(new Property("AnswerToEverything", Value::create(42)))
+		 , PropertyPtr(new Property("HelloWorld", Value::create("Hello World")))
+	};
+
 	return TestResult::Successful;
 }

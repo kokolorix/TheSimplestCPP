@@ -39,3 +39,13 @@ void Property::fromXml(const string& xml)
 {
 	throw std::exception("The method or operation is not implemented.");
 }
+
+string Property::writeString() const
+{
+	throw std::exception("The method or operation is not implemented.");
+}
+
+void Property::readString(const string& str)
+{
+	throw std::exception("The method or operation is not implemented.");
+}

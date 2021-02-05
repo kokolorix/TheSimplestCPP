@@ -16,7 +16,12 @@ using std::endl;
 namespace
 {
 	using CaseMap = map<string, TestCasePtr>;
-	CaseMap testCases_;
+
+	CaseMap& getCases()
+	{
+		static CaseMap testCases;
+		return testCases;
+	}
 
 	struct NameChecker
 	{
@@ -46,7 +51,8 @@ OutputStream out;
 
 bool TestCase::addTestCase(const string& name, TestCasePtr testCase)
 {
-	return !testCases_.insert(make_pair(name, testCase)).second;
+	CaseMap& testCases = getCases();
+	return !testCases.insert(make_pair(name, testCase)).second;
 }
 
 TestResult TestCase::runTests(const string& testPattern /*= "*"*/)
@@ -55,7 +61,8 @@ TestResult TestCase::runTests(const string& testPattern /*= "*"*/)
 	VectorOfstringVectors outputs = { labels };
 
 	NameChecker check(testPattern);
-	for (CaseMap::value_type& entry :  testCases_)
+	CaseMap& testCases = getCases();
+	for (CaseMap::value_type& entry :  testCases)
 	{
 		const string& name = entry.first;
 		TestCasePtr pTest = entry.second;

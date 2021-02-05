@@ -22,6 +22,9 @@ public:
 
 	void fromXml(const string& xml) override;
 
+
+	string writeString() const override;
+
 public:
 	PropertyRW<string> Name;
 	PropertyRW<ValuePtr> Value;
@@ -29,6 +32,9 @@ public:
 private:
 	string name_;
 	ValuePtr value_;
+public:
+	void readString(const string& str) override;
+
 };
 using PropertyPtr = shared_ptr<Property>;
 using PropertyList = std::vector<PropertyPtr>;

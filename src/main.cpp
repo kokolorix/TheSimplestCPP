@@ -18,6 +18,7 @@ using std::endl;
 #include <windows.h>
 
 #include "dbg_new.h"
+#include "utils.hpp"
 
 #include <CommCtrl.h>
 #include "Thread.h"

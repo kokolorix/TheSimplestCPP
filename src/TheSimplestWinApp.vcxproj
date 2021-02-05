@@ -195,6 +195,7 @@
     <ClCompile Include="Base\Property.cpp" />
     <ClCompile Include="Base\Object.cpp" />
     <ClCompile Include="Test\BaseTests.cpp" />
+    <ClCompile Include="Test\PropertyTests.cpp" />
     <ClCompile Include="Test\TestCase.cpp">
       <DependentUpon>Test\TestCase.h</DependentUpon>
     </ClCompile>
@@ -236,6 +237,9 @@
     <ClInclude Include="output.hpp" />
     <ClInclude Include="Test\BaseTests.h">
       <DependentUpon>Test\BaseTests.cpp</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Test\PropertyTests.h">
+      <DependentUpon>Test\PropertyTests.cpp</DependentUpon>
     </ClInclude>
     <ClInclude Include="Test\TestCase.h" />
     <ClInclude Include="Test\TestRunner.h">

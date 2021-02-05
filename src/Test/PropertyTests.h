@@ -1,7 +1,7 @@
 #pragma once
 #include "TestCase.h"
 
-class ProeprtyTests
+class PropertyTests
 	: public TestCase
 {
 

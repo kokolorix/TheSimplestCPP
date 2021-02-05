@@ -1,7 +1,13 @@
 #pragma once
-//#include <windows.h>
-//#include <assert.h>
-//#include <debugapi.h>
+
+#include <stdarg.h>
+#include <string>
+using std::string;
+
+#include <sstream>
+using std::ostringstream;
+using std::endl;
+
 #include <vector>
 using std::vector;
 #include <string>
@@ -92,8 +98,8 @@ protected:
 	}
 
 private:
-	outputbuf(outputbuf const&);                 // disallow copy construction
-	void operator= (outputbuf const&);           // disallow copy assignment
+	outputbuf(outputbuf const&);              // disallow copy construction
+	void operator= (outputbuf const&);        // disallow copy assignment
 };
 
 template<typename Elem>
@@ -106,3 +112,43 @@ public:
 };
 
 using OutputStream = output_stream<char>;
+
+struct LogHelper
+{
+	LogHelper(const string& logSrc)
+	{
+		label = "Msg";
+		msg_ << logSrc << " ThreadId: " << ::GetCurrentThreadId();
+	}
+	LogHelper(const string& logSrc, const string& msg)
+	{
+		label = "Detail";
+		msg_ << logSrc << " ThreadId: " << ::GetCurrentThreadId();
+		msg_ << " Msg: " << msg;
+	}
+	~LogHelper()
+	{
+		msg_ << endl;
+		OutputStream out;
+		out << msg_.str();
+	}
+	void operator()(const string&  str)
+	{
+		msg_ << ", " << label << ": " << str;
+	}
+	void operator()(const char* format, ...)
+	{
+		va_list args;
+		va_start(args, format);
+		size_t len = _vscprintf(format, args) + (size_t)1; // _vscprintf doesn't count terminating '\0'
+		char* buf = new char[len * sizeof(char)];
+		_vsnprintf_s(buf, len, len, format, args);
+		msg_ << ", "   << label << ": " << buf;
+		delete[] buf;
+		va_end(args);
+	}
+	string label;
+	ostringstream msg_;
+};
+#define LOG	LogHelper(LOG_SOURCE)
+#define DETAILED_LOG(msg)	LogHelper(LOG_SOURCE, msg)
