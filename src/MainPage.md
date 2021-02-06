@@ -6,13 +6,16 @@ A  very simple application, which demonstrates
 how a gui framework can be built and operated
 asynchronously and to test and play with tricky 
 constructions in doxygen, c++ and the Win32-Api  
+![image](../screenshot.png)
 
 ## Entrance points
 
 - main.cpp
 - Property.hpp
+- output.hpp
 - Thread
 - Control
+- TestCase
 
 ## Overviews
 
@@ -27,3 +30,4 @@ constructions in doxygen, c++ and the Win32-Api
 - [c++ reference](https://en.cppreference.com/w/)
 - [boost documentation](https://www.boost.org/doc/libs/1_72_0/?view=categorized)
 - [graphviz documentation](https://graphviz.org/documentation/)
+- [markdown help](https://commonmark.org/help/)

@@ -28,7 +28,7 @@ using std::endl;
 #include <fstream>
 #include <ctime>
 #include <random>
-#include "TestRunner.h"
+#include "TestCase.h"
 
 
 /**
@@ -369,6 +369,10 @@ void OnThreadTestClicked(Button* button)
 void OnStartTestClicked(Button* button)
 {
 	EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
-	TestRunner::StartTests(filterTest->Caption);
+	EditPtr output = Edit::Manager["Output:Edit"];
+	string pattern = filterTest->Caption;
+	output->Caption = "";
+	output->add(format("Start tests with filter '%s'\r\n", pattern.c_str()));
+	TestCase::runTests(pattern);
 }
 

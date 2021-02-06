@@ -199,7 +199,6 @@
     <ClCompile Include="Test\TestCase.cpp">
       <DependentUpon>Test\TestCase.h</DependentUpon>
     </ClCompile>
-    <ClCompile Include="Test\TestRunner.cpp" />
     <ClCompile Include="Test\ValueTests.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +241,6 @@
       <DependentUpon>Test\PropertyTests.cpp</DependentUpon>
     </ClInclude>
     <ClInclude Include="Test\TestCase.h" />
-    <ClInclude Include="Test\TestRunner.h">
-      <DependentUpon>Test\TestRunner.cpp</DependentUpon>
-    </ClInclude>
     <ClInclude Include="Test\ValueTests.h">
       <DependentUpon>Test\ValueTests.cpp</DependentUpon>
     </ClInclude>

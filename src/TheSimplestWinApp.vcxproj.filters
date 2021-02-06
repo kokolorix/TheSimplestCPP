@@ -44,9 +44,6 @@
     <ClCompile Include="Base\Object.cpp">
       <Filter>Base</Filter>
     </ClCompile>
-    <ClCompile Include="Test\TestRunner.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
     <ClCompile Include="Test\ValueTests.cpp">
       <Filter>Test\Base</Filter>
     </ClCompile>
@@ -60,15 +57,15 @@
   <ItemGroup>
     <ClInclude Include="dbg_new.h" />
     <ClInclude Include="Base\Property.hpp" />
-    <ClInclude Include="Test\TestCase.h">
-      <Filter>Test\Base</Filter>
-    </ClInclude>
     <ClInclude Include="Base\Serialize.h">
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="cast.hpp" />
     <ClInclude Include="output.hpp" />
     <ClInclude Include="utils.hpp" />
+    <ClInclude Include="Test\TestCase.h">
+      <Filter>Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="MainPage.md" />

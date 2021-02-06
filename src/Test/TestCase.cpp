@@ -12,6 +12,8 @@ using namespace std::chrono;
 #include <sstream>
 using std::endl;
 #include "cast.hpp"
+#include <algorithm>
+using std::max;
 
 namespace
 {
@@ -143,24 +145,28 @@ void TestCase::writeOutput(const VectorOfstringVectors& outputs)
 	if (outputs.size() > 1) // if 1, no tests were performed
 	{
 		const stringVector& labels = outputs.front();
+		vector<uint32_t> colLengts(labels.size(), 0);
+		for (size_t col = 0; col < labels.size(); ++col)
+		{
+			for (const stringVector& values : outputs)
+				colLengts[col] = max(values[col].length(), colLengts[col]);
+		}
+
 		for (const stringVector& values : outputs)
 		{
-			for (size_t i = 0; i < labels.size(); ++i)
+			for (size_t col = 0; col < labels.size(); ++col)
 			{
-				const string label = labels.at(i);
-				if (values.size() > i)
+				const string label = labels.at(col);
+				if (values.size() > col)
 				{
-					string value = values.at(i);
-					if (value.length() > label.length())
-						value.erase(label.size());
-					else if (value.length() < label.length())
-						value += string((label.length() - value.length()), ' ');
-					out << value << "\t";
+					string value = values.at(col);
+					value += string((colLengts[col] -  value.length()), ' ');
+					out << value << '\t';
 				}
 				else
 				{
-					string value(label.size(), ' ');
-					out << value << "\t";
+					string value(colLengts[col], ' ');
+					out << value << '\t';
 				}
 			}
 			out << endl;
