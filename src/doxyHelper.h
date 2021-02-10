@@ -14,6 +14,16 @@ struct ThreadPtr
     Thread *operator&() { return ptr_; }
     Thread &operator*() { return *ptr_; }
 };
+
+class Control;
+struct ControlPtr
+{
+    Control* ptr_;
+    Control *operator->() const { return ptr_; }
+    Control *operator&() { return ptr_; }
+    Control &operator*() { return *ptr_; }
+};
+
 class Button;
 struct ButtonPtr
 {
@@ -21,4 +31,13 @@ struct ButtonPtr
     Button *operator->() const { return ptr_; }
     Button *operator&() { return ptr_; }
     Button &operator*() { return *ptr_; }
+};
+
+class Edit;
+struct EditPtr
+{
+    Edit* ptr_;
+    Edit *operator->() const { return ptr_; }
+    Edit *operator&() { return ptr_; }
+    Edit &operator*() { return *ptr_; }
 };

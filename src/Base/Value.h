@@ -13,6 +13,10 @@ struct ValuePtr;
 
 template<typename T>	class	ValueImpl;
 
+/**
+ * @brief Value is the base class for all
+ * value types in the system 
+ */
 class Value	:
 	public Serialize
 {
@@ -23,6 +27,14 @@ protected:
 	virtual ~Value();
 };
 
+/**
+ * @brief ValuePtr is the smart pointer for thread-wide 
+ * used values. 
+ * @details
+ * In order not to provoke incalculable side effects,
+ * the value in the pointer is constant.
+ * If a new value is assigned, a new instance is created. 
+ */
 struct ValuePtr : public shared_ptr<const Value>
 {
 	using BasePtr = shared_ptr<const Value>;
@@ -37,7 +49,14 @@ struct ValuePtr : public shared_ptr<const Value>
 	operator shared_ptr<const ValueImpl<T>>();
 };
 
-template<typename T> 
+/**
+ * @brief The template ValueImpl is the concrete implementation 
+ * of any value type.
+ * @details
+ * Special behavior in the serialize methods is realized
+ * as specialization of template methods.
+ */
+template<typename T>
 class	ValueImpl : public Value
 {	
 public:
@@ -111,28 +130,22 @@ using Int32ValuePtr = shared_ptr<const ValueImpl<int32_t>>;
 
 
 template<typename T>
-ValuePtr::ValuePtr(T value)
+inline ValuePtr::ValuePtr(T value)
 	: BasePtr(make_shared<const ValueImpl<T>>(value))
 {
 
 }
+
+template<>
+inline ValuePtr::ValuePtr(const char* value)
+	: BasePtr(make_shared<const ValueImpl<string>>(value))
+{
+
+}
+
 template<typename T>
 ValuePtr::operator shared_ptr<const ValueImpl<T>>()
 {
 	return dynamic_pointer_cast<const ValueImpl<T>>(*this);
 }
 
-
-
-template<typename T>
-inline ValuePtr Value::create(T value)
-{
-	auto valuePtr = make_shared<const ValueImpl<T>>(value);
-	return  dynamic_pointer_cast<const Value>(valuePtr);
-}
-
-template<>
-inline ValuePtr Value::create(const char *value)
-{
-	return create<string>(value);
-}

@@ -9,8 +9,8 @@ namespace
 TestResult PropertyTests::runTest()
 {
 	PropertyList properties = {
-		PropertyPtr(new Property("AnswerToEverything", Value::create(42)))
-		 , PropertyPtr(new Property("HelloWorld", Value::create("Hello World")))
+		PropertyPtr(new Property("AnswerToEverything", ValuePtr(42)))
+		 , PropertyPtr(new Property("HelloWorld", ValuePtr("Hello World")))
 	};
 
 	return TestResult::Successful;

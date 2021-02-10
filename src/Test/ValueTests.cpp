@@ -25,6 +25,14 @@ TestResult ValueTests::runTest()
 }
 namespace
 {
+	/**
+	 * @brief Tests all functionality on stacked Values
+	 * @details 
+	 * - Assignment
+	 * - Copying
+	 * - Serialize to string
+	 * - Deserialze from string
+	 */
 	void stackTests()
 	{
 		BooleanValue booleanValue1(false);		
@@ -41,7 +49,13 @@ namespace
 		intValue2.readString(intStr);
 	}
 //#define AssertTrue(condition, message) { if(!(condition)) { throw exception(format("AssertTrue: %s\t%s\t%d\t%s", #condition, __FILE__, __LINE__, (message)).c_str()); }  }
-
+	/**
+	 * @brief Test the functionality if Values are on heap,
+	 * encapsulated in shared_ptr.
+	 * @details
+	 * - Creation / Assignement
+	 * - Copying / Instances
+	 */
 	void heapTests()
 	{
 		ValuePtr bv1(false);

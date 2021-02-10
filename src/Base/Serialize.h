@@ -6,7 +6,12 @@ using std::string;
 using std::shared_ptr;
 using std::make_shared;
 
-
+/**
+ * @brief Serialize is the interface for objects
+ * which can be persisted in a simple string,
+ * as JSON or XML structure.
+ * 
+ */
 class Serialize
 {
 public:

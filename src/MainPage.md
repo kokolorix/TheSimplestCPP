@@ -6,16 +6,22 @@ A  very simple application, which demonstrates
 how a gui framework can be built and operated
 asynchronously and to test and play with tricky 
 constructions in doxygen, c++ and the Win32-Api  
-![image](../screenshot.png)
 
 ## Entrance points
 
 - main.cpp
-- Property.hpp
+- utils.hpp
 - output.hpp
+- Property.hpp
 - Thread
 - Control
+- Value
+- Property
+- Object
 - TestCase
+
+## The App
+![image](../screenshot.png)
 
 ## Overviews
 
