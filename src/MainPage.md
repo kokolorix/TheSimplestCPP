@@ -7,6 +7,9 @@ how a gui framework can be built and operated
 asynchronously and to test and play with tricky 
 constructions in doxygen, c++ and the Win32-Api  
 
+
+[Source code on GitHub](https://github.com/kokolorix/TheSimplestCPP)
+
 ## Entrance points
 
 - main.cpp
@@ -21,7 +24,7 @@ constructions in doxygen, c++ and the Win32-Api
 - TestCase
 
 ## The App
-![image](../screenshot.png)
+![image](screenshot.png)
 
 ## Overviews
 

@@ -1,6 +1,4 @@
-[submodule "docs"]
-	path = docs
-   branch = gh-pages/docs
+[submodule "pages"]
+	path = pages
 	url = https://github.com/kokolorix/TheSimplestCPP.git
-   update = checkout
-   
+	branch = gh-pages
