@@ -1,0 +1,10 @@
+digraph "Value"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Value",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Value is the base class for all value types in the system."];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Serialize",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_serialize.html",tooltip="Serialize is the interface for objects which can be persisted in a simple string, as JSON or XML stru..."];
+}

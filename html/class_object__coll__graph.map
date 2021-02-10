@@ -1,0 +1,14 @@
+<map id="Object" name="Object">
+<area shape="rect" id="node1" title=" " alt="" coords="820,107,880,133"/>
+<area shape="rect" id="node2" href="$class_serialize.html" title="Serialize is the interface for objects which can be persisted in a simple string, as JSON or XML stru..." alt="" coords="573,5,645,32"/>
+<area shape="rect" id="node3" title=" " alt="" coords="582,56,637,83"/>
+<area shape="rect" id="node4" href="$struct_property_r_w.html" title=" " alt="" coords="535,107,684,133"/>
+<area shape="rect" id="node5" href="$struct_property_r.html" title=" " alt="" coords="267,47,403,73"/>
+<area shape="rect" id="node6" title=" " alt="" coords="5,47,155,73"/>
+<area shape="rect" id="node7" title=" " alt="" coords="267,98,404,139"/>
+<area shape="rect" id="node8" href="$struct_property_r_w.html" title=" " alt="" coords="516,161,703,188"/>
+<area shape="rect" id="node9" href="$struct_property_r.html" title=" " alt="" coords="248,164,423,191"/>
+<area shape="rect" id="node10" title=" " alt="" coords="5,157,155,198"/>
+<area shape="rect" id="node11" title=" " alt="" coords="248,215,423,257"/>
+<area shape="rect" id="node12" title=" " alt="" coords="536,212,683,239"/>
+</map>

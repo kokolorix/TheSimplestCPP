@@ -1,0 +1,8 @@
+<map id="Thread::Impl::standardLoop" name="Thread::Impl::standardLoop">
+<area shape="rect" id="node1" title="The normally used processing loop of a background thread." alt="" coords="5,56,184,83"/>
+<area shape="rect" id="node2" href="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f" title=" " alt="" coords="287,5,362,32"/>
+<area shape="rect" id="node5" href="$struct_thread_1_1_impl.html#ae467f41841d4236274bf360f470ec775" title="process the queue of functors, usually called form notify&#45;functor" alt="" coords="232,56,417,83"/>
+<area shape="rect" id="node6" href="$_thread_8cpp.html#a1b6cdfcdd75b61856b37cf13deae9334" title=" " alt="" coords="267,107,382,133"/>
+<area shape="rect" id="node3" href="$class_thread.html#adb11ad65376e640d84d47f0394f94f10" title=" " alt="" coords="465,5,555,32"/>
+<area shape="rect" id="node4" href="$class_thread.html#a1333a7179253857c1431b82e162272fd" title=" " alt="" coords="603,5,721,32"/>
+</map>

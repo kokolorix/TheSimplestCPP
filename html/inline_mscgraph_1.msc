@@ -1,0 +1,44 @@
+msc {
+hscale="2.5", arcgradient="10";
+gui[linecolor="violet"], tr1[linecolor="olive"], tr2[linecolor="orange"];
+
+|||;
+
+gui box gui[label="GUI-Thread", textbgcolour="violet"];
+tr1 box tr1[label="Worker1", textbgcolour="olive"];
+tr2 box tr2[label="Worker2", textbgcolour="orange"];
+
+gui => tr1 [label="start()",linecolor="violet"];
+gui => tr2 [label="start()",linecolor="violet"];
+
+gui => tr2 [label="call(...)",linecolor="violet"];
+
+gui => tr1 [label="call(...)",linecolor="violet"];
+
+tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+tr2 => gui [label="button->caption='Running |'",linecolor="orange"];
+tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+tr2 => gui [label="button->caption='Running /'",linecolor="orange"];
+tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+tr2 => gui [label="button->caption='Running -'",linecolor="orange"];
+
+tr1 => tr1 [label="sleep(900)",linecolor="olive", arcskip="1"];
+tr1 => gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)",linecolor="olive"];
+
+tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+tr2 => gui [label="button->caption='Running \'",linecolor="orange"];
+tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+tr2 => gui [label="button->caption='Running |'",linecolor="orange"];
+tr2 => tr2 [label="sleep(300)",linecolor="orange", arcskip="1"];
+tr2 => gui [label="button->caption='Running /'",linecolor="orange"];
+
+
+tr1 => tr1 [label="sleep(900)",linecolor="olive", arcskip="1"];
+tr1 => gui [label="PostMessage(hWndPB, PBM_STEPIT, 0, 0)",linecolor="olive"];
+
+---;
+
+tr2 => gui [label="button->caption='Start...'",linecolor="orange"];
+gui => tr1 [label="stop()",linecolor="violet"];
+gui => tr2 [label="stop()",linecolor="violet"];
+}

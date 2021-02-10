@@ -1,0 +1,4 @@
+<map id="Thread::Impl::initRunningThread" name="Thread::Impl::initRunningThread">
+<area shape="rect" id="node1" title="initialize a running thread." alt="" coords="5,5,171,47"/>
+<area shape="rect" id="node2" href="$struct_thread_1_1_impl.html#a93f1224d2dca6c13eacf20e89c044cc4" title="notify condition or notify&#45;functor" alt="" coords="219,13,351,39"/>
+</map>

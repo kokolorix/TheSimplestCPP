@@ -1,0 +1,15 @@
+<map id="Property" name="Property">
+<area shape="rect" id="node1" title=" " alt="" coords="755,107,825,133"/>
+<area shape="rect" id="node2" href="$class_serialize.html" title="Serialize is the interface for objects which can be persisted in a simple string, as JSON or XML stru..." alt="" coords="543,5,615,32"/>
+<area shape="rect" id="node3" href="$struct_value_ptr.html" title="ValuePtr is the smart pointer for thread&#45;wide used values." alt="" coords="543,56,615,83"/>
+<area shape="rect" id="node4" title=" " alt="" coords="249,29,402,70"/>
+<area shape="rect" id="node5" href="$struct_property_r_w.html" title=" " alt="" coords="496,107,663,133"/>
+<area shape="rect" id="node6" href="$struct_property_r.html" title=" " alt="" coords="248,95,403,121"/>
+<area shape="rect" id="node7" title=" " alt="" coords="15,87,145,129"/>
+<area shape="rect" id="node8" title=" " alt="" coords="248,146,403,187"/>
+<area shape="rect" id="node9" title=" " alt="" coords="552,157,607,184"/>
+<area shape="rect" id="node10" href="$struct_property_r_w.html" title=" " alt="" coords="505,212,654,239"/>
+<area shape="rect" id="node11" href="$struct_property_r.html" title=" " alt="" coords="257,212,393,239"/>
+<area shape="rect" id="node12" title=" " alt="" coords="5,212,155,239"/>
+<area shape="rect" id="node13" title=" " alt="" coords="257,263,394,305"/>
+</map>

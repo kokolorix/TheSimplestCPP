@@ -1,0 +1,13 @@
+digraph "OnStartClicked"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="OnStartClicked",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="All the magic is here :-)"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="WndProc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a30a1e3b0304f1b083637664cbda94e72",tooltip="The declaration of the main message processing function."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="WinMain",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a946cd7d17bf6760d82ded70909de9a6d",tooltip="The beginning of everything."];
+}

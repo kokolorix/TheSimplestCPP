@@ -1,0 +1,12 @@
+<map id="OnStartClicked" name="OnStartClicked">
+<area shape="rect" id="node1" title="All the magic is here :&#45;)" alt="" coords="5,68,116,95"/>
+<area shape="rect" id="node2" href="$class_thread.html#adb11ad65376e640d84d47f0394f94f10" title=" " alt="" coords="909,17,999,44"/>
+<area shape="rect" id="node4" href="$class_thread.html#ada9adb041744058adc9abb1744e86c5d" title=" " alt="" coords="164,68,259,95"/>
+<area shape="rect" id="node10" href="$class_thread.html#abd50159ecd409936f454c2321f673616" title="Stops a running thread as fast as intended. In longer lasting processing it must be provided,..." alt="" coords="164,119,259,145"/>
+<area shape="rect" id="node3" href="$class_thread.html#a1333a7179253857c1431b82e162272fd" title=" " alt="" coords="1047,17,1165,44"/>
+<area shape="rect" id="node5" href="$class_thread.html#a1f53ee62bd30a7924186ef26150ce262" title="The most normal way to start a new thread." alt="" coords="307,75,401,101"/>
+<area shape="rect" id="node6" href="$struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9" title="The normally used processing loop of a background thread." alt="" coords="449,87,628,113"/>
+<area shape="rect" id="node7" href="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f" title=" " alt="" coords="731,43,806,69"/>
+<area shape="rect" id="node8" href="$struct_thread_1_1_impl.html#ae467f41841d4236274bf360f470ec775" title="process the queue of functors, usually called form notify&#45;functor" alt="" coords="676,93,861,120"/>
+<area shape="rect" id="node9" href="$_thread_8cpp.html#a1b6cdfcdd75b61856b37cf13deae9334" title=" " alt="" coords="711,144,826,171"/>
+</map>

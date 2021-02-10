@@ -1,0 +1,56 @@
+digraph "WndProc"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="WndProc",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="The declaration of the main message processing function."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Button::create",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_button.html#a4b47ae117b554b76c7681d0dc0f6b59a",tooltip=" "];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Control::create",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_control.html#a5556f2e0a0d67ccba4981ddc8c39d2c3",tooltip=" "];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Control::insert",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_control.html#af9a3acf49973e5a31594f30e979246b0",tooltip=" "];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Edit::create",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_edit.html#ab18ca6e3077d72996f0599d984283636",tooltip=" "];
+  Node5 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Button::execute",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_button.html#a4ade92d5ac85d581c0bfe5c04bc7e1f1",tooltip=" "];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="OnStartClicked",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#abdf0523e10fae27868b24d21a841e926",tooltip="All the magic is here :-)"];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Thread::call",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#adb11ad65376e640d84d47f0394f94f10",tooltip=" "];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Thread::enqueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#a1333a7179253857c1431b82e162272fd",tooltip=" "];
+  Node7 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Thread::start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#ada9adb041744058adc9abb1744e86c5d",tooltip=" "];
+  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="Thread::start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#a1f53ee62bd30a7924186ef26150ce262",tooltip="The most normal way to start a new thread."];
+  Node11 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="Thread::Impl::standardLoop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9",tooltip="The normally used processing loop of a background thread."];
+  Node12 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="Edit::add",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f",tooltip=" "];
+  Node13 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="Thread::Impl::processQueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$struct_thread_1_1_impl.html#ae467f41841d4236274bf360f470ec775",tooltip="process the queue of functors, usually called form notify-functor"];
+  Node12 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="SetThreadName",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$_thread_8cpp.html#a1b6cdfcdd75b61856b37cf13deae9334",tooltip=" "];
+  Node7 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="Thread::stop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#abd50159ecd409936f454c2321f673616",tooltip="Stops a running thread as fast as intended. In longer lasting processing it must be provided,..."];
+  Node1 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="OnStartTestClicked",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a1870be22060f25a2595afa09934e9784",tooltip=" "];
+  Node17 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="format",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$output_8hpp.html#a40ccb49bbe6f7e94ed2bc2dc6cd7e8d0",tooltip=" "];
+  Node17 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="TestCase::runTests",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_test_case.html#a67dbda1a6ccebdf1c834c54fce361a6a",tooltip=" "];
+  Node19 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="anonymous_namespace\l\{TestCase::cpp\}::getCases",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceanonymous__namespace_02_test_case_8cpp_03.html#a4073e77346d8adea8ac92f2e309de1aa",tooltip=" "];
+  Node1 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="OnThreadTestClicked",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a6e6bef72e348d49296a2aa278ce80ca6",tooltip="Thread-Test-Button event handler."];
+  Node21 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node22 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node22 [label="Thread::processQueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69",tooltip="Processes a maximum of the specified number of function objects in the queue."];
+}

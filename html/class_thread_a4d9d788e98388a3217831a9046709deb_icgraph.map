@@ -1,0 +1,4 @@
+<map id="Thread::join" name="Thread::join">
+<area shape="rect" id="node1" title="Waits for the end of the thread." alt="" coords="212,13,301,39"/>
+<area shape="rect" id="node2" href="$struct_thread_1_1_thread_manager_1_1_impl.html#a6a46aa5678c8c2de88074f78d35826e9" title="&gt;An helper construct to prevent the application from crashing on exit." alt="" coords="5,5,164,47"/>
+</map>

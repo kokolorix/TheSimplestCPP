@@ -1,0 +1,6 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$class_serialize.html" title="Serialize is the interface for objects which can be persisted in a simple string, as JSON or XML stru..." alt="" coords="5,56,77,83"/>
+<area shape="rect" id="node2" href="$class_object.html" title=" " alt="" coords="131,5,191,32"/>
+<area shape="rect" id="node3" href="$class_property.html" title=" " alt="" coords="125,56,196,83"/>
+<area shape="rect" id="node4" href="$class_value.html" title="Value is the base class for all value types in the system." alt="" coords="133,107,188,133"/>
+</map>

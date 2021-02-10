@@ -1,0 +1,6 @@
+<map id="Thread::ThreadManager::Impl::~Impl" name="Thread::ThreadManager::Impl::~Impl">
+<area shape="rect" id="node1" title="&gt;An helper construct to prevent the application from crashing on exit." alt="" coords="5,49,164,90"/>
+<area shape="rect" id="node2" href="$class_thread.html#a4d9d788e98388a3217831a9046709deb" title="Waits for the end of the thread." alt="" coords="224,5,313,32"/>
+<area shape="rect" id="node3" href="$class_thread.html#acff52284ec491e188b12a04d087dad43" title="Checks if the std::thread object identifies an active thread of execution. Specifically,..." alt="" coords="212,56,325,83"/>
+<area shape="rect" id="node4" href="$class_thread.html#abd50159ecd409936f454c2321f673616" title="Stops a running thread as fast as intended. In longer lasting processing it must be provided,..." alt="" coords="221,107,316,133"/>
+</map>

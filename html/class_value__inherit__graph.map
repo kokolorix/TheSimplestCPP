@@ -1,0 +1,4 @@
+<map id="Value" name="Value">
+<area shape="rect" id="node1" title="Value is the base class for all value types in the system." alt="" coords="14,80,69,107"/>
+<area shape="rect" id="node2" href="$class_serialize.html" title="Serialize is the interface for objects which can be persisted in a simple string, as JSON or XML stru..." alt="" coords="5,5,77,32"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="Thread::stop" name="Thread::stop">
+<area shape="rect" id="node1" title="Stops a running thread as fast as intended. In longer lasting processing it must be provided,..." alt="" coords="457,35,552,61"/>
+<area shape="rect" id="node2" href="$main_8cpp.html#abdf0523e10fae27868b24d21a841e926" title="All the magic is here :&#45;)" alt="" coords="275,5,385,32"/>
+<area shape="rect" id="node5" href="$struct_thread_1_1_thread_manager_1_1_impl.html#a6a46aa5678c8c2de88074f78d35826e9" title="&gt;An helper construct to prevent the application from crashing on exit." alt="" coords="251,57,409,98"/>
+<area shape="rect" id="node3" href="$main_8cpp.html#a30a1e3b0304f1b083637664cbda94e72" title="The declaration of the main message processing function." alt="" coords="127,5,203,32"/>
+<area shape="rect" id="node4" href="$main_8cpp.html#a946cd7d17bf6760d82ded70909de9a6d" title="The beginning of everything." alt="" coords="5,5,79,32"/>
+</map>
