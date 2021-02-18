@@ -116,6 +116,97 @@ ThreadPtr mainThread;           //> The main thread instance
  */
 
 /**
+ * @name Thread control
+ * @brief Methods to control the flow of a thread
+ */
+/**@{*/ // start Thread control
+
+/**
+ * @fn void Thread::start()
+ * @brief Starts the Thread with @ref Thread::Impl::standardLoop
+ * @details After startup it is possible to push tasks to the thread queue
+ */
+/**
+ * @fn void Thread::stop()
+ * @brief Method to stop the Trhead
+ * @details
+ * Internally, the IsStopped property is set. When the executing thread 
+ * detects that this property is True, it should finish or abort
+ *  its work as soon as possible
+ */
+/**
+ * @fn void Thread::joinable()
+ * @brief Reports whether the thread can be merged or not
+ */
+/**
+ * @fn void Thread::join()
+ * @brief Führt den Thread mit dem aktuellen zusammen.
+ * @details
+ * The current thread waits until the requested thread is finished
+ */
+
+/**@}*/ // end Thread control
+
+/**
+ * @name Exisiting threads
+ * @brief Methods to intervene in already running threads
+ */
+/**@{*/ // start Exisiting threads
+/**
+ * @fn void Thread::initRunningThread(ThreadId id, function<void()> notify)
+ * @brief Initialisert ein Thread objekt mit einem bereits laufenden Thread.
+ * @details
+ * The notification function is called when the thread gets new items pushed to its queue
+ */
+
+/**
+ * @fn void Thread::processQueue(size_t maxElements = 10)
+ * @brief Arbeitet im laufenden Thread @c maxElements ab.
+ * @details
+ * Nach der Benachrichtigung werden so alle Aufgaben abgearbeitet.
+ */
+/**@}*/ // end Exisiting threads
+
+/**
+ * @name Code injection
+ * @brief start and call are very similar in application
+ * @details
+ * here you can specify any callable object (function, method, std::function, etc.)
+ * with all arguments, which will then be executed in the thread.
+ * While start which uses the callable object as the start function of the thread,
+ * call enqueues the callable object in the thread's waiting queue
+ * and an event is fired, which requests the thread to process its queue.
+ * 
+ * @tparam _Fn the type callable.object 
+ * @tparam _Args the types of the parameters
+ * @param _Fx any callable object
+ * @param _Ax arguments for the callable object
+ */
+
+/**@{*/ // start Code injection
+
+/**
+ * @fn void Thread::start(_Fn &&_Fx, _Args &&... _Ax)
+ * @brief The code that will be executed, after the new Thread is started
+ * @details
+ * This is the main functionallity of the Thread. Usually such a working thread is
+ * which should complete a task exactly once and then ends.
+ * If the task should be able to be aborted, it is important to check for 
+ * IsStopped between all steps.
+ */
+
+/**
+ * @fn void Thread::call(_Fn &&_Fx, _Args &&... _Ax)
+ * @brief  The code that will be enqued in the threads task queue
+ * @details
+ * Threads which are started with the @ref Thread::Impl::standardLoop,
+ * can thus accept new tasks. The tasks are added to the queue 
+ * and processed as fast as possible
+ */
+
+/**@}*/ // end Code injection
+
+/**
  * @brief The real implementation of Thread.
  * 
  * Hidden from the public eye, here effectively done 

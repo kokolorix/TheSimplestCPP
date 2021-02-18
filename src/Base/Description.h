@@ -4,9 +4,9 @@ using std::string;
 
 class Description
 {
-	  virtual ~Description() {}
+public:
+	virtual ~Description() {}
 
-	  virtual string summary() = 0;
-	  virtual string detailed() = 0;
+	virtual string summary() = 0;
+	virtual string detailed() = 0;
 };
-
