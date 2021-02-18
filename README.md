@@ -26,4 +26,8 @@ To push all stuff to remote, do this:
 
 `git commit -m "update doc"`
 
+`cd ..`
+
+`git commit -m "update doc"`
+
 `git push --recurse-submodules=on-demand`
