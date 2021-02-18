@@ -16,4 +16,14 @@ To update the pages to the newest commit, do this:
 `git commit -m "update to latest doc"`
 
 To push all stuff to remote, do this:
-`???`
+`cd pages`
+
+`git checkout gh-pages`
+
+`..\generate.doc`
+
+`git add .`
+
+`git commit -m "update doc"`
+
+`git push --recurse-submodules=on-demand`
