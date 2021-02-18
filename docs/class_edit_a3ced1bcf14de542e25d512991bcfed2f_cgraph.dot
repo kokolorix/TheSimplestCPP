@@ -7,7 +7,7 @@ digraph "Edit::add"
   rankdir="LR";
   Node1 [label="Edit::add",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
   Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node2 [label="Thread::call",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#adb11ad65376e640d84d47f0394f94f10",tooltip=" "];
+  Node2 [label="Thread::call",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#adb11ad65376e640d84d47f0394f94f10",tooltip="The code that will be enqued in the threads task queue."];
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="Thread::enqueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#a1333a7179253857c1431b82e162272fd",tooltip=" "];
 }

@@ -19,7 +19,7 @@
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
-<g id="a_node2"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title="The code that will be enqued in the threads task queue.">
 <polygon fill="white" stroke="black" points="864,-66.5 864,-85.5 931,-85.5 931,-66.5 864,-66.5"/>
 <text text-anchor="middle" x="897.5" y="-73.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::call</text>
 </a>
@@ -185,7 +185,7 @@
 </g>
 <!-- Node13 -->
 <g id="node13" class="node"><title>Node13</title>
-<g id="a_node13"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="The most normal way to start a new thread.">
+<g id="a_node13"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="Starts the Thread with Thread::Impl::standardLoop.">
 <polygon fill="white" stroke="black" points="480,-133.5 480,-152.5 551,-152.5 551,-133.5 480,-133.5"/>
 <text text-anchor="middle" x="515.5" y="-140.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>
@@ -198,7 +198,7 @@
 </g>
 <!-- Node14 -->
 <g id="node14" class="node"><title>Node14</title>
-<g id="a_node14"><a xlink:href="class_thread.html#ada9adb041744058adc9abb1744e86c5d" target="_top" xlink:title=" ">
+<g id="a_node14"><a xlink:href="class_thread.html#ada9adb041744058adc9abb1744e86c5d" target="_top" xlink:title="The code that will be executed, after the new Thread is started.">
 <polygon fill="white" stroke="black" points="339.5,-152.5 339.5,-171.5 410.5,-171.5 410.5,-152.5 339.5,-152.5"/>
 <text text-anchor="middle" x="375" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>

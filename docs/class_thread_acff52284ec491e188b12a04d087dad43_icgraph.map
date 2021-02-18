@@ -1,4 +1,4 @@
 <map id="Thread::joinable" name="Thread::joinable">
-<area shape="rect" id="node1" title="Checks if the std::thread object identifies an active thread of execution. Specifically,..." alt="" coords="212,13,325,39"/>
+<area shape="rect" id="node1" title="Reports whether the thread can be merged or not." alt="" coords="212,13,325,39"/>
 <area shape="rect" id="node2" href="$struct_thread_1_1_thread_manager_1_1_impl.html#a6a46aa5678c8c2de88074f78d35826e9" title="&gt;An helper construct to prevent the application from crashing on exit." alt="" coords="5,5,164,47"/>
 </map>

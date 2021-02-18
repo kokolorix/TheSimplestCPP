@@ -19,7 +19,7 @@
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
-<g id="a_node2"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title="The code that will be enqued in the threads task queue.">
 <polygon fill="white" stroke="black" points="678,-95.5 678,-114.5 745,-114.5 745,-95.5 678,-95.5"/>
 <text text-anchor="middle" x="711.5" y="-102.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::call</text>
 </a>
@@ -32,7 +32,7 @@
 </g>
 <!-- Node4 -->
 <g id="node4" class="node"><title>Node4</title>
-<g id="a_node4"><a xlink:href="class_thread.html#ada9adb041744058adc9abb1744e86c5d" target="_top" xlink:title=" ">
+<g id="a_node4"><a xlink:href="class_thread.html#ada9adb041744058adc9abb1744e86c5d" target="_top" xlink:title="The code that will be executed, after the new Thread is started.">
 <polygon fill="white" stroke="black" points="119,-57.5 119,-76.5 190,-76.5 190,-57.5 119,-57.5"/>
 <text text-anchor="middle" x="154.5" y="-64.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>
@@ -45,7 +45,7 @@
 </g>
 <!-- Node10 -->
 <g id="node10" class="node"><title>Node10</title>
-<g id="a_node10"><a xlink:href="class_thread.html#abd50159ecd409936f454c2321f673616" target="_top" xlink:title="Stops a running thread as fast as intended. In longer lasting processing it must be provided,...">
+<g id="a_node10"><a xlink:href="class_thread.html#abd50159ecd409936f454c2321f673616" target="_top" xlink:title="Method to stop the Trhead.">
 <polygon fill="white" stroke="black" points="119,-19.5 119,-38.5 190,-38.5 190,-19.5 119,-19.5"/>
 <text text-anchor="middle" x="154.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::stop</text>
 </a>
@@ -71,7 +71,7 @@
 </g>
 <!-- Node5 -->
 <g id="node5" class="node"><title>Node5</title>
-<g id="a_node5"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="The most normal way to start a new thread.">
+<g id="a_node5"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="Starts the Thread with Thread::Impl::standardLoop.">
 <polygon fill="white" stroke="black" points="226,-52.5 226,-71.5 297,-71.5 297,-52.5 226,-52.5"/>
 <text text-anchor="middle" x="261.5" y="-59.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>

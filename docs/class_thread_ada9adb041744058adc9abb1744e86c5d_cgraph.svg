@@ -57,7 +57,7 @@ var sectionId = 'dynsection-11';
 <polygon fill="white" stroke="none" points="-4,4 -4,-100 755,-100 755,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<g id="a_node1"><a xlink:title=" ">
+<g id="a_node1"><a xlink:title="The code that will be executed, after the new Thread is started.">
 <polygon fill="#bfbfbf" stroke="black" points="0,-38.5 0,-57.5 71,-57.5 71,-38.5 0,-38.5"/>
 <text text-anchor="middle" x="35.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>
@@ -65,7 +65,7 @@ var sectionId = 'dynsection-11';
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
-<g id="a_node2"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="The most normal way to start a new thread.">
+<g id="a_node2"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="Starts the Thread with Thread::Impl::standardLoop.">
 <polygon fill="white" stroke="black" points="107,-38.5 107,-57.5 178,-57.5 178,-38.5 107,-38.5"/>
 <text text-anchor="middle" x="142.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>
@@ -130,7 +130,7 @@ var sectionId = 'dynsection-11';
 </g>
 <!-- Node5 -->
 <g id="node5" class="node"><title>Node5</title>
-<g id="a_node5"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title="The code that will be enqued in the threads task queue.">
 <polygon fill="white" stroke="black" points="559,-76.5 559,-95.5 626,-95.5 626,-76.5 559,-76.5"/>
 <text text-anchor="middle" x="592.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::call</text>
 </a>

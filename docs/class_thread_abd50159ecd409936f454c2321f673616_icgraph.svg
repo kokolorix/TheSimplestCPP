@@ -11,7 +11,7 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-73.5 414,-73.5 414,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<g id="a_node1"><a xlink:title="Stops a running thread as fast as intended. In longer lasting processing it must be provided,...">
+<g id="a_node1"><a xlink:title="Method to stop the Trhead.">
 <polygon fill="#bfbfbf" stroke="black" points="339,-28 339,-47 410,-47 410,-28 339,-28"/>
 <text text-anchor="middle" x="374.5" y="-35" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::stop</text>
 </a>

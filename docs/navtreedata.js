@@ -32,6 +32,7 @@ var NAVTREE =
       [ "Overviews", "index.html#autotoc_md4", null ],
       [ "External documentations", "index.html#autotoc_md5", null ]
     ] ],
+    [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -70,7 +71,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_base_tests_8cpp.html",
-"dir_4814b1a558d470c33d85e65dbde02eaa.html"
+"dir_3aec98192bf1179f5a0cb056cdd4aba6.html",
+"utils_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

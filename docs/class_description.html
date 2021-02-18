@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>The Simpelst Windows App: Description Class Reference</title>
+<title>The Simpelst Windows App: Description Interface Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,34 +83,35 @@ $(document).ready(function(){initNavTree('class_description.html',''); initResiz
 
 <div class="header">
   <div class="summary">
-<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="class_description-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Description Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">Description Interface Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>TODO: long description.  
+<p>Interface for objects which can describe themselves.  
  <a href="class_description.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_description_8h_source.html">Description.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
 <tr class="memitem:a263503014a6b08eab327305f280ad751"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_description.html#a263503014a6b08eab327305f280ad751">~Description</a> ()</td></tr>
 <tr class="separator:a263503014a6b08eab327305f280ad751"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a840324aafe95eeb2b7ac6e4e28956cbd"><td class="memItemLeft" align="right" valign="top">virtual string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_description.html#a840324aafe95eeb2b7ac6e4e28956cbd">summary</a> ()=0</td></tr>
-<tr class="separator:a840324aafe95eeb2b7ac6e4e28956cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a845cee755c6e3b078ee82a1bc744a3d8"><td class="memItemLeft" align="right" valign="top">virtual string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_description.html#a845cee755c6e3b078ee82a1bc744a3d8">detailed</a> ()=0</td></tr>
-<tr class="separator:a845cee755c6e3b078ee82a1bc744a3d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Descriptions</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Methods to describe objects </p>
+</div></td></tr>
+<tr class="memitem:aa2fefa6c1a9c7ab49e8e409037c3486d"><td class="memItemLeft" align="right" valign="top">virtual string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_description.html#aa2fefa6c1a9c7ab49e8e409037c3486d">summary</a> ()=0</td></tr>
+<tr class="memdesc:aa2fefa6c1a9c7ab49e8e409037c3486d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Summary of the object A short (one line) summary of the obejct.  <a href="class_description.html#aa2fefa6c1a9c7ab49e8e409037c3486d">More...</a><br /></td></tr>
+<tr class="separator:aa2fefa6c1a9c7ab49e8e409037c3486d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36eaf342d0aa5402b10ad0034fffab8a"><td class="memItemLeft" align="right" valign="top">virtual string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_description.html#a36eaf342d0aa5402b10ad0034fffab8a">detailed</a> ()=0</td></tr>
+<tr class="memdesc:a36eaf342d0aa5402b10ad0034fffab8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detailed description of the object A longer text, that describes the obect in all its facets.  <a href="class_description.html#a36eaf342d0aa5402b10ad0034fffab8a">More...</a><br /></td></tr>
+<tr class="separator:a36eaf342d0aa5402b10ad0034fffab8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>TODO: long description. </p>
-<dl class="section note"><dt>Note</dt><dd></dd></dl>
-<dl class="section author"><dt>Author</dt><dd>srebe</dd></dl>
-<dl class="section version"><dt>Version</dt><dd>1.0</dd></dl>
-<dl class="section date"><dt>Date</dt><dd>Januar 2021</dd></dl>
-<p>Contact: <a href="#" onclick="location.href='mai'+'lto:'+'use'+'r@'+'com'+'pa'+'ny.'+'co'+'m'; return false;">user@<span style="display: none;">.nosp@m.</span>comp<span style="display: none;">.nosp@m.</span>any.c<span style="display: none;">.nosp@m.</span>om</a> </p>
+<div class="textblock"><p>Interface for objects which can describe themselves. </p>
+<p>The methods serve for the output of a short and a detailed description, of the object. </p>
 
 <p class="definition">Definition at line <a class="el" href="_description_8h_source.html#l00005">5</a> of file <a class="el" href="_description_8h_source.html">Description.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -132,19 +133,19 @@ Private Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_description_8h_source.html#l00007">7</a> of file <a class="el" href="_description_8h_source.html">Description.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;{}</div>
+<p class="definition">Definition at line <a class="el" href="_description_8h_source.html#l00008">8</a> of file <a class="el" href="_description_8h_source.html">Description.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a845cee755c6e3b078ee82a1bc744a3d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a845cee755c6e3b078ee82a1bc744a3d8">&#9670;&nbsp;</a></span>detailed()</h2>
+<a id="a36eaf342d0aa5402b10ad0034fffab8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36eaf342d0aa5402b10ad0034fffab8a">&#9670;&nbsp;</a></span>detailed()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -153,7 +154,7 @@ Private Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual string Description::detailed </td>
+          <td class="memname">string Description::detailed </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -161,15 +162,17 @@ Private Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Detailed description of the object A longer text, that describes the obect in all its facets. </p>
+
 </div>
 </div>
-<a id="a840324aafe95eeb2b7ac6e4e28956cbd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a840324aafe95eeb2b7ac6e4e28956cbd">&#9670;&nbsp;</a></span>summary()</h2>
+<a id="aa2fefa6c1a9c7ab49e8e409037c3486d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2fefa6c1a9c7ab49e8e409037c3486d">&#9670;&nbsp;</a></span>summary()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,7 +181,7 @@ Private Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual string Description::summary </td>
+          <td class="memname">string Description::summary </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -186,15 +189,18 @@ Private Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
+<p>Summary of the object A short (one line) summary of the obejct. </p>
+
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this interface was generated from the following files:<ul>
 <li>src/Base/<a class="el" href="_description_8h_source.html">Description.h</a></li>
+<li>src/Base/<a class="el" href="_description_8cpp_source.html">Description.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,6 +1,6 @@
 <map id="OnThreadTestClicked" name="OnThreadTestClicked">
 <area shape="rect" id="node1" title="Thread&#45;Test&#45;Button event handler." alt="" coords="5,31,152,57"/>
 <area shape="rect" id="node2" href="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f" title=" " alt="" coords="200,5,275,32"/>
-<area shape="rect" id="node3" href="$class_thread.html#adb11ad65376e640d84d47f0394f94f10" title=" " alt="" coords="323,31,412,57"/>
+<area shape="rect" id="node3" href="$class_thread.html#adb11ad65376e640d84d47f0394f94f10" title="The code that will be enqued in the threads task queue." alt="" coords="323,31,412,57"/>
 <area shape="rect" id="node4" href="$class_thread.html#a1333a7179253857c1431b82e162272fd" title=" " alt="" coords="460,31,579,57"/>
 </map>

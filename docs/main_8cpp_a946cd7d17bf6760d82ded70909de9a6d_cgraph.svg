@@ -65,7 +65,7 @@ var sectionId = 'dynsection-7';
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
-<g id="a_node2"><a xlink:href="class_thread.html#a5a2980b7db2cdd4afe3860d5df6aa94e" target="_top" xlink:title=" ">
+<g id="a_node2"><a xlink:href="class_thread.html#a5a2980b7db2cdd4afe3860d5df6aa94e" target="_top" xlink:title="Initialisert ein Thread objekt mit einem bereits laufenden Thread.">
 <polygon fill="white" stroke="black" points="91,-233.5 91,-252.5 220,-252.5 220,-233.5 91,-233.5"/>
 <text text-anchor="middle" x="155.5" y="-240.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::initRunningThread</text>
 </a>
@@ -169,7 +169,7 @@ var sectionId = 'dynsection-7';
 </g>
 <!-- Node24 -->
 <g id="node24" class="node"><title>Node24</title>
-<g id="a_node24"><a xlink:href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69" target="_top" xlink:title="Processes a maximum of the specified number of function objects in the queue.">
+<g id="a_node24"><a xlink:href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69" target="_top" xlink:title="Arbeitet im laufenden Thread maxElements ab.">
 <polygon fill="white" stroke="black" points="256,-0.5 256,-19.5 371,-19.5 371,-0.5 256,-0.5"/>
 <text text-anchor="middle" x="313.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::processQueue</text>
 </a>
@@ -213,7 +213,7 @@ var sectionId = 'dynsection-7';
 </g>
 <!-- Node10 -->
 <g id="node10" class="node"><title>Node10</title>
-<g id="a_node10"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title=" ">
+<g id="a_node10"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title="The code that will be enqued in the threads task queue.">
 <polygon fill="white" stroke="black" points="1058,-152.5 1058,-171.5 1125,-171.5 1125,-152.5 1058,-152.5"/>
 <text text-anchor="middle" x="1091.5" y="-159.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::call</text>
 </a>
@@ -226,7 +226,7 @@ var sectionId = 'dynsection-7';
 </g>
 <!-- Node12 -->
 <g id="node12" class="node"><title>Node12</title>
-<g id="a_node12"><a xlink:href="class_thread.html#ada9adb041744058adc9abb1744e86c5d" target="_top" xlink:title=" ">
+<g id="a_node12"><a xlink:href="class_thread.html#ada9adb041744058adc9abb1744e86c5d" target="_top" xlink:title="The code that will be executed, after the new Thread is started.">
 <polygon fill="white" stroke="black" points="422,-228.5 422,-247.5 493,-247.5 493,-228.5 422,-228.5"/>
 <text text-anchor="middle" x="457.5" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>
@@ -239,7 +239,7 @@ var sectionId = 'dynsection-7';
 </g>
 <!-- Node18 -->
 <g id="node18" class="node"><title>Node18</title>
-<g id="a_node18"><a xlink:href="class_thread.html#abd50159ecd409936f454c2321f673616" target="_top" xlink:title="Stops a running thread as fast as intended. In longer lasting processing it must be provided,...">
+<g id="a_node18"><a xlink:href="class_thread.html#abd50159ecd409936f454c2321f673616" target="_top" xlink:title="Method to stop the Trhead.">
 <polygon fill="white" stroke="black" points="422,-190.5 422,-209.5 493,-209.5 493,-190.5 422,-190.5"/>
 <text text-anchor="middle" x="457.5" y="-197.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::stop</text>
 </a>
@@ -265,7 +265,7 @@ var sectionId = 'dynsection-7';
 </g>
 <!-- Node13 -->
 <g id="node13" class="node"><title>Node13</title>
-<g id="a_node13"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="The most normal way to start a new thread.">
+<g id="a_node13"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="Starts the Thread with Thread::Impl::standardLoop.">
 <polygon fill="white" stroke="black" points="575,-228.5 575,-247.5 646,-247.5 646,-228.5 575,-228.5"/>
 <text text-anchor="middle" x="610.5" y="-235.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>

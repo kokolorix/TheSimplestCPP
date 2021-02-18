@@ -123,29 +123,56 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a37d9edd3a1a776cbc27dedff949c9726"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread.html#a37d9edd3a1a776cbc27dedff949c9726">~Thread</a> ()</td></tr>
 <tr class="memdesc:a37d9edd3a1a776cbc27dedff949c9726"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a>:: <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> object.  <a href="class_thread.html#a37d9edd3a1a776cbc27dedff949c9726">More...</a><br /></td></tr>
 <tr class="separator:a37d9edd3a1a776cbc27dedff949c9726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Code injection</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>start and call are very similar in application</p>
+<p>here you can specify any callable object (function, method, std::function, etc.) with all arguments, which will then be executed in the thread. While start which uses the callable object as the start function of the thread, call enqueues the callable object in the thread's waiting queue and an event is fired, which requests the thread to process its queue.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">_Fn</td><td>the type callable.object </td></tr>
+    <tr><td class="paramname">_Args</td><td>the types of the parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">_Fx</td><td>any callable object </td></tr>
+    <tr><td class="paramname">_Ax</td><td>arguments for the callable object </td></tr>
+  </table>
+  </dd>
+</dl>
+</div></td></tr>
 <tr class="memitem:ada9adb041744058adc9abb1744e86c5d"><td class="memTemplParams" colspan="2">template&lt;class _Fn , class... _Args&gt; </td></tr>
 <tr class="memitem:ada9adb041744058adc9abb1744e86c5d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_thread.html#ada9adb041744058adc9abb1744e86c5d">start</a> (_Fn &amp;&amp;_Fx, _Args &amp;&amp;... _Ax)</td></tr>
+<tr class="memdesc:ada9adb041744058adc9abb1744e86c5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The code that will be executed, after the new <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> is started.  <a href="class_thread.html#ada9adb041744058adc9abb1744e86c5d">More...</a><br /></td></tr>
 <tr class="separator:ada9adb041744058adc9abb1744e86c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb11ad65376e640d84d47f0394f94f10"><td class="memTemplParams" colspan="2">template&lt;class _Fn , class... _Args&gt; </td></tr>
 <tr class="memitem:adb11ad65376e640d84d47f0394f94f10"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_thread.html#adb11ad65376e640d84d47f0394f94f10">call</a> (_Fn &amp;&amp;_Fx, _Args &amp;&amp;... _Ax)</td></tr>
+<tr class="memdesc:adb11ad65376e640d84d47f0394f94f10"><td class="mdescLeft">&#160;</td><td class="mdescRight">The code that will be enqued in the threads task queue.  <a href="class_thread.html#adb11ad65376e640d84d47f0394f94f10">More...</a><br /></td></tr>
 <tr class="separator:adb11ad65376e640d84d47f0394f94f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Thread control</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Methods to control the flow of a thread </p>
+</div></td></tr>
 <tr class="memitem:a1f53ee62bd30a7924186ef26150ce262"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262">start</a> ()</td></tr>
-<tr class="memdesc:a1f53ee62bd30a7924186ef26150ce262"><td class="mdescLeft">&#160;</td><td class="mdescRight">The most normal way to start a new thread.  <a href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262">More...</a><br /></td></tr>
+<tr class="memdesc:a1f53ee62bd30a7924186ef26150ce262"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> with <a class="el" href="struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9">Thread::Impl::standardLoop</a>.  <a href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262">More...</a><br /></td></tr>
 <tr class="separator:a1f53ee62bd30a7924186ef26150ce262"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd50159ecd409936f454c2321f673616"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread.html#abd50159ecd409936f454c2321f673616">stop</a> ()</td></tr>
-<tr class="memdesc:abd50159ecd409936f454c2321f673616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops a running thread as fast as intended. In longer lasting processing it must be provided, at suitable places to cancel.  <a href="class_thread.html#abd50159ecd409936f454c2321f673616">More...</a><br /></td></tr>
+<tr class="memdesc:abd50159ecd409936f454c2321f673616"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to stop the Trhead.  <a href="class_thread.html#abd50159ecd409936f454c2321f673616">More...</a><br /></td></tr>
 <tr class="separator:abd50159ecd409936f454c2321f673616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a2980b7db2cdd4afe3860d5df6aa94e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread.html#a5a2980b7db2cdd4afe3860d5df6aa94e">initRunningThread</a> (<a class="el" href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a> id, function&lt; void()&gt; notify)</td></tr>
-<tr class="separator:a5a2980b7db2cdd4afe3860d5df6aa94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0bd96245e2b765b410f8dd2d1aeeb69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69">processQueue</a> (size_t maxElements=10)</td></tr>
-<tr class="memdesc:af0bd96245e2b765b410f8dd2d1aeeb69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a maximum of the specified number of function objects in the queue.  <a href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69">More...</a><br /></td></tr>
-<tr class="separator:af0bd96245e2b765b410f8dd2d1aeeb69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acff52284ec491e188b12a04d087dad43"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread.html#acff52284ec491e188b12a04d087dad43">joinable</a> ()</td></tr>
-<tr class="memdesc:acff52284ec491e188b12a04d087dad43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the std::thread object identifies an active thread of execution. Specifically, returns true if get_id() != std::thread::id(). So a default constructed thread is not joinable. A thread that has finished executing code, but has not yet been joined is still considered an active thread of execution and is therefore joinable.  <a href="class_thread.html#acff52284ec491e188b12a04d087dad43">More...</a><br /></td></tr>
+<tr class="memdesc:acff52284ec491e188b12a04d087dad43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reports whether the thread can be merged or not.  <a href="class_thread.html#acff52284ec491e188b12a04d087dad43">More...</a><br /></td></tr>
 <tr class="separator:acff52284ec491e188b12a04d087dad43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d9d788e98388a3217831a9046709deb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread.html#a4d9d788e98388a3217831a9046709deb">join</a> ()</td></tr>
-<tr class="memdesc:a4d9d788e98388a3217831a9046709deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Waits for the end of the thread.  <a href="class_thread.html#a4d9d788e98388a3217831a9046709deb">More...</a><br /></td></tr>
+<tr class="memdesc:a4d9d788e98388a3217831a9046709deb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Führt den <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> mit dem aktuellen zusammen.  <a href="class_thread.html#a4d9d788e98388a3217831a9046709deb">More...</a><br /></td></tr>
 <tr class="separator:a4d9d788e98388a3217831a9046709deb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Exisiting threads</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Methods to intervene in already running threads </p>
+</div></td></tr>
+<tr class="memitem:a5a2980b7db2cdd4afe3860d5df6aa94e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread.html#a5a2980b7db2cdd4afe3860d5df6aa94e">initRunningThread</a> (<a class="el" href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a> id, function&lt; void()&gt; notify)</td></tr>
+<tr class="memdesc:a5a2980b7db2cdd4afe3860d5df6aa94e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisert ein <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> objekt mit einem bereits laufenden <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a>.  <a href="class_thread.html#a5a2980b7db2cdd4afe3860d5df6aa94e">More...</a><br /></td></tr>
+<tr class="separator:a5a2980b7db2cdd4afe3860d5df6aa94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0bd96245e2b765b410f8dd2d1aeeb69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69">processQueue</a> (size_t maxElements=10)</td></tr>
+<tr class="memdesc:af0bd96245e2b765b410f8dd2d1aeeb69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Arbeitet im laufenden <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> <code>maxElements</code> ab.  <a href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69">More...</a><br /></td></tr>
+<tr class="separator:af0bd96245e2b765b410f8dd2d1aeeb69"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -182,7 +209,7 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><p>This class represents a thread in the system. </p>
 <p>A thread can be created and started again, it can be but also existing, running threads can be assigned.</p>
 <p>For newly created threads, the start function can be included, or the Standard function can be used. The default function <a class="el" href="struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9" title="The normally used processing loop of a background thread.">Thread::Impl::standardLoop</a> supports the continuous exchange of function objects via a queue.</p>
-<p>For own start functions or otherwise started threads, like the main thread the processing of the queue must be triggered from outside, via <a class="el" href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69" title="Processes a maximum of the specified number of function objects in the queue.">Thread::processQueue</a>. You can also specify a notification callback to be called, if new function objects have been added to the queue.</p>
+<p>For own start functions or otherwise started threads, like the main thread the processing of the queue must be triggered from outside, via <a class="el" href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69" title="Arbeitet im laufenden Thread maxElements ab.">Thread::processQueue</a>. You can also specify a notification callback to be called, if new function objects have been added to the queue.</p>
 <p>All active threads are accessible through the <a class="el" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a> via a name or the ThreadId</p>
 <p>Using for a background thread is very intuitive: </p><div class="fragment"><div class="line"><a class="code" href="struct_thread_ptr.html">ThreadPtr</a> thread1 = <a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>[<span class="stringliteral">&quot;Thread1&quot;</span>];</div>
 <div class="line"><span class="keywordflow">if</span>(!thread1-&gt;<a class="code" href="class_thread.html#ab9842f0f585d0688ace9eacd4c54f3c6">IsRunning</a>)</div>
@@ -242,20 +269,20 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00232">232</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    : <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>(make_unique&lt;Thread::Impl&gt;(name))</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    , <a class="code" href="class_thread.html#af5ac4eab873a27acc26f9fa4faf9a255">Name</a>(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;name_)</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    , <a class="code" href="class_thread.html#ab9842f0f585d0688ace9eacd4c54f3c6">IsRunning</a>([<span class="keyword">this</span>]() {</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_ != <a class="code" href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a>() &amp;&amp; !<a class="code" href="class_thread.html#abe4893bd16497893029c0abbcfedcca9">IsStopped</a>;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;      })</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    , <a class="code" href="class_thread.html#abe4893bd16497893029c0abbcfedcca9">IsStopped</a>([<span class="keyword">this</span>]() {</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_.load();</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;      })</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    , <a class="code" href="class_thread.html#a861d540a447f34bc3c35aef2ab0b11a7">Id</a>([<span class="keyword">this</span>]() {</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_;</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;      })</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;{</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00323">323</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    : <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>(make_unique&lt;Thread::Impl&gt;(name))</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    , <a class="code" href="class_thread.html#af5ac4eab873a27acc26f9fa4faf9a255">Name</a>(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;name_)</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    , <a class="code" href="class_thread.html#ab9842f0f585d0688ace9eacd4c54f3c6">IsRunning</a>([<span class="keyword">this</span>]() {</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_ != <a class="code" href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a>() &amp;&amp; !<a class="code" href="class_thread.html#abe4893bd16497893029c0abbcfedcca9">IsStopped</a>;</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;      })</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    , <a class="code" href="class_thread.html#abe4893bd16497893029c0abbcfedcca9">IsStopped</a>([<span class="keyword">this</span>]() {</div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_.load();</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;      })</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    , <a class="code" href="class_thread.html#a861d540a447f34bc3c35aef2ab0b11a7">Id</a>([<span class="keyword">this</span>]() {</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;          <span class="keywordflow">return</span> <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_;</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;      })</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;{</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;}</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="_thread_8h_source.html#l00079">IsStopped</a>, and <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
 
@@ -286,33 +313,33 @@ Private Attributes</h2></td></tr>
 
 <p>Destroy the <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a>:: <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00250">250</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;{</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.joinable())</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    {</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        <span class="keywordflow">if</span>(this_thread::get_id() == <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.get_id())</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        {</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;            <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.detach();</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        }</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;        {</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;            <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;            <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.join();</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        }</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    }</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160; </div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    <span class="comment">// It is possible that global variables are deleted,  </span></div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    <span class="comment">// after the manager has already been cleared. </span></div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    <span class="comment">// Hence this check here </span></div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#aa8b68a1f6a05f54441caf0d9632a28be">Thread::ThreadManager::Impl::isDeleted</a>)</div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    {</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="struct_thread_1_1_thread_manager.html#a9f4c1d89ebdf82a669e4c09277a6ad66">pImpl_</a>-&gt;nameMap_.erase(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;name_);</div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="struct_thread_1_1_thread_manager.html#a9f4c1d89ebdf82a669e4c09277a6ad66">pImpl_</a>-&gt;idMap_.erase(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_);</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    }</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00341">341</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;{</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.joinable())</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;    {</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;        <span class="keywordflow">if</span>(this_thread::get_id() == <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.get_id())</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;        {</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.detach();</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;        }</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;        {</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;            <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_ = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;            <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.join();</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        }</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    }</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160; </div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;    <span class="comment">// It is possible that global variables are deleted,  </span></div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    <span class="comment">// after the manager has already been cleared. </span></div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <span class="comment">// Hence this check here </span></div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#aa8b68a1f6a05f54441caf0d9632a28be">Thread::ThreadManager::Impl::isDeleted</a>)</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;    {</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;        <a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="struct_thread_1_1_thread_manager.html#a9f4c1d89ebdf82a669e4c09277a6ad66">pImpl_</a>-&gt;nameMap_.erase(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;name_);</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;        <a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="struct_thread_1_1_thread_manager.html#a9f4c1d89ebdf82a669e4c09277a6ad66">pImpl_</a>-&gt;idMap_.erase(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    }</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00155">Thread::ThreadManager::Impl::isDeleted</a>, <a class="el" href="_thread_8cpp_source.html#l00225">Manager</a>, <a class="el" href="_thread_8h_source.html#l00040">Thread::ThreadManager::pImpl_</a>, and <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
+<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00246">Thread::ThreadManager::Impl::isDeleted</a>, <a class="el" href="_thread_8cpp_source.html#l00316">Manager</a>, <a class="el" href="_thread_8h_source.html#l00040">Thread::ThreadManager::pImpl_</a>, and <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
 
 </div>
 </div>
@@ -353,24 +380,29 @@ template&lt;class _Fn , class... _Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>The code that will be enqued in the threads task queue. </p>
+<p>Threads which are started with the <a class="el" href="struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9">Thread::Impl::standardLoop</a>, can thus accept new tasks. The tasks are added to the queue and processed as fast as possible </p>
+
 <p class="definition">Definition at line <a class="el" href="_thread_8h_source.html#l00056">56</a> of file <a class="el" href="_thread_8h_source.html">Thread.h</a>.</p>
 <div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keyword">auto</span> f = bind(_Fx, std::forward&lt;_Args&gt;(_Ax)...);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="class_thread.html#a1333a7179253857c1431b82e162272fd">enqueue</a>(f);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00363">enqueue()</a>.</p>
+<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00454">enqueue()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_edit_8cpp_source.html#l00089">Edit::add()</a>, <a class="el" href="main_8cpp_source.html#l00240">OnStartClicked()</a>, and <a class="el" href="main_8cpp_source.html#l00311">OnThreadTestClicked()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_adb11ad65376e640d84d47f0394f94f10_cgraph.svg" width="267" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_adb11ad65376e640d84d47f0394f94f10_cgraph.svg" width="267" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_thread_adb11ad65376e640d84d47f0394f94f10_icgraph.svg" width="100%" height="508"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_thread_adb11ad65376e640d84d47f0394f94f10_icgraph.svg" width="100%" height="508"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 
 </div>
@@ -405,10 +437,10 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00363">363</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;{</div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;enqueue(f);</div>
-<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00454">454</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;{</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;enqueue(f);</div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;}</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
 
@@ -416,7 +448,8 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_thread_a1333a7179253857c1431b82e162272fd_icgraph.svg" width="100%" height="508"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_thread_a1333a7179253857c1431b82e162272fd_icgraph.svg" width="100%" height="508"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 
 </div>
@@ -446,6 +479,9 @@ Here is the caller graph for this function:</div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initialisert ein <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> objekt mit einem bereits laufenden <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a>. </p>
+<p>The notification function is called when the thread gets new items pushed to its queue</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td></td></tr>
@@ -454,10 +490,10 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00282">282</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;{</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;initRunningThread(<span class="keywordtype">id</span>, notify, shared_from_this());</div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00373">373</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;{</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;initRunningThread(<span class="keywordtype">id</span>, notify, shared_from_this());</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;}</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
 
@@ -465,7 +501,8 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_a5a2980b7db2cdd4afe3860d5df6aa94e_icgraph.svg" width="304" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_a5a2980b7db2cdd4afe3860d5df6aa94e_icgraph.svg" width="304" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -485,20 +522,23 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Waits for the end of the thread. </p>
+<p>Führt den <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> mit dem aktuellen zusammen. </p>
+<p>Waits for the end of the thread.</p>
+<p>The current thread waits until the requested thread is finished </p>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00394">394</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;{</div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.join();</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00485">485</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160;{</div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.join();</div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;}</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00156">Thread::ThreadManager::Impl::~Impl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00247">Thread::ThreadManager::Impl::~Impl()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_a4d9d788e98388a3217831a9046709deb_icgraph.svg" width="307" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_a4d9d788e98388a3217831a9046709deb_icgraph.svg" width="307" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -518,21 +558,23 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Checks if the std::thread object identifies an active thread of execution. Specifically, returns true if get_id() != std::thread::id(). So a default constructed thread is not joinable. A thread that has finished executing code, but has not yet been joined is still considered an active thread of execution and is therefore joinable. </p>
+<p>Reports whether the thread can be merged or not. </p>
+<p>Checks if the std::thread object identifies an active thread of execution. Specifically, returns true if get_id() != std::thread::id(). So a default constructed thread is not joinable. A thread that has finished executing code, but has not yet been joined is still considered an active thread of execution and is therefore joinable.</p>
 <dl class="section return"><dt>Returns</dt><dd>true if the thread object identifies an active thread of execution, false otherwise </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00385">385</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;{</div>
-<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.joinable();</div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00476">476</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;{</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.joinable();</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;}</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00156">Thread::ThreadManager::Impl::~Impl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00247">Thread::ThreadManager::Impl::~Impl()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_acff52284ec491e188b12a04d087dad43_icgraph.svg" width="331" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_acff52284ec491e188b12a04d087dad43_icgraph.svg" width="331" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -553,7 +595,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Processes a maximum of the specified number of function objects in the queue. </p>
+<p>Arbeitet im laufenden <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> <code>maxElements</code> ab. </p>
+<p>Processes a maximum of the specified number of function objects in the queue.</p>
+<p>Nach der Benachrichtigung werden so alle Aufgaben abgearbeitet.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">maxElements</td><td></td></tr>
@@ -561,11 +605,11 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00373">373</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;{</div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    unique_lock&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
-<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;processQueue(lock, maxElements);</div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00464">464</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;{</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    unique_lock&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;processQueue(lock, maxElements);</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;}</div>
 </div><!-- fragment -->
 <p class="reference">References <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
 
@@ -573,7 +617,8 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_af0bd96245e2b765b410f8dd2d1aeeb69_icgraph.svg" width="410" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_af0bd96245e2b765b410f8dd2d1aeeb69_icgraph.svg" width="410" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -593,28 +638,32 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>The most normal way to start a new thread. </p>
+<p>Starts the <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> with <a class="el" href="struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9">Thread::Impl::standardLoop</a>. </p>
+<p>The most normal way to start a new thread.</p>
+<p>After startup it is possible to push tasks to the thread queue </p>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00312">312</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;{</div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;    <a class="code" href="struct_thread_ptr.html">ThreadPtr</a> thisThread = shared_from_this();</div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;    unique_lock&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    <a class="code" href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262">start</a>(thread(<a class="code" href="struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9">Impl::standardLoop</a>, thisThread));</div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;condition_.wait(lock);</div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00403">403</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;{</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <a class="code" href="struct_thread_ptr.html">ThreadPtr</a> thisThread = shared_from_this();</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    unique_lock&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <a class="code" href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262">start</a>(thread(<a class="code" href="struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9">Impl::standardLoop</a>, thisThread));</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;condition_.wait(lock);</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>, and <a class="el" href="_thread_8cpp_source.html#l00439">Thread::Impl::standardLoop()</a>.</p>
+<p class="reference">References <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>, and <a class="el" href="_thread_8cpp_source.html#l00530">Thread::Impl::standardLoop()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_thread_8h_source.html#l00047">start()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_thread_a1f53ee62bd30a7924186ef26150ce262_cgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_thread_a1f53ee62bd30a7924186ef26150ce262_cgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_a1f53ee62bd30a7924186ef26150ce262_icgraph.svg" width="652" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_a1f53ee62bd30a7924186ef26150ce262_icgraph.svg" width="652" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -655,6 +704,9 @@ template&lt;class _Fn , class... _Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>The code that will be executed, after the new <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a> is started. </p>
+<p>This is the main functionallity of the <a class="el" href="class_thread.html" title="This class represents a thread in the system.">Thread</a>. Usually such a working thread is which should complete a task exactly once and then ends. If the task should be able to be aborted, it is important to check for IsStopped between all steps. </p>
+
 <p class="definition">Definition at line <a class="el" href="_thread_8h_source.html#l00047">47</a> of file <a class="el" href="_thread_8h_source.html">Thread.h</a>.</p>
 <div class="fragment"><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="struct_thread_ptr.html">ThreadPtr</a> thisThread = shared_from_this();</div>
@@ -663,18 +715,20 @@ template&lt;class _Fn , class... _Args&gt; </div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        }));</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00312">start()</a>.</p>
+<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00403">start()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00240">OnStartClicked()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_thread_ada9adb041744058adc9abb1744e86c5d_cgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_thread_ada9adb041744058adc9abb1744e86c5d_cgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_ada9adb041744058adc9abb1744e86c5d_icgraph.svg" width="510" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_ada9adb041744058adc9abb1744e86c5d_icgraph.svg" width="510" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -709,24 +763,24 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00292">292</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;{</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.joinable())</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    {</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.join();</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="comment">//pImpl_-&gt;thread_.detach();</span></div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    }</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    swap(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_, t);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_ = <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_ = <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.get_id();</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;    <a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="struct_thread_1_1_thread_manager.html#a9f4c1d89ebdf82a669e4c09277a6ad66">pImpl_</a>-&gt;idMap_.insert(make_pair(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_, shared_from_this()));</div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00383">383</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;{</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.joinable())</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    {</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_ = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.join();</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="comment">//pImpl_-&gt;thread_.detach();</span></div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;    }</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160; </div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    swap(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_, t);</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_ = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_ = <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;thread_.get_id();</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;    lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;    <a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="struct_thread_1_1_thread_manager.html#a9f4c1d89ebdf82a669e4c09277a6ad66">pImpl_</a>-&gt;idMap_.insert(make_pair(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_, shared_from_this()));</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00225">Manager</a>, <a class="el" href="_thread_8h_source.html#l00040">Thread::ThreadManager::pImpl_</a>, and <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
+<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00316">Manager</a>, <a class="el" href="_thread_8h_source.html#l00040">Thread::ThreadManager::pImpl_</a>, and <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
 
 </div>
 </div>
@@ -745,7 +799,9 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Stops a running thread as fast as intended. In longer lasting processing it must be provided, at suitable places to cancel. </p>
+<p>Method to stop the Trhead. </p>
+<p>Stops a running thread as fast as intended. In longer lasting processing it must be provided, at suitable places to cancel.</p>
+<p>Internally, the IsStopped property is set. When the executing thread detects that this property is True, it should finish or abort its work as soon as possible</p>
 <div class="fragment"><div class="line">thread2-&gt;call([thread2]() {</div>
 <div class="line">    <span class="keywordflow">while</span>(!thread2-&gt;IsStopped) <span class="comment">// &lt;--- here we checks every loop the IsStopped Property</span></div>
 <div class="line">    {</div>
@@ -766,25 +822,26 @@ Here is the caller graph for this function:</div>
 <div class="line">    });</div>
 <div class="line">});</div>
 </div><!-- fragment --> 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00346">346</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;{</div>
-<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_ = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;condition_.notify_one();</div>
-<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    this_thread::yield();</div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    {</div>
-<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;        <a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="struct_thread_1_1_thread_manager.html#a9f4c1d89ebdf82a669e4c09277a6ad66">pImpl_</a>-&gt;idMap_.erase(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_);</div>
-<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;    }</div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_ = <a class="code" href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a>();</div>
-<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00437">437</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;{</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;stopped_ = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;condition_.notify_one();</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;    this_thread::yield();</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    {</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;        lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;mutex_);</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;        <a class="code" href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a>.<a class="code" href="struct_thread_1_1_thread_manager.html#a9f4c1d89ebdf82a669e4c09277a6ad66">pImpl_</a>-&gt;idMap_.erase(<a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_);</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;    }</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <a class="code" href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">pImpl_</a>-&gt;id_ = <a class="code" href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a>();</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00225">Manager</a>, <a class="el" href="_thread_8h_source.html#l00040">Thread::ThreadManager::pImpl_</a>, and <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
+<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00316">Manager</a>, <a class="el" href="_thread_8h_source.html#l00040">Thread::ThreadManager::pImpl_</a>, and <a class="el" href="_thread_8h_source.html#l00072">pImpl_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00240">OnStartClicked()</a>, and <a class="el" href="_thread_8cpp_source.html#l00156">Thread::ThreadManager::Impl::~Impl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00240">OnStartClicked()</a>, and <a class="el" href="_thread_8cpp_source.html#l00247">Thread::ThreadManager::Impl::~Impl()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_abd50159ecd409936f454c2321f673616_icgraph.svg" width="558" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_thread_abd50159ecd409936f454c2321f673616_icgraph.svg" width="558" height="104"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 </div>
 
 </div>
@@ -840,7 +897,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_thread_8h_source.html#l00079">79</a> of file <a class="el" href="_thread_8h_source.html">Thread.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00240">OnStartClicked()</a>, and <a class="el" href="_thread_8cpp_source.html#l00232">Thread()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00240">OnStartClicked()</a>, and <a class="el" href="_thread_8cpp_source.html#l00323">Thread()</a>.</p>
 
 </div>
 </div>
@@ -864,9 +921,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00225">225</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00316">316</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00409">Thread::Impl::initRunningThread()</a>, <a class="el" href="main_8cpp_source.html#l00240">OnStartClicked()</a>, <a class="el" href="main_8cpp_source.html#l00311">OnThreadTestClicked()</a>, <a class="el" href="_thread_8cpp_source.html#l00439">Thread::Impl::standardLoop()</a>, <a class="el" href="_thread_8cpp_source.html#l00292">start()</a>, <a class="el" href="_thread_8cpp_source.html#l00346">stop()</a>, <a class="el" href="main_8cpp_source.html#l00053">WinMain()</a>, and <a class="el" href="_thread_8cpp_source.html#l00250">~Thread()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00500">Thread::Impl::initRunningThread()</a>, <a class="el" href="main_8cpp_source.html#l00240">OnStartClicked()</a>, <a class="el" href="main_8cpp_source.html#l00311">OnThreadTestClicked()</a>, <a class="el" href="_thread_8cpp_source.html#l00530">Thread::Impl::standardLoop()</a>, <a class="el" href="_thread_8cpp_source.html#l00383">start()</a>, <a class="el" href="_thread_8cpp_source.html#l00437">stop()</a>, <a class="el" href="main_8cpp_source.html#l00053">WinMain()</a>, and <a class="el" href="_thread_8cpp_source.html#l00341">~Thread()</a>.</p>
 
 </div>
 </div>
@@ -884,7 +941,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_thread_8h_source.html#l00081">81</a> of file <a class="el" href="_thread_8h_source.html">Thread.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00439">Thread::Impl::standardLoop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00530">Thread::Impl::standardLoop()</a>.</p>
 
 </div>
 </div>
@@ -910,7 +967,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_thread_8h_source.html#l00073">73</a> of file <a class="el" href="_thread_8h_source.html">Thread.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00363">enqueue()</a>, <a class="el" href="_thread_8cpp_source.html#l00282">initRunningThread()</a>, <a class="el" href="_thread_8cpp_source.html#l00409">Thread::Impl::initRunningThread()</a>, <a class="el" href="_thread_8cpp_source.html#l00394">join()</a>, <a class="el" href="_thread_8cpp_source.html#l00385">joinable()</a>, <a class="el" href="_thread_8cpp_source.html#l00523">Thread::ThreadManager::operator[]()</a>, <a class="el" href="_thread_8cpp_source.html#l00373">processQueue()</a>, <a class="el" href="_thread_8cpp_source.html#l00439">Thread::Impl::standardLoop()</a>, <a class="el" href="_thread_8cpp_source.html#l00292">start()</a>, <a class="el" href="_thread_8cpp_source.html#l00346">stop()</a>, <a class="el" href="_thread_8cpp_source.html#l00232">Thread()</a>, and <a class="el" href="_thread_8cpp_source.html#l00250">~Thread()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00454">enqueue()</a>, <a class="el" href="_thread_8cpp_source.html#l00373">initRunningThread()</a>, <a class="el" href="_thread_8cpp_source.html#l00500">Thread::Impl::initRunningThread()</a>, <a class="el" href="_thread_8cpp_source.html#l00485">join()</a>, <a class="el" href="_thread_8cpp_source.html#l00476">joinable()</a>, <a class="el" href="_thread_8cpp_source.html#l00614">Thread::ThreadManager::operator[]()</a>, <a class="el" href="_thread_8cpp_source.html#l00464">processQueue()</a>, <a class="el" href="_thread_8cpp_source.html#l00530">Thread::Impl::standardLoop()</a>, <a class="el" href="_thread_8cpp_source.html#l00383">start()</a>, <a class="el" href="_thread_8cpp_source.html#l00437">stop()</a>, <a class="el" href="_thread_8cpp_source.html#l00323">Thread()</a>, and <a class="el" href="_thread_8cpp_source.html#l00341">~Thread()</a>.</p>
 
 </div>
 </div>
@@ -920,10 +977,10 @@ Here is the caller graph for this function:</div>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_thread_html_a1f53ee62bd30a7924186ef26150ce262"><div class="ttname"><a href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262">Thread::start</a></div><div class="ttdeci">void start()</div><div class="ttdoc">The most normal way to start a new thread.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00312">Thread.cpp:312</a></div></div>
-<div class="ttc" id="aclass_thread_html_ada9adb041744058adc9abb1744e86c5d"><div class="ttname"><a href="class_thread.html#ada9adb041744058adc9abb1744e86c5d">Thread::start</a></div><div class="ttdeci">void start(_Fn &amp;&amp;_Fx, _Args &amp;&amp;... _Ax)</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00047">Thread.h:47</a></div></div>
-<div class="ttc" id="aclass_thread_html_ae79f1982f6304f1d019910e2dd11ff9e"><div class="ttname"><a href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a></div><div class="ttdeci">static struct Thread::ThreadManager Manager</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00225">Thread.cpp:225</a></div></div>
-<div class="ttc" id="aclass_thread_html_a1333a7179253857c1431b82e162272fd"><div class="ttname"><a href="class_thread.html#a1333a7179253857c1431b82e162272fd">Thread::enqueue</a></div><div class="ttdeci">void enqueue(function&lt; void()&gt; f)</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00363">Thread.cpp:363</a></div></div>
+<div class="ttc" id="aclass_thread_html_a1f53ee62bd30a7924186ef26150ce262"><div class="ttname"><a href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262">Thread::start</a></div><div class="ttdeci">void start()</div><div class="ttdoc">Starts the Thread with Thread::Impl::standardLoop.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00403">Thread.cpp:403</a></div></div>
+<div class="ttc" id="aclass_thread_html_ada9adb041744058adc9abb1744e86c5d"><div class="ttname"><a href="class_thread.html#ada9adb041744058adc9abb1744e86c5d">Thread::start</a></div><div class="ttdeci">void start(_Fn &amp;&amp;_Fx, _Args &amp;&amp;... _Ax)</div><div class="ttdoc">The code that will be executed, after the new Thread is started.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00047">Thread.h:47</a></div></div>
+<div class="ttc" id="aclass_thread_html_ae79f1982f6304f1d019910e2dd11ff9e"><div class="ttname"><a href="class_thread.html#ae79f1982f6304f1d019910e2dd11ff9e">Thread::Manager</a></div><div class="ttdeci">static struct Thread::ThreadManager Manager</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00316">Thread.cpp:316</a></div></div>
+<div class="ttc" id="aclass_thread_html_a1333a7179253857c1431b82e162272fd"><div class="ttname"><a href="class_thread.html#a1333a7179253857c1431b82e162272fd">Thread::enqueue</a></div><div class="ttdeci">void enqueue(function&lt; void()&gt; f)</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00454">Thread.cpp:454</a></div></div>
 <div class="ttc" id="astruct_button_ptr_html"><div class="ttname"><a href="struct_button_ptr.html">ButtonPtr</a></div><div class="ttdef"><b>Definition:</b> <a href="doxy_helper_8h_source.html#l00028">doxyHelper.h:29</a></div></div>
 <div class="ttc" id="astruct_thread_ptr_html"><div class="ttname"><a href="struct_thread_ptr.html">ThreadPtr</a></div><div class="ttdef"><b>Definition:</b> <a href="doxy_helper_8h_source.html#l00010">doxyHelper.h:11</a></div></div>
 <div class="ttc" id="aclass_thread_html_ab9842f0f585d0688ace9eacd4c54f3c6"><div class="ttname"><a href="class_thread.html#ab9842f0f585d0688ace9eacd4c54f3c6">Thread::IsRunning</a></div><div class="ttdeci">PropertyR&lt; bool &gt; IsRunning</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00078">Thread.h:78</a></div></div>
@@ -932,16 +989,16 @@ Here is the caller graph for this function:</div>
 <div class="ttc" id="aclass_control_html_aafeec8da86346167538e8e13a3212a5a"><div class="ttname"><a href="class_control.html#aafeec8da86346167538e8e13a3212a5a">Control::Caption</a></div><div class="ttdeci">PropertyRW&lt; string &gt; Caption</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00079">Control.h:79</a></div></div>
 <div class="ttc" id="aclass_thread_html_a861d540a447f34bc3c35aef2ab0b11a7"><div class="ttname"><a href="class_thread.html#a861d540a447f34bc3c35aef2ab0b11a7">Thread::Id</a></div><div class="ttdeci">PropertyR&lt; ThreadId &gt; Id</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00080">Thread.h:80</a></div></div>
 <div class="ttc" id="aclass_button_html_a7b5ed34827e9c2bf3b809a3479ebc3d1"><div class="ttname"><a href="class_button.html#a7b5ed34827e9c2bf3b809a3479ebc3d1">Button::Manager</a></div><div class="ttdeci">static Control::ControlManagerImpl&lt; Button &gt; Manager</div><div class="ttdef"><b>Definition:</b> <a href="_button_8h_source.html#l00014">Button.h:14</a></div></div>
-<div class="ttc" id="aclass_thread_html_af0bd96245e2b765b410f8dd2d1aeeb69"><div class="ttname"><a href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69">Thread::processQueue</a></div><div class="ttdeci">void processQueue(size_t maxElements=10)</div><div class="ttdoc">Processes a maximum of the specified number of function objects in the queue.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00373">Thread.cpp:373</a></div></div>
+<div class="ttc" id="aclass_thread_html_af0bd96245e2b765b410f8dd2d1aeeb69"><div class="ttname"><a href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69">Thread::processQueue</a></div><div class="ttdeci">void processQueue(size_t maxElements=10)</div><div class="ttdoc">Arbeitet im laufenden Thread maxElements ab.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00464">Thread.cpp:464</a></div></div>
 <div class="ttc" id="aclass_thread_html_aa12db61580aa52421ea74a7d8f995b80"><div class="ttname"><a href="class_thread.html#aa12db61580aa52421ea74a7d8f995b80">Thread::pImpl_</a></div><div class="ttdeci">unique_ptr&lt; Impl &gt; pImpl_</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00073">Thread.h:72</a></div></div>
 <div class="ttc" id="aclass_thread_html_af5ac4eab873a27acc26f9fa4faf9a255"><div class="ttname"><a href="class_thread.html#af5ac4eab873a27acc26f9fa4faf9a255">Thread::Name</a></div><div class="ttdeci">PropertyR&lt; string &gt; Name</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00081">Thread.h:81</a></div></div>
 <div class="ttc" id="a_thread_8h_html_a2d5453caf8ef899f496e0b680e93e63d"><div class="ttname"><a href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a></div><div class="ttdeci">thread::id ThreadId</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00023">Thread.h:23</a></div></div>
-<div class="ttc" id="astruct_thread_1_1_impl_html_a0164f5b95922ac969d1d81914e5d5eb9"><div class="ttname"><a href="struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9">Thread::Impl::standardLoop</a></div><div class="ttdeci">static void standardLoop(ThreadPtr pThread)</div><div class="ttdoc">The normally used processing loop of a background thread.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00439">Thread.cpp:439</a></div></div>
+<div class="ttc" id="astruct_thread_1_1_impl_html_a0164f5b95922ac969d1d81914e5d5eb9"><div class="ttname"><a href="struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9">Thread::Impl::standardLoop</a></div><div class="ttdeci">static void standardLoop(ThreadPtr pThread)</div><div class="ttdoc">The normally used processing loop of a background thread.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00530">Thread.cpp:530</a></div></div>
 <div class="ttc" id="a_thread_8h_html_a1b4e8efae9fda32d33db1a8341adde73"><div class="ttname"><a href="_thread_8h.html#a1b4e8efae9fda32d33db1a8341adde73">mainThread</a></div><div class="ttdeci">ThreadPtr mainThread</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00039">main.cpp:39</a></div></div>
-<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_aa8b68a1f6a05f54441caf0d9632a28be"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#aa8b68a1f6a05f54441caf0d9632a28be">Thread::ThreadManager::Impl::isDeleted</a></div><div class="ttdeci">static bool isDeleted</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00155">Thread.cpp:155</a></div></div>
+<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_aa8b68a1f6a05f54441caf0d9632a28be"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#aa8b68a1f6a05f54441caf0d9632a28be">Thread::ThreadManager::Impl::isDeleted</a></div><div class="ttdeci">static bool isDeleted</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00246">Thread.cpp:246</a></div></div>
 <div class="ttc" id="amain_8cpp_html_aecae5bbaca8f171c1ff9f549d91d3bdb"><div class="ttname"><a href="main_8cpp.html#aecae5bbaca8f171c1ff9f549d91d3bdb">WM_THREAD</a></div><div class="ttdeci">#define WM_THREAD</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00040">main.cpp:40</a></div></div>
-<div class="ttc" id="aclass_thread_html_adb11ad65376e640d84d47f0394f94f10"><div class="ttname"><a href="class_thread.html#adb11ad65376e640d84d47f0394f94f10">Thread::call</a></div><div class="ttdeci">void call(_Fn &amp;&amp;_Fx, _Args &amp;&amp;... _Ax)</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00056">Thread.h:56</a></div></div>
-<div class="ttc" id="aclass_thread_html_a5a2980b7db2cdd4afe3860d5df6aa94e"><div class="ttname"><a href="class_thread.html#a5a2980b7db2cdd4afe3860d5df6aa94e">Thread::initRunningThread</a></div><div class="ttdeci">void initRunningThread(ThreadId id, function&lt; void()&gt; notify)</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00282">Thread.cpp:282</a></div></div>
+<div class="ttc" id="aclass_thread_html_adb11ad65376e640d84d47f0394f94f10"><div class="ttname"><a href="class_thread.html#adb11ad65376e640d84d47f0394f94f10">Thread::call</a></div><div class="ttdeci">void call(_Fn &amp;&amp;_Fx, _Args &amp;&amp;... _Ax)</div><div class="ttdoc">The code that will be enqued in the threads task queue.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00056">Thread.h:56</a></div></div>
+<div class="ttc" id="aclass_thread_html_a5a2980b7db2cdd4afe3860d5df6aa94e"><div class="ttname"><a href="class_thread.html#a5a2980b7db2cdd4afe3860d5df6aa94e">Thread::initRunningThread</a></div><div class="ttdeci">void initRunningThread(ThreadId id, function&lt; void()&gt; notify)</div><div class="ttdoc">Initialisert ein Thread objekt mit einem bereits laufenden Thread.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00373">Thread.cpp:373</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

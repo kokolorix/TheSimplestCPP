@@ -104,7 +104,7 @@ var sectionId = 'dynsection-5';
 </g>
 <!-- Node5 -->
 <g id="node5" class="node"><title>Node5</title>
-<g id="a_node5"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title=" ">
+<g id="a_node5"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title="The code that will be enqued in the threads task queue.">
 <polygon fill="white" stroke="black" points="434,-0.5 434,-19.5 501,-19.5 501,-0.5 434,-0.5"/>
 <text text-anchor="middle" x="467.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::call</text>
 </a>

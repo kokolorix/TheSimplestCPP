@@ -11,7 +11,7 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-24 303,-24 303,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<g id="a_node1"><a xlink:title="Processes a maximum of the specified number of function objects in the queue.">
+<g id="a_node1"><a xlink:title="Arbeitet im laufenden Thread maxElements ab.">
 <polygon fill="#bfbfbf" stroke="black" points="184,-0.5 184,-19.5 299,-19.5 299,-0.5 184,-0.5"/>
 <text text-anchor="middle" x="241.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::processQueue</text>
 </a>

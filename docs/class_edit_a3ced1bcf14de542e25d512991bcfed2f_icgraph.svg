@@ -187,7 +187,7 @@ var sectionId = 'dynsection-3';
 </g>
 <!-- Node11 -->
 <g id="node11" class="node"><title>Node11</title>
-<g id="a_node11"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="The most normal way to start a new thread.">
+<g id="a_node11"><a xlink:href="class_thread.html#a1f53ee62bd30a7924186ef26150ce262" target="_top" xlink:title="Starts the Thread with Thread::Impl::standardLoop.">
 <polygon fill="white" stroke="black" points="484.5,-0.5 484.5,-19.5 555.5,-19.5 555.5,-0.5 484.5,-0.5"/>
 <text text-anchor="middle" x="520" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>
@@ -200,7 +200,7 @@ var sectionId = 'dynsection-3';
 </g>
 <!-- Node12 -->
 <g id="node12" class="node"><title>Node12</title>
-<g id="a_node12"><a xlink:href="class_thread.html#ada9adb041744058adc9abb1744e86c5d" target="_top" xlink:title=" ">
+<g id="a_node12"><a xlink:href="class_thread.html#ada9adb041744058adc9abb1744e86c5d" target="_top" xlink:title="The code that will be executed, after the new Thread is started.">
 <polygon fill="white" stroke="black" points="339.5,-0.5 339.5,-19.5 410.5,-19.5 410.5,-0.5 339.5,-0.5"/>
 <text text-anchor="middle" x="375" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>

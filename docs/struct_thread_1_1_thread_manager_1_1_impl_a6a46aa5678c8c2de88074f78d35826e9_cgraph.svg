@@ -20,7 +20,7 @@
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
-<g id="a_node2"><a xlink:href="class_thread.html#a4d9d788e98388a3217831a9046709deb" target="_top" xlink:title="Waits for the end of the thread.">
+<g id="a_node2"><a xlink:href="class_thread.html#a4d9d788e98388a3217831a9046709deb" target="_top" xlink:title="Führt den Thread mit dem aktuellen zusammen.">
 <polygon fill="white" stroke="black" points="164,-76.5 164,-95.5 231,-95.5 231,-76.5 164,-76.5"/>
 <text text-anchor="middle" x="197.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::join</text>
 </a>
@@ -33,7 +33,7 @@
 </g>
 <!-- Node3 -->
 <g id="node3" class="node"><title>Node3</title>
-<g id="a_node3"><a xlink:href="class_thread.html#acff52284ec491e188b12a04d087dad43" target="_top" xlink:title="Checks if the std::thread object identifies an active thread of execution. Specifically,...">
+<g id="a_node3"><a xlink:href="class_thread.html#acff52284ec491e188b12a04d087dad43" target="_top" xlink:title="Reports whether the thread can be merged or not.">
 <polygon fill="white" stroke="black" points="155,-38.5 155,-57.5 240,-57.5 240,-38.5 155,-38.5"/>
 <text text-anchor="middle" x="197.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::joinable</text>
 </a>
@@ -46,7 +46,7 @@
 </g>
 <!-- Node4 -->
 <g id="node4" class="node"><title>Node4</title>
-<g id="a_node4"><a xlink:href="class_thread.html#abd50159ecd409936f454c2321f673616" target="_top" xlink:title="Stops a running thread as fast as intended. In longer lasting processing it must be provided,...">
+<g id="a_node4"><a xlink:href="class_thread.html#abd50159ecd409936f454c2321f673616" target="_top" xlink:title="Method to stop the Trhead.">
 <polygon fill="white" stroke="black" points="162,-0.5 162,-19.5 233,-19.5 233,-0.5 162,-0.5"/>
 <text text-anchor="middle" x="197.5" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::stop</text>
 </a>
