@@ -5,6 +5,8 @@ title %~n0 - %cd%
 set path=%ProgramFiles(x86)%\Microsoft Visual Studio\2019\Community\Common7\Tools;%path%
 call VsDevCmd
 call MSBuild TheSimplestWinApp.sln -t:Rebuild -p:Configuration=Release -p:Platform=x64
+set path=%cd%\tools;%path%
+call nircmd shortcut "%cd%\x64\Release\TheSimplestWinApp.exe" "%cd%" "start-app" "" "%cd%\bin\window_gear.ico"
 goto:wait
 
 
