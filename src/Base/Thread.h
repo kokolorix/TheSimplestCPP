@@ -64,7 +64,7 @@ public:
 	void start();
 	void stop();
 
-	void sleep(size_t milliseconds);
+	static void sleep(size_t milliseconds);
 
 	bool joinable();
 	void join();
