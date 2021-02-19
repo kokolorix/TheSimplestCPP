@@ -74,7 +74,7 @@ using namespace std;
     if(!thread1->IsRunning)
         thread1->start();
 
-    thread1->call([thread1]() {
+    thread1->enqueues([thread1]() {
 		DoTheJob();
 	});
  * @endcode
@@ -169,12 +169,12 @@ ThreadPtr mainThread;           //> The main thread instance
 
 /**
  * @name Code injection
- * @brief start and call are very similar in application
+ * @brief start and enqueues are very similar in application
  * @details
  * here you can specify any callable object (function, method, std::function, etc.)
  * with all arguments, which will then be executed in the thread.
  * While start which uses the callable object as the start function of the thread,
- * call enqueues the callable object in the thread's waiting queue
+ * enqueues enqueues the callable object in the thread's waiting queue
  * and an event is fired, which requests the thread to process its queue.
  * 
  * @tparam _Fn the type callable.object 
@@ -196,7 +196,7 @@ ThreadPtr mainThread;           //> The main thread instance
  */
 
 /**
- * @fn void Thread::call(_Fn &&_Fx, _Args &&... _Ax)
+ * @fn void Thread::enqueues(_Fn &&_Fx, _Args &&... _Ax)
  * @brief  The code that will be enqued in the threads task queue
  * @details
  * Threads which are started with the @ref Thread::Impl::standardLoop,
@@ -266,12 +266,13 @@ struct Thread::ThreadManager::Impl
 				thread->join();
 		}
 	}
-	recursive_mutex mutex_;
+	mutable recursive_mutex mutex_;
 	map<ThreadId, weak_ptr<Thread>> idMap_;
 	map<string, weak_ptr<Thread>> nameMap_;
 
 	ThreadPtr getOrCreateThread(const string& name);
-	ThreadPtr getThread(const ThreadId &id);
+	ThreadPtr getThread(const ThreadId &id) const;
+	ThreadPtr getThread(const string &name) const;
 };
 
 /**
@@ -300,14 +301,28 @@ ThreadPtr Thread::ThreadManager::Impl::getOrCreateThread(const string& name)
 /**
  * @copydoc Thread::ThreadManager::operator[](const ThreadId &id) const
  */
-ThreadPtr Thread::ThreadManager::Impl::getThread(const ThreadId &id)
+ThreadPtr Thread::ThreadManager::Impl::getThread(const ThreadId &id) const
 {
 	lock_guard<recursive_mutex> lock(mutex_);
 	auto it = idMap_.find(id);
 	if (it != idMap_.end())
 	{
-		weak_ptr<Thread>& thread = it->second;
+		const weak_ptr<Thread>& thread = it->second;
 		return thread.lock();
+	}
+	return ThreadPtr();
+}
+/**
+ * @copydoc Thread::ThreadManager::find(const string &name)
+ */
+ThreadPtr Thread::ThreadManager::Impl::getThread(const string &name) const
+{
+	lock_guard<recursive_mutex> lock(mutex_);
+	auto it = nameMap_.find(name);
+	if (it != nameMap_.end())
+	{
+		const weak_ptr<Thread>& weakPtr = it->second;
+		return weakPtr.lock();
 	}
 	return ThreadPtr();
 }
@@ -413,11 +428,11 @@ void Thread::start()
  * In longer lasting processing it must be provided, at suitable places
  * to cancel
  * @code {.cpp}
-    thread2->call([thread2]() {
+    thread2->enqueues([thread2]() {
         while(!thread2->IsStopped) // <--- here we checks every loop the IsStopped Property
         {
             ::Sleep(300);
-            mainThread->call([thread2]() {
+            mainThread->enqueues([thread2]() {
                 static int count = 0;
                 string progress[] = {"|","/", "-", "\\" };
                 int size = sizeof(progress) / sizeof(string);
@@ -427,7 +442,7 @@ void Thread::start()
             });
         }
         // If the thread was stopped, we reset the text
-        mainThread->call([](){
+        mainThread->enqueues([](){
              ButtonPtr button = Button::Manager["Start:Button"];
              button->Caption = "Start ...";            
         });
@@ -615,6 +630,7 @@ ThreadPtr Thread::ThreadManager::operator[](const string &name)
 {
 	return pImpl_->getOrCreateThread(name);
 }
+
 /**
  * @brief Returns the Thread object with the resulting ThreadId. If no such thread exists, an empty ThreadPtr is returned. 
  * 
@@ -626,15 +642,24 @@ ThreadPtr Thread::ThreadManager::operator[](const ThreadId &id) const
 	return pImpl_->getThread(id);
 }
 
-//---------------------------------------------------------------------------
+/**
+ * @brief Returns the Thread object with the resulting ThreadId. If no such thread exists, an empty ThreadPtr is returned. 
+ * 
+ * @param name 
+ * @return ThreadPtr 
+ */
 ThreadPtr Thread::ThreadManager::find(const string& name) const
 {
-	return ThreadPtr();
+	return pImpl_->getThread(name);
 }
 
-//---------------------------------------------------------------------------
+/**
+ * @brief Returns the current thread. If no such thread exists, an empty ThreadPtr is returned. 
+ * 
+ * @return ThreadPtr 
+ */
 ThreadPtr Thread::ThreadManager::currentThread() const
 {
-	return ThreadPtr();
+	return pImpl_->getThread(this_thread::get_id());
 }
 
