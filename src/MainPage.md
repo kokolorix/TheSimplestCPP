@@ -12,10 +12,12 @@ constructions in doxygen, c++ and the Win32-Api
 
 ## Entrance points
 
-- main.cpp
-- utils.hpp
-- output.hpp
-- Property.hpp
+### Interfaces
+
+- Serialize
+- Description
+### Classes
+
 - Thread
 - Control
 - Value
@@ -23,9 +25,12 @@ constructions in doxygen, c++ and the Win32-Api
 - Object
 - TestCase
 
-## The App
-![image](screenshot.png)
+### Helpers
 
+- main.cpp
+- utils.hpp
+- output.hpp
+- Property.hpp
 ## Overviews
 
 - [Go to the class list](annotated.html)
@@ -34,9 +39,13 @@ constructions in doxygen, c++ and the Win32-Api
 
 ## External documentations
 
-- [Win32 Api](https://docs.microsoft.com/en-us/windows/win32/api/_winmsg/)
 - [c++ reference](https://en.cppreference.com/w/)
 - [boost documentation](https://www.boost.org/doc/libs/1_72_0/?view=categorized)
+- [Win32 Api](https://docs.microsoft.com/en-us/windows/win32/api/_winmsg/)
 - [doxygen special commands](http://doxygen.nl/manual/commands.html)
 - [graphviz documentation](https://graphviz.org/documentation/)
 - [markdown help](https://commonmark.org/help/)
+
+## The App
+![image](screenshot.png)
+
