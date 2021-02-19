@@ -148,22 +148,22 @@ ThreadPtr mainThread;           //> The main thread instance
 /**@}*/ // end Thread control
 
 /**
- * @name Exisiting threads
- * @brief Methods to intervene in already running threads
+ * @name Inclusion of existing threads
+ * @brief Methods to include already running threads
  */
 /**@{*/ // start Exisiting threads
 /**
  * @fn void Thread::initRunningThread(ThreadId id, function<void()> notify)
- * @brief Initialisert ein Thread objekt mit einem bereits laufenden Thread.
+ * @brief Initializes a thread object with an already running thread.
  * @details
  * The notification function is called when the thread gets new items pushed to its queue
  */
 
 /**
  * @fn void Thread::processQueue(size_t maxElements = 10)
- * @brief Arbeitet im laufenden Thread @c maxElements ab.
+ * @brief Processes @c maxElements in the running thread.
  * @details
- * Nach der Benachrichtigung werden so alle Aufgaben abgearbeitet.
+ * After notification, all tasks are processed in this way.
  */
 /**@}*/ // end Exisiting threads
 
@@ -380,7 +380,7 @@ void Thread::initRunningThread(ThreadId id, function<void()> notify)
  * 
  * @param t 
  */
-void Thread::start(thread &&t)
+void Thread::start_(thread &&t)
 {
 	if (pImpl_->thread_.joinable())
 	{
@@ -404,7 +404,7 @@ void Thread::start()
 {
 	ThreadPtr thisThread = shared_from_this();
 	unique_lock<recursive_mutex> lock(pImpl_->mutex_);
-	start(thread(Impl::standardLoop, thisThread));
+	start_(thread(Impl::standardLoop, thisThread));
 	pImpl_->condition_.wait(lock);
 }
 
@@ -451,7 +451,7 @@ void Thread::stop()
  * 
  * @param f 
  */
-void Thread::enqueue(function<void()> f)
+void Thread::enqueue_(function<void()> f)
 {
 	pImpl_->enqueue(f);
 }
@@ -624,5 +624,17 @@ ThreadPtr Thread::ThreadManager::operator[](const string &name)
 ThreadPtr Thread::ThreadManager::operator[](const ThreadId &id) const
 {
 	return pImpl_->getThread(id);
+}
+
+//---------------------------------------------------------------------------
+ThreadPtr Thread::ThreadManager::find(const string& name) const
+{
+	return ThreadPtr();
+}
+
+//---------------------------------------------------------------------------
+ThreadPtr Thread::ThreadManager::currentThread() const
+{
+	return ThreadPtr();
 }
 

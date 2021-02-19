@@ -145,7 +145,7 @@ void TestCase::writeOutput(const VectorOfstringVectors& outputs)
 	if (outputs.size() > 1) // if 1, no tests were performed
 	{
 		const stringVector& labels = outputs.front();
-		vector<uint32_t> colLengts(labels.size(), 0);
+		vector<size_t> colLengts(labels.size(), 0);
 		for (size_t col = 0; col < labels.size(); ++col)
 		{
 			for (const stringVector& values : outputs)

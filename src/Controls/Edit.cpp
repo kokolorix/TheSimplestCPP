@@ -97,7 +97,7 @@ void Edit::add(const string& line)
    else
    {
       HWND h = hWnd;
-      mainThread->call([h, line]() {
+      mainThread->enqueue([h, line]() {
 		      SendMessageA(h, EM_SETSEL, -1, -1);
 		      SendMessageA(h, EM_REPLACESEL, FALSE, (LPARAM)line.c_str());
          });

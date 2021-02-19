@@ -259,11 +259,11 @@ void OnStartClicked(Button *button)
 
     // Then we send the job to the second worker thread every 3 tenths of a second
     // update the text of the start button
-    thread2->call([thread2]() {
+    thread2->enqueue([thread2]() {
         while(!thread2->IsStopped)
         {
             ::Sleep(300);
-            mainThread->call([thread2]() {
+            mainThread->enqueue([thread2]() {
                 static int count = 0;
                 string progress[] = {"|","/", "-", "\\" };
                 int size = sizeof(progress) / sizeof(string);
@@ -273,7 +273,7 @@ void OnStartClicked(Button *button)
             });
         }
         // If the thread was stopped, we reset the text
-        mainThread->call([](){
+        mainThread->enqueue([](){
              ButtonPtr button = Button::Manager["Start:Button"];
              button->Caption = "Start ...";            
         });
@@ -281,7 +281,7 @@ void OnStartClicked(Button *button)
 
     // The first worker thread gets the job, ten times, every 900 milliseconds, 
     // move the progress bar one step forward
-    thread1->call([thread1,thread2]() {
+    thread1->enqueue([thread1,thread2]() {
                
         // This is the real job: Move the bar one to the right ten times :-)
         for(int i = 0; i < 10 && !thread1->IsStopped; ++i)
@@ -297,7 +297,7 @@ void OnStartClicked(Button *button)
 		  }
 
         // if the job is done, we stop the threads from the main-thread
-        mainThread->call([thread1,thread2](){
+        mainThread->enqueue([thread1,thread2](){
             thread2->stop();
             thread1->stop();
         });
@@ -338,7 +338,7 @@ void OnThreadTestClicked(Button* button)
 	{
 		thread->start();
 		LOG(__FUNCTION__);
-		thread->call([thread, output]() {
+		thread->enqueue([thread, output]() {
 			;
 			for (; thread->IsRunning;)
 			{
@@ -358,7 +358,7 @@ void OnThreadTestClicked(Button* button)
 				string line = os.str();
 				::Sleep(wait);
 				LOG(__FUNCTION__);
-				mainThread->call([output, line]() {
+				mainThread->enqueue([output, line]() {
 					output->add(line);
 					});
 			}
