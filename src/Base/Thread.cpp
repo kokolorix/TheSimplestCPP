@@ -343,7 +343,8 @@ ThreadPtr mainThread;           //> The main thread instance
  * Threads which are started with the @ref Thread::Impl::standardLoop,
  * can thus accept new tasks. The tasks are added to the queue 
  * and processed as fast as possible
- */
+ * @copydoc hidden_enqueue_sample
+*/
 
 /**@}*/ // end Code injection
 
