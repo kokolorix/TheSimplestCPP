@@ -431,7 +431,7 @@ Here is the caller graph for this function:</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordflow">if</span> (outputs.size() &gt; 1) <span class="comment">// if 1, no tests were performed</span></div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    {</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">const</span> <a class="code" href="_test_case_8cpp.html#a5fbc21d6dd1dcac185e2adf9acfe147b">stringVector</a>&amp; labels = outputs.front();</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        vector&lt;uint32_t&gt; colLengts(labels.size(), 0);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        vector&lt;size_t&gt; colLengts(labels.size(), 0);</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> col = 0; col &lt; labels.size(); ++col)</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        {</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">const</span> <a class="code" href="_test_case_8cpp.html#a5fbc21d6dd1dcac185e2adf9acfe147b">stringVector</a>&amp; values : outputs)</div>

@@ -46,7 +46,7 @@ if (edges && edges.length) {
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 652;
+var viewWidth = 679;
 var viewHeight = 104;
 var sectionId = 'dynsection-9';
 </script>
@@ -54,12 +54,12 @@ var sectionId = 'dynsection-9';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>Thread::start</title>
-<polygon fill="white" stroke="none" points="-4,4 -4,-100 648,-100 648,4 -4,4"/>
+<polygon fill="white" stroke="none" points="-4,4 -4,-100 675,-100 675,4 -4,4"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
 <g id="a_node1"><a xlink:title="Starts the Thread with Thread::Impl::standardLoop.">
-<polygon fill="#bfbfbf" stroke="black" points="0,-38.5 0,-57.5 71,-57.5 71,-38.5 0,-38.5"/>
-<text text-anchor="middle" x="35.5" y="-45.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
+<polygon fill="#bfbfbf" stroke="black" points="0,-19.5 0,-38.5 71,-38.5 71,-19.5 0,-19.5"/>
+<text text-anchor="middle" x="35.5" y="-26.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start</text>
 </a>
 </g>
 </g>
@@ -73,8 +73,21 @@ var sectionId = 'dynsection-9';
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge"><title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M71.2979,-48C79.2176,-48 87.9357,-48 96.8359,-48"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="96.9289,-51.5001 106.929,-48 96.9288,-44.5001 96.9289,-51.5001"/>
+<path fill="none" stroke="midnightblue" d="M71.2979,-33.8437C79.2176,-34.946 87.9357,-36.1596 96.8359,-37.3984"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="96.5418,-40.8911 106.929,-38.8033 97.5069,-33.958 96.5418,-40.8911"/>
+</g>
+<!-- Node8 -->
+<g id="node8" class="node"><title>Node8</title>
+<g id="a_node8"><a xlink:href="class_thread.html#af1a12dd97c3644116d394f655ca63c86" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="135.5,-0.5 135.5,-19.5 212.5,-19.5 212.5,-0.5 135.5,-0.5"/>
+<text text-anchor="middle" x="174" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::start_</text>
+</a>
+</g>
+</g>
+<!-- Node1&#45;&gt;Node8 -->
+<g id="edge7" class="edge"><title>Node1&#45;&gt;Node8</title>
+<path fill="none" stroke="midnightblue" d="M71.2979,-24.1563C87.673,-21.877 107.461,-19.1226 125.214,-16.6515"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="125.968,-20.0804 135.39,-15.235 125.003,-13.1472 125.968,-20.0804"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node"><title>Node3</title>
@@ -117,29 +130,29 @@ var sectionId = 'dynsection-9';
 </g>
 <!-- Node4 -->
 <g id="node4" class="node"><title>Node4</title>
-<g id="a_node4"><a xlink:href="class_thread.html#adb11ad65376e640d84d47f0394f94f10" target="_top" xlink:title="The code that will be enqued in the threads task queue.">
-<polygon fill="white" stroke="black" points="452,-76.5 452,-95.5 519,-95.5 519,-76.5 452,-76.5"/>
-<text text-anchor="middle" x="485.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::call</text>
+<g id="a_node4"><a xlink:href="class_thread.html#abf7db5b09bd25b345e80577f71321ee9" target="_top" xlink:title="The code that will be enqued in the threads task queue.">
+<polygon fill="white" stroke="black" points="452,-76.5 452,-95.5 541,-95.5 541,-76.5 452,-76.5"/>
+<text text-anchor="middle" x="496.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::enqueue</text>
 </a>
 </g>
 </g>
 <!-- Node3&#45;&gt;Node4 -->
 <g id="edge3" class="edge"><title>Node3&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M374.567,-86C393.685,-86 419.702,-86 441.626,-86"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="441.691,-89.5001 451.691,-86 441.69,-82.5001 441.691,-89.5001"/>
+<path fill="none" stroke="midnightblue" d="M374.645,-86C393.388,-86 418.944,-86 441.728,-86"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="441.967,-89.5001 451.967,-86 441.967,-82.5001 441.967,-89.5001"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node"><title>Node5</title>
-<g id="a_node5"><a xlink:href="class_thread.html#a1333a7179253857c1431b82e162272fd" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="555,-76.5 555,-95.5 644,-95.5 644,-76.5 555,-76.5"/>
-<text text-anchor="middle" x="599.5" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::enqueue</text>
+<g id="a_node5"><a xlink:href="class_thread.html#a3ee4bd6db78554c9ea75cf242b8ae273" target="_top" xlink:title="push the functor in the queue">
+<polygon fill="white" stroke="black" points="577,-76.5 577,-95.5 671,-95.5 671,-76.5 577,-76.5"/>
+<text text-anchor="middle" x="624" y="-83.5" font-family="Helvetica,sans-Serif" font-size="10.00">Thread::enqueue_</text>
 </a>
 </g>
 </g>
 <!-- Node4&#45;&gt;Node5 -->
 <g id="edge4" class="edge"><title>Node4&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M519.196,-86C527.178,-86 535.929,-86 544.612,-86"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="544.724,-89.5001 554.724,-86 544.724,-82.5001 544.724,-89.5001"/>
+<path fill="none" stroke="midnightblue" d="M541.042,-86C549.387,-86 558.233,-86 566.908,-86"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="566.973,-89.5001 576.973,-86 566.973,-82.5001 566.973,-89.5001"/>
 </g>
 </g>
 </svg>

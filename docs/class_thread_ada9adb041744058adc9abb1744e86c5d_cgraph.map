@@ -1,10 +1,4 @@
 <map id="Thread::start" name="Thread::start">
-<area shape="rect" id="node1" title="The code that will be executed, after the new Thread is started." alt="" coords="5,56,100,83"/>
-<area shape="rect" id="node2" href="$class_thread.html#a1f53ee62bd30a7924186ef26150ce262" title="Starts the Thread with Thread::Impl::standardLoop." alt="" coords="148,56,243,83"/>
-<area shape="rect" id="node3" href="$struct_thread_1_1_impl.html#a0164f5b95922ac969d1d81914e5d5eb9" title="The normally used processing loop of a background thread." alt="" coords="291,56,469,83"/>
-<area shape="rect" id="node4" href="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f" title=" " alt="" coords="573,5,647,32"/>
-<area shape="rect" id="node7" href="$struct_thread_1_1_impl.html#ae467f41841d4236274bf360f470ec775" title="process the queue of functors, usually called form notify&#45;functor" alt="" coords="517,56,703,83"/>
-<area shape="rect" id="node8" href="$_thread_8cpp.html#a1b6cdfcdd75b61856b37cf13deae9334" title=" " alt="" coords="553,107,667,133"/>
-<area shape="rect" id="node5" href="$class_thread.html#adb11ad65376e640d84d47f0394f94f10" title="The code that will be enqued in the threads task queue." alt="" coords="751,5,840,32"/>
-<area shape="rect" id="node6" href="$class_thread.html#a1333a7179253857c1431b82e162272fd" title=" " alt="" coords="888,5,1007,32"/>
+<area shape="rect" id="node1" title="The code that will be executed, after the new Thread is started." alt="" coords="5,5,100,32"/>
+<area shape="rect" id="node2" href="$class_thread.html#af1a12dd97c3644116d394f655ca63c86" title=" " alt="" coords="148,5,251,32"/>
 </map>

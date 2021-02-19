@@ -27,10 +27,14 @@ var NAVTREE =
   [ "The Simpelst Windows App", "index.html", [
     [ "Documentation", "index.html", [
       [ "Short description", "index.html#autotoc_md1", null ],
-      [ "Entrance points", "index.html#autotoc_md2", null ],
-      [ "The App", "index.html#autotoc_md3", null ],
-      [ "Overviews", "index.html#autotoc_md4", null ],
-      [ "External documentations", "index.html#autotoc_md5", null ]
+      [ "Entrance points", "index.html#autotoc_md2", [
+        [ "Interfaces", "index.html#autotoc_md3", null ],
+        [ "Classes", "index.html#autotoc_md4", null ],
+        [ "Helpers", "index.html#autotoc_md5", null ]
+      ] ],
+      [ "Overviews", "index.html#autotoc_md6", null ],
+      [ "External documentations", "index.html#autotoc_md7", null ],
+      [ "The App", "index.html#autotoc_md8", null ]
     ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
@@ -71,8 +75,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_base_tests_8cpp.html",
-"dir_3aec98192bf1179f5a0cb056cdd4aba6.html",
-"utils_8hpp_source.html"
+"dir_00ea2a5550464bf32f448b3dc22902e9.html",
+"utils_8hpp.html#a1735f5d615cad7eccda02cb1747553ff"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

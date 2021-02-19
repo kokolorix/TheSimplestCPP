@@ -1,4 +1,4 @@
 <map id="Thread::initRunningThread" name="Thread::initRunningThread">
-<area shape="rect" id="node1" title="Initialisert ein Thread objekt mit einem bereits laufenden Thread." alt="" coords="127,5,299,32"/>
+<area shape="rect" id="node1" title="Initializes a thread object with an already running thread." alt="" coords="127,5,299,32"/>
 <area shape="rect" id="node2" href="$main_8cpp.html#a946cd7d17bf6760d82ded70909de9a6d" title="The beginning of everything." alt="" coords="5,5,79,32"/>
 </map>

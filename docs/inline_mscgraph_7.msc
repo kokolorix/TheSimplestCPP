@@ -1,0 +1,16 @@
+msc {
+hscale="0.2", arcgradient="2";
+mt[label="mainThread", linecolor="fuchsia"], t1[label="thread1", linecolor="orange"];
+|||;
+mt box mt[label="main", textbgcolour="fuchsia"];
+t1 box t1[label="thread1", textbgcolour="orange"];
+
+---;
+
+mt =>> t1 [label="start()", URL="\ref start", linecolor="fuchsia"];
+t1 => t1 [label="DoTheJob()", textcolor="orange", linecolor="violet"];
+
+
+---;
+mt <<= t1 [label="join()", URL="\ref join", linecolor="orange"];
+}

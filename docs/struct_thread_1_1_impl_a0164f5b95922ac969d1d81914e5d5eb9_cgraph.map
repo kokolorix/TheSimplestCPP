@@ -3,6 +3,6 @@
 <area shape="rect" id="node2" href="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f" title=" " alt="" coords="287,5,362,32"/>
 <area shape="rect" id="node5" href="$struct_thread_1_1_impl.html#ae467f41841d4236274bf360f470ec775" title="process the queue of functors, usually called form notify&#45;functor" alt="" coords="232,56,417,83"/>
 <area shape="rect" id="node6" href="$_thread_8cpp.html#a1b6cdfcdd75b61856b37cf13deae9334" title=" " alt="" coords="267,107,382,133"/>
-<area shape="rect" id="node3" href="$class_thread.html#adb11ad65376e640d84d47f0394f94f10" title="The code that will be enqued in the threads task queue." alt="" coords="465,5,555,32"/>
-<area shape="rect" id="node4" href="$class_thread.html#a1333a7179253857c1431b82e162272fd" title=" " alt="" coords="603,5,721,32"/>
+<area shape="rect" id="node3" href="$class_thread.html#abf7db5b09bd25b345e80577f71321ee9" title="The code that will be enqued in the threads task queue." alt="" coords="465,5,584,32"/>
+<area shape="rect" id="node4" href="$class_thread.html#a3ee4bd6db78554c9ea75cf242b8ae273" title="push the functor in the queue" alt="" coords="632,5,757,32"/>
 </map>

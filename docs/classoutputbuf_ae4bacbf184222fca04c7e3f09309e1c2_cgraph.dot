@@ -11,7 +11,7 @@ digraph "outputbuf::flushMsg"
   Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
   Node3 [label="Edit::add",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f",tooltip=" "];
   Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node4 [label="Thread::call",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#adb11ad65376e640d84d47f0394f94f10",tooltip="The code that will be enqued in the threads task queue."];
+  Node4 [label="Thread::enqueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#abf7db5b09bd25b345e80577f71321ee9",tooltip="The code that will be enqued in the threads task queue."];
   Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
-  Node5 [label="Thread::enqueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#a1333a7179253857c1431b82e162272fd",tooltip=" "];
+  Node5 [label="Thread::enqueue_",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#a3ee4bd6db78554c9ea75cf242b8ae273",tooltip="push the functor in the queue"];
 }

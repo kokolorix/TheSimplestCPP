@@ -1,5 +1,5 @@
 <map id="Edit::add" name="Edit::add">
 <area shape="rect" id="node1" title=" " alt="" coords="5,5,80,32"/>
-<area shape="rect" id="node2" href="$class_thread.html#adb11ad65376e640d84d47f0394f94f10" title="The code that will be enqued in the threads task queue." alt="" coords="128,5,217,32"/>
-<area shape="rect" id="node3" href="$class_thread.html#a1333a7179253857c1431b82e162272fd" title=" " alt="" coords="265,5,384,32"/>
+<area shape="rect" id="node2" href="$class_thread.html#abf7db5b09bd25b345e80577f71321ee9" title="The code that will be enqued in the threads task queue." alt="" coords="128,5,247,32"/>
+<area shape="rect" id="node3" href="$class_thread.html#a3ee4bd6db78554c9ea75cf242b8ae273" title="push the functor in the queue" alt="" coords="295,5,420,32"/>
 </map>
