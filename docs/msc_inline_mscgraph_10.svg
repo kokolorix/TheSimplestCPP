@@ -1,8 +1,8 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1"
- width="160px" height="302px"
- viewBox="0 0 160 302"
+ width="160px" height="231px"
+ viewBox="0 0 160 231"
  xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges"
  stroke-width="1" text-rendering="geometricPrecision">
 <polygon fill="white" points="6,7 72,7 72,16 6,16"/>
@@ -39,57 +39,37 @@ main
 <text x="99" y="87" textLength="41" font-family="Helvetica" font-size="12" fill="black">
 thread1
 </text>
-<line x1="40" y1="101" x2="40" y2="131" stroke="#FF00FF"/>
-<line x1="120" y1="101" x2="120" y2="131" stroke="#FFB000"/>
-<line x1="40" y1="112" x2="120" y2="114" stroke="#FF00FF"/>
-<line x1="120" y1="114" x2="110" y2="120" stroke="#FF00FF"/>
-<line x1="110" y1="108" x2="120" y2="114" stroke="#FF00FF"/>
-<polygon fill="white" points="63,103 96,103 96,112 63,112"/>
-<text x="64" y="112" textLength="31" font-family="Helvetica" font-size="12" fill="blue">
+<line x1="40" y1="101" x2="40" y2="120" stroke="#FF00FF"/>
+<line x1="120" y1="101" x2="120" y2="120" stroke="#FFB000"/>
+<line x1="20" y1="106" x2="140" y2="106" stroke="black" stroke-dasharray="2,2"/>
+<line x1="40" y1="120" x2="40" y2="150" stroke="#FF00FF"/>
+<line x1="120" y1="120" x2="120" y2="150" stroke="#FFB000"/>
+<line x1="40" y1="131" x2="120" y2="133" stroke="#FF00FF"/>
+<line x1="120" y1="133" x2="110" y2="139" stroke="#FF00FF"/>
+<line x1="110" y1="127" x2="120" y2="133" stroke="#FF00FF"/>
+<polygon fill="white" points="63,122 96,122 96,131 63,131"/>
+<text x="64" y="131" textLength="31" font-family="Helvetica" font-size="12" fill="blue">
 start()
 </text>
-<line x1="40" y1="131" x2="40" y2="161" stroke="#FF00FF"/>
-<line x1="120" y1="131" x2="120" y2="161" stroke="#FFB000"/>
-<path d="M 120 136 A40,6 0 0,1 120,148" stroke="#D02090" fill="none"/><polygon fill="#D02090" points="120,148 130,154 130,142"/>
-<polygon fill="white" points="61,133 118,133 118,142 61,142"/>
-<text x="62" y="142" textLength="55" font-family="Helvetica" font-size="12" fill="#FFB000">
-working ...
+<line x1="40" y1="150" x2="40" y2="180" stroke="#FF00FF"/>
+<line x1="120" y1="150" x2="120" y2="180" stroke="#FFB000"/>
+<path d="M 120 155 A40,6 0 0,1 120,167" stroke="#D02090" fill="none"/><polygon fill="#D02090" points="120,167 130,173 130,161"/>
+<polygon fill="white" points="53,152 118,152 118,161 53,161"/>
+<text x="54" y="161" textLength="63" font-family="Helvetica" font-size="12" fill="#FFB000">
+DoTheJob()
 </text>
-<line x1="40" y1="161" x2="40" y2="191" stroke="#FF00FF"/>
-<line x1="120" y1="161" x2="120" y2="191" stroke="#FFB000"/>
-<path d="M 120 166 A40,6 0 0,1 120,178" stroke="#D02090" fill="none"/><polygon fill="#D02090" points="120,178 130,184 130,172"/>
-<polygon fill="white" points="61,163 118,163 118,172 61,172"/>
-<text x="62" y="172" textLength="55" font-family="Helvetica" font-size="12" fill="#FFB000">
-working ...
-</text>
-<line x1="40" y1="191" x2="40" y2="210" stroke="#FF00FF"/>
-<line x1="120" y1="191" x2="120" y2="210" stroke="#FFB000"/>
-<line x1="20" y1="196" x2="140" y2="196" stroke="black" stroke-dasharray="2,2"/>
-<line x1="40" y1="210" x2="40" y2="240" stroke="#FF00FF"/>
-<line x1="120" y1="210" x2="120" y2="240" stroke="#FFB000"/>
-<line x1="40" y1="221" x2="120" y2="223" stroke="#FF00FF"/>
-<line x1="120" y1="223" x2="110" y2="229" stroke="#FF00FF"/>
-<line x1="110" y1="217" x2="120" y2="223" stroke="#FF00FF"/>
-<polygon fill="white" points="63,212 96,212 96,221 63,221"/>
-<text x="64" y="221" textLength="31" font-family="Helvetica" font-size="12" fill="blue">
-stop()
-</text>
-<line x1="40" y1="240" x2="40" y2="270" stroke="#FF00FF"/>
-<line x1="120" y1="240" x2="120" y2="270" stroke="#FFB000"/>
-<path d="M 120 245 A40,6 0 0,1 120,257" stroke="#D02090" fill="none"/><polygon fill="#D02090" points="120,257 130,263 130,251"/>
-<polygon fill="white" points="61,242 118,242 118,251 61,251"/>
-<text x="62" y="251" textLength="55" font-family="Helvetica" font-size="12" fill="#FFB000">
-working ...
-</text>
-<line x1="40" y1="270" x2="40" y2="300" stroke="#FF00FF"/>
-<line x1="120" y1="270" x2="120" y2="300" stroke="#FFB000"/>
-<line x1="120" y1="281" x2="40" y2="283" stroke="#FFB000"/>
-<line x1="40" y1="283" x2="50" y2="289" stroke="#FFB000"/>
-<line x1="40" y1="283" x2="50" y2="277" stroke="#FFB000"/>
-<polygon fill="white" points="65,272 94,272 94,281 65,281"/>
-<text x="66" y="281" textLength="27" font-family="Helvetica" font-size="12" fill="blue">
+<line x1="40" y1="180" x2="40" y2="199" stroke="#FF00FF"/>
+<line x1="120" y1="180" x2="120" y2="199" stroke="#FFB000"/>
+<line x1="20" y1="185" x2="140" y2="185" stroke="black" stroke-dasharray="2,2"/>
+<line x1="40" y1="199" x2="40" y2="229" stroke="#FF00FF"/>
+<line x1="120" y1="199" x2="120" y2="229" stroke="#FFB000"/>
+<line x1="120" y1="210" x2="40" y2="212" stroke="#FFB000"/>
+<line x1="40" y1="212" x2="50" y2="218" stroke="#FFB000"/>
+<line x1="40" y1="212" x2="50" y2="206" stroke="#FFB000"/>
+<polygon fill="white" points="65,201 94,201 94,210 65,210"/>
+<text x="66" y="210" textLength="27" font-family="Helvetica" font-size="12" fill="blue">
 join()
 </text>
-<line x1="40" y1="292" x2="40" y2="302" stroke="#FF00FF"/>
-<line x1="120" y1="292" x2="120" y2="302" stroke="#FFB000"/>
+<line x1="40" y1="221" x2="40" y2="231" stroke="#FF00FF"/>
+<line x1="120" y1="221" x2="120" y2="231" stroke="#FFB000"/>
 </svg>

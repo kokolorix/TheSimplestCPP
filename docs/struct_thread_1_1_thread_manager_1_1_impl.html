@@ -132,7 +132,7 @@ Static Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The implementation of the thread manager. </p>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00385">385</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00386">386</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a6a46aa5678c8c2de88074f78d35826e9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6a46aa5678c8c2de88074f78d35826e9">&#9670;&nbsp;</a></span>~Impl()</h2>
@@ -159,30 +159,30 @@ Static Public Attributes</h2></td></tr>
 
 <p>&gt;An helper construct to prevent the application from crashing on exit. </p>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00388">388</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;    {</div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        <span class="comment">// If the globally stored main thread is released on termination, the manager may already be cleared</span></div>
-<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#aa8b68a1f6a05f54441caf0d9632a28be">isDeleted</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        std::vector&lt;weak_ptr&lt;Thread&gt;&gt; threads;</div>
-<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        <span class="keywordflow">for</span> (map&lt;<a class="code" href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a>, weak_ptr&lt;Thread&gt;&gt;::value_type vt : <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a7775f9014a859635b7a72ddf6c3c4117">idMap_</a>)</div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;            threads.push_back(vt.second);</div>
-<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160; </div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <span class="keywordflow">for</span> ( weak_ptr&lt;Thread&gt; twp : threads)</div>
-<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        {</div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;            <a class="code" href="struct_thread_ptr.html">ThreadPtr</a> thread = twp.lock(); </div>
-<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;            <span class="keywordflow">if</span> (thread)</div>
-<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                thread-&gt;<a class="code" href="class_thread.html#abd50159ecd409936f454c2321f673616">stop</a>();</div>
-<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;        }</div>
-<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        this_thread::yield();</div>
-<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        <span class="keywordflow">for</span> ( weak_ptr&lt;Thread&gt; twp : threads)</div>
-<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        {</div>
-<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;            <a class="code" href="struct_thread_ptr.html">ThreadPtr</a> thread = twp.lock(); </div>
-<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            <span class="keywordflow">if</span> (thread &amp;&amp; thread-&gt;<a class="code" href="class_thread.html#acff52284ec491e188b12a04d087dad43">joinable</a>())</div>
-<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;                thread-&gt;<a class="code" href="class_thread.html#a4d9d788e98388a3217831a9046709deb">join</a>();</div>
-<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;        }</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    }</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00389">389</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;    {</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        <span class="comment">// If the globally stored main thread is released on termination, the manager may already be cleared</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#aa8b68a1f6a05f54441caf0d9632a28be">isDeleted</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        std::vector&lt;weak_ptr&lt;Thread&gt;&gt; threads;</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        <span class="keywordflow">for</span> (map&lt;<a class="code" href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a>, weak_ptr&lt;Thread&gt;&gt;::value_type vt : <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a7775f9014a859635b7a72ddf6c3c4117">idMap_</a>)</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;            threads.push_back(vt.second);</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160; </div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        <span class="keywordflow">for</span> ( weak_ptr&lt;Thread&gt; twp : threads)</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        {</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;            <a class="code" href="struct_thread_ptr.html">ThreadPtr</a> thread = twp.lock(); </div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;            <span class="keywordflow">if</span> (thread)</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;                thread-&gt;<a class="code" href="class_thread.html#abd50159ecd409936f454c2321f673616">stop</a>();</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;        this_thread::yield();</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;        <span class="keywordflow">for</span> ( weak_ptr&lt;Thread&gt; twp : threads)</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;        {</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;            <a class="code" href="struct_thread_ptr.html">ThreadPtr</a> thread = twp.lock(); </div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;            <span class="keywordflow">if</span> (thread &amp;&amp; thread-&gt;<a class="code" href="class_thread.html#acff52284ec491e188b12a04d087dad43">joinable</a>())</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;                thread-&gt;<a class="code" href="class_thread.html#a4d9d788e98388a3217831a9046709deb">join</a>();</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;        }</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00626">Thread::join()</a>, <a class="el" href="_thread_8cpp_source.html#l00617">Thread::joinable()</a>, and <a class="el" href="_thread_8cpp_source.html#l00567">Thread::stop()</a>.</p>
+<p class="reference">References <a class="el" href="_thread_8cpp_source.html#l00627">Thread::join()</a>, <a class="el" href="_thread_8cpp_source.html#l00618">Thread::joinable()</a>, and <a class="el" href="_thread_8cpp_source.html#l00568">Thread::stop()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -217,25 +217,25 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_thread_ptr.html">ThreadPtr</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00422">422</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;{</div>
-<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;    lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a0bb3e00cca1d594929bc59087705e826">mutex_</a>);</div>
-<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    <a class="code" href="struct_thread_ptr.html">ThreadPtr</a> threadPtr;</div>
-<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <span class="keyword">auto</span> res = <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a1d9cb6e2c861bf451f405c0afcdb6b13">nameMap_</a>.insert(make_pair(name, threadPtr));</div>
-<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    <span class="keywordflow">if</span> (res.second)</div>
-<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    {</div>
-<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;        weak_ptr&lt;Thread&gt;&amp; weakPtr = res.first-&gt;second;</div>
-<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        threadPtr = <a class="code" href="_thread_8h.html#ae7ce2ce5ee85a8e3fd881358301b8242">ThreadPtr</a>(<span class="keyword">new</span> <a class="code" href="struct_thread_1_1_thread_manager.html#adbc148eaddd341d7ae4d07c9e9e33bfd">Thread</a>(name));</div>
-<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        weakPtr = threadPtr;</div>
-<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;    }</div>
-<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    {</div>
-<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;        weak_ptr&lt;Thread&gt;&amp; weakPtr = res.first-&gt;second;</div>
-<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        threadPtr = weakPtr.lock();</div>
-<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;    }</div>
-<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160; </div>
-<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    <span class="keywordflow">return</span> threadPtr;</div>
-<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00423">423</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;{</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a0bb3e00cca1d594929bc59087705e826">mutex_</a>);</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;    <a class="code" href="struct_thread_ptr.html">ThreadPtr</a> threadPtr;</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;    <span class="keyword">auto</span> res = <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a1d9cb6e2c861bf451f405c0afcdb6b13">nameMap_</a>.insert(make_pair(name, threadPtr));</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;    <span class="keywordflow">if</span> (res.second)</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    {</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;        weak_ptr&lt;Thread&gt;&amp; weakPtr = res.first-&gt;second;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;        threadPtr = <a class="code" href="_thread_8h.html#ae7ce2ce5ee85a8e3fd881358301b8242">ThreadPtr</a>(<span class="keyword">new</span> <a class="code" href="struct_thread_1_1_thread_manager.html#adbc148eaddd341d7ae4d07c9e9e33bfd">Thread</a>(name));</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;        weakPtr = threadPtr;</div>
+<div class="line"><a name="l00433"></a><span class="lineno">  433</span>&#160;    }</div>
+<div class="line"><a name="l00434"></a><span class="lineno">  434</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00435"></a><span class="lineno">  435</span>&#160;    {</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;        weak_ptr&lt;Thread&gt;&amp; weakPtr = res.first-&gt;second;</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160;        threadPtr = weakPtr.lock();</div>
+<div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;    }</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160; </div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    <span class="keywordflow">return</span> threadPtr;</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -264,17 +264,17 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_thread_ptr.html">ThreadPtr</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00459">459</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160;{</div>
-<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a0bb3e00cca1d594929bc59087705e826">mutex_</a>);</div>
-<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    <span class="keyword">auto</span> it = <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a1d9cb6e2c861bf451f405c0afcdb6b13">nameMap_</a>.find(name);</div>
-<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="keywordflow">if</span> (it != <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a1d9cb6e2c861bf451f405c0afcdb6b13">nameMap_</a>.end())</div>
-<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    {</div>
-<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        <span class="keyword">const</span> weak_ptr&lt;Thread&gt;&amp; weakPtr = it-&gt;second;</div>
-<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        <span class="keywordflow">return</span> weakPtr.lock();</div>
-<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    }</div>
-<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="_thread_8h.html#ae7ce2ce5ee85a8e3fd881358301b8242">ThreadPtr</a>();</div>
-<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00460">460</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;{</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;    lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a0bb3e00cca1d594929bc59087705e826">mutex_</a>);</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="keyword">auto</span> it = <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a1d9cb6e2c861bf451f405c0afcdb6b13">nameMap_</a>.find(name);</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    <span class="keywordflow">if</span> (it != <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a1d9cb6e2c861bf451f405c0afcdb6b13">nameMap_</a>.end())</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;    {</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        <span class="keyword">const</span> weak_ptr&lt;Thread&gt;&amp; weakPtr = it-&gt;second;</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;        <span class="keywordflow">return</span> weakPtr.lock();</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    }</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="_thread_8h.html#ae7ce2ce5ee85a8e3fd881358301b8242">ThreadPtr</a>();</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -303,17 +303,17 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_thread_ptr.html">ThreadPtr</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00445">445</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;{</div>
-<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a0bb3e00cca1d594929bc59087705e826">mutex_</a>);</div>
-<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    <span class="keyword">auto</span> it = <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a7775f9014a859635b7a72ddf6c3c4117">idMap_</a>.find(<span class="keywordtype">id</span>);</div>
-<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="keywordflow">if</span> (it != <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a7775f9014a859635b7a72ddf6c3c4117">idMap_</a>.end())</div>
-<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    {</div>
-<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;        <span class="keyword">const</span> weak_ptr&lt;Thread&gt;&amp; thread = it-&gt;second;</div>
-<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;        <span class="keywordflow">return</span> thread.lock();</div>
-<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    }</div>
-<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="_thread_8h.html#ae7ce2ce5ee85a8e3fd881358301b8242">ThreadPtr</a>();</div>
-<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00446">446</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;{</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;    lock_guard&lt;recursive_mutex&gt; lock(<a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a0bb3e00cca1d594929bc59087705e826">mutex_</a>);</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;    <span class="keyword">auto</span> it = <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a7775f9014a859635b7a72ddf6c3c4117">idMap_</a>.find(<span class="keywordtype">id</span>);</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;    <span class="keywordflow">if</span> (it != <a class="code" href="struct_thread_1_1_thread_manager_1_1_impl.html#a7775f9014a859635b7a72ddf6c3c4117">idMap_</a>.end())</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;    {</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;        <span class="keyword">const</span> weak_ptr&lt;Thread&gt;&amp; thread = it-&gt;second;</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;        <span class="keywordflow">return</span> thread.lock();</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;    }</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="_thread_8h.html#ae7ce2ce5ee85a8e3fd881358301b8242">ThreadPtr</a>();</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -330,7 +330,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00411">411</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00412">412</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -354,9 +354,9 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00387">387</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00388">388</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00497">Thread::~Thread()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_thread_8cpp_source.html#l00498">Thread::~Thread()</a>.</p>
 
 </div>
 </div>
@@ -380,7 +380,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00410">410</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00411">411</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -396,7 +396,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00412">412</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_thread_8cpp_source.html#l00413">413</a> of file <a class="el" href="_thread_8cpp_source.html">Thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -405,17 +405,17 @@ Here is the call graph for this function:</div>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_a0bb3e00cca1d594929bc59087705e826"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#a0bb3e00cca1d594929bc59087705e826">Thread::ThreadManager::Impl::mutex_</a></div><div class="ttdeci">recursive_mutex mutex_</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00410">Thread.cpp:410</a></div></div>
+<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_a0bb3e00cca1d594929bc59087705e826"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#a0bb3e00cca1d594929bc59087705e826">Thread::ThreadManager::Impl::mutex_</a></div><div class="ttdeci">recursive_mutex mutex_</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00411">Thread.cpp:411</a></div></div>
 <div class="ttc" id="astruct_thread_ptr_html"><div class="ttname"><a href="struct_thread_ptr.html">ThreadPtr</a></div><div class="ttdef"><b>Definition:</b> <a href="doxy_helper_8h_source.html#l00010">doxyHelper.h:11</a></div></div>
 <div class="ttc" id="a_thread_8h_html_ae7ce2ce5ee85a8e3fd881358301b8242"><div class="ttname"><a href="_thread_8h.html#ae7ce2ce5ee85a8e3fd881358301b8242">ThreadPtr</a></div><div class="ttdeci">shared_ptr&lt; Thread &gt; ThreadPtr</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00022">Thread.h:22</a></div></div>
-<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_a1d9cb6e2c861bf451f405c0afcdb6b13"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#a1d9cb6e2c861bf451f405c0afcdb6b13">Thread::ThreadManager::Impl::nameMap_</a></div><div class="ttdeci">map&lt; string, weak_ptr&lt; Thread &gt; &gt; nameMap_</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00412">Thread.cpp:412</a></div></div>
+<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_a1d9cb6e2c861bf451f405c0afcdb6b13"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#a1d9cb6e2c861bf451f405c0afcdb6b13">Thread::ThreadManager::Impl::nameMap_</a></div><div class="ttdeci">map&lt; string, weak_ptr&lt; Thread &gt; &gt; nameMap_</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00413">Thread.cpp:413</a></div></div>
 <div class="ttc" id="astruct_thread_1_1_thread_manager_html_adbc148eaddd341d7ae4d07c9e9e33bfd"><div class="ttname"><a href="struct_thread_1_1_thread_manager.html#adbc148eaddd341d7ae4d07c9e9e33bfd">Thread::ThreadManager::Thread</a></div><div class="ttdeci">friend class Thread</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00044">Thread.h:44</a></div></div>
-<div class="ttc" id="aclass_thread_html_abd50159ecd409936f454c2321f673616"><div class="ttname"><a href="class_thread.html#abd50159ecd409936f454c2321f673616">Thread::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Method to stop the Trhead.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00567">Thread.cpp:567</a></div></div>
-<div class="ttc" id="aclass_thread_html_acff52284ec491e188b12a04d087dad43"><div class="ttname"><a href="class_thread.html#acff52284ec491e188b12a04d087dad43">Thread::joinable</a></div><div class="ttdeci">bool joinable()</div><div class="ttdoc">Reports whether the thread can be merged or not.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00617">Thread.cpp:617</a></div></div>
+<div class="ttc" id="aclass_thread_html_abd50159ecd409936f454c2321f673616"><div class="ttname"><a href="class_thread.html#abd50159ecd409936f454c2321f673616">Thread::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">Method to stop the Trhead.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00568">Thread.cpp:568</a></div></div>
+<div class="ttc" id="aclass_thread_html_acff52284ec491e188b12a04d087dad43"><div class="ttname"><a href="class_thread.html#acff52284ec491e188b12a04d087dad43">Thread::joinable</a></div><div class="ttdeci">bool joinable()</div><div class="ttdoc">Reports whether the thread can be merged or not.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00618">Thread.cpp:618</a></div></div>
 <div class="ttc" id="a_thread_8h_html_a2d5453caf8ef899f496e0b680e93e63d"><div class="ttname"><a href="_thread_8h.html#a2d5453caf8ef899f496e0b680e93e63d">ThreadId</a></div><div class="ttdeci">thread::id ThreadId</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8h_source.html#l00023">Thread.h:23</a></div></div>
-<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_aa8b68a1f6a05f54441caf0d9632a28be"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#aa8b68a1f6a05f54441caf0d9632a28be">Thread::ThreadManager::Impl::isDeleted</a></div><div class="ttdeci">static bool isDeleted</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00387">Thread.cpp:387</a></div></div>
-<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_a7775f9014a859635b7a72ddf6c3c4117"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#a7775f9014a859635b7a72ddf6c3c4117">Thread::ThreadManager::Impl::idMap_</a></div><div class="ttdeci">map&lt; ThreadId, weak_ptr&lt; Thread &gt; &gt; idMap_</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00411">Thread.cpp:411</a></div></div>
-<div class="ttc" id="aclass_thread_html_a4d9d788e98388a3217831a9046709deb"><div class="ttname"><a href="class_thread.html#a4d9d788e98388a3217831a9046709deb">Thread::join</a></div><div class="ttdeci">void join()</div><div class="ttdoc">Führt den Thread mit dem aktuellen zusammen.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00626">Thread.cpp:626</a></div></div>
+<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_aa8b68a1f6a05f54441caf0d9632a28be"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#aa8b68a1f6a05f54441caf0d9632a28be">Thread::ThreadManager::Impl::isDeleted</a></div><div class="ttdeci">static bool isDeleted</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00388">Thread.cpp:388</a></div></div>
+<div class="ttc" id="astruct_thread_1_1_thread_manager_1_1_impl_html_a7775f9014a859635b7a72ddf6c3c4117"><div class="ttname"><a href="struct_thread_1_1_thread_manager_1_1_impl.html#a7775f9014a859635b7a72ddf6c3c4117">Thread::ThreadManager::Impl::idMap_</a></div><div class="ttdeci">map&lt; ThreadId, weak_ptr&lt; Thread &gt; &gt; idMap_</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00412">Thread.cpp:412</a></div></div>
+<div class="ttc" id="aclass_thread_html_a4d9d788e98388a3217831a9046709deb"><div class="ttname"><a href="class_thread.html#a4d9d788e98388a3217831a9046709deb">Thread::join</a></div><div class="ttdeci">void join()</div><div class="ttdoc">Führt den Thread mit dem aktuellen zusammen.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00627">Thread.cpp:627</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
