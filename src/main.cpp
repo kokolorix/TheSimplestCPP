@@ -110,6 +110,13 @@ void OnStartTestClicked(Button* button);
  */
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	ControlPtr control = Control::Manager[hWnd];
+	if(control)
+	{
+		LRESULT result = control->wndProc(hWnd, message, wParam, lParam);
+		if (result  == LRES_PROCESSED)
+			return result;
+	}
 	switch (message)
 	{
 	case WM_CREATE:
@@ -133,14 +140,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		startTest->create(hWnd, 260, 20, 100, 30, "Test");
 
 		EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
-		filterTest->LeftMargin = 6;
-		filterTest->TopMargin = 2;
 		filterTest->ClientEdge = true;
+		filterTest->Multiline = true;
+		filterTest->Margins = 4;
 		filterTest->create(hWnd, 380, 20, rcClient.right - 400, 30, "*");
+		SetFocus(filterTest->hWnd);
 
 		EditPtr output = Edit::Manager["Output:Edit"];
 		output->Margins = 6;
 		output->ReadOnly = true;
+		output->Multiline = true;
+		output->VScroll = true;
 		output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
 
 		ProgressPtr progress1 = Progress::Manager["Progress1"];
@@ -152,11 +162,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_COMMAND:
 	{
 		HWND hCtrl = reinterpret_cast<HWND>(lParam);
-		if (HIWORD(wParam) == BN_CLICKED)
+		ControlPtr control = Control::Manager[hCtrl];
+		if (control)
 		{
-			ButtonPtr button = Button::Manager[hCtrl];
-			button->execute(BN_CLICKED);
-			return 0;
+			LRESULT result = control->wndProc(hWnd, message, wParam, lParam);
+			if (result == LRES_PROCESSED)
+				return result;
 		}
 		break;
 	}

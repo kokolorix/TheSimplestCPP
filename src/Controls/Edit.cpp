@@ -14,7 +14,7 @@ Control::ControlManagerImpl<Edit> Edit::Manager;
 
 struct  Edit::Impl
 {	 
-	 bool readOnly_ = false, clientedge_ = false, hscroll_ = false, vscroll_ = true;
+	 bool readOnly_ = false, clientedge_ = false, multiline_ = false, hscroll_ = false, vscroll_ = false;
 	 uint32_t lm_ = 0, tm_ = 0, rm_ = 0, bm_ = 0;
 	 uint32_t  getMargins() const;
 	 void setMargins(uint32_t m);
@@ -35,8 +35,9 @@ Edit::Edit()
 : pImpl_(make_unique<Edit::Impl>())
 , ReadOnly(pImpl_->readOnly_)
 , ClientEdge(pImpl_->clientedge_)
+, Multiline(pImpl_->multiline_)
 , HScroll(pImpl_->hscroll_)
-, VSCroll(pImpl_->vscroll_)
+, VScroll(pImpl_->vscroll_)
 , LeftMargin(pImpl_->lm_)
 , TopMargin(pImpl_->tm_)
 , RightMargin(pImpl_->rm_)
@@ -52,12 +53,13 @@ Edit::~Edit()
 
 HWND Edit::create(HWND hParent, int x, int y, int cx, int cy, string caption /*= string()*/)
 {
-	DWORD wsStyle = WS_CHILD | WS_VISIBLE  | ES_MULTILINE | ES_LEFT | ES_AUTOVSCROLL;
-	if (VSCroll) wsStyle |= WS_VSCROLL;
+	DWORD wsStyle = WS_CHILD | WS_VISIBLE  | ES_LEFT | ES_AUTOVSCROLL;
+	if (VScroll) wsStyle |= WS_VSCROLL;
 	if (HScroll) wsStyle |= WS_HSCROLL;
 	if (ReadOnly) wsStyle |= ES_READONLY;
+	if (Multiline) wsStyle |= ES_MULTILINE;
 
-	DWORD wsExStyle = 0;	
+	DWORD wsExStyle = WS_EX_CONTROLPARENT;	
 	if (ClientEdge)  wsExStyle |= WS_EX_CLIENTEDGE;
 
 	HWND hWnd = ::CreateWindowExA(
@@ -75,7 +77,8 @@ HWND Edit::create(HWND hParent, int x, int y, int cx, int cy, string caption /*=
 		NULL);
 
 	RECT rc;
-	SendMessage(hWnd, EM_GETRECT, 0, (LPARAM)&rc);
+	::GetClientRect(hWnd, &rc);
+	//SendMessage(hWnd, EM_GETRECT, 0, (LPARAM)&rc);
 	rc.left += LeftMargin;
 	rc.top += TopMargin;
 	rc.right -= RightMargin;
@@ -104,4 +107,16 @@ void Edit::add(const string& line)
 		//PostMessageA(hWnd, EM_SETSEL, -1, -1);
 		//PostMessageA(hWnd, EM_REPLACESEL, FALSE, (LPARAM)line.c_str());
    }
+}
+
+LRESULT Edit::wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	if (message == WM_COMMAND)
+	{
+		if (HIWORD(wParam) == EN_CHANGE)
+		{
+		}
+	}
+
+	return __super::wndProc(hWnd, message, wParam, lParam);
 }

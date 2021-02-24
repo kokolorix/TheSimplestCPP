@@ -17,6 +17,9 @@ public:
 
 	 void add(const string& line);
 
+protected:
+	LRESULT wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) override;
+
 
 private:
     struct Impl;
@@ -25,8 +28,9 @@ private:
 public:
 	PropertyRW<bool> ReadOnly;
 	PropertyRW<bool> ClientEdge;
+	PropertyRW<bool> Multiline;
 	PropertyRW<bool>  HScroll;
-	PropertyRW<bool> VSCroll;
+	PropertyRW<bool> VScroll;
 	PropertyRW<uint32_t> Margins;
 	PropertyRW<uint32_t> LeftMargin;
 	PropertyRW<uint32_t> TopMargin;

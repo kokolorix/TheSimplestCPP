@@ -17,6 +17,8 @@ using std::unique_ptr;
 class Control;
 using ControlPtr = shared_ptr<Control>;
 
+const LRESULT LRES_PROCESSED = -1; // 0xFFFFFFFFFFFFFFFF
+
 class Control
 {
 public:
@@ -27,8 +29,8 @@ public:
     {
         ControlManager();
         virtual ~ControlManager();
-        ControlPtr operator[](const string &name);
-        ControlPtr operator[](HWND hWnd);
+        ControlPtr operator[](const string &name) const;
+        ControlPtr operator[](HWND hWnd) const;
 
     protected:        
         ControlPtr& get(const string& name);
@@ -41,7 +43,7 @@ public:
 
     virtual HWND create(HWND hParent, int x, int y, int cx, int cy, string windowClass, string caption , int windowStyle);
     virtual void insert(HWND hWnd);
-    virtual void execute(int command);
+    virtual bool execute(int command);
 
     protected:
     template<typename CT>
@@ -49,7 +51,7 @@ public:
     {
         std::shared_ptr<CT> operator[](const string &name)
         {
-            ControlPtr &ctrl = get(name);
+            ControlPtr &ctrl = Control::Manager.get(name);
             if (ctrl)
             {
                 std::shared_ptr<CT> impl = dynamic_pointer_cast<CT>(ctrl);
@@ -59,7 +61,7 @@ public:
             else
             {
                 std::shared_ptr<CT> impl = make_shared<CT>();
-                ctrl = impl;
+                ctrl = dynamic_pointer_cast<Control>(impl);
                 return impl;
             }
         }
@@ -69,6 +71,10 @@ public:
             return impl;
         }
     };
+
+    virtual LRESULT wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+    friend LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 
 private:
     struct Impl;
