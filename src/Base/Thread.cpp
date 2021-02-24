@@ -232,7 +232,27 @@ ThreadPtr mainThread;           //> The main thread instance
         mainThread->processQueue();
         break;
 
- * @endcode */
+ * @endcode 
+ * @msc
+ * hscale="0.2", arcgradient="2";
+ * mt[label="mainThread", linecolor="fuchsia"], t1[label="thread1", linecolor="orange"];
+ * |||;
+ * mt box mt[label="main", textbgcolour="fuchsia"];
+ * t1 box t1[label="thread1", textbgcolour="orange"];
+ * 
+ * mt =>> mt [label="initRunningThread()", URL="\ref initRunningThread", linecolor="fuchsia"];
+ * 
+ * ---;
+ * 
+ * t1 =>> mt [label="enqueue()", textcolor="orange", linecolor="violet"];
+ * t1 =>> t1 [label="notify()", textcolor="orange", linecolor="violet"];
+ * t1 =>> mt [label="PostMessage(...)", textcolor="orange", linecolor="fuchsia"];
+ * 
+ * ---;
+ * 
+ * mt =>> mt [label="processQueue()", URL="\ref processQueue", linecolor="fuchsia"];
+ * @endmsc
+*/
 
 /**
  * @name Thread control
@@ -289,6 +309,7 @@ ThreadPtr mainThread;           //> The main thread instance
  * @brief Initializes a thread object with an already running thread.
  * @details
  * The notification function is called when the thread gets new items pushed to its queue
+ * @copydoc hidden_exisiting_sample
  */
 
 /**
@@ -296,6 +317,7 @@ ThreadPtr mainThread;           //> The main thread instance
  * @brief Processes @c maxElements in the running thread.
  * @details
  * After notification, all tasks are processed in this way.
+ * @copydoc hidden_exisiting_sample
  */
 /**@}*/ // end Exisiting threads
 
