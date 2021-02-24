@@ -244,8 +244,8 @@ ThreadPtr mainThread;           //> The main thread instance
  * 
  * ---;
  * 
- * t1 =>> mt [label="enqueue()", textcolor="orange", linecolor="violet"];
- * t1 =>> t1 [label="notify()", textcolor="orange", linecolor="violet"];
+ * t1 =>> mt [label="enqueue()", textcolor="orange", linecolor="fuchsia"];
+ * t1 =>> mt [label="notify()", textcolor="orange", linecolor="fuchsia"];
  * t1 =>> mt [label="PostMessage(...)", textcolor="orange", linecolor="fuchsia"];
  * 
  * ---;
