@@ -139,7 +139,7 @@ Friends</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00026">26</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00028">28</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae5f31a97af064123b199a0604b621862"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae5f31a97af064123b199a0604b621862">&#9670;&nbsp;</a></span>ControlManager()</h2>
@@ -156,8 +156,8 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00093">93</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;: <a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>(make_unique&lt;Control::ControlManager::Impl&gt;()){}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00108">108</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;: <a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>(make_unique&lt;Control::ControlManager::Impl&gt;()){}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -184,10 +184,10 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00095">95</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{ <a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;deleted_ = <span class="keyword">true</span>; }</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00110">110</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;{ <a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;deleted_ = <span class="keyword">true</span>; }</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_control_8h_source.html#l00074">Control::pImpl_</a>.</p>
+<p class="reference">References <a class="el" href="_control_8h_source.html#l00080">Control::pImpl_</a>.</p>
 
 </div>
 </div>
@@ -216,15 +216,15 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00111">111</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <a class="code" href="struct_control_ptr.html">ControlPtr</a> &amp;control = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_[name];</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">return</span> control;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00126">126</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;{</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <a class="code" href="struct_control_ptr.html">ControlPtr</a> &amp;control = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_[name];</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordflow">return</span> control;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_control_8cpp_source.html#l00011">Control::Manager</a>, and <a class="el" href="_control_8h_source.html#l00037">pImpl_</a>.</p>
+<p class="reference">References <a class="el" href="_control_8cpp_source.html#l00012">Control::Manager</a>, and <a class="el" href="_control_8h_source.html#l00039">pImpl_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_control_8h_source.html#l00050">Control::ControlManagerImpl&lt; Edit &gt;::operator[]()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_control_8h_source.html#l00052">Control::ControlManagerImpl&lt; Edit &gt;::operator[]()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -249,15 +249,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00097">97</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="struct_control_ptr.html">ControlPtr</a> &amp;control = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_[name];</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">if</span> (!control)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        control = make_shared&lt;Control&gt;();</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">return</span> control;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00112">112</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;{</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <a class="code" href="struct_control_ptr.html">ControlPtr</a> &amp;control = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_[name];</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    <span class="comment">//if (!control)</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="comment">//    control = make_shared&lt;Control&gt;();</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">return</span> control;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_control_8cpp_source.html#l00011">Control::Manager</a>, and <a class="el" href="_control_8h_source.html#l00037">pImpl_</a>.</p>
+<p class="reference">References <a class="el" href="_control_8cpp_source.html#l00012">Control::Manager</a>, and <a class="el" href="_control_8h_source.html#l00039">pImpl_</a>.</p>
 
 </div>
 </div>
@@ -277,15 +277,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00104">104</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;{</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="struct_control_ptr.html">ControlPtr</a> &amp;control = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;hMap_[<a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>];</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span> (!control)</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        control = make_shared&lt;Control&gt;();</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordflow">return</span> control;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00119">119</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;{</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <a class="code" href="struct_control_ptr.html">ControlPtr</a> &amp;control = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;hMap_[<a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>];</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="comment">//if (!control)</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    <span class="comment">//    control = make_shared&lt;Control&gt;();</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">return</span> control;</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_control_8h_source.html#l00078">Control::hWnd</a>, <a class="el" href="_control_8cpp_source.html#l00011">Control::Manager</a>, and <a class="el" href="_control_8h_source.html#l00037">pImpl_</a>.</p>
+<p class="reference">References <a class="el" href="_control_8h_source.html#l00084">Control::hWnd</a>, <a class="el" href="_control_8cpp_source.html#l00012">Control::Manager</a>, and <a class="el" href="_control_8h_source.html#l00039">pImpl_</a>.</p>
 
 </div>
 </div>
@@ -310,7 +310,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00039">39</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00041">41</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
 
 </div>
 </div>
@@ -335,9 +335,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00038">38</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00040">40</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_control_8cpp_source.html#l00111">get()</a>, <a class="el" href="_control_8cpp_source.html#l00075">Control::insert()</a>, <a class="el" href="_control_8cpp_source.html#l00097">operator[]()</a>, and <a class="el" href="_control_8cpp_source.html#l00044">Control::~Control()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_control_8cpp_source.html#l00126">get()</a>, <a class="el" href="_control_8cpp_source.html#l00077">Control::insert()</a>, <a class="el" href="_control_8cpp_source.html#l00112">operator[]()</a>, and <a class="el" href="_control_8cpp_source.html#l00046">Control::~Control()</a>.</p>
 
 </div>
 </div>
@@ -347,10 +347,10 @@ Here is the caller graph for this function:</div>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_control_html_aeec9a389448c03059e3ad36fb7872874"><div class="ttname"><a href="class_control.html#aeec9a389448c03059e3ad36fb7872874">Control::hWnd</a></div><div class="ttdeci">PropertyRW&lt; HWND &gt; hWnd</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00078">Control.h:78</a></div></div>
+<div class="ttc" id="aclass_control_html_aeec9a389448c03059e3ad36fb7872874"><div class="ttname"><a href="class_control.html#aeec9a389448c03059e3ad36fb7872874">Control::hWnd</a></div><div class="ttdeci">PropertyRW&lt; HWND &gt; hWnd</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00084">Control.h:84</a></div></div>
 <div class="ttc" id="astruct_control_ptr_html"><div class="ttname"><a href="struct_control_ptr.html">ControlPtr</a></div><div class="ttdef"><b>Definition:</b> <a href="doxy_helper_8h_source.html#l00019">doxyHelper.h:20</a></div></div>
-<div class="ttc" id="astruct_control_1_1_control_manager_html_aca895997c96bb4e0ea1950cda859b707"><div class="ttname"><a href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">Control::ControlManager::pImpl_</a></div><div class="ttdeci">unique_ptr&lt; Impl &gt; pImpl_</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00038">Control.h:37</a></div></div>
-<div class="ttc" id="aclass_control_html_a96292c0b21236714e453dcda678b38ed"><div class="ttname"><a href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a></div><div class="ttdeci">static struct Control::ControlManager Manager</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00011">Control.cpp:11</a></div></div>
+<div class="ttc" id="astruct_control_1_1_control_manager_html_aca895997c96bb4e0ea1950cda859b707"><div class="ttname"><a href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">Control::ControlManager::pImpl_</a></div><div class="ttdeci">unique_ptr&lt; Impl &gt; pImpl_</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00040">Control.h:39</a></div></div>
+<div class="ttc" id="aclass_control_html_a96292c0b21236714e453dcda678b38ed"><div class="ttname"><a href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a></div><div class="ttdeci">static struct Control::ControlManager Manager</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00012">Control.cpp:12</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

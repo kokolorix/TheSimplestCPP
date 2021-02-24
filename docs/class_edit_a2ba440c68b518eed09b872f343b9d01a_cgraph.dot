@@ -1,0 +1,53 @@
+digraph "Edit::WndProc"
+{
+ // INTERACTIVE_SVG=YES
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Edit::WndProc",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="WndProc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a30a1e3b0304f1b083637664cbda94e72",tooltip="The declaration of the main message processing function."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Button::create",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_button.html#a4b47ae117b554b76c7681d0dc0f6b59a",tooltip=" "];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Control::create",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_control.html#a5556f2e0a0d67ccba4981ddc8c39d2c3",tooltip=" "];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Control::insert",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_control.html#af9a3acf49973e5a31594f30e979246b0",tooltip=" "];
+  Node2 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Edit::create",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_edit.html#ab18ca6e3077d72996f0599d984283636",tooltip=" "];
+  Node6 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="OnStartClicked",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#abdf0523e10fae27868b24d21a841e926",tooltip="All the magic is here :-)"];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Thread::enqueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#abf7db5b09bd25b345e80577f71321ee9",tooltip="The code that will be enqued in the threads task queue."];
+  Node8 -> Node9 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Thread::enqueue_",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#a3ee4bd6db78554c9ea75cf242b8ae273",tooltip="push the functor in the queue"];
+  Node7 -> Node10 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="Thread::start",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#ada9adb041744058adc9abb1744e86c5d",tooltip="The code that will be executed, after the new Thread is started."];
+  Node10 -> Node11 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 [label="Thread::start_",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#af1a12dd97c3644116d394f655ca63c86",tooltip=" "];
+  Node7 -> Node12 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node12 [label="Thread::stop",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#abd50159ecd409936f454c2321f673616",tooltip="Method to stop the Trhead."];
+  Node2 -> Node13 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 [label="OnStartTestClicked",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a1870be22060f25a2595afa09934e9784",tooltip=" "];
+  Node13 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node14 [label="Edit::add",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f",tooltip=" "];
+  Node14 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node13 -> Node15 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node15 [label="format",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$output_8hpp.html#a40ccb49bbe6f7e94ed2bc2dc6cd7e8d0",tooltip=" "];
+  Node13 -> Node16 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node16 [label="TestCase::runTests",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_test_case.html#a67dbda1a6ccebdf1c834c54fce361a6a",tooltip=" "];
+  Node16 -> Node17 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node17 [label="anonymous_namespace\l\{TestCase::cpp\}::getCases",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceanonymous__namespace_02_test_case_8cpp_03.html#a4073e77346d8adea8ac92f2e309de1aa",tooltip=" "];
+  Node2 -> Node18 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 [label="OnThreadTestClicked",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$main_8cpp.html#a6e6bef72e348d49296a2aa278ce80ca6",tooltip="Thread-Test-Button event handler."];
+  Node18 -> Node14 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node18 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node19 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node19 [label="Thread::processQueue",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69",tooltip="Processes maxElements in the running thread."];
+  Node2 -> Node20 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node20 [label="Control::WndProc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_control.html#ad3f4aface35bcd0fd170ac854db36431",tooltip=" "];
+  Node20 -> Node21 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node21 [label="Control::execute",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_control.html#ad2a1ce33f8bb652934af8d1c39ca7351",tooltip=" "];
+}

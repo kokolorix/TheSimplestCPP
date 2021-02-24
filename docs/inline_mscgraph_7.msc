@@ -8,9 +8,14 @@ t1 box t1[label="thread1", textbgcolour="orange"];
 ---;
 
 mt =>> t1 [label="start()", URL="\ref start", linecolor="fuchsia"];
+mt -> t1 [label="enqueue()", URL="\ref enqueue", linecolor="fuchsia"];
+
 t1 => t1 [label="DoTheJob()", textcolor="orange", linecolor="violet"];
 
+mt -> t1 [label="enqueue()", URL="\ref enqueue", linecolor="fuchsia"];
+mt -> t1 [label="enqueue()", URL="\ref enqueue", linecolor="fuchsia"];
 
----;
-mt <<= t1 [label="join()", URL="\ref join", linecolor="orange"];
+t1 => t1 [label="DoTheJob()", textcolor="orange", linecolor="violet"];
+t1 => t1 [label="DoTheJob()", textcolor="orange", linecolor="violet"];
+
 }

@@ -1,21 +1,22 @@
 <map id="WndProc" name="WndProc">
-<area shape="rect" id="node1" title="The declaration of the main message processing function." alt="" coords="5,157,81,184"/>
-<area shape="rect" id="node2" href="$class_button.html#a4b47ae117b554b76c7681d0dc0f6b59a" title=" " alt="" coords="154,56,258,83"/>
-<area shape="rect" id="node5" href="$class_edit.html#ab18ca6e3077d72996f0599d984283636" title=" " alt="" coords="353,5,443,32"/>
-<area shape="rect" id="node6" href="$class_button.html#a4ade92d5ac85d581c0bfe5c04bc7e1f1" title=" " alt="" coords="149,107,263,133"/>
-<area shape="rect" id="node7" href="$main_8cpp.html#abdf0523e10fae27868b24d21a841e926" title="All the magic is here :&#45;)" alt="" coords="151,309,261,336"/>
-<area shape="rect" id="node13" href="$main_8cpp.html#a1870be22060f25a2595afa09934e9784" title=" " alt="" coords="139,208,273,235"/>
-<area shape="rect" id="node18" href="$main_8cpp.html#a6e6bef72e348d49296a2aa278ce80ca6" title="Thread&#45;Test&#45;Button event handler." alt="" coords="133,157,279,184"/>
-<area shape="rect" id="node19" href="$class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69" title="Processes maxElements in the running thread." alt="" coords="129,360,283,387"/>
-<area shape="rect" id="node3" href="$class_control.html#a5556f2e0a0d67ccba4981ddc8c39d2c3" title=" " alt="" coords="345,56,451,83"/>
+<area shape="rect" id="node1" title="The declaration of the main message processing function." alt="" coords="5,208,81,235"/>
+<area shape="rect" id="node2" href="$class_button.html#a4b47ae117b554b76c7681d0dc0f6b59a" title=" " alt="" coords="154,19,258,45"/>
+<area shape="rect" id="node5" href="$class_edit.html#ab18ca6e3077d72996f0599d984283636" title=" " alt="" coords="161,81,251,108"/>
+<area shape="rect" id="node6" href="$main_8cpp.html#abdf0523e10fae27868b24d21a841e926" title="All the magic is here :&#45;)" alt="" coords="151,309,261,336"/>
+<area shape="rect" id="node12" href="$main_8cpp.html#a1870be22060f25a2595afa09934e9784" title=" " alt="" coords="139,208,273,235"/>
+<area shape="rect" id="node17" href="$main_8cpp.html#a6e6bef72e348d49296a2aa278ce80ca6" title="Thread&#45;Test&#45;Button event handler." alt="" coords="133,157,279,184"/>
+<area shape="rect" id="node18" href="$class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69" title="Processes maxElements in the running thread." alt="" coords="129,360,283,387"/>
+<area shape="rect" id="node19" href="$class_control.html#acb9c9e1fe3913ade543cf9bda76f05e3" title=" " alt="" coords="145,436,267,463"/>
+<area shape="rect" id="node3" href="$class_control.html#a5556f2e0a0d67ccba4981ddc8c39d2c3" title=" " alt="" coords="345,5,451,32"/>
 <area shape="rect" id="node4" href="$class_control.html#af9a3acf49973e5a31594f30e979246b0" title=" " alt="" coords="551,31,653,57"/>
-<area shape="rect" id="node8" href="$class_thread.html#abf7db5b09bd25b345e80577f71321ee9" title="The code that will be enqued in the threads task queue." alt="" coords="543,157,661,184"/>
-<area shape="rect" id="node10" href="$class_thread.html#ada9adb041744058adc9abb1744e86c5d" title="The code that will be executed, after the new Thread is started." alt="" coords="351,411,445,437"/>
-<area shape="rect" id="node12" href="$class_thread.html#abd50159ecd409936f454c2321f673616" title="Method to stop the Trhead." alt="" coords="351,360,445,387"/>
-<area shape="rect" id="node9" href="$class_thread.html#a3ee4bd6db78554c9ea75cf242b8ae273" title="push the functor in the queue" alt="" coords="739,157,864,184"/>
-<area shape="rect" id="node11" href="$class_thread.html#af1a12dd97c3644116d394f655ca63c86" title=" " alt="" coords="551,411,653,437"/>
-<area shape="rect" id="node14" href="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f" title=" " alt="" coords="361,157,435,184"/>
-<area shape="rect" id="node15" href="$output_8hpp.html#a40ccb49bbe6f7e94ed2bc2dc6cd7e8d0" title=" " alt="" coords="369,208,427,235"/>
-<area shape="rect" id="node16" href="$class_test_case.html#a67dbda1a6ccebdf1c834c54fce361a6a" title=" " alt="" coords="331,259,465,285"/>
-<area shape="rect" id="node17" href="$namespaceanonymous__namespace_02_test_case_8cpp_03.html#a4073e77346d8adea8ac92f2e309de1aa" title=" " alt="" coords="513,251,691,293"/>
+<area shape="rect" id="node7" href="$class_thread.html#abf7db5b09bd25b345e80577f71321ee9" title="The code that will be enqued in the threads task queue." alt="" coords="543,157,661,184"/>
+<area shape="rect" id="node9" href="$class_thread.html#ada9adb041744058adc9abb1744e86c5d" title="The code that will be executed, after the new Thread is started." alt="" coords="351,411,445,437"/>
+<area shape="rect" id="node11" href="$class_thread.html#abd50159ecd409936f454c2321f673616" title="Method to stop the Trhead." alt="" coords="351,360,445,387"/>
+<area shape="rect" id="node8" href="$class_thread.html#a3ee4bd6db78554c9ea75cf242b8ae273" title="push the functor in the queue" alt="" coords="739,157,864,184"/>
+<area shape="rect" id="node10" href="$class_thread.html#af1a12dd97c3644116d394f655ca63c86" title=" " alt="" coords="551,411,653,437"/>
+<area shape="rect" id="node13" href="$class_edit.html#a3ced1bcf14de542e25d512991bcfed2f" title=" " alt="" coords="361,157,435,184"/>
+<area shape="rect" id="node14" href="$output_8hpp.html#a40ccb49bbe6f7e94ed2bc2dc6cd7e8d0" title=" " alt="" coords="369,208,427,235"/>
+<area shape="rect" id="node15" href="$class_test_case.html#a67dbda1a6ccebdf1c834c54fce361a6a" title=" " alt="" coords="331,259,465,285"/>
+<area shape="rect" id="node16" href="$namespaceanonymous__namespace_02_test_case_8cpp_03.html#a4073e77346d8adea8ac92f2e309de1aa" title=" " alt="" coords="513,251,691,293"/>
+<area shape="rect" id="node20" href="$class_control.html#a499710d0d6ee6ae6326f42b4823abde2" title=" " alt="" coords="339,461,457,488"/>
 </map>

@@ -129,7 +129,7 @@ Additional Inherited Members</h2></td></tr>
 struct Control::ControlManagerImpl&lt; CT &gt;</h3>
 
 
-<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00048">48</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00050">50</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a249e759b12971bafebf97df77991316b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a249e759b12971bafebf97df77991316b">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
@@ -157,22 +157,22 @@ template&lt;typename CT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00050">50</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <a class="code" href="struct_control_ptr.html">ControlPtr</a> &amp;ctrl = <a class="code" href="struct_control_1_1_control_manager.html#ac12d50b6c23e1c2feea0474a6a733828">get</a>(name);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">if</span> (ctrl)</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                std::shared_ptr&lt;CT&gt; <a class="code" href="namespaceimpl.html">impl</a> = dynamic_pointer_cast&lt;CT&gt;(ctrl);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                assert(<a class="code" href="namespaceimpl.html">impl</a>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="namespaceimpl.html">impl</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                std::shared_ptr&lt;CT&gt; <a class="code" href="namespaceimpl.html">impl</a> = make_shared&lt;CT&gt;();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                ctrl = <a class="code" href="namespaceimpl.html">impl</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="namespaceimpl.html">impl</a>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        }</div>
+<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00052">52</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="struct_control_ptr.html">ControlPtr</a> &amp;ctrl = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#ac12d50b6c23e1c2feea0474a6a733828">get</a>(name);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">if</span> (ctrl)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                std::shared_ptr&lt;CT&gt; <a class="code" href="namespaceimpl.html">impl</a> = dynamic_pointer_cast&lt;CT&gt;(ctrl);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                assert(<a class="code" href="namespaceimpl.html">impl</a>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="namespaceimpl.html">impl</a>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                std::shared_ptr&lt;CT&gt; <a class="code" href="namespaceimpl.html">impl</a> = make_shared&lt;CT&gt;();</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                ctrl = dynamic_pointer_cast&lt;Control&gt;(<a class="code" href="namespaceimpl.html">impl</a>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="namespaceimpl.html">impl</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -202,11 +202,11 @@ template&lt;typename CT &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00066">66</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
-<div class="fragment"><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            std::shared_ptr&lt;CT&gt; <a class="code" href="namespaceimpl.html">impl</a> = dynamic_pointer_cast&lt;CT&gt;(<a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>[<a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>]);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="namespaceimpl.html">impl</a>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00068">68</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            std::shared_ptr&lt;CT&gt; <a class="code" href="namespaceimpl.html">impl</a> = dynamic_pointer_cast&lt;CT&gt;(<a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>[<a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>]);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="namespaceimpl.html">impl</a>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -215,11 +215,11 @@ template&lt;typename CT &gt; </div>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aclass_control_html_aeec9a389448c03059e3ad36fb7872874"><div class="ttname"><a href="class_control.html#aeec9a389448c03059e3ad36fb7872874">Control::hWnd</a></div><div class="ttdeci">PropertyRW&lt; HWND &gt; hWnd</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00078">Control.h:78</a></div></div>
+<div class="ttc" id="aclass_control_html_aeec9a389448c03059e3ad36fb7872874"><div class="ttname"><a href="class_control.html#aeec9a389448c03059e3ad36fb7872874">Control::hWnd</a></div><div class="ttdeci">PropertyRW&lt; HWND &gt; hWnd</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00084">Control.h:84</a></div></div>
 <div class="ttc" id="astruct_control_ptr_html"><div class="ttname"><a href="struct_control_ptr.html">ControlPtr</a></div><div class="ttdef"><b>Definition:</b> <a href="doxy_helper_8h_source.html#l00019">doxyHelper.h:20</a></div></div>
 <div class="ttc" id="anamespaceimpl_html"><div class="ttname"><a href="namespaceimpl.html">impl</a></div><div class="ttdef"><b>Definition:</b> <a href="cast_8hpp_source.html#l00010">cast.hpp:11</a></div></div>
-<div class="ttc" id="aclass_control_html_a96292c0b21236714e453dcda678b38ed"><div class="ttname"><a href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a></div><div class="ttdeci">static struct Control::ControlManager Manager</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00011">Control.cpp:11</a></div></div>
-<div class="ttc" id="astruct_control_1_1_control_manager_html_ac12d50b6c23e1c2feea0474a6a733828"><div class="ttname"><a href="struct_control_1_1_control_manager.html#ac12d50b6c23e1c2feea0474a6a733828">Control::ControlManager::get</a></div><div class="ttdeci">ControlPtr &amp; get(const string &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00111">Control.cpp:111</a></div></div>
+<div class="ttc" id="aclass_control_html_a96292c0b21236714e453dcda678b38ed"><div class="ttname"><a href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a></div><div class="ttdeci">static struct Control::ControlManager Manager</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00012">Control.cpp:12</a></div></div>
+<div class="ttc" id="astruct_control_1_1_control_manager_html_ac12d50b6c23e1c2feea0474a6a733828"><div class="ttname"><a href="struct_control_1_1_control_manager.html#ac12d50b6c23e1c2feea0474a6a733828">Control::ControlManager::get</a></div><div class="ttdeci">ControlPtr &amp; get(const string &amp;name)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00126">Control.cpp:126</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

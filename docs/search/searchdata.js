@@ -9,7 +9,7 @@ var indexSectionsWithContent =
   6: "bcegiopstv",
   7: "t",
   8: "efsu",
-  9: "ct",
+  9: "ctw",
   10: "acdlsw",
   11: "o",
   12: "ds"

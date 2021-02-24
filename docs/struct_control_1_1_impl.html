@@ -110,7 +110,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00013">13</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00014">14</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aacb56fb531cf012a0858ebb797f14830"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aacb56fb531cf012a0858ebb797f14830">&#9670;&nbsp;</a></span>get_caption()</h2>
@@ -135,14 +135,15 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00020">20</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordtype">size_t</span> len = ::GetWindowTextLengthA(<a class="code" href="struct_control_1_1_impl.html#a543910ce84305585e5e1fa30cac359a5">hWnd_</a>) + 1;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keyword">auto</span> buf = unique_ptr&lt;char[]&gt;(<span class="keyword">new</span> <span class="keywordtype">char</span>[len]);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        buf[len - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        ::GetWindowTextA(<a class="code" href="struct_control_1_1_impl.html#a543910ce84305585e5e1fa30cac359a5">hWnd_</a>, buf.get(), (<span class="keywordtype">int</span>)len) ;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">return</span> string(buf.get());</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00021">21</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;     {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;         <span class="keywordtype">int</span> ilen = ::GetWindowTextLengthA(<a class="code" href="struct_control_1_1_impl.html#a543910ce84305585e5e1fa30cac359a5">hWnd_</a>) + 1;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;         <span class="keywordtype">size_t</span> len = <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(ilen);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;         <span class="keyword">auto</span> buf = unique_ptr&lt;char[]&gt;(<span class="keyword">new</span> <span class="keywordtype">char</span>[len]);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;         buf[len - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;         ::GetWindowTextA(<a class="code" href="struct_control_1_1_impl.html#a543910ce84305585e5e1fa30cac359a5">hWnd_</a>, buf.get(), (<span class="keywordtype">int</span>)len);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;         <span class="keywordflow">return</span> string(buf.get());</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;     }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -170,10 +171,10 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00016">16</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        ::SetWindowTextA(<a class="code" href="struct_control_1_1_impl.html#a543910ce84305585e5e1fa30cac359a5">hWnd_</a>, caption.c_str());</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00017">17</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        ::SetWindowTextA(<a class="code" href="struct_control_1_1_impl.html#a543910ce84305585e5e1fa30cac359a5">hWnd_</a>, caption.c_str());</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -190,7 +191,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00015">15</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00016">16</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
 
 </div>
 </div>
@@ -199,7 +200,7 @@ Public Attributes</h2></td></tr>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="astruct_control_1_1_impl_html_a543910ce84305585e5e1fa30cac359a5"><div class="ttname"><a href="struct_control_1_1_impl.html#a543910ce84305585e5e1fa30cac359a5">Control::Impl::hWnd_</a></div><div class="ttdeci">HWND hWnd_</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00015">Control.cpp:15</a></div></div>
+<div class="ttc" id="astruct_control_1_1_impl_html_a543910ce84305585e5e1fa30cac359a5"><div class="ttname"><a href="struct_control_1_1_impl.html#a543910ce84305585e5e1fa30cac359a5">Control::Impl::hWnd_</a></div><div class="ttdeci">HWND hWnd_</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00016">Control.cpp:16</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
