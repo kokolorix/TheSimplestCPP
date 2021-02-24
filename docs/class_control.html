@@ -177,12 +177,12 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00039">39</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;: <a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>(make_unique&lt;Control::Impl&gt;())</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;, <a class="code" href="class_control.html#aafeec8da86346167538e8e13a3212a5a">Caption</a>(bind(&amp;<a class="code" href="struct_control_1_1_impl.html#aacb56fb531cf012a0858ebb797f14830">Impl::get_caption</a>, <a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>.get()), bind(&amp;<a class="code" href="struct_control_1_1_impl.html#ad899af4659843d2f7419e4ba57a0d464">Impl::set_caption</a>, <a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>.get(), _1))</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;, <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>(<a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>-&gt;hWnd_)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;{</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00038">38</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;: <a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>(make_unique&lt;Control::Impl&gt;())</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;, <a class="code" href="class_control.html#aafeec8da86346167538e8e13a3212a5a">Caption</a>(bind(&amp;<a class="code" href="struct_control_1_1_impl.html#aacb56fb531cf012a0858ebb797f14830">Impl::get_caption</a>, <a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>.get()), bind(&amp;<a class="code" href="struct_control_1_1_impl.html#ad899af4659843d2f7419e4ba57a0d464">Impl::set_caption</a>, <a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>.get(), _1))</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;, <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>(<a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>-&gt;hWnd_)</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -209,20 +209,20 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00046">46</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a> = NULL;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;   <span class="keywordflow">if</span>(!<a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>-&gt;deleted_)</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">auto</span> begin = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.begin();</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">auto</span> end = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.end();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keyword">auto</span> it = find_if(begin, end, [<span class="keyword">this</span>](pair&lt;const string, ControlPtr&gt;&amp; p) {<span class="keywordflow">return</span> p.second.get() == <span class="keyword">this</span>; });</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span> (it != end)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.erase(it);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00045">45</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a> = NULL;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;   <span class="keywordflow">if</span>(!<a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>-&gt;deleted_)</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keyword">auto</span> begin = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.begin();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">auto</span> end = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.end();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keyword">auto</span> it = find_if(begin, end, [<span class="keyword">this</span>](pair&lt;const string, ControlPtr&gt;&amp; p) {<span class="keywordflow">return</span> p.second.get() == <span class="keyword">this</span>; });</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">if</span> (it != end)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.erase(it);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_control_8h_source.html#l00084">hWnd</a>, <a class="el" href="_control_8cpp_source.html#l00012">Manager</a>, <a class="el" href="_control_8h_source.html#l00039">Control::ControlManager::pImpl_</a>, and <a class="el" href="_control_8h_source.html#l00080">pImpl_</a>.</p>
+<p class="reference">References <a class="el" href="_control_8h_source.html#l00084">hWnd</a>, <a class="el" href="_control_8cpp_source.html#l00011">Manager</a>, <a class="el" href="_control_8h_source.html#l00039">Control::ControlManager::pImpl_</a>, and <a class="el" href="_control_8h_source.html#l00080">pImpl_</a>.</p>
 
 </div>
 </div>
@@ -297,25 +297,25 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00059">59</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    HWND <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a> = ::CreateWindowA(windowClass.c_str(),</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                   caption.c_str(),</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                                   windowStyle,</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                   x,</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                   y,</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                   cx,</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                   cy,</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                   hParent,</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                   0,</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                   <a class="code" href="_control_8cpp.html#a74029128723095e7bf00a71d46af8b24">hInstance</a>,</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                                   NULL);</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <a class="code" href="class_control.html#af9a3acf49973e5a31594f30e979246b0">insert</a>(<a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00058">58</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;{</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    HWND <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a> = ::CreateWindowA(windowClass.c_str(),</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                                   caption.c_str(),</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                                   windowStyle,</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                                   x,</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                                   y,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                   cx,</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                                   cy,</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                                   hParent,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                                   0,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                                   <a class="code" href="_control_8cpp.html#a74029128723095e7bf00a71d46af8b24">hInstance</a>,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                                   NULL);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <a class="code" href="class_control.html#af9a3acf49973e5a31594f30e979246b0">insert</a>(<a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="main_8cpp_source.html#l00041">hInstance</a>, <a class="el" href="_control_8h_source.html#l00084">hWnd</a>, and <a class="el" href="_control_8cpp_source.html#l00077">insert()</a>.</p>
+<p class="reference">References <a class="el" href="main_8cpp_source.html#l00041">hInstance</a>, <a class="el" href="_control_8h_source.html#l00084">hWnd</a>, and <a class="el" href="_control_8cpp_source.html#l00076">insert()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_button_8cpp_source.html#l00027">Button::create()</a>.</p>
 <div class="dynheader">
@@ -326,8 +326,7 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_control_a5556f2e0a0d67ccba4981ddc8c39d2c3_icgraph.svg" width="515" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_control_a5556f2e0a0d67ccba4981ddc8c39d2c3_icgraph.svg" width="515" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -358,22 +357,21 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_button.html#af4c837d1b6f28b472d155201a034f63f">Button</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00088">88</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;{</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="comment">//switch(command)</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">//{</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">//default:</span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">//   return false;</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="comment">//}</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00087">87</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="comment">//switch(command)</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="comment">//{</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="comment">//default:</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="comment">//   return false;</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="comment">//}</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Referenced by <a class="el" href="_control_8cpp_source.html#l00098">wndProc()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_control_8cpp_source.html#l00097">wndProc()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_control_a499710d0d6ee6ae6326f42b4823abde2_icgraph.svg" width="543" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_control_a499710d0d6ee6ae6326f42b4823abde2_icgraph.svg" width="543" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -402,25 +400,24 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00077">77</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;{</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;   <a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>-&gt;hWnd_ = <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>;</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">auto</span> begin = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.begin();</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">auto</span> end = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.end();</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keyword">auto</span> it = find_if(begin, end, [<span class="keyword">this</span>](pair&lt;const string, ControlPtr&gt;&amp; p) {<span class="keywordflow">return</span> p.second.get() == <span class="keyword">this</span>; });</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> (it != end)</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;hMap_[<a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>-&gt;hWnd_] = it-&gt;second;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00076">76</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;   <a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>-&gt;hWnd_ = <a class="code" href="class_control.html#aeec9a389448c03059e3ad36fb7872874">hWnd</a>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keyword">auto</span> begin = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.begin();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keyword">auto</span> end = <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;nameMap_.end();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keyword">auto</span> it = find_if(begin, end, [<span class="keyword">this</span>](pair&lt;const string, ControlPtr&gt;&amp; p) {<span class="keywordflow">return</span> p.second.get() == <span class="keyword">this</span>; });</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span> (it != end)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <a class="code" href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a>.<a class="code" href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">pImpl_</a>-&gt;hMap_[<a class="code" href="class_control.html#ae31851b431902faf8195ccfeb435186d">pImpl_</a>-&gt;hWnd_] = it-&gt;second;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_control_8h_source.html#l00084">hWnd</a>, <a class="el" href="_control_8cpp_source.html#l00012">Manager</a>, <a class="el" href="_control_8h_source.html#l00039">Control::ControlManager::pImpl_</a>, and <a class="el" href="_control_8h_source.html#l00080">pImpl_</a>.</p>
+<p class="reference">References <a class="el" href="_control_8h_source.html#l00084">hWnd</a>, <a class="el" href="_control_8cpp_source.html#l00011">Manager</a>, <a class="el" href="_control_8h_source.html#l00039">Control::ControlManager::pImpl_</a>, and <a class="el" href="_control_8h_source.html#l00080">pImpl_</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_progress_8cpp_source.html#l00064">Progress::create()</a>, <a class="el" href="_edit_8cpp_source.html#l00054">Edit::create()</a>, and <a class="el" href="_control_8cpp_source.html#l00059">create()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_progress_8cpp_source.html#l00064">Progress::create()</a>, <a class="el" href="_edit_8cpp_source.html#l00054">Edit::create()</a>, and <a class="el" href="_control_8cpp_source.html#l00058">create()</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_control_af9a3acf49973e5a31594f30e979246b0_icgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="class_control_af9a3acf49973e5a31594f30e979246b0_icgraph.svg" width="100%" height="404"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 
 </div>
@@ -473,30 +470,28 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_edit.html#af4eba2652991c860e0085e93fe5b81c3">Edit</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00098">98</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;{</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordflow">if</span> (message == WM_COMMAND)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_control.html#a499710d0d6ee6ae6326f42b4823abde2">execute</a>(HIWORD(wParam)))</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;         <span class="keywordflow">return</span> <a class="code" href="_control_8h.html#a67c07131e0edf0d74f9d19316b2bc852">LRES_PROCESSED</a>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;   <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00097">97</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;{</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordflow">if</span> (message == WM_COMMAND)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    {</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_control.html#a499710d0d6ee6ae6326f42b4823abde2">execute</a>(HIWORD(wParam)))</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;         <span class="keywordflow">return</span> <a class="code" href="_control_8h.html#a67c07131e0edf0d74f9d19316b2bc852">LRES_PROCESSED</a>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    }</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;   <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">References <a class="el" href="_control_8cpp_source.html#l00088">execute()</a>, and <a class="el" href="_control_8h_source.html#l00020">LRES_PROCESSED</a>.</p>
+<p class="reference">References <a class="el" href="_control_8cpp_source.html#l00087">execute()</a>, and <a class="el" href="_control_8h_source.html#l00020">LRES_PROCESSED</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="main_8cpp_source.html#l00111">WndProc()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_control_acb9c9e1fe3913ade543cf9bda76f05e3_cgraph.svg" width="298" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_control_acb9c9e1fe3913ade543cf9bda76f05e3_cgraph.svg" width="298" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="class_control_acb9c9e1fe3913ade543cf9bda76f05e3_icgraph.svg" width="378" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="class_control_acb9c9e1fe3913ade543cf9bda76f05e3_icgraph.svg" width="378" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -685,7 +680,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00084">84</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_edit_8cpp_source.html#l00092">Edit::add()</a>, <a class="el" href="_progress_8cpp_source.html#l00064">Progress::create()</a>, <a class="el" href="_edit_8cpp_source.html#l00054">Edit::create()</a>, <a class="el" href="_control_8cpp_source.html#l00059">create()</a>, <a class="el" href="_control_8cpp_source.html#l00077">insert()</a>, <a class="el" href="_control_8cpp_source.html#l00119">Control::ControlManager::operator[]()</a>, <a class="el" href="_control_8h_source.html#l00068">Control::ControlManagerImpl&lt; Edit &gt;::operator[]()</a>, <a class="el" href="_progress_8cpp_source.html#l00023">Progress::Impl::set_maxRange()</a>, <a class="el" href="_progress_8cpp_source.html#l00016">Progress::Impl::set_minRange()</a>, <a class="el" href="_progress_8cpp_source.html#l00037">Progress::Impl::set_pos()</a>, <a class="el" href="_progress_8cpp_source.html#l00030">Progress::Impl::set_step()</a>, <a class="el" href="_progress_8cpp_source.html#l00043">Progress::Impl::stepIt()</a>, <a class="el" href="main_8cpp_source.html#l00111">WndProc()</a>, <a class="el" href="_edit_8cpp_source.html#l00112">Edit::wndProc()</a>, and <a class="el" href="_control_8cpp_source.html#l00046">~Control()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_edit_8cpp_source.html#l00092">Edit::add()</a>, <a class="el" href="_progress_8cpp_source.html#l00064">Progress::create()</a>, <a class="el" href="_edit_8cpp_source.html#l00054">Edit::create()</a>, <a class="el" href="_control_8cpp_source.html#l00058">create()</a>, <a class="el" href="_control_8cpp_source.html#l00076">insert()</a>, <a class="el" href="_control_8h_source.html#l00068">Control::ControlManagerImpl&lt; Edit &gt;::operator[]()</a>, <a class="el" href="_control_8cpp_source.html#l00116">Control::ControlManager::operator[]()</a>, <a class="el" href="_progress_8cpp_source.html#l00023">Progress::Impl::set_maxRange()</a>, <a class="el" href="_progress_8cpp_source.html#l00016">Progress::Impl::set_minRange()</a>, <a class="el" href="_progress_8cpp_source.html#l00037">Progress::Impl::set_pos()</a>, <a class="el" href="_progress_8cpp_source.html#l00030">Progress::Impl::set_step()</a>, <a class="el" href="_progress_8cpp_source.html#l00043">Progress::Impl::stepIt()</a>, <a class="el" href="main_8cpp_source.html#l00111">WndProc()</a>, <a class="el" href="_edit_8cpp_source.html#l00112">Edit::wndProc()</a>, and <a class="el" href="_control_8cpp_source.html#l00045">~Control()</a>.</p>
 
 </div>
 </div>
@@ -709,9 +704,9 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00012">12</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_control_8cpp_source.html#l00011">11</a> of file <a class="el" href="_control_8cpp_source.html">Control.cpp</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_control_8cpp_source.html#l00126">Control::ControlManager::get()</a>, <a class="el" href="_control_8cpp_source.html#l00077">insert()</a>, <a class="el" href="_control_8cpp_source.html#l00112">Control::ControlManager::operator[]()</a>, <a class="el" href="_control_8h_source.html#l00052">Control::ControlManagerImpl&lt; Edit &gt;::operator[]()</a>, <a class="el" href="main_8cpp_source.html#l00111">WndProc()</a>, and <a class="el" href="_control_8cpp_source.html#l00046">~Control()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_control_8cpp_source.html#l00121">Control::ControlManager::get()</a>, <a class="el" href="_control_8cpp_source.html#l00076">insert()</a>, <a class="el" href="_control_8h_source.html#l00052">Control::ControlManagerImpl&lt; Edit &gt;::operator[]()</a>, <a class="el" href="_control_8cpp_source.html#l00111">Control::ControlManager::operator[]()</a>, <a class="el" href="main_8cpp_source.html#l00111">WndProc()</a>, and <a class="el" href="_control_8cpp_source.html#l00045">~Control()</a>.</p>
 
 </div>
 </div>
@@ -737,7 +732,7 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="_control_8h_source.html#l00081">81</a> of file <a class="el" href="_control_8h_source.html">Control.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_control_8cpp_source.html#l00077">insert()</a>, <a class="el" href="_control_8cpp_source.html#l00046">~Control()</a>, and <a class="el" href="_control_8cpp_source.html#l00110">Control::ControlManager::~ControlManager()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_control_8cpp_source.html#l00076">insert()</a>, <a class="el" href="_control_8cpp_source.html#l00045">~Control()</a>, and <a class="el" href="_control_8cpp_source.html#l00109">Control::ControlManager::~ControlManager()</a>.</p>
 
 </div>
 </div>
@@ -749,12 +744,12 @@ Here is the caller graph for this function:</div>
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_edit_html_a391e2b8d14d31962adb95f7d372c34ff"><div class="ttname"><a href="class_edit.html#a391e2b8d14d31962adb95f7d372c34ff">Edit::ClientEdge</a></div><div class="ttdeci">PropertyRW&lt; bool &gt; ClientEdge</div><div class="ttdef"><b>Definition:</b> <a href="_edit_8h_source.html#l00030">Edit.h:30</a></div></div>
 <div class="ttc" id="a_progress_8h_html_a346bd1b0a87fde3787d61d053f02ff78"><div class="ttname"><a href="_progress_8h.html#a346bd1b0a87fde3787d61d053f02ff78">ProgressPtr</a></div><div class="ttdeci">shared_ptr&lt; Progress &gt; ProgressPtr</div><div class="ttdef"><b>Definition:</b> <a href="_progress_8h_source.html#l00006">Progress.h:6</a></div></div>
-<div class="ttc" id="aclass_control_html_acb9c9e1fe3913ade543cf9bda76f05e3"><div class="ttname"><a href="class_control.html#acb9c9e1fe3913ade543cf9bda76f05e3">Control::wndProc</a></div><div class="ttdeci">virtual LRESULT wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00098">Control.cpp:98</a></div></div>
+<div class="ttc" id="aclass_control_html_acb9c9e1fe3913ade543cf9bda76f05e3"><div class="ttname"><a href="class_control.html#acb9c9e1fe3913ade543cf9bda76f05e3">Control::wndProc</a></div><div class="ttdeci">virtual LRESULT wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00097">Control.cpp:97</a></div></div>
 <div class="ttc" id="aclass_control_html_aeec9a389448c03059e3ad36fb7872874"><div class="ttname"><a href="class_control.html#aeec9a389448c03059e3ad36fb7872874">Control::hWnd</a></div><div class="ttdeci">PropertyRW&lt; HWND &gt; hWnd</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00084">Control.h:84</a></div></div>
 <div class="ttc" id="astruct_button_ptr_html"><div class="ttname"><a href="struct_button_ptr.html">ButtonPtr</a></div><div class="ttdef"><b>Definition:</b> <a href="doxy_helper_8h_source.html#l00028">doxyHelper.h:29</a></div></div>
 <div class="ttc" id="aclass_edit_html_a4606f6bdbe6ca268ff3b5bdeb5d0d37c"><div class="ttname"><a href="class_edit.html#a4606f6bdbe6ca268ff3b5bdeb5d0d37c">Edit::Multiline</a></div><div class="ttdeci">PropertyRW&lt; bool &gt; Multiline</div><div class="ttdef"><b>Definition:</b> <a href="_edit_8h_source.html#l00031">Edit.h:31</a></div></div>
 <div class="ttc" id="aclass_edit_html_ac245ecb53a084b2d25e35ae94ef67b13"><div class="ttname"><a href="class_edit.html#ac245ecb53a084b2d25e35ae94ef67b13">Edit::VScroll</a></div><div class="ttdeci">PropertyRW&lt; bool &gt; VScroll</div><div class="ttdef"><b>Definition:</b> <a href="_edit_8h_source.html#l00033">Edit.h:33</a></div></div>
-<div class="ttc" id="aclass_control_html_af9a3acf49973e5a31594f30e979246b0"><div class="ttname"><a href="class_control.html#af9a3acf49973e5a31594f30e979246b0">Control::insert</a></div><div class="ttdeci">virtual void insert(HWND hWnd)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00077">Control.cpp:77</a></div></div>
+<div class="ttc" id="aclass_control_html_af9a3acf49973e5a31594f30e979246b0"><div class="ttname"><a href="class_control.html#af9a3acf49973e5a31594f30e979246b0">Control::insert</a></div><div class="ttdeci">virtual void insert(HWND hWnd)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00076">Control.cpp:76</a></div></div>
 <div class="ttc" id="amain_8cpp_html_a1870be22060f25a2595afa09934e9784"><div class="ttname"><a href="main_8cpp.html#a1870be22060f25a2595afa09934e9784">OnStartTestClicked</a></div><div class="ttdeci">void OnStartTestClicked(Button *button)</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00380">main.cpp:380</a></div></div>
 <div class="ttc" id="aclass_edit_html_ab18ca6e3077d72996f0599d984283636"><div class="ttname"><a href="class_edit.html#ab18ca6e3077d72996f0599d984283636">Edit::create</a></div><div class="ttdeci">HWND create(HWND hParent, int x, int y, int cx, int cy, string caption=string())</div><div class="ttdef"><b>Definition:</b> <a href="_edit_8cpp_source.html#l00054">Edit.cpp:54</a></div></div>
 <div class="ttc" id="aclass_control_html_aafeec8da86346167538e8e13a3212a5a"><div class="ttname"><a href="class_control.html#aafeec8da86346167538e8e13a3212a5a">Control::Caption</a></div><div class="ttdeci">PropertyRW&lt; string &gt; Caption</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00085">Control.h:85</a></div></div>
@@ -764,14 +759,14 @@ Here is the caller graph for this function:</div>
 <div class="ttc" id="astruct_control_1_1_control_manager_html_aca895997c96bb4e0ea1950cda859b707"><div class="ttname"><a href="struct_control_1_1_control_manager.html#aca895997c96bb4e0ea1950cda859b707">Control::ControlManager::pImpl_</a></div><div class="ttdeci">unique_ptr&lt; Impl &gt; pImpl_</div><div class="ttdef"><b>Definition:</b> <a href="_control_8h_source.html#l00040">Control.h:39</a></div></div>
 <div class="ttc" id="aclass_button_html_a7b5ed34827e9c2bf3b809a3479ebc3d1"><div class="ttname"><a href="class_button.html#a7b5ed34827e9c2bf3b809a3479ebc3d1">Button::Manager</a></div><div class="ttdeci">static Control::ControlManagerImpl&lt; Button &gt; Manager</div><div class="ttdef"><b>Definition:</b> <a href="_button_8h_source.html#l00014">Button.h:14</a></div></div>
 <div class="ttc" id="aclass_button_html_a4b47ae117b554b76c7681d0dc0f6b59a"><div class="ttname"><a href="class_button.html#a4b47ae117b554b76c7681d0dc0f6b59a">Button::create</a></div><div class="ttdeci">HWND create(HWND hParent, int x, int y, int cx, int cy, string caption)</div><div class="ttdef"><b>Definition:</b> <a href="_button_8cpp_source.html#l00027">Button.cpp:27</a></div></div>
-<div class="ttc" id="aclass_control_html_a499710d0d6ee6ae6326f42b4823abde2"><div class="ttname"><a href="class_control.html#a499710d0d6ee6ae6326f42b4823abde2">Control::execute</a></div><div class="ttdeci">virtual bool execute(int command)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00088">Control.cpp:88</a></div></div>
+<div class="ttc" id="aclass_control_html_a499710d0d6ee6ae6326f42b4823abde2"><div class="ttname"><a href="class_control.html#a499710d0d6ee6ae6326f42b4823abde2">Control::execute</a></div><div class="ttdeci">virtual bool execute(int command)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00087">Control.cpp:87</a></div></div>
 <div class="ttc" id="aclass_thread_html_af0bd96245e2b765b410f8dd2d1aeeb69"><div class="ttname"><a href="class_thread.html#af0bd96245e2b765b410f8dd2d1aeeb69">Thread::processQueue</a></div><div class="ttdeci">void processQueue(size_t maxElements=10)</div><div class="ttdoc">Processes maxElements in the running thread.</div><div class="ttdef"><b>Definition:</b> <a href="_thread_8cpp_source.html#l00628">Thread.cpp:628</a></div></div>
 <div class="ttc" id="aclass_edit_html_a718f5d211c8e2962ca666b2268f7080f"><div class="ttname"><a href="class_edit.html#a718f5d211c8e2962ca666b2268f7080f">Edit::Margins</a></div><div class="ttdeci">PropertyRW&lt; uint32_t &gt; Margins</div><div class="ttdef"><b>Definition:</b> <a href="_edit_8h_source.html#l00034">Edit.h:34</a></div></div>
 <div class="ttc" id="aclass_edit_html_ae6aead013dab7ecd600046888d9c559a"><div class="ttname"><a href="class_edit.html#ae6aead013dab7ecd600046888d9c559a">Edit::Manager</a></div><div class="ttdeci">static Control::ControlManagerImpl&lt; Edit &gt; Manager</div><div class="ttdef"><b>Definition:</b> <a href="_edit_8h_source.html#l00014">Edit.h:14</a></div></div>
 <div class="ttc" id="aclass_button_html_a8b8e77eed9fbcf28aa78ecd495b3f069"><div class="ttname"><a href="class_button.html#a8b8e77eed9fbcf28aa78ecd495b3f069">Button::OnClicked</a></div><div class="ttdeci">PropertyRW&lt; function&lt; void(Button *)&gt; &gt; OnClicked</div><div class="ttdef"><b>Definition:</b> <a href="_button_8h_source.html#l00024">Button.h:24</a></div></div>
-<div class="ttc" id="astruct_control_1_1_impl_html_ad899af4659843d2f7419e4ba57a0d464"><div class="ttname"><a href="struct_control_1_1_impl.html#ad899af4659843d2f7419e4ba57a0d464">Control::Impl::set_caption</a></div><div class="ttdeci">void set_caption(const string &amp;caption)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00017">Control.cpp:17</a></div></div>
-<div class="ttc" id="astruct_control_1_1_impl_html_aacb56fb531cf012a0858ebb797f14830"><div class="ttname"><a href="struct_control_1_1_impl.html#aacb56fb531cf012a0858ebb797f14830">Control::Impl::get_caption</a></div><div class="ttdeci">string get_caption()</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00021">Control.cpp:21</a></div></div>
-<div class="ttc" id="aclass_control_html_a96292c0b21236714e453dcda678b38ed"><div class="ttname"><a href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a></div><div class="ttdeci">static struct Control::ControlManager Manager</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00012">Control.cpp:12</a></div></div>
+<div class="ttc" id="astruct_control_1_1_impl_html_ad899af4659843d2f7419e4ba57a0d464"><div class="ttname"><a href="struct_control_1_1_impl.html#ad899af4659843d2f7419e4ba57a0d464">Control::Impl::set_caption</a></div><div class="ttdeci">void set_caption(const string &amp;caption)</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00016">Control.cpp:16</a></div></div>
+<div class="ttc" id="astruct_control_1_1_impl_html_aacb56fb531cf012a0858ebb797f14830"><div class="ttname"><a href="struct_control_1_1_impl.html#aacb56fb531cf012a0858ebb797f14830">Control::Impl::get_caption</a></div><div class="ttdeci">string get_caption()</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00020">Control.cpp:20</a></div></div>
+<div class="ttc" id="aclass_control_html_a96292c0b21236714e453dcda678b38ed"><div class="ttname"><a href="class_control.html#a96292c0b21236714e453dcda678b38ed">Control::Manager</a></div><div class="ttdeci">static struct Control::ControlManager Manager</div><div class="ttdef"><b>Definition:</b> <a href="_control_8cpp_source.html#l00011">Control.cpp:11</a></div></div>
 <div class="ttc" id="amain_8cpp_html_abdf0523e10fae27868b24d21a841e926"><div class="ttname"><a href="main_8cpp.html#abdf0523e10fae27868b24d21a841e926">OnStartClicked</a></div><div class="ttdeci">void OnStartClicked(Button *button)</div><div class="ttdoc">All the magic is here :-)</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00251">main.cpp:251</a></div></div>
 <div class="ttc" id="amain_8cpp_html_a6e6bef72e348d49296a2aa278ce80ca6"><div class="ttname"><a href="main_8cpp.html#a6e6bef72e348d49296a2aa278ce80ca6">OnThreadTestClicked</a></div><div class="ttdeci">void OnThreadTestClicked(Button *button)</div><div class="ttdoc">Thread-Test-Button event handler.</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00322">main.cpp:322</a></div></div>
 <div class="ttc" id="amain_8cpp_html_aecae5bbaca8f171c1ff9f549d91d3bdb"><div class="ttname"><a href="main_8cpp.html#aecae5bbaca8f171c1ff9f549d91d3bdb">WM_THREAD</a></div><div class="ttdeci">#define WM_THREAD</div><div class="ttdef"><b>Definition:</b> <a href="main_8cpp_source.html#l00040">main.cpp:40</a></div></div>
