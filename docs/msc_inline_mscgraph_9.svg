@@ -52,19 +52,20 @@ initRunningThread()
 <line x1="20" y1="136" x2="140" y2="136" stroke="black" stroke-dasharray="2,2"/>
 <line x1="40" y1="150" x2="40" y2="180" stroke="#FF00FF"/>
 <line x1="120" y1="150" x2="120" y2="180" stroke="#FFB000"/>
-<line x1="120" y1="161" x2="40" y2="163" stroke="#D02090"/>
-<line x1="40" y1="163" x2="50" y2="169" stroke="#D02090"/>
-<line x1="40" y1="163" x2="50" y2="157" stroke="#D02090"/>
+<line x1="120" y1="161" x2="40" y2="163" stroke="#FF00FF"/>
+<line x1="40" y1="163" x2="50" y2="169" stroke="#FF00FF"/>
+<line x1="40" y1="163" x2="50" y2="157" stroke="#FF00FF"/>
 <polygon fill="white" points="51,152 108,152 108,161 51,161"/>
 <text x="52" y="161" textLength="55" font-family="Helvetica" font-size="12" fill="#FFB000">
 enqueue()
 </text>
 <line x1="40" y1="180" x2="40" y2="210" stroke="#FF00FF"/>
 <line x1="120" y1="180" x2="120" y2="210" stroke="#FFB000"/>
-<path d="M 120 185 A40,6 0 0,1 120,197" stroke="#D02090" fill="none"/><line x1="120" y1="197" x2="130" y2="203" stroke="#D02090"/>
-<line x1="120" y1="197" x2="130" y2="191" stroke="#D02090"/>
-<polygon fill="white" points="79,182 118,182 118,191 79,191"/>
-<text x="80" y="191" textLength="37" font-family="Helvetica" font-size="12" fill="#FFB000">
+<line x1="120" y1="191" x2="40" y2="193" stroke="#FF00FF"/>
+<line x1="40" y1="193" x2="50" y2="199" stroke="#FF00FF"/>
+<line x1="40" y1="193" x2="50" y2="187" stroke="#FF00FF"/>
+<polygon fill="white" points="60,182 99,182 99,191 60,191"/>
+<text x="61" y="191" textLength="37" font-family="Helvetica" font-size="12" fill="#FFB000">
 notify()
 </text>
 <line x1="40" y1="210" x2="40" y2="240" stroke="#FF00FF"/>
