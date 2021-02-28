@@ -3,6 +3,8 @@ A simple c++ project to play around with language and doxygen features
 
 [Code-Documentation](https://kokolorix.github.io/TheSimplestCPP/)
 
+[git Reference](https://git-scm.com/docs)
+
 To clone all stuff do this:
 
 `attrib +r .`
