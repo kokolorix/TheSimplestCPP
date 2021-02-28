@@ -1,0 +1,2252 @@
+format 222
+"Base" // src::Base
+  revision 1
+  modified_by 2 "srdev"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "D:/Projects/TheSimplestCPP/src/Base/"
+  cpp_src_dir "D:/Projects/TheSimplestCPP/src/Base/"
+  classview 128130 "Base"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 128258 "Thread"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129666 // <generalisation>
+	relation 129666 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129666 // <generalisation>
+	  b parent class_ref 130562 // typedef6
+      end
+
+      operation 132098 "Thread"
+	preserve_cpp_body_indent private explicit_return_type ""
+	nparams 1
+	  param in name "name" explicit_type "string"
+	cpp_decl "    ${comment}${inline}explicit ${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief Construct a new Thread:: Thread object
+//
+//@param name 
+//
+
+${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)}
+	: pImpl_(make_unique<Thread::Impl>(name))
+	, Name(pImpl_->name_)
+	, IsRunning([this]() {
+		  return pImpl_->id_ != ThreadId() && !IsStopped;
+	  })
+	, IsStopped([this]() {
+		  return pImpl_->stopped_.load();
+	  })
+	, Id([this]() {
+		  return pImpl_->id_;
+	  })
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 132226 "~Thread"
+	preserve_cpp_body_indent cpp_virtual public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief Destroy the Thread:: Thread object
+//
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      class 130690 "ThreadManager"
+	visibility package stereotype "struct"
+	cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	operation 132354 "ThreadManager"
+	  preserve_cpp_body_indent public explicit_return_type ""
+	  nparams 0
+	  cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	  cpp_def "//
+//@brief Construct a new Thread:: Thread Manager:: Thread Manager object
+//
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}
+	: pImpl_(make_unique<Thread::ThreadManager::ThreadManager::Impl>())
+${throw}{
+${body}}
+"
+	  
+	  
+	  
+	  
+	end
+
+	operation 132482 "~ThreadManager"
+	  cpp_virtual cpp_defaulted public explicit_return_type ""
+	  nparams 0
+	  cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	  
+	  
+	  
+	  
+	end
+
+	operation 132610 "operator []"
+	  preserve_cpp_body_indent public return_type class_ref 128130 // ThreadPtr
+	  nparams 1
+	    param in name "name" explicit_type "string"
+	  cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	  cpp_def "//
+//@brief Returns the thread with the given name. If none exists yet, it is created now
+//
+//@param name 
+//@return ThreadPtr 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	  
+	  
+	  
+	  
+	end
+
+	operation 132738 "operator []"
+	  preserve_cpp_body_indent const public return_type class_ref 128130 // ThreadPtr
+	  nparams 1
+	    param in name "id" type class_ref 130306 // ThreadId
+	  cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	  cpp_def "//
+//@brief Returns the Thread object with the resulting ThreadId. If no such thread exists, an empty ThreadPtr is returned. 
+//
+//@param id 
+//@return ThreadPtr 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	  
+	  
+	  
+	  
+	end
+
+	extra_member 128002 "Impl"
+	  
+	  stereotype "struct"
+	  cpp "    struct Impl;
+" ""
+	  java ""
+	  php ""
+	  python ""
+	  idl ""
+	  mysql ""
+	end
+
+	attribute 128642 "pImpl_"
+	  private explicit_type "Impl"
+	  stereotype "unique_ptr"
+	  cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	classrelation 129794 // <dependency>
+	  relation 129794 -_->
+	    stereotype "friend"
+	    a public
+	      cpp default "Generated"
+	      classrelation_ref 129794 // <dependency>
+	    b parent class_ref 128258 // Thread
+	end
+      end
+
+      operation 132866 "start"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief The most normal way to start a new thread.
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 132994 "stop"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief Stops a running thread as fast as intended.
+//In longer lasting processing it must be provided, at suitable places
+//to cancel
+//@code {.cpp}
+//thread2->call([thread2]() {
+//while(!thread2->IsStopped) // <--- here we checks every loop the IsStopped Property
+//{
+//::Sleep(300);
+//mainThread->call([thread2]() {
+//static int count = 0;
+//string progress[] = {\"|\",\"/\", \"-\", \"\\\\\" };
+//int size = sizeof(progress) / sizeof(string);
+//ButtonPtr button = Button::Manager[\"Start:Button\"];
+//button->Caption = \"Running \" + progress[count % size];
+//count++;
+//});
+//}
+//// If the thread was stopped, we reset the text
+//mainThread->call([](){
+//ButtonPtr button = Button::Manager[\"Start:Button\"];
+//button->Caption = \"Start ...\";            
+//});
+//});
+//@endcode
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133122 "initRunningThread"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "id" type class_ref 130306 // ThreadId
+	  param in name "notify" explicit_type "function<void()>"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief 
+//
+//@param id 
+//@param notify 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133250 "processQueue"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "maxElements" explicit_type "size_t"
+	    defaultvalue "10"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief Processes a maximum of the specified number of function objects in the queue
+//
+//@param maxElements 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133378 "joinable"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief Checks if the std::thread object identifies an active thread of execution. Specifically, returns true if get_id() != std::thread::id(). So a default constructed thread is not joinable.
+//A thread that has finished executing code, but has not yet been joined is still considered an active thread of execution and is therefore joinable.
+//
+//@return true if the thread object identifies an active thread of execution, false otherwise 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133506 "join"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief Waits for the end of the thread
+//
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 128130 "Impl"
+	
+	stereotype "struct"
+	cpp "    struct Impl;
+" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      attribute 128770 "pImpl_"
+	private explicit_type "Impl"
+	stereotype "unique_ptr"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 133634 "enqueue"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "f" explicit_type "function<void()>"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief 
+//
+//@param f 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133762 "start"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param inout name "t" explicit_type "thread"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} && ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief 
+//
+//@param t 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} && ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 128898 "IsRunning"
+	public explicit_type "bool"
+	stereotype "PropertyR"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 129026 "IsStopped"
+	public explicit_type "bool"
+	stereotype "PropertyR"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 129922 // Id (<directional composition>)
+	relation 129922 *-->
+	  stereotype "PropertyR"
+	  a role_name "Id" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 129922 // Id (<directional composition>)
+	  b parent class_ref 130306 // ThreadId
+      end
+
+      attribute 129154 "Name"
+	public explicit_type "string"
+	stereotype "PropertyR"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 128642 "Description"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 129154 "~Description"
+	cpp_virtual cpp_inline private explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+
+      operation 129282 "summary"
+	abstract cpp_virtual private explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 129410 "detailed"
+	abstract cpp_virtual private explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128770 "ObjectPtr"
+      visibility package stereotype "template_typedef"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128258 // <generalisation>
+	relation 128258 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128258 // <generalisation>
+	  b parent class_ref 128898 // typedef1
+      end
+    end
+
+    class 128898 "typedef1"
+      visibility package stereotype "typedef" explicit_base_type "shared_ptr<Object>"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 129026 "Object"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128386 // <generalisation>
+	relation 128386 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128386 // <generalisation>
+	  b parent class_ref 129154 // Serialize
+      end
+
+      operation 129538 "Object"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}
+	:Object(string(), PropertyList())
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 129666 "Object"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param in name "name" explicit_type "string"
+	  param in name "properties" type class_ref 129282 // PropertyList
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} ${p0}, ${t1} ${p1}${)}
+	: Name(name_)
+	, Properties(properties_)
+	, name_(name)
+	, properties_(properties)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 129794 "toJson"
+	preserve_cpp_body_indent const cpp_override public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 129922 "fromJson"
+	preserve_cpp_body_indent cpp_override public explicit_return_type "void"
+	nparams 1
+	  param in name "json" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130050 "toXml"
+	preserve_cpp_body_indent const cpp_override public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130178 "fromXml"
+	preserve_cpp_body_indent cpp_override public explicit_return_type "void"
+	nparams 1
+	  param in name "xml" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 128130 "Name"
+	public explicit_type "string"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 128514 // Properties (<directional composition>)
+	relation 128514 *-->
+	  stereotype "PropertyRW"
+	  a role_name "Properties" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 128514 // Properties (<directional composition>)
+	  b parent class_ref 129282 // PropertyList
+      end
+
+      attribute 128258 "name_"
+	private explicit_type "string"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 128642 // properties_ (<directional composition>)
+	relation 128642 *-->
+	  a role_name "properties_" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 128642 // properties_ (<directional composition>)
+	  b parent class_ref 129282 // PropertyList
+      end
+    end
+
+    class 129154 "Serialize"
+      abstract visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 131202 "~Serialize"
+	cpp_virtual cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {};
+"
+	
+	
+	
+	
+      end
+
+      operation 131330 "writeString"
+	abstract const cpp_virtual public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 131458 "readString"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "str" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 131586 "toJson"
+	abstract const cpp_virtual public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 131714 "fromJson"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "json" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 131842 "toXml"
+	abstract const cpp_virtual public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 131970 "fromXml"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 1
+	  param in name "xml" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 129282 "PropertyList"
+      visibility package stereotype "template_typedef"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129282 // <generalisation>
+	relation 129282 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129282 // <generalisation>
+	  b parent class_ref 129922 // typedef3
+      end
+    end
+
+    class 129410 "Property"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128770 // <generalisation>
+	relation 128770 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128770 // <generalisation>
+	  b parent class_ref 129154 // Serialize
+      end
+
+      operation 130306 "Property"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}
+	: Property(string(), ValuePtr())
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130434 "Property"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param in name "name" explicit_type "string"
+	  param in name "value" type class_ref 129538 // ValuePtr
+	    defaultvalue "ValuePtr()"
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}, ${t1} ${p1}${v1}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}, ${t1} ${p1}${)}
+	: Name( name_)
+	, Value(value_)
+	, name_(name)
+	, value_(value)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130562 "~Property"
+	preserve_cpp_body_indent cpp_override public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130690 "toJson"
+	preserve_cpp_body_indent const cpp_override public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130818 "fromJson"
+	preserve_cpp_body_indent cpp_override public explicit_return_type "void"
+	nparams 1
+	  param in name "json" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130946 "toXml"
+	preserve_cpp_body_indent const cpp_override public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 131074 "fromXml"
+	preserve_cpp_body_indent cpp_override public explicit_return_type "void"
+	nparams 1
+	  param in name "xml" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 128386 "Name"
+	public explicit_type "string"
+	stereotype "PropertyRW"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 128898 // Value (<directional composition>)
+	relation 128898 *-->
+	  stereotype "PropertyRW"
+	  a role_name "Value" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 128898 // Value (<directional composition>)
+	  b parent class_ref 129538 // ValuePtr
+      end
+
+      attribute 128514 "name_"
+	private explicit_type "string"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 129026 // value_ (<directional composition>)
+	relation 129026 *-->
+	  a role_name "value_" private
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 129026 // value_ (<directional composition>)
+	  b parent class_ref 129538 // ValuePtr
+      end
+    end
+
+    class 129538 "ValuePtr"
+      visibility package stereotype "template_typedef"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 130178 // <generalisation>
+	relation 130178 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 130178 // <generalisation>
+	  b parent class_ref 130946 // typedef7
+      end
+    end
+
+    class 129666 "PropertyPtr"
+      visibility package stereotype "template_typedef"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129154 // <generalisation>
+	relation 129154 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129154 // <generalisation>
+	  b parent class_ref 129794 // typedef2
+      end
+    end
+
+    class 129794 "typedef2"
+      visibility package stereotype "typedef" explicit_base_type "shared_ptr<Property>"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 129922 "typedef3"
+      visibility package stereotype "typedef" explicit_base_type "std::vector<PropertyPtr>"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 130050 "SerializePtr"
+      visibility package stereotype "template_typedef"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129410 // <generalisation>
+	relation 129410 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129410 // <generalisation>
+	  b parent class_ref 130178 // typedef4
+      end
+    end
+
+    class 130178 "typedef4"
+      visibility package stereotype "typedef" explicit_base_type "shared_ptr<Serialize>"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 130306 "ThreadId"
+      visibility package stereotype "template_typedef"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 129538 // <generalisation>
+	relation 129538 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129538 // <generalisation>
+	  b parent class_ref 130434 // typedef5
+      end
+    end
+
+    class 130434 "typedef5"
+      visibility package stereotype "typedef" explicit_base_type "thread::id"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 130562 "typedef6"
+      visibility package stereotype "typedef" explicit_base_type "enable_shared_from_this<Thread>"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 130818 "Value"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 130050 // <generalisation>
+	relation 130050 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 130050 // <generalisation>
+	  b parent class_ref 129154 // Serialize
+      end
+
+      operation 133890 "Value"
+	preserve_cpp_body_indent protected explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134018 "~Value"
+	preserve_cpp_body_indent cpp_virtual protected explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 130946 "typedef7"
+      visibility package stereotype "typedef" explicit_base_type "shared_ptr<Value>"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 131074 "ValueImpl"
+      visibility package 
+      nformals 1
+      formal name "T" type "typename" explicit_default_value ""
+        explicit_extends ""
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 130306 // <generalisation>
+	relation 130306 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 130306 // <generalisation>
+	  b parent class_ref 130818 // Value
+      end
+
+      operation 134146 "ValueImpl"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "v" explicit_type "T"
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} && ${p0}${v0}${)}${volatile}${throw}${abstract} : value_(v)
+	{
+
+	};
+"
+	
+	
+	
+	
+      end
+
+      operation 134274 "writeString"
+	preserve_cpp_body_indent const cpp_override cpp_inline public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134402 "readString"
+	preserve_cpp_body_indent cpp_override cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "str" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134530 "toJson"
+	preserve_cpp_body_indent const cpp_override cpp_inline public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134658 "fromJson"
+	preserve_cpp_body_indent cpp_override cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "json" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134786 "toXml"
+	preserve_cpp_body_indent const cpp_override cpp_inline public explicit_return_type "string"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134914 "fromXml"
+	preserve_cpp_body_indent cpp_override cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "xml" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 129282 "value_"
+	private explicit_type "T"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 131202 "StringValue"
+      visibility package stereotype "template_typedef"
+      nactuals 1
+      actual class class_ref 131074 // ValueImpl
+        rank 0 explicit_value "string"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 130434 // <realization>
+	relation 130434 -_-|>
+	  stereotype "bind"
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 130434 // <realization>
+	  b parent class_ref 131074 // ValueImpl
+      end
+    end
+
+    class 131330 "BooleanValue"
+      visibility package stereotype "template_typedef"
+      nactuals 1
+      actual class class_ref 131074 // ValueImpl
+        rank 0 explicit_value "bool"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 130562 // <realization>
+	relation 130562 -_-|>
+	  stereotype "bind"
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 130562 // <realization>
+	  b parent class_ref 131074 // ValueImpl
+      end
+    end
+
+    class 131458 "Int32Value"
+      visibility package stereotype "template_typedef"
+      nactuals 1
+      actual class class_ref 131074 // ValueImpl
+        rank 0 explicit_value "int32_t"
+      cpp_decl "${comment}${template}using ${name} = ${inherit};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 130690 // <realization>
+	relation 130690 -_-|>
+	  stereotype "bind"
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 130690 // <realization>
+	  b parent class_ref 131074 // ValueImpl
+      end
+    end
+
+    class 133762 "tagTHREADNAME_INFO"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 132610 "dwType"
+	public explicit_type "DWORD"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Must be 0x1000."
+      end
+
+      attribute 132738 "szName"
+	public explicit_type "LPCSTR"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Pointer to name (in user addr space)."
+      end
+
+      attribute 132866 "dwThreadID"
+	public explicit_type "DWORD"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Thread ID (-1=caller thread)."
+      end
+
+      attribute 132994 "dwFlags"
+	public explicit_type "DWORD"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Reserved for future use, must be zero."
+      end
+    end
+
+    class 133890 "THREADNAME_INFO"
+      visibility package stereotype "typedef" base_type class_ref 133762 // tagTHREADNAME_INFO
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 134018 "Thread::Impl"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@class Thread
+
+@brief This class represents a thread in the system.
+
+A thread can be created and started again, it can be
+but also existing, running threads can be assigned.
+
+
+For newly created threads, the start function can be included, or the 
+Standard function can be used. The default function #Thread::Impl::standardLoop
+supports the continuous exchange of function objects via a queue.
+
+
+For own start functions or otherwise started threads, like the main thread
+the processing of the queue must be triggered from outside, via #Thread::processQueue.
+You can also specify a notification callback to be called,
+if new function objects have been added to the queue.
+
+
+All active threads are accessible through the Thread::Manager via a name or the ThreadId
+
+
+Using for a background thread is very intuitive:
+@code {.cpp}
+ThreadPtr thread1 = Thread::Manager[\"Thread1\"];
+if(!thread1->IsRunning)
+thread1->start();
+
+thread1->call([thread1]() {
+DoTheJob();
+});
+@endcode
+Thread1 remains in this case after the job has been completed
+Stand by and wait for the next job.
+
+If only a specific task is to be completed, this can also be done this way:
+@code {.cpp}
+ThreadPtr thread1 = Thread::Manager[\"Thread1\"];
+if(!thread1->IsRunning)
+thread1->start([thread1]() {
+DoTheJob();
+});
+@endcode
+Thread1 ends in this case with DoTheJob() and will be removed from Manager,
+if no other ThreadPtr exists in the system 
+
+
+Another case is assigning the main thread of an application to a thread object:
+Globally, the following elements are necessary:
+@code {.cpp}
+ThreadPtr mainThread;           //> The main thread instance 
+#define WM_THREAD WM_USER + 1   //> The Windows Message to communicate with the main thread
+@endcode
+In the WinMain you have to do
+@code {.cpp}
+ThreadPtr mainThread = Thread::Manager[\"MainThread\"];
+mainThread->initRunningThread(this_thread::get_id(), [hWnd]() {
+::PostMessage(hWnd, WM_THREAD, (WPARAM)0, (LPARAM)0); 
+});
+@endcode
+And t * he WinProc Function must be extended like this:
+@code {.cpp}
+case WM_THREAD:
+mainThread->processQueue();
+break;
+@endcode
+
+
+
+@brief The real implementation of Thread.
+
+Hidden from the public eye, here effectively done 
+
+"
+      operation 139266 "Impl"
+	cpp_inline public explicit_return_type ""
+	nparams 1
+	  param in name "name" explicit_type "string"
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract} : name_(name)
+	{};
+"
+	
+	
+	
+	
+      end
+
+      attribute 133122 "name_"
+	public explicit_type "string"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 132482 // id_ (<directional composition>)
+	relation 132482 *-->
+	  a role_name "id_" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 132482 // id_ (<directional composition>)
+	  b parent class_ref 130306 // ThreadId
+      end
+
+      attribute 133250 "thread_"
+	public explicit_type "thread"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 133378 "notify_"
+	public explicit_type "void()"
+	stereotype "function"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 133506 "mutex_"
+	public explicit_type "recursive_mutex"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 133634 "condition_"
+	public explicit_type "condition_variable_any"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 133762 "enqueued_"
+	public explicit_type "atomic_bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 133890 "stopped_"
+	public explicit_type "atomic_bool"
+	init_value "=  false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${h_value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 134018 "queue_"
+	public explicit_type "function<void()>"
+	stereotype "queue"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 139394 "enqueue"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "f" explicit_type "function<void()>"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief A new function object is added to the waiting queue
+//
+//@param f 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 139522 "notify"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief notify condition or notify-functor
+//
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 139650 "standardLoop"
+	class_operation preserve_cpp_body_indent cpp_inline public explicit_return_type "void"
+	nparams 1
+	  param in name "pThread" type class_ref 128130 // ThreadPtr
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief The normally used processing loop of a background thread.
+//
+//@param pThread 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 139778 "initRunningThread"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type "void"
+	nparams 3
+	  param in name "id" type class_ref 130306 // ThreadId
+	  param in name "notify" explicit_type "function<void()>"
+	  param in name "pThread" type class_ref 128130 // ThreadPtr
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief initialize a running thread.
+//
+//@details 
+//
+//
+//@param id 
+//@param notify 
+//@param pThread 
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${const}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 139906 "processQueue"
+	preserve_cpp_body_indent cpp_inline public explicit_return_type "void"
+	nparams 2
+	  param inout name "lock" explicit_type "unique_lock<recursive_mutex>"
+	  param in name "maxElements" explicit_type "size_t"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} & ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@brief process the queue of functors, usually called form notify-functor
+//
+//@param maxElements ///> if more elements in queue, notify is called
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} & ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 134146 "Thread::ThreadManager::Impl"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "
+@brief The implementation of the thread manager
+
+"
+      attribute 134146 "isDeleted"
+	class_attribute public explicit_type "bool"
+	init_value "= false"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "/>An helper construct to prevent the application from crashing on exit."
+      end
+
+      operation 140034 "~Impl"
+	cpp_inline public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract} {
+		// If the globally stored main thread is released on termination, the manager may already be cleared
+		isDeleted = true;
+		std::vector<weak_ptr<Thread>> threads;
+		for (map<ThreadId, weak_ptr<Thread>>::value_type vt : idMap_)
+			threads.push_back(vt.second);
+
+		for ( weak_ptr<Thread> twp : threads)
+		{
+			ThreadPtr thread = twp.lock(); 
+			if (thread)
+				thread->stop();
+		}
+		this_thread::yield();
+		for ( weak_ptr<Thread> twp : threads)
+		{
+			ThreadPtr thread = twp.lock(); 
+			if (thread && thread->joinable())
+				thread->join();
+		}
+	};
+"
+	
+	
+	
+	
+      end
+
+      attribute 134274 "mutex_"
+	public explicit_type "recursive_mutex"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      classrelation 132610 // idMap_ (<directional composition>)
+	relation 132610 *-->
+	  stereotype "map"
+	  a role_name "idMap_" public
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type},weak_ptr<Thread> > ${name}${value};
+"
+	    classrelation_ref 132610 // idMap_ (<directional composition>)
+	  b parent class_ref 130306 // ThreadId
+      end
+
+      attribute 134402 "nameMap_"
+	public explicit_type "string, weak_ptr<Thread>"
+	stereotype "map"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 140162 "getOrCreateThread"
+	preserve_cpp_body_indent cpp_inline public return_type class_ref 128130 // ThreadPtr
+	nparams 1
+	  param in name "name" explicit_type "string"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@copydoc Thread::ThreadManager::operator[](const string &name)
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 140290 "getThread"
+	preserve_cpp_body_indent cpp_inline public return_type class_ref 128130 // ThreadPtr
+	nparams 1
+	  param in name "id" type class_ref 130306 // ThreadId
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//
+//@copydoc Thread::ThreadManager::operator[](const ThreadId &id) const
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 128130 "Base"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128258 "Description"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128642 // Description
+      end
+    end
+
+    artifact 128386 "Object"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128898 // typedef1
+	class_ref 128770 // ObjectPtr
+	class_ref 129026 // Object
+      end
+    end
+
+    artifact 128514 "Property"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 129410 // Property
+	class_ref 129794 // typedef2
+	class_ref 129666 // PropertyPtr
+	class_ref 129922 // typedef3
+	class_ref 129282 // PropertyList
+      end
+    end
+
+    artifact 128642 "Serialize"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 129154 // Serialize
+	class_ref 130178 // typedef4
+	class_ref 130050 // SerializePtr
+      end
+    end
+
+    artifact 128770 "Thread"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 130434 // typedef5
+	class_ref 130306 // ThreadId
+	class_ref 130562 // typedef6
+	class_ref 128258 // Thread
+      end
+    end
+
+    artifact 128898 "Value"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 130818 // Value
+	class_ref 130946 // typedef7
+	class_ref 129538 // ValuePtr
+	class_ref 131074 // ValueImpl
+	class_ref 131202 // StringValue
+	class_ref 131330 // BooleanValue
+	class_ref 131458 // Int32Value
+      end
+    end
+
+    artifact 129922 "tagTHREADNAME_INFO"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 133762 // tagTHREADNAME_INFO
+      end
+    end
+
+    artifact 130050 "THREADNAME_INFO"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 133890 // THREADNAME_INFO
+      end
+    end
+
+    artifact 130178 "Thread::Impl"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 134018 // Thread::Impl
+      end
+    end
+
+    artifact 130306 "Thread::ThreadManager::Impl"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 134146 // Thread::ThreadManager::Impl
+      end
+    end
+  end
+end

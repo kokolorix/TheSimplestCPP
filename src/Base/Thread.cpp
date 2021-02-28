@@ -69,51 +69,306 @@ using namespace std;
  * 
  * 
  * Using for a background thread is very intuitive:
- * @code {.cpp}
-    ThreadPtr thread1 = Thread::Manager["Thread1"];
-    if(!thread1->IsRunning)
-        thread1->start();
-
-    thread1->call([thread1]() {
-		DoTheJob();
-	});
- * @endcode
+ * @copydoc hidden_enqueue_sample
  * Thread1 remains in this case after the job has been completed
  * Stand by and wait for the next job.
  * 
+ * 
  * If only a specific task is to be completed, this can also be done this way:
- * @code {.cpp}
-    ThreadPtr thread1 = Thread::Manager["Thread1"];
-    if(!thread1->IsRunning)
-        thread1->start([thread1]() {
-		DoTheJob();
-	});
- * @endcode
+ * @copydoc hidden_start_sample
  * Thread1 ends in this case with DoTheJob() and will be removed from Manager,
  * if no other ThreadPtr exists in the system 
  * 
  * 
  * Another case is assigning the main thread of an application to a thread object:
+ * @copydoc hidden_exisiting_sample
+ */
+
+/**
+ * @class hidden_enqueue_sample 
+ * @code {.cpp}
+
+    ThreadPtr thread1 = Thread::Manager["Thread1"];
+    if(!thread1->IsRunning)
+        thread1->start();
+
+    for(size_t i = 0; i < 3; ++i)
+	 {
+		thread1->enqueue([thread1]() {
+			DoTheJob();
+		});
+	 }
+
+ * @endcode
+ * @msc
+ * hscale="0.2", arcgradient="2";
+ * mt[label="mainThread", linecolor="fuchsia"], t1[label="thread1", linecolor="orange"];
+ * |||;
+ * mt box mt[label="main", textbgcolour="fuchsia"];
+ * t1 box t1[label="thread1", textbgcolour="orange"];
+ * 
+ * ---;
+ * 
+ * mt =>> t1 [label="start()", URL="\ref start", linecolor="fuchsia"];
+ * mt -> t1 [label="enqueue()", URL="\ref enqueue", linecolor="fuchsia"];
+ * 
+ * t1 => t1 [label="DoTheJob()", textcolor="orange", linecolor="violet"];
+ * 
+ * mt -> t1 [label="enqueue()", URL="\ref enqueue", linecolor="fuchsia"];
+ * mt -> t1 [label="enqueue()", URL="\ref enqueue", linecolor="fuchsia"];
+ * 
+ * t1 => t1 [label="DoTheJob()", textcolor="orange", linecolor="violet"];
+ * t1 => t1 [label="DoTheJob()", textcolor="orange", linecolor="violet"];
+ * 
+ * @endmsc
+ */
+
+/**
+ * @class hidden_start_sample 
+ * @code {.cpp}
+
+    ThreadPtr thread1 = Thread::Manager["Thread1"];
+    if(!thread1->IsRunning)
+        thread1->start([thread1]() {
+		DoTheJob();
+	});
+	thread1->join();  // wait to the end of DoTheJob
+
+ * @endcode 
+ * @msc
+ * hscale="0.2", arcgradient="2";
+ * mt[label="mainThread", linecolor="fuchsia"], t1[label="thread1", linecolor="orange"];
+ * |||;
+ * mt box mt[label="main", textbgcolour="fuchsia"];
+ * t1 box t1[label="thread1", textbgcolour="orange"];
+ * 
+ * ---;
+ * 
+ * mt =>> t1 [label="start()", URL="\ref start", linecolor="fuchsia"];
+ * t1 => t1 [label="DoTheJob()", textcolor="orange", linecolor="violet"];
+ * 
+ * 
+ * ---;
+ * mt <<= t1 [label="join()", URL="\ref join", linecolor="orange"];
+ * @endmsc
+ */
+
+/**
+ * @class hidden_stop_sample 
+ * @code {.cpp}
+
+    thread2->start([thread2]() {
+        while(!thread2->IsStopped) // <--- here we checks every loop the IsStopped Property
+        {
+            Thread::sleep(300);
+            mainThread->enqueues([thread2]() {
+                static int count = 0;
+                string progress[] = {"|","/", "-", "\\" };
+                int size = sizeof(progress) / sizeof(string);
+                ButtonPtr button = Button::Manager["Start:Button"];
+                button->Caption = "Running " + progress[count % size];
+                count++;
+            });
+        }
+        // If the thread was stopped, we reset the text
+        mainThread->enqueues([](){
+             ButtonPtr button = Button::Manager["Start:Button"];
+             button->Caption = "Start ...";            
+        });
+    });
+	 ...
+	void OnStartClicked(Button *button)
+	{
+		ThreadPtr thread2 = Thread::Manager.find("Thread2");
+		if(thread2)
+		{
+			thread2->stop();
+			thread2->join();
+		}
+	}
+
+ * @endcode
+ * @msc
+ * hscale="0.2", arcgradient="2";
+ * mt[label="mainThread", linecolor="fuchsia"], t1[label="thread1", linecolor="orange"];
+ * |||;
+ * mt box mt[label="main", textbgcolour="fuchsia"];
+ * t1 box t1[label="thread1", textbgcolour="orange"];
+ * 
+ * mt =>> t1 [label="start()", URL="\ref start", linecolor="fuchsia"];
+ * t1 => t1 [label="working ...", textcolor="orange", linecolor="violet"];
+ * t1 => t1 [label="working ...", textcolor="orange", linecolor="violet"];
+ * 
+ * ---;
+ * 
+ * mt =>> t1 [label="stop()", URL="\ref stop", linecolor="fuchsia"];
+ * t1 => t1 [label="working ...", textcolor="orange", linecolor="violet"];
+ * mt <<= t1 [label="join()", URL="\ref join", linecolor="orange"];
+ * @endmsc
+ */
+
+/**
+ * @class hidden_exisiting_sample 
  * Globally, the following elements are necessary:
  * @code {.cpp}
+
 ThreadPtr mainThread;           //> The main thread instance 
 #define WM_THREAD WM_USER + 1   //> The Windows Message to communicate with the main thread
+
  * @endcode
  * In the WinMain you have to do
  * @code {.cpp}
+
     ThreadPtr mainThread = Thread::Manager["MainThread"];
     mainThread->initRunningThread(this_thread::get_id(), [hWnd]() {
          ::PostMessage(hWnd, WM_THREAD, (WPARAM)0, (LPARAM)0); 
          });
+
  * @endcode
- * And t * he WinProc Function must be extended like this:
+ * And the WinProc Function must be extended like this:
  * @code {.cpp}
+
     case WM_THREAD:
         mainThread->processQueue();
         break;
- * @endcode
+
+ * @endcode 
+ * @msc
+ * hscale="0.2", arcgradient="2";
+ * mt[label="mainThread", linecolor="fuchsia"], t1[label="thread1", linecolor="orange"];
+ * |||;
+ * mt box mt[label="main", textbgcolour="fuchsia"];
+ * t1 box t1[label="thread1", textbgcolour="orange"];
+ * 
+ * mt =>> mt [label="initRunningThread()", URL="\ref initRunningThread", linecolor="fuchsia"];
+ * 
+ * ---;
+ * 
+ * t1 =>> mt [label="enqueue()", textcolor="orange", linecolor="fuchsia"];
+ * t1 =>> mt [label="notify()", textcolor="orange", linecolor="fuchsia"];
+ * t1 =>> mt [label="PostMessage(...)", textcolor="orange", linecolor="fuchsia"];
+ * 
+ * ---;
+ * 
+ * mt =>> mt [label="processQueue()", URL="\ref processQueue", linecolor="fuchsia"];
+ * @endmsc
+*/
+
+/**
+ * @name Thread control
+ * @brief Methods to control the flow of a thread
+ * @details
+ * Start and enqueue
+ * @copydoc hidden_enqueue_sample
+ * 
+ * Stop and join
+ * @copydoc hidden_stop_sample
  * 
  */
+/**@{*/ // start Thread control
+
+/**
+ * @fn void Thread::start()
+ * @brief Starts the Thread with @ref Thread::Impl::standardLoop
+ * @details
+ * After startup it is possible to push tasks to the thread queue
+ * 
+ * @copydoc hidden_enqueue_sample
+ */
+/**
+ * @fn void Thread::stop()
+ * @brief Method to stop the Trhead
+ * @details
+ * Internally, the IsStopped property is set. When the executing thread 
+ * detects that this property is True, it should finish or abort
+ *  its work as soon as possible
+ * 
+ * @copydoc hidden_stop_sample
+ */
+/**
+ * @fn void Thread::joinable()
+ * @brief Reports whether the thread can be merged or not
+ */
+/**
+ * @fn void Thread::join()
+ * @brief Führt den Thread mit dem aktuellen zusammen.
+ * @details
+ * The current thread waits until the requested thread is finished
+ */
+
+/**@}*/ // end Thread control
+
+/**
+ * @name Inclusion of existing threads
+ * @brief Methods to include already running threads
+ * @copydoc hidden_exisiting_sample
+ */
+/**@{*/ // start Exisiting threads
+/**
+ * @fn void Thread::initRunningThread(ThreadId id, function<void()> notify)
+ * @brief Initializes a thread object with an already running thread.
+ * @details
+ * The notification function is called when the thread gets new items pushed to its queue
+ * @copydoc hidden_exisiting_sample
+ */
+
+/**
+ * @fn void Thread::processQueue(size_t maxElements = 10)
+ * @brief Processes @c maxElements in the running thread.
+ * @details
+ * After notification, all tasks are processed in this way.
+ * @copydoc hidden_exisiting_sample
+ */
+/**@}*/ // end Exisiting threads
+
+/**
+ * @name Code injection
+ * @brief start and enqueue are very similar in application
+ * @details
+ * here you can specify any callable object (function, method, std::function, etc.)
+ * with all arguments, which will then be executed in the thread.
+ * While start which uses the callable object as the start function of the thread,
+ * enqueue enqueues the callable object in the thread's waiting queue
+ * and an event is fired, which requests the thread to process its queue.
+ * 
+ * Let's look at a simple startup example:
+ * @copydoc hidden_start_sample
+ * 
+ * And then the example of a reusable thread:
+ * @copydoc hidden_enqueue_sample
+ * 
+ * @tparam _Fn the type callable.object 
+ * @tparam _Args the types of the parameters
+ * @param _Fx any callable object
+ * @param _Ax arguments for the callable object
+ */
+
+/**@{*/ // start Code injection
+
+/**
+ * @fn void Thread::start(_Fn &&_Fx, _Args &&... _Ax)
+ * @brief The code that will be executed, after the new Thread is started
+ * @details
+ * This is the main functionallity of the Thread. Usually such a working thread is
+ * which should complete a task exactly once and then ends.
+ * If the task should be able to be aborted, it is important to check for 
+ * IsStopped between all steps.
+ * 
+ * 
+ * @copydoc hidden_start_sample
+ */
+
+/**
+ * @fn void Thread::enqueue(_Fn &&_Fx, _Args &&... _Ax)
+ * @brief  The code that will be enqued in the threads task queue
+ * @details
+ * Threads which are started with the @ref Thread::Impl::standardLoop,
+ * can thus accept new tasks. The tasks are added to the queue 
+ * and processed as fast as possible
+ * @copydoc hidden_enqueue_sample
+*/
+
+/**@}*/ // end Code injection
 
 /**
  * @brief The real implementation of Thread.
@@ -175,12 +430,13 @@ struct Thread::ThreadManager::Impl
 				thread->join();
 		}
 	}
-	recursive_mutex mutex_;
+	mutable recursive_mutex mutex_;
 	map<ThreadId, weak_ptr<Thread>> idMap_;
 	map<string, weak_ptr<Thread>> nameMap_;
 
 	ThreadPtr getOrCreateThread(const string& name);
-	ThreadPtr getThread(const ThreadId &id);
+	ThreadPtr getThread(const ThreadId &id) const;
+	ThreadPtr getThread(const string &name) const;
 };
 
 /**
@@ -209,14 +465,28 @@ ThreadPtr Thread::ThreadManager::Impl::getOrCreateThread(const string& name)
 /**
  * @copydoc Thread::ThreadManager::operator[](const ThreadId &id) const
  */
-ThreadPtr Thread::ThreadManager::Impl::getThread(const ThreadId &id)
+ThreadPtr Thread::ThreadManager::Impl::getThread(const ThreadId &id) const
 {
 	lock_guard<recursive_mutex> lock(mutex_);
 	auto it = idMap_.find(id);
 	if (it != idMap_.end())
 	{
-		weak_ptr<Thread>& thread = it->second;
+		const weak_ptr<Thread>& thread = it->second;
 		return thread.lock();
+	}
+	return ThreadPtr();
+}
+/**
+ * @copydoc Thread::ThreadManager::find(const string &name) const
+ */
+ThreadPtr Thread::ThreadManager::Impl::getThread(const string &name) const
+{
+	lock_guard<recursive_mutex> lock(mutex_);
+	auto it = nameMap_.find(name);
+	if (it != nameMap_.end())
+	{
+		const weak_ptr<Thread>& weakPtr = it->second;
+		return weakPtr.lock();
 	}
 	return ThreadPtr();
 }
@@ -289,7 +559,7 @@ void Thread::initRunningThread(ThreadId id, function<void()> notify)
  * 
  * @param t 
  */
-void Thread::start(thread &&t)
+void Thread::start_(thread &&t)
 {
 	if (pImpl_->thread_.joinable())
 	{
@@ -313,36 +583,10 @@ void Thread::start()
 {
 	ThreadPtr thisThread = shared_from_this();
 	unique_lock<recursive_mutex> lock(pImpl_->mutex_);
-	start(thread(Impl::standardLoop, thisThread));
+	start_(thread(Impl::standardLoop, thisThread));
 	pImpl_->condition_.wait(lock);
 }
 
-/**
- * @brief Stops a running thread as fast as intended.
- * In longer lasting processing it must be provided, at suitable places
- * to cancel
- * @code {.cpp}
-    thread2->call([thread2]() {
-        while(!thread2->IsStopped) // <--- here we checks every loop the IsStopped Property
-        {
-            ::Sleep(300);
-            mainThread->call([thread2]() {
-                static int count = 0;
-                string progress[] = {"|","/", "-", "\\" };
-                int size = sizeof(progress) / sizeof(string);
-                ButtonPtr button = Button::Manager["Start:Button"];
-                button->Caption = "Running " + progress[count % size];
-                count++;
-            });
-        }
-        // If the thread was stopped, we reset the text
-        mainThread->call([](){
-             ButtonPtr button = Button::Manager["Start:Button"];
-             button->Caption = "Start ...";            
-        });
-    });
- * @endcode
- */
 void Thread::stop()
 {
 	pImpl_->stopped_ = true;
@@ -356,11 +600,22 @@ void Thread::stop()
 }
 
 /**
- * @brief 
+ * @brief blocks the current thread for at least the given milliseconds
  * 
- * @param f 
+ * @param milliseconds 
  */
-void Thread::enqueue(function<void()> f)
+void Thread::sleep(size_t milliseconds) 
+{
+	std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+	// throw exception(__FUNCTION__" not implemented");
+}
+
+/**
+ * @brief push the functor in the queue
+ * 
+ * @param f functor to push in queue
+ */
+void Thread::enqueue_(function<void()> f)
 {
 	pImpl_->enqueue(f);
 }
@@ -448,7 +703,7 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 	SetThreadName(::GetCurrentThreadId(), threadName.c_str());
 	
 	EditPtr output = Edit::Manager["Output:Edit"];
-	output->addLine((ostringstream() << "start of thread " << threadName << "\r\n").str());
+	output->add((ostringstream() << "start of thread " << threadName << "\r\n").str());
 	Thread::Impl* pImpl = pThread->pImpl_.get();
 	pImpl->condition_.notify_all();
 
@@ -467,12 +722,13 @@ void Thread::Impl::standardLoop(ThreadPtr pThread)
 		Thread::Manager.pImpl_->idMap_.erase(pImpl->id_);
 	}
 	pImpl->id_ = ThreadId();
-	output->addLine((ostringstream() << "end of thread " << threadName << "\r\n").str());
+	output->add((ostringstream() << "end of thread " << threadName << "\r\n").str());
 }
 /**
  * @brief process the queue of functors, usually called form notify-functor
  * 
- * @param maxElements ///> if more elements in queue, notify is called
+ * @param lock				///> The lock must set outside of this procedure
+ * @param maxElements 	///> If more elements in queue, notify is called
  */
 void Thread::Impl::processQueue(unique_lock<recursive_mutex>& lock, size_t maxElements)
 {
@@ -480,7 +736,10 @@ void Thread::Impl::processQueue(unique_lock<recursive_mutex>& lock, size_t maxEl
 	{
 		function<void()> f = queue_.front();
 		queue_.pop();
+#pragma warning(push)
+#pragma warning(disable : 26110)
 		lock.unlock();
+#pragma warning(pop)
 		f();
 		lock.lock();
 
@@ -521,6 +780,7 @@ ThreadPtr Thread::ThreadManager::operator[](const string &name)
 {
 	return pImpl_->getOrCreateThread(name);
 }
+
 /**
  * @brief Returns the Thread object with the resulting ThreadId. If no such thread exists, an empty ThreadPtr is returned. 
  * 
@@ -530,5 +790,26 @@ ThreadPtr Thread::ThreadManager::operator[](const string &name)
 ThreadPtr Thread::ThreadManager::operator[](const ThreadId &id) const
 {
 	return pImpl_->getThread(id);
+}
+
+/**
+ * @brief Returns the Thread object with the resulting ThreadId. If no such thread exists, an empty ThreadPtr is returned. 
+ * 
+ * @param name 
+ * @return ThreadPtr 
+ */
+ThreadPtr Thread::ThreadManager::find(const string& name) const
+{
+	return pImpl_->getThread(name);
+}
+
+/**
+ * @brief Returns the current thread. If no such thread exists, an empty ThreadPtr is returned. 
+ * 
+ * @return ThreadPtr 
+ */
+ThreadPtr Thread::ThreadManager::currentThread() const
+{
+	return pImpl_->getThread(this_thread::get_id());
 }
 

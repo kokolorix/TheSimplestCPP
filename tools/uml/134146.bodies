@@ -1,0 +1,29 @@
+class Thread::ThreadManager::Impl
+!!!140162.cpp!!!	getOrCreateThread(in name : string) : ThreadPtr
+
+	lock_guard<recursive_mutex> lock(mutex_);
+	ThreadPtr threadPtr;
+	auto res = nameMap_.insert(make_pair(name, threadPtr));
+	if (res.second)
+	{
+		weak_ptr<Thread>& weakPtr = res.first->second;
+		threadPtr = ThreadPtr(new Thread(name));
+		weakPtr = threadPtr;
+	}
+	else
+	{
+		weak_ptr<Thread>& weakPtr = res.first->second;
+		threadPtr = weakPtr.lock();
+	}
+
+	return threadPtr;
+!!!140290.cpp!!!	getThread(in id : ThreadId) : ThreadPtr
+
+	lock_guard<recursive_mutex> lock(mutex_);
+	auto it = idMap_.find(id);
+	if (it != idMap_.end())
+	{
+		weak_ptr<Thread>& thread = it->second;
+		return thread.lock();
+	}
+	return ThreadPtr();

@@ -1,0 +1,22 @@
+class Property
+!!!130306.cpp!!!	Property()
+
+
+!!!130434.cpp!!!	Property(in name : string, in value : ValuePtr = ValuePtr())
+
+
+!!!130562.cpp!!!	~Property()
+
+
+!!!130690.cpp!!!	toJson() : string
+
+	throw std::exception("The method or operation is not implemented.");
+!!!130818.cpp!!!	fromJson(in json : string) : void
+
+	throw std::exception("The method or operation is not implemented.");
+!!!130946.cpp!!!	toXml() : string
+
+	throw std::exception("The method or operation is not implemented.");
+!!!131074.cpp!!!	fromXml(in xml : string) : void
+
+	throw std::exception("The method or operation is not implemented.");

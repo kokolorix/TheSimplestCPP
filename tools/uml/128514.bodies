@@ -1,0 +1,24 @@
+class Button
+!!!135042.cpp!!!	Button()
+
+!!!135170.cpp!!!	~Button()
+
+
+!!!135298.cpp!!!	create(in hParent : HWND, in x : int, in y : int, in cx : int, in cy : int, in caption : string) : HWND
+
+    return Control::create(hParent,
+                           x,
+                           y,
+                           cx,
+                           cy,
+                           "BUTTON",
+                           caption,
+                           WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON
+                           );
+!!!135426.cpp!!!	execute(in command : int) : void
+
+    switch(command)
+    {
+        case BN_CLICKED:
+        OnClicked(this);
+    }

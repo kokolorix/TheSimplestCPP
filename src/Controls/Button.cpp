@@ -37,11 +37,14 @@ HWND Button::create(HWND hParent, int x, int y, int cx, int cy, string caption)
                            );
 }
 
-void Button::execute(int command)
+bool Button::execute(int command)
 {
-    switch(command)
-    {
-        case BN_CLICKED:
-        OnClicked(this);
-    }
+	switch (command)
+	{
+	case BN_CLICKED:
+		OnClicked(this);
+		return true;
+	default:
+		return false;
+	}
 }

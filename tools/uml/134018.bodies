@@ -1,0 +1,73 @@
+class Thread::Impl
+!!!139394.cpp!!!	enqueue(in f : function<void()>) : void
+
+	{
+		lock_guard<recursive_mutex> lock(mutex_);
+		queue_.push(f);
+		enqueued_ = true;
+	}
+	notify();
+!!!139522.cpp!!!	notify() : void
+
+	if (notify_)
+		notify_();
+	else
+		condition_.notify_one();
+!!!139650.cpp!!!	standardLoop(in pThread : ThreadPtr) : void
+
+	string threadName = pThread->Name;
+	//std::wstring threadName = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(tn.c_str());
+	//std::wstring threadName(tn.length(), L' ');// = std::wstring_convert<std::codecvt_utf8<wchar_t>>().from_bytes(tn.c_str());
+	//std::copy(tn.begin(), tn.end(), threadName.begin());
+
+	//HRESULT hr = SetThreadDescription(GetCurrentThread(), threadName.c_str());
+	//assert(SUCCEEDED(hr));
+	SetThreadName(::GetCurrentThreadId(), threadName.c_str());
+	
+	EditPtr output = Edit::Manager["Output:Edit"];
+	output->add((ostringstream() << "start of thread " << threadName << "\r\n").str());
+	Thread::Impl* pImpl = pThread->pImpl_.get();
+	pImpl->condition_.notify_all();
+
+	do
+	{
+		unique_lock<recursive_mutex> lock(pThread->pImpl_->mutex_);
+		pImpl->condition_.wait(lock, [pImpl] { return pImpl->enqueued_.load() || pImpl->stopped_.load(); });
+		pImpl->enqueued_ = false;
+
+		pImpl->processQueue(lock, 10);
+
+	} while (pImpl->stopped_ == false);
+
+	{
+		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+		Thread::Manager.pImpl_->idMap_.erase(pImpl->id_);
+	}
+	pImpl->id_ = ThreadId();
+	output->add((ostringstream() << "end of thread " << threadName << "\r\n").str());
+!!!139778.cpp!!!	initRunningThread(in id : ThreadId, in notify : function<void()>, in pThread : ThreadPtr) : void
+
+	id_ = id;
+	{
+		lock_guard<recursive_mutex> lock(Thread::Manager.pImpl_->mutex_);
+		Thread::Manager.pImpl_->nameMap_.insert(make_pair(name_, pThread));
+	}
+	notify_ = notify;
+!!!139906.cpp!!!	processQueue(inout lock : unique_lock<recursive_mutex>, in maxElements : size_t) : void
+
+	for (size_t i = 0; i < maxElements && !queue_.empty(); ++i)
+	{
+		function<void()> f = queue_.front();
+		queue_.pop();
+#pragma warning(push)
+#pragma warning(disable : 26110)
+		lock.unlock();
+#pragma warning(pop)
+		f();
+		lock.lock();
+
+		this_thread::yield();
+	}
+
+	if (!queue_.empty())
+		notify();

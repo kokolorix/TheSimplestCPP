@@ -14,7 +14,7 @@ public:
     static Control::ControlManagerImpl<Button> Manager;
 
     HWND create(HWND hParent, int x, int y, int cx, int cy, string caption);
-    void execute(int command);
+	 virtual bool execute(int command);
 
 private:
     struct Impl;

@@ -17,13 +17,15 @@ struct  Control::Impl
     {
         ::SetWindowTextA(hWnd_, caption.c_str());
     }
-    string get_caption()
-    {
-        size_t len = ::GetWindowTextLengthA(hWnd_);
-        auto buf = unique_ptr<char[]>(new char[len + 1]);
-        ::GetWindowTextA(hWnd_, buf.get(), (int)len);
-        return string(buf.get());
-    }
+	 string get_caption()
+	 {
+		 int ilen = ::GetWindowTextLengthA(hWnd_) + 1;
+		 size_t len = static_cast<size_t>(ilen);
+		 auto buf = unique_ptr<char[]>(new char[len]);
+		 buf[len - 1] = '\0';
+		 ::GetWindowTextA(hWnd_, buf.get(), (int)len);
+		 return string(buf.get());
+	 }
 };
 
 struct Control::ControlManager::Impl
@@ -82,29 +84,38 @@ void Control::insert(HWND hWnd)
 		Control::Manager.pImpl_->hMap_[pImpl_->hWnd_] = it->second;
 }
 
-void Control::execute(int command)
+bool Control::execute(int command)
 {
-    //switch(command)
-    //{
-    //}
+	//switch(command)
+	//{
+	//default:
+	//   return false;
+	//}
+	return false;
+}
+
+LRESULT Control::wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	if (message == WM_COMMAND)
+	{
+		if(execute(HIWORD(wParam)))
+         return LRES_PROCESSED;
+	}
+   return 0;
 }
 
 Control::ControlManager::ControlManager() : pImpl_(make_unique<Control::ControlManager::Impl>()){}
 
 Control::ControlManager::~ControlManager() { pImpl_->deleted_ = true; }
 
-ControlPtr Control::ControlManager::operator[](const string &name)
+ControlPtr Control::ControlManager::operator[](const string &name) const
 {
     ControlPtr &control = Control::Manager.pImpl_->nameMap_[name];
-    if (!control)
-        control = make_shared<Control>();
     return control;
 }
-ControlPtr Control::ControlManager::operator[](HWND hWnd)
+ControlPtr Control::ControlManager::operator[](HWND hWnd) const
 {
     ControlPtr &control = Control::Manager.pImpl_->hMap_[hWnd];
-    if (!control)
-        control = make_shared<Control>();
     return control;
 }
 ControlPtr& Control::ControlManager::get(const string &name)

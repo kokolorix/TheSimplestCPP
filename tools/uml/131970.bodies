@@ -1,0 +1,19 @@
+class ControlManager
+!!!135938.cpp!!!	~ControlManager()
+ pImpl_->deleted_ = true;
+!!!136066.cpp!!!	operator [](in name : string) : ControlPtr
+
+    ControlPtr &control = Control::Manager.pImpl_->nameMap_[name];
+    if (!control)
+        control = make_shared<Control>();
+    return control;
+!!!136194.cpp!!!	operator [](in hWnd : HWND) : ControlPtr
+
+    ControlPtr &control = Control::Manager.pImpl_->hMap_[hWnd];
+    if (!control)
+        control = make_shared<Control>();
+    return control;
+!!!136322.cpp!!!	get(in name : string) : ControlPtr
+
+    ControlPtr &control = Control::Manager.pImpl_->nameMap_[name];
+    return control;

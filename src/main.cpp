@@ -18,6 +18,7 @@ using std::endl;
 #include <windows.h>
 
 #include "dbg_new.h"
+#include "utils.hpp"
 
 #include <CommCtrl.h>
 #include "Thread.h"
@@ -27,6 +28,7 @@ using std::endl;
 #include <fstream>
 #include <ctime>
 #include <random>
+#include "TestCase.h"
 
 
 /**
@@ -85,9 +87,9 @@ int WINAPI CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevIn
          ::PostMessage(hWnd, WM_THREAD, (WPARAM)0, (LPARAM)0); 
          });
 
-    while (::GetMessage(&msg, NULL, 0, 0) > 0)
-    {
-        ::DispatchMessage(&msg);
+	 while (GetMessage(&msg, NULL, 0, 0) > 0) {
+		 ::TranslateMessage(&msg);
+		 ::DispatchMessage(&msg);
     }
 
     return 0;
@@ -96,6 +98,7 @@ int WINAPI CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevIn
 
 void OnStartClicked(Button* button);
 void OnThreadTestClicked(Button* button);
+void OnStartTestClicked(Button* button);
 /**
  * @brief 
  * 
@@ -107,66 +110,92 @@ void OnThreadTestClicked(Button* button);
  */
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    switch (message)
-    {
-    case WM_CREATE:
-    {
-        ButtonPtr start = Button::Manager["Start:Button"];
-        start->OnClicked = OnStartClicked;
-        start->create(hWnd, 20, 20, 100, 30, "Start ...");
+	ControlPtr control = Control::Manager[hWnd];
+	if(control)
+	{
+		LRESULT result = control->wndProc(hWnd, message, wParam, lParam);
+		if (result  == LRES_PROCESSED)
+			return result;
+	}
+	switch (message)
+	{
+	case WM_CREATE:
+	{
+		ButtonPtr start = Button::Manager["Start:Button"];
+		start->OnClicked = OnStartClicked;
+		start->create(hWnd, 20, 20, 100, 30, "Start ...");
 
-        RECT rcClient;
-        ::GetClientRect(hWnd, &rcClient);
+		RECT rcClient;
+		::GetClientRect(hWnd, &rcClient);
 
-        int cyVScroll = GetSystemMetrics(SM_CYVSCROLL);
-		  LONG height = rcClient.bottom - rcClient.top;
+		int cyVScroll = GetSystemMetrics(SM_CYVSCROLL);
+		LONG height = rcClient.bottom - rcClient.top;
 
-        ButtonPtr threadTest = Button::Manager["ThreadTest:Button"];
-        threadTest->OnClicked = OnThreadTestClicked;
-        threadTest->create(hWnd, 140, 20, 100, 30, "Thread-Test");
+		ButtonPtr threadTest = Button::Manager["ThreadTest:Button"];
+		threadTest->OnClicked = OnThreadTestClicked;
+		threadTest->create(hWnd, 140, 20, 100, 30, "Thread-Test");
 
-        EditPtr output = Edit::Manager["Output:Edit"];
-        output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
+		ButtonPtr startTest = Button::Manager["StartTest:Button"];
+		startTest->OnClicked = OnStartTestClicked;
+		startTest->create(hWnd, 260, 20, 100, 30, "Test");
 
-        ProgressPtr progress1 = Progress::Manager["Progress1"];
-        progress1->create(hWnd, 0, height - cyVScroll * 2, rcClient.right, cyVScroll * 2);
-  }
-    break;
+		EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
+		filterTest->ClientEdge = true;
+		filterTest->Multiline = true;
+		filterTest->Margins = 4;
+		filterTest->create(hWnd, 380, 20, rcClient.right - 400, 30, "*");
+		SetFocus(filterTest->hWnd);
 
-    case WM_COMMAND:
-    {
-        HWND hCtrl = reinterpret_cast<HWND>(lParam);
-        if (HIWORD(wParam) == BN_CLICKED)
-        {
-            ButtonPtr button = Button::Manager[hCtrl];
-            button->execute(BN_CLICKED);
-        }
-   }
-    break;
+		EditPtr output = Edit::Manager["Output:Edit"];
+		output->Margins = 6;
+		output->ReadOnly = true;
+		output->Multiline = true;
+		output->VScroll = true;
+		output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
 
-    case WM_KEYUP:
-    {
-        if(wParam  == VK_ESCAPE)
-            ::PostMessage(hWnd, WM_CLOSE, 0, 0);
-    }
-    break;
+		ProgressPtr progress1 = Progress::Manager["Progress1"];
+		progress1->create(hWnd, 0, height - cyVScroll * 2, rcClient.right, cyVScroll * 2);
+		return 0;
+	}
+	break;
 
-    case WM_LBUTTONDOWN:
-        ::SetFocus(hWnd);
-        break;
+	case WM_COMMAND:
+	{
+		HWND hCtrl = reinterpret_cast<HWND>(lParam);
+		ControlPtr control = Control::Manager[hCtrl];
+		if (control)
+		{
+			LRESULT result = control->wndProc(hWnd, message, wParam, lParam);
+			if (result == LRES_PROCESSED)
+				return result;
+		}
+		break;
+	}
 
-    case WM_CLOSE:
-        ::PostQuitMessage(0);
-        break;
+	case WM_KEYUP:
+	{
+		if (wParam == VK_ESCAPE)
+		{
+			::PostMessage(hWnd, WM_CLOSE, 0, 0);
+			return 0;
+		}
+	}
+	break;
 
-    case WM_THREAD:
-        mainThread->processQueue();
-        break;
+	case WM_LBUTTONDOWN:
+		::SetFocus(hWnd);
+		return 0;
 
-    default:
-        return ::DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
+	case WM_CLOSE:
+		::PostQuitMessage(0);
+		return 0;
+
+	case WM_THREAD:
+		mainThread->processQueue();
+		return 0;
+
+	}
+	return ::DefWindowProc(hWnd, message, wParam, lParam);
 }
 
 /**
@@ -241,11 +270,11 @@ void OnStartClicked(Button *button)
 
     // Then we send the job to the second worker thread every 3 tenths of a second
     // update the text of the start button
-    thread2->call([thread2]() {
+    thread2->enqueue([thread2]() {
         while(!thread2->IsStopped)
         {
             ::Sleep(300);
-            mainThread->call([thread2]() {
+            mainThread->enqueue([thread2]() {
                 static int count = 0;
                 string progress[] = {"|","/", "-", "\\" };
                 int size = sizeof(progress) / sizeof(string);
@@ -255,7 +284,7 @@ void OnStartClicked(Button *button)
             });
         }
         // If the thread was stopped, we reset the text
-        mainThread->call([](){
+        mainThread->enqueue([](){
              ButtonPtr button = Button::Manager["Start:Button"];
              button->Caption = "Start ...";            
         });
@@ -263,7 +292,7 @@ void OnStartClicked(Button *button)
 
     // The first worker thread gets the job, ten times, every 900 milliseconds, 
     // move the progress bar one step forward
-    thread1->call([thread1,thread2]() {
+    thread1->enqueue([thread1,thread2]() {
                
         // This is the real job: Move the bar one to the right ten times :-)
         for(int i = 0; i < 10 && !thread1->IsStopped; ++i)
@@ -279,7 +308,7 @@ void OnStartClicked(Button *button)
 		  }
 
         // if the job is done, we stop the threads from the main-thread
-        mainThread->call([thread1,thread2](){
+        mainThread->enqueue([thread1,thread2](){
             thread2->stop();
             thread1->stop();
         });
@@ -320,7 +349,7 @@ void OnThreadTestClicked(Button* button)
 	{
 		thread->start();
 		LOG(__FUNCTION__);
-		thread->call([thread, output]() {
+		thread->enqueue([thread, output]() {
 			;
 			for (; thread->IsRunning;)
 			{
@@ -340,11 +369,21 @@ void OnThreadTestClicked(Button* button)
 				string line = os.str();
 				::Sleep(wait);
 				LOG(__FUNCTION__);
-				mainThread->call([output, line]() {
-					output->addLine(line);
+				mainThread->enqueue([output, line]() {
+					output->add(line);
 					});
 			}
 			});
 	}
+}
+
+void OnStartTestClicked(Button* button)
+{
+	EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
+	EditPtr output = Edit::Manager["Output:Edit"];
+	string pattern = filterTest->Caption;
+	output->Caption = "";
+	output->add(format("Start tests with filter '%s'\r\n", pattern.c_str()));
+	TestCase::runTests(pattern);
 }
 
