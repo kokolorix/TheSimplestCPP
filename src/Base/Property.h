@@ -11,19 +11,14 @@ public:
 	Property(const string&  name, ValuePtr value = ValuePtr());
 	~Property() override;
 
-	string toJson() const override;
-
-
-	void fromJson(const string& json) override;
-
-
-	string toXml() const override;
-
-
-	void fromXml(const string& xml) override;
-
-
-	string writeString() const override;
+	template <class Archive>
+	void serialize(Archive& a)
+	{
+		a(
+			CEREAL_NVP(name_),
+			CEREAL_NVP(value_)
+		);
+	}
 
 public:
 	PropertyRW<string> Name;
@@ -32,9 +27,6 @@ public:
 private:
 	string name_;
 	ValuePtr value_;
-public:
-	void readString(const string& str) override;
-
 };
 using PropertyPtr = shared_ptr<Property>;
 using PropertyList = std::vector<PropertyPtr>;

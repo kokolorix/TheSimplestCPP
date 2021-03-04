@@ -21,11 +21,20 @@ class Value	:
 	public Serialize
 {
 public:
-	template<typename T> static ValuePtr create(T value);
-protected:
 	Value();
 	virtual ~Value();
+	template <class Archive>
+	void serialize(Archive&)
+	{
+	}
+
+protected:
 };
+CEREAL_REGISTER_TYPE(Value)
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Serialize, Value)
+
+template<typename T>
+class	ValueImpl;
 
 /**
  * @brief ValuePtr is the smart pointer for thread-wide 
@@ -46,7 +55,10 @@ struct ValuePtr : public shared_ptr<const Value>
 	ValuePtr(T value);
 
 	template<typename T>
-	operator shared_ptr<const ValueImpl<T>>();
+	operator shared_ptr<const ValueImpl<T>>()
+	{
+		return dynamic_pointer_cast<const ValueImpl<T>>(*this);
+	}
 };
 
 /**
@@ -60,73 +72,49 @@ template<typename T>
 class	ValueImpl : public Value
 {	
 public:
+	ValueImpl():value_(T()) {}
+	ValueImpl(const ValueImpl& v) :value_(v.value_) {}
+	
 	ValueImpl(T v) : value_(v) { 	}
 
-	string writeString() const override;
-
-	void readString(const string& str) override;
-
-	string toJson() const override;
-
-	void fromJson(const string& json) override;
-
-	string toXml() const override;
-
-	void fromXml(const string& xml) override;
+	ValueImpl& operator = (const ValueImpl& v) 
+	{
+		value_ = v.value_;
+		return *this;
+	}
+	ValueImpl& operator = (T v)
+	{
+		value_ = v;
+		return *this;
+	}
 
 	operator T() const { return value_; }
+
+	template <class Archive>
+	void serialize(Archive& a)
+	{
+		a(CEREAL_NVP(value_));
+	}
 
 private:
 	T value_;
 };
 
-template<typename T>
-string ValueImpl<T>::writeString() const
-{
-	ostringstream os;
-	os << boolalpha << value_;
-	return os.str();
-}
-
-template<typename T>
-void ValueImpl<T>::readString(const string& str)
-{
-	istringstream is(str);
-	is >> boolalpha >> value_;
-}
-
-template<typename T>
-string ValueImpl<T>::toJson() const
-{
-	return writeString();
-}
-
-template<typename T>
-void ValueImpl<T>::fromJson(const string& json)
-{
-	readString(json);
-}
-
-template<typename T>
-string ValueImpl<T>::toXml() const
-{
-	return writeString();
-}
-
-template<typename T>
-void ValueImpl<T>::fromXml(const string& xml)
-{
-	readString(xml);
-}
 
 using StringValue = ValueImpl<string>;
 using StringValuePtr = shared_ptr<const ValueImpl<string>>;
+CEREAL_REGISTER_TYPE(StringValue)
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Value, StringValue)
 
 using BooleanValue = ValueImpl<bool>;
 using BooleanValuePtr = shared_ptr<const ValueImpl<bool>>;
+CEREAL_REGISTER_TYPE(BooleanValue)
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Value, BooleanValue)
 
 using Int32Value = ValueImpl<int32_t>;
 using Int32ValuePtr = shared_ptr<const ValueImpl<int32_t>>;
+CEREAL_REGISTER_TYPE(Int32Value)
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Value, Int32Value)
 
 
 template<typename T>
@@ -143,9 +131,9 @@ inline ValuePtr::ValuePtr(const char* value)
 
 }
 
-template<typename T>
-ValuePtr::operator shared_ptr<const ValueImpl<T>>()
-{
-	return dynamic_pointer_cast<const ValueImpl<T>>(*this);
-}
+//template<typename T>
+//inline ValuePtr::operator shared_ptr<const ValueImpl<T>>()
+//{
+//	return dynamic_pointer_cast<const ValueImpl<T>>(*this);
+//}
 

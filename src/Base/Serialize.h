@@ -6,6 +6,12 @@ using std::string;
 using std::shared_ptr;
 using std::make_shared;
 
+#include <cereal/types/polymorphic.hpp>
+
+
+//#define BOOST_JSON_STANDALONE
+//#include <boost\json.hpp>
+
 /**
  * @brief Serialize is the interface for objects
  * which can be persisted in a simple string,
@@ -17,14 +23,19 @@ class Serialize
 public:
 	virtual ~Serialize() {}
 
-	virtual string writeString() const = 0;
-	virtual void readString(const string& str) = 0;
+	template <class Archive>
+	void serialize(Archive&) 
+	{
+	}
 
-	virtual string toJson() const = 0;
-	virtual void fromJson(const string& json) = 0;
+	virtual string writeString() const;
+	virtual void readString(const string& str);
 
-	virtual string toXml() const = 0;
-	virtual void fromXml(const string& xml) = 0;
+	virtual string toJson() const;
+	virtual void fromJson(const string& json);
+
+	virtual string toXml() const;
+	virtual void fromXml(const string& xml);
 };
 
 using SerializePtr = shared_ptr<Serialize>;

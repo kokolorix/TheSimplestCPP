@@ -1,5 +1,8 @@
 #include "Property.h"
 
+CEREAL_REGISTER_TYPE(Property)
+CEREAL_REGISTER_POLYMORPHIC_RELATION(Serialize, Property)
+
 Property::Property()
 	: Property(string(), ValuePtr())
 {
@@ -18,34 +21,4 @@ Property::Property(const string& name, ValuePtr value /*= ValuePtr()*/)
 Property::~Property()
 {
 
-}
-
-string Property::toJson() const
-{
-	throw std::exception("The method or operation is not implemented.");
-}
-
-void Property::fromJson(const string& json)
-{
-	throw std::exception("The method or operation is not implemented.");
-}
-
-string Property::toXml() const
-{
-	throw std::exception("The method or operation is not implemented.");
-}
-
-void Property::fromXml(const string& xml)
-{
-	throw std::exception("The method or operation is not implemented.");
-}
-
-string Property::writeString() const
-{
-	throw std::exception("The method or operation is not implemented.");
-}
-
-void Property::readString(const string& str)
-{
-	throw std::exception("The method or operation is not implemented.");
 }

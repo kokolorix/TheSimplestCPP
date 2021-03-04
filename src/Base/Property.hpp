@@ -39,10 +39,18 @@ struct PropertyR
     /**
      * @brief Conversion operator
      * 
-     * @return T const 
+     * @return T 
      */
     operator T () { return getter_(); }
     operator  T const() const { return static_cast<T>(getter_()); }
+
+    /**
+     * @brief Arrow operator
+     * @details Allows natural access to pointer types
+     * @return T 
+     */
+	T operator -> () { return getter_(); }
+	T const operator -> () const { return getter_(); }
 
     /**
      * @brief Explicit bool operator, used by control structures
@@ -62,6 +70,14 @@ struct PropertyR
 			getter_()(std::forward<_Args>(_Ax)...);
 	}
 
+    /**
+     * @brief Allows explicit access to the underlying type
+     * @details sometimes a simple get is clearer than a 
+     * more cumbersome cast
+     * @return T 
+     */
+    T get() { return getter_(); }
+    T const get() const { return static_cast<T>(getter_()); }
 
 protected:
     Getter getter_;

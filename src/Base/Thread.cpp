@@ -29,11 +29,7 @@ typedef struct tagTHREADNAME_INFO
 } THREADNAME_INFO;
 #pragma pack(pop)
 void SetThreadName(DWORD dwThreadID, const char* threadName) {
-	THREADNAME_INFO info;
-	info.dwType = 0x1000;
-	info.szName = threadName;
-	info.dwThreadID = dwThreadID;
-	info.dwFlags = 0;
+	THREADNAME_INFO info = { 0x1000, threadName, dwThreadID, 0 };
 #pragma warning(push)
 #pragma warning(disable: 6320 6322)
 	__try {
