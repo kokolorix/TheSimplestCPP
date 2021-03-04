@@ -2,3 +2,6 @@
 	path = pages
 	url = https://github.com/kokolorix/TheSimplestCPP.git
 	branch = gh-pages
+[submodule "3rdParty/cereal"]
+	path = 3rdParty/cereal
+	url = https://github.com/USCiLab/cereal.git

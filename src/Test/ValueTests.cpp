@@ -63,11 +63,20 @@ namespace
 		AssertTrue( bv2.use_count() == 2, "");
 		BooleanValuePtr ptr1 = bv1, ptr2 = bv2;
 		AssertTrue((*ptr1 == *ptr2), "");
-		AssertTrue( bv2.use_count() == 4, "");
+		AssertTrue( bv1.use_count() == 4, "");
 		bv2 = true;  
+		AssertTrue( bv1.use_count() == 3, "");
 		BooleanValuePtr ptr3 = bv2;
 		AssertFalse((*ptr1 == *ptr3), "");
 		AssertTrue( bv2.use_count() == 2, "");
 		AssertTrue( bv1.use_count() == 3, "");
+		shared_ptr<const BooleanValue> spbv1 = bv1;
+		AssertTrue( bv1.use_count() == 4, "");
+		bv1.reset();
+		AssertTrue(spbv1.use_count() == 3, "");
+		ptr2.reset();
+		AssertTrue(spbv1.use_count() == 2, "");
+		ptr1.reset();
+		AssertTrue(spbv1.use_count() == 1, "");
 	}
 }
