@@ -28,6 +28,8 @@ public:
 	{
 	}
 
+	virtual bool operator < (const Value& v) const = 0;
+
 protected:
 };
 CEREAL_REGISTER_TYPE(Value)
@@ -60,6 +62,8 @@ struct ValuePtr : public shared_ptr<const Value>
 		return dynamic_pointer_cast<const ValueImpl<T>>(*this);
 	}
 };
+
+bool operator < (ValuePtr v1, ValuePtr v2);
 
 /**
  * @brief The template ValueImpl is the concrete implementation 
@@ -94,6 +98,18 @@ public:
 	void serialize(Archive& a)
 	{
 		a(CEREAL_NVP(value_));
+	}
+
+protected:
+	virtual bool operator < (const Value& v) const override
+	{
+		if (const ValueImpl* p = dynamic_cast<const ValueImpl*>(&v))
+			return value_ < p->value_;
+		return writeString() < v.writeString();
+	}
+	bool operator < (const ValueImpl& v) const
+	{
+		return value_ < v.value_;
 	}
 
 private:

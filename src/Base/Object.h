@@ -1,6 +1,7 @@
 #pragma once
 #include "Serialize.h"
 #include "Property.h"
+#include "operators.hpp"
 
 class Object;
 using ObjectPtr = shared_ptr<Object>;
@@ -31,5 +32,9 @@ public:
 private:
 	string name_;
 	PropertyList properties_;
+
+	friend bool operator < (const Object& obj1, const Object& obj2);
 };
+
+bool operator < (const Object& obj1, const Object& obj2);
 
