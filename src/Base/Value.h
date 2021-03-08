@@ -1,5 +1,6 @@
 #pragma once
 #include "Serialize.h"
+#include "Comparable.h"
 
 #include <sstream>
 #include <stdint.h>
@@ -17,8 +18,9 @@ template<typename T>	class	ValueImpl;
  * @brief Value is the base class for all
  * value types in the system 
  */
-class Value	:
-	public Serialize
+class Value 
+	: public Serialize
+	, public Comparable
 {
 public:
 	Value();
@@ -28,8 +30,11 @@ public:
 	{
 	}
 
+	bool operator <(const Comparable& other) const override;
+
 protected:
 };
+
 CEREAL_REGISTER_TYPE(Value)
 CEREAL_REGISTER_POLYMORPHIC_RELATION(Serialize, Value)
 
@@ -95,6 +100,20 @@ public:
 	{
 		a(CEREAL_NVP(value_));
 	}
+
+	bool operator < (const ValueImpl& v) const
+	{
+		return value_ < v.value_;
+	}
+	virtual bool operator < (const Comparable& other) const override
+	{
+		const Comparable* ptr = &other;
+		if (const ValueImpl* v_ptr = dynamic_cast<const ValueImpl*>(ptr))
+			return value_ < v_ptr->value_;
+
+		return __super::operator<(other);
+	}
+protected:
 
 private:
 	T value_;

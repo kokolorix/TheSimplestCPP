@@ -15,8 +15,8 @@ namespace
 TestResult PropertyTests::runTest()
 {
 	PropertyList properties = {
-		PropertyPtr(new Property("AnswerToEverything", ValuePtr(42)))
-		, make_shared<Property>("HelloWorld", ValuePtr("Hello World"))
+		Property("AnswerToEverything", ValuePtr(42))
+		, Property("HelloWorld", ValuePtr("Hello World"))
 	};
 
 	std::stringstream ss; // any stream can be used

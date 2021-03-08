@@ -199,6 +199,8 @@
     <ClCompile Include="Base\Property.cpp" />
     <ClCompile Include="Base\Object.cpp" />
     <ClCompile Include="Test\BaseTests.cpp" />
+    <ClCompile Include="Test\ObjectTest.cpp" />
+    <ClCompile Include="Test\OperatorTests.cpp" />
     <ClCompile Include="Test\PropertyTests.cpp" />
     <ClCompile Include="Test\TestCase.cpp">
       <DependentUpon>Test\TestCase.h</DependentUpon>
@@ -206,6 +208,7 @@
     <ClCompile Include="Test\ValueTests.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Base\Comparable.h" />
     <ClInclude Include="Base\Description.h">
       <DependentUpon>Base\Description.cpp</DependentUpon>
     </ClInclude>
@@ -237,9 +240,16 @@
     <ClInclude Include="Base\Object.h">
       <DependentUpon>Base\Object.cpp</DependentUpon>
     </ClInclude>
+    <ClInclude Include="operators.hpp" />
     <ClInclude Include="output.hpp" />
     <ClInclude Include="Test\BaseTests.h">
       <DependentUpon>Test\BaseTests.cpp</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Test\ObjectTest.h">
+      <DependentUpon>Test\ObjectTest.cpp</DependentUpon>
+    </ClInclude>
+    <ClInclude Include="Test\OperatorTests.h">
+      <DependentUpon>Test\OperatorTests.cpp</DependentUpon>
     </ClInclude>
     <ClInclude Include="Test\PropertyTests.h">
       <DependentUpon>Test\PropertyTests.cpp</DependentUpon>
