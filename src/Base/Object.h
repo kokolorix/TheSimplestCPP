@@ -1,29 +1,30 @@
 #pragma once
 #include "Serialize.h"
 #include "Property.h"
-#include "operators.hpp"
 
 class Object;
 using ObjectPtr = shared_ptr<Object>;
 
-class Object :
-	public Serialize
+class Object
+	: public Serialize
+	, public Comparable
 {
 public:
 	Object();
+	Object(const string name);
+	Object(PropertyList proprties);
 	Object(const string name, PropertyList proprties);
 
-public:
-	string toJson() const override;
+	template <class Archive>
+	void serialize(Archive& a)
+	{
+		a(
+			CEREAL_NVP(name_),
+			CEREAL_NVP(properties_)
+		);
+	}
 
-
-	void fromJson(const string& json) override;
-
-
-	string toXml() const override;
-
-
-	void fromXml(const string& xml) override;
+	bool operator <(const Comparable& other) const override;
 
 public:
 	PropertyRW<string> Name;
@@ -32,9 +33,5 @@ public:
 private:
 	string name_;
 	PropertyList properties_;
-
-	friend bool operator < (const Object& obj1, const Object& obj2);
 };
-
-bool operator < (const Object& obj1, const Object& obj2);
 

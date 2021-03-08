@@ -10,7 +10,7 @@ Value::~Value()
 
 }
 
-bool operator<(ValuePtr v1, ValuePtr v2)
+bool Value::operator<(const Comparable& other) const
 {
-	return false;// (*v1) < (*v2);
+	return false;
 }

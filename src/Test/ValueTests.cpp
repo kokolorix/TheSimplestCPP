@@ -6,7 +6,7 @@ namespace
 	bool test = TestCase::addTestCase(S(ValueTests), make_shared<ValueTests>());
 
 	void stackTests();
-	void heapTests();
+	void heapTests();	
 }
 
 TestResult ValueTests::runTest()

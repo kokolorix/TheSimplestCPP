@@ -61,7 +61,13 @@
         "xlocmon": "cpp",
         "xloctime": "cpp",
         "xtree": "cpp"
-    }
+    },
+    "C_Cpp.default.includePath": [
+        "${default"
+        ,"./Base"
+        ,"./Test"
+        ]}
+
     // ,
     // "code-runner.executorMap": {
     //     // "cpp": "cd $dir && \"$workspaceRoot\\.vscode\\cpp-code-runner.cmd\" $fileName"

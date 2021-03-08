@@ -56,6 +56,9 @@
     <ClCompile Include="Test\ObjectTest.cpp">
       <Filter>Test\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Test\OperatorTests.cpp">
+      <Filter>Test\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dbg_new.h" />
@@ -70,6 +73,9 @@
       <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="operators.hpp" />
+    <ClInclude Include="Base\Comparable.h">
+      <Filter>Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="MainPage.md" />
