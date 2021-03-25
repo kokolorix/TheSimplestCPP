@@ -38,6 +38,8 @@ Object::Object(const string name)
  * @param proprties 
  */
 Object::Object(PropertyList proprties) 
+	: Name(name_)
+	, Properties(properties_)
 {
 	
 }

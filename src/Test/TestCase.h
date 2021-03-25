@@ -7,6 +7,9 @@ using std::string;
 using std::shared_ptr;
 using std::make_shared;
 
+#include <vector>
+using stringVector = std::vector<string>;
+
 #include "output.hpp"
 
 enum struct TestResult
@@ -27,7 +30,16 @@ public:
 
 	static bool addTestCase(const string& name, TestCasePtr testCase);
 	static void writeOutput(const VectorOfStringVectors& outputs);
+
+	static void writeLine(const stringVector& labels, const stringVector& outValues, vector<size_t> colLengts);
+
 	static TestResult runTests(const string& testPattern = "*");
+
+	static void breakDown(TestCasePtr pTest, stringVector& outValues);
+
+	static void runTest(TestCasePtr pTest, stringVector& outValues);
+
+	static void buildUp(TestCasePtr pTest, stringVector& outValues);
 
 
 };
