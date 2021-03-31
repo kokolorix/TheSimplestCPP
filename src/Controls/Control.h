@@ -74,7 +74,7 @@ public:
 
     virtual LRESULT wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
     friend LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-
+    friend LRESULT CALLBACK WmCommand(LPARAM lParam, HWND hWnd, UINT message, WPARAM wParam);
 
 private:
     struct Impl;

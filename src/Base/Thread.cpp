@@ -409,23 +409,20 @@ struct Thread::ThreadManager::Impl
 		// If the globally stored main thread is released on termination, the manager may already be cleared
 		isDeleted = true;
 		std::vector<weak_ptr<Thread>> threads;
-		for (map<ThreadId, weak_ptr<Thread>>::value_type vt : idMap_)
-			threads.push_back(vt.second);
+		std::transform(idMap_.begin(), idMap_.end(), threads.end(),
+			[](auto vt) -> weak_ptr<Thread> {return vt.second; });
+		//for (map<ThreadId, weak_ptr<Thread>>::value_type vt : idMap_)
+		//	threads.push_back(vt.second);
 
-		for ( weak_ptr<Thread> twp : threads)
-		{
-			ThreadPtr thread = twp.lock(); 
-			if (thread)
-				thread->stop();
-		}
+		stopThreads(threads);
 		this_thread::yield();
-		for ( weak_ptr<Thread> twp : threads)
-		{
-			ThreadPtr thread = twp.lock(); 
-			if (thread && thread->joinable())
-				thread->join();
-		}
+		joinThreads(threads);
 	}
+
+	void joinThreads(std::vector<weak_ptr<Thread>> threads);
+
+	void stopThreads(std::vector<weak_ptr<Thread>> threads);
+
 	mutable recursive_mutex mutex_;
 	map<ThreadId, weak_ptr<Thread>> idMap_;
 	map<string, weak_ptr<Thread>> nameMap_;
@@ -485,6 +482,26 @@ ThreadPtr Thread::ThreadManager::Impl::getThread(const string &name) const
 		return weakPtr.lock();
 	}
 	return ThreadPtr();
+}
+
+void Thread::ThreadManager::Impl::stopThreads(std::vector<weak_ptr<Thread>> threads)
+{
+	for (weak_ptr<Thread> twp : threads)
+	{
+		ThreadPtr thread = twp.lock();
+		if (thread)
+			thread->stop();
+	}
+}
+
+void Thread::ThreadManager::Impl::joinThreads(std::vector<weak_ptr<Thread>> threads)
+{
+	for (weak_ptr<Thread> twp : threads)
+	{
+		ThreadPtr thread = twp.lock();
+		if (thread && thread->joinable())
+			thread->join();
+	}
 }
 
 bool Thread::ThreadManager::Impl::isDeleted = false;

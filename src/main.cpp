@@ -99,6 +99,59 @@ int WINAPI CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevIn
 void OnStartClicked(Button* button);
 void OnThreadTestClicked(Button* button);
 void OnStartTestClicked(Button* button);
+
+LRESULT CALLBACK WmCreate(HWND hWnd)
+{
+	ButtonPtr start = Button::Manager["Start:Button"];
+	start->OnClicked = OnStartClicked;
+	start->create(hWnd, 20, 20, 100, 30, "Start ...");
+
+	RECT rcClient;
+	::GetClientRect(hWnd, &rcClient);
+
+	int cyVScroll = GetSystemMetrics(SM_CYVSCROLL);
+	LONG height = rcClient.bottom - rcClient.top;
+
+	ButtonPtr threadTest = Button::Manager["ThreadTest:Button"];
+	threadTest->OnClicked = OnThreadTestClicked;
+	threadTest->create(hWnd, 140, 20, 100, 30, "Thread-Test");
+
+	ButtonPtr startTest = Button::Manager["StartTest:Button"];
+	startTest->OnClicked = OnStartTestClicked;
+	startTest->create(hWnd, 260, 20, 100, 30, "Test");
+
+	EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
+	filterTest->ClientEdge = true;
+	filterTest->Multiline = true;
+	filterTest->Margins = 4;
+	filterTest->create(hWnd, 380, 20, rcClient.right - 400, 30, "*");
+	SetFocus(filterTest->hWnd);
+
+	EditPtr output = Edit::Manager["Output:Edit"];
+	output->Margins = 6;
+	output->ReadOnly = true;
+	output->Multiline = true;
+	output->VScroll = true;
+	output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
+
+	ProgressPtr progress1 = Progress::Manager["Progress1"];
+	progress1->create(hWnd, 0, height - cyVScroll * 2, rcClient.right, cyVScroll * 2);
+	return 0;
+}
+
+LRESULT CALLBACK WmCommand(LPARAM lParam, HWND hWnd, UINT message, WPARAM wParam)
+{
+	HWND hCtrl = reinterpret_cast<HWND>(lParam);
+	ControlPtr control = Control::Manager[hCtrl];
+	if (control)
+	{
+		LRESULT result = control->wndProc(hWnd, message, wParam, lParam);
+		if (result == LRES_PROCESSED)
+			return result;
+	}
+	return 0;
+}
+
 /**
  * @brief 
  * 
@@ -110,65 +163,23 @@ void OnStartTestClicked(Button* button);
  */
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	ControlPtr control = Control::Manager[hWnd];
-	if(control)
+	if(ControlPtr control = Control::Manager[hWnd])
 	{
 		LRESULT result = control->wndProc(hWnd, message, wParam, lParam);
 		if (result  == LRES_PROCESSED)
 			return result;
 	}
+
 	switch (message)
 	{
 	case WM_CREATE:
-	{
-		ButtonPtr start = Button::Manager["Start:Button"];
-		start->OnClicked = OnStartClicked;
-		start->create(hWnd, 20, 20, 100, 30, "Start ...");
-
-		RECT rcClient;
-		::GetClientRect(hWnd, &rcClient);
-
-		int cyVScroll = GetSystemMetrics(SM_CYVSCROLL);
-		LONG height = rcClient.bottom - rcClient.top;
-
-		ButtonPtr threadTest = Button::Manager["ThreadTest:Button"];
-		threadTest->OnClicked = OnThreadTestClicked;
-		threadTest->create(hWnd, 140, 20, 100, 30, "Thread-Test");
-
-		ButtonPtr startTest = Button::Manager["StartTest:Button"];
-		startTest->OnClicked = OnStartTestClicked;
-		startTest->create(hWnd, 260, 20, 100, 30, "Test");
-
-		EditPtr filterTest = Edit::Manager["TestFilter:Edit"];
-		filterTest->ClientEdge = true;
-		filterTest->Multiline = true;
-		filterTest->Margins = 4;
-		filterTest->create(hWnd, 380, 20, rcClient.right - 400, 30, "*");
-		SetFocus(filterTest->hWnd);
-
-		EditPtr output = Edit::Manager["Output:Edit"];
-		output->Margins = 6;
-		output->ReadOnly = true;
-		output->Multiline = true;
-		output->VScroll = true;
-		output->create(hWnd, 20, 60, rcClient.right - 40, (height - (cyVScroll * 2)) - 80);
-
-		ProgressPtr progress1 = Progress::Manager["Progress1"];
-		progress1->create(hWnd, 0, height - cyVScroll * 2, rcClient.right, cyVScroll * 2);
-		return 0;
-	}
-	break;
+		return WmCreate(hWnd);
 
 	case WM_COMMAND:
 	{
-		HWND hCtrl = reinterpret_cast<HWND>(lParam);
-		ControlPtr control = Control::Manager[hCtrl];
-		if (control)
-		{
-			LRESULT result = control->wndProc(hWnd, message, wParam, lParam);
-			if (result == LRES_PROCESSED)
-				return result;
-		}
+		LRESULT result = WmCommand(lParam, hWnd, message, wParam);
+		if (result == LRES_PROCESSED)
+			return result;
 		break;
 	}
 
